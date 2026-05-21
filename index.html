@@ -163,7 +163,10 @@
       line-height: 1.48;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      /* overflow-x: hidden은 자식의 position:sticky를 깨므로 clip 사용 (Safari 16+, Chrome 90+, FF 81+).
+         미지원 구형 브라우저는 첫 줄 hidden으로 폴백. */
       overflow-x: hidden;
+      overflow-x: clip;
     }
 
     /* English content + buttons + nav use Red Hat Display */
@@ -1720,10 +1723,11 @@
         flex: 0 0 calc(100vw - var(--page-pad) * 2 - var(--s-16));
         scroll-snap-align: none;
         min-height: 0;
+        height: auto;
         max-height: calc(100vh - var(--gnb-h) - var(--s-80));
-        height: calc(100vh - var(--gnb-h) - var(--s-80));
         padding: var(--s-28) var(--s-22);
         overflow-y: auto;
+        align-self: center;
       }
       .tech-pin .tech-card-h { font-size: 22px; }
       .tech-pin .tech-card-p { font-size: 15px; }
@@ -1954,22 +1958,30 @@
     .carousel-stage { /* desktop: pass-through */ contents: ''; }
 
     @media (max-width: 768px) {
+      /* Stage가 GNB 아래 뷰포트 전체를 덮어 사용자 시야에는 GNB와 stage만 남게 함.
+         pin은 sticky 구간을 충분히 길게 잡아, 그 스크롤 거리만큼 카드가 가로로 슬라이드됨.
+         시각적으로 페이지가 "고정"되어 보이고 카드만 움직임. */
       .carousel-pin {
-        height: calc(100vh + (var(--card-count, 3) - 1) * 85vh);
+        --stage-h: calc(100vh - var(--gnb-h));
+        /* 카드 1장당 60vh의 sticky 스크롤 거리 → 가로 슬라이드 동안 페이지는 stage 뒤에서만 진행 */
+        height: calc(var(--stage-h) + (var(--card-count, 3)) * 60vh);
       }
       .carousel-stage {
         position: sticky;
         top: var(--gnb-h);
-        height: calc(100vh - var(--gnb-h));
+        height: var(--stage-h);
         overflow: hidden;
         display: flex;
         flex-direction: column;
         justify-content: center;
+        background: var(--canvas);
         /* 컨테이너 패딩 무시하고 화면 끝까지 확장 */
         margin-left: calc(var(--page-pad) * -1);
         margin-right: calc(var(--page-pad) * -1);
         padding: 0 var(--page-pad);
       }
+      /* .data 섹션 배경(surface-soft)이 stage와 다르므로 stage가 그 위를 덮도록 보강 */
+      .data .carousel-stage { background: var(--surface-soft); }
     }
 
     /* —— TOOLS 모바일 카드 — scroll-jacking 트랙 (768px 이하) —— */
@@ -1992,12 +2004,16 @@
         scroll-snap-align: none;
         border: 1px solid var(--line-hard);
         min-height: 0;
+        height: auto;
         max-height: calc(100vh - var(--gnb-h) - var(--s-80));
-        height: calc(100vh - var(--gnb-h) - var(--s-80));
         padding: var(--s-24);
         gap: var(--s-16);
         overflow-y: auto;
+        align-self: center;
       }
+      /* deliv: margin-top:auto는 고정높이 전제라 콘텐츠 기반 높이에서는 빈공간 유발 → 해제 */
+      .tools-pin .tool-card .deliv { margin-top: 0; }
+      .tech-pin .tech-card .deliv { margin-top: 0; }
       .tools-pin .tool-card h3 { font-size: 24px; }
       .tools-pin .tool-card .quote { font-size: 17px; padding-left: var(--s-16); }
       .tools-pin .tool-card p { font-size: 15.5px; line-height: 1.6; }
@@ -4754,7 +4770,8 @@
 
     @media (max-width: 768px) {
       /* —— 공통 —— */
-      html, body { overflow-x: hidden; }
+      /* overflow-x: hidden은 자식 sticky를 깨므로 clip 사용. 구형 브라우저는 hidden 폴백. */
+      html, body { overflow-x: hidden; overflow-x: clip; }
       ::selection { background: var(--primary); color: var(--ink); }
 
       /* GNB */
@@ -5263,13 +5280,13 @@
       </a>
 
       <div class="gnb-menu" id="gnb-menu">
-        <a class="nav-link kr" href="about.html">회사소개</a>
         <a class="nav-link active kr" href="#definition">GEO 개요</a>
         <a class="nav-link kr" href="#data">GEO 기술력</a>
         <a class="nav-link kr" href="#tools">ETRIBE GEO</a>
         <a class="nav-link kr" href="#positioning">프로세스</a>
         <a class="nav-link kr" href="#plans">요금정책</a>
         <a class="nav-link kr" href="faq.html">FAQ</a>
+        <a class="nav-link kr" href="about.html">회사소개</a>
         <a class="nav-link kr" href="/blog" target="_blank" rel="noopener">기술블로그</a>
       </div>
 
@@ -5282,13 +5299,13 @@
   <div class="mobile-menu" id="mobile-menu">
     <button class="close" id="menu-close" aria-label="메뉴 닫기">×</button>
     <ul>
-      <li><a href="about.html">회사소개</a></li>
       <li><a href="#definition" class="active">GEO 개요</a></li>
       <li><a href="#data">GEO 기술력</a></li>
       <li><a href="#tools">ETRIBE GEO</a></li>
       <li><a href="#positioning">프로세스</a></li>
       <li><a href="#plans">요금정책</a></li>
       <li><a href="faq.html">FAQ</a></li>
+      <li><a href="about.html">회사소개</a></li>
       <li><a href="/blog" target="_blank" rel="noopener">기술블로그</a></li>
     </ul>
 
@@ -6978,10 +6995,11 @@
     })();
 
     /* ───────────────────────────────────────────────────────────
-       CAROUSEL PIN — 모바일 scroll-jacking
-       .carousel-pin 컨테이너가 길게 잡혀 있고, 안의 .carousel-stage가 sticky로
-       뷰포트에 고정됨. 스크롤 진행도에 비례해 .tools-grid / .tech-cards 트랙을
-       가로로 translate → "스크롤하면 카드가 옆으로 슬라이드"되는 효과.
+       CAROUSEL PIN — 모바일 scroll-jacking (스크롤 위치 기반)
+       stage가 GNB 아래 뷰포트 전체를 덮은 채 sticky로 고정되고,
+       pin의 sticky 가능 구간을 스크롤 진행도로 환산해
+       .tools-grid / .tech-cards 트랙을 가로 translate.
+       시각적으로 GNB와 stage만 보이므로 페이지는 "고정"된 인상.
        768px 이하에서만 작동.
        ─────────────────────────────────────────────────────────── */
     (function () {
@@ -6991,7 +7009,6 @@
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
       const states = [];
-
       pins.forEach(pin => {
         const track = pin.querySelector('.tools-grid, .tech-cards');
         const stage = pin.querySelector('.carousel-stage');
@@ -7001,20 +7018,18 @@
 
       const update = () => {
         if (!mq.matches || reduceMotion) {
-          // 데스크탑 또는 모션 감축 모드: transform 해제
           states.forEach(s => { s.track.style.transform = ''; });
           return;
         }
-        const vh = window.innerHeight;
         states.forEach(({ pin, stage, track }) => {
           const rect = pin.getBoundingClientRect();
           const pinH = pin.offsetHeight;
-          // 스크롤 가능 거리 = pin 전체 높이 - stage 1 viewport
-          const totalScroll = pinH - vh;
-          // 현재 진행도 (0~1)
-          const scrolled = Math.max(0, Math.min(totalScroll, -rect.top));
+          const stageH = stage.offsetHeight;
+          const stickyTop = parseFloat(getComputedStyle(stage).top) || 0;
+          // sticky 활성 구간 길이 = pinH - stageH
+          const totalScroll = Math.max(0, pinH - stageH);
+          const scrolled = Math.max(0, Math.min(totalScroll, stickyTop - rect.top));
           const progress = totalScroll > 0 ? scrolled / totalScroll : 0;
-          // 트랙이 화면 밖으로 빠져나가야 할 거리
           const trackWidth = track.scrollWidth;
           const stageWidth = stage.clientWidth;
           const maxTranslate = Math.max(0, trackWidth - stageWidth);
@@ -7023,7 +7038,6 @@
         });
       };
 
-      // RAF 스로틀
       let raf = 0;
       const onScroll = () => {
         if (raf) return;

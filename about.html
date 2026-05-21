@@ -49,7 +49,7 @@
   --s-48: 48px;  --s-56: 56px;   --s-64: 64px;  --s-80: 80px;
   --s-120: 120px; --s-160: 160px;
 
-  --gnb-h:        80px;
+  --gnb-h:        72px;
   --content-max:  1800px;
   --page-pad:     60px;
 
@@ -59,7 +59,7 @@
 }
 
 @media (max-width: 768px) {
-  :root { --page-pad: 20px; --gnb-h: 64px; }
+  :root { --page-pad: 20px; }
 }
 
 /* BASE */
@@ -108,119 +108,103 @@ h1, h2, h3, h4, p, blockquote {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   GNB
+   GNB (faq.html / index.html과 공통)
    ═══════════════════════════════════════════════════════════════ */
 .gnb {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 1000;
-  height: var(--gnb-h);
-  background: rgba(255,255,255,0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--line-soft);
-  display: flex;
-  align-items: center;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  height: var(--gnb-h); background: transparent;
+  display: flex; align-items: center;
+  border-bottom: 1px solid transparent;
+  transition: transform .35s cubic-bezier(.4, 0, .2, 1);
+  will-change: transform;
 }
+.gnb.is-hidden { transform: translateY(-100%); }
+@media (prefers-reduced-motion: reduce) { .gnb { transition: none; } }
+
+/* 오버레이(모바일 메뉴)가 열렸을 때 GNB 햄버거가 X 버튼과 겹치지 않도록 GNB 숨김 */
+body.overlay-open .gnb { visibility: hidden; pointer-events: none; }
+.gnb-inner {
+  width: 100%; padding: 0 var(--page-pad);
+  display: flex; align-items: center; justify-content: space-between; gap: var(--s-24);
+}
+.gnb-logo { display: inline-flex; align-items: stretch; height: 32px; color: var(--ink); }
+.gnb-logo .wordmark-box {
+  background: var(--surface-ink); display: inline-flex; align-items: center;
+  justify-content: center; padding: 0 var(--s-16);
+}
+.gnb-logo .wordmark-box img { height: 28px; width: auto; display: block; }
+.gnb-logo .service-name {
+  display: inline-flex; align-items: center; padding: 0 var(--s-16);
+  font-family: var(--font-en); font-weight: 700; font-size: 15px;
+  letter-spacing: 0.02em; color: var(--ink);
+  background: transparent; border: 1px solid var(--ink); border-left: 0;
+}
+.gnb-menu { display: flex; align-items: center; gap: var(--s-24); }
+.nav-link {
+  position: relative; font-family: var(--font-kr); font-size: 20px;
+  font-weight: 600; letter-spacing: -0.005em; color: var(--ink);
+  padding: var(--s-8) 0; display: inline-flex; align-items: center; gap: var(--s-8);
+  transition: opacity .2s ease;
+}
+.nav-link:hover { opacity: 0.6; }
+.nav-link::before {
+  content: ""; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--primary); opacity: 0; transform: scale(0.6);
+  transition: opacity .25s ease, transform .25s ease;
+}
+.nav-link.active::before { opacity: 1; transform: scale(1); }
+.nav-link.active { font-weight: 700; }
+
+.gnb-toggle { display: none; width: 40px; height: 40px; align-items: center; justify-content: center; }
+.gnb-toggle span, .gnb-toggle span::before, .gnb-toggle span::after {
+  display: block; width: 22px; height: 2px; background: var(--ink); position: relative;
+}
+.gnb-toggle span::before, .gnb-toggle span::after { content: ""; position: absolute; left: 0; }
+.gnb-toggle span::before { top: -7px; }
+.gnb-toggle span::after  { top: 7px; }
+@media (max-width: 1200px) {
+  .gnb-menu { display: none; }
+  .gnb-toggle { display: inline-flex; }
+}
+
+.mobile-menu {
+  position: fixed; inset: 0; z-index: 999; background: var(--canvas);
+  padding: var(--gnb-h) var(--s-24) var(--s-40);
+  transform: translateY(-100%);
+  transition: transform .35s cubic-bezier(.6,.05,.1,.95);
+  display: flex; flex-direction: column;
+}
+.mobile-menu.open { transform: translateY(0); }
+.mobile-menu .close {
+  position: absolute; top: var(--s-20); right: var(--s-20);
+  width: 40px; height: 40px; display: inline-flex; align-items: center;
+  justify-content: center; font-size: 28px; color: var(--ink);
+}
+.mobile-menu ul { list-style: none; margin-top: var(--s-48); display: flex; flex-direction: column; gap: var(--s-32); }
+.mobile-menu a {
+  font-family: var(--font-en); font-weight: 700; font-size: 28px;
+  letter-spacing: 0.02em; color: var(--ink);
+  display: inline-flex; align-items: center; gap: var(--s-12);
+}
+.mobile-menu a.active::before {
+  content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--primary);
+}
+
+/* about.html은 hero가 어두운 배경 → GNB를 다크 위에서 보이게 반전 */
 .gnb.over-dark {
   background: rgba(5,5,5,0.55);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
   border-bottom-color: rgba(255,255,255,0.08);
 }
-.gnb-inner {
-  width: 100%;
-  max-width: var(--content-max);
-  margin: 0 auto;
-  padding: 0 var(--page-pad);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--s-32);
+.gnb.over-dark .gnb-logo { color: var(--text-on-ink); }
+.gnb.over-dark .gnb-logo .service-name {
+  color: var(--text-on-ink);
+  border-color: var(--text-on-ink);
 }
-.gnb-brand {
-  display: inline-flex;
-  align-items: center;
-  height: 100%;
-}
-/* Logo: 22px (20% larger than previous 18px) */
-.gnb-brand svg {
-  height: 22px;
-  width: auto;
-  display: block;
-  transition: filter .25s ease;
-}
-.gnb.over-dark .gnb-brand svg path { fill: #ffffff; }
-
-.gnb-nav {
-  display: flex;
-  gap: var(--s-32);
-  font-family: var(--font-en);
-  font-weight: 500;
-  font-size: 14px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-.gnb-nav a {
-  color: var(--ink);
-  padding: var(--s-8) 0;
-  transition: color .15s ease, opacity .15s ease;
-  position: relative;
-}
-.gnb.over-dark .gnb-nav a { color: var(--text-on-ink); }
-.gnb-nav a:hover { color: var(--primary); }
-
-/* Corporate Site link — distinguishes with subtle red treatment */
-.gnb-nav .gnb-corp {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  color: var(--primary);
-}
-.gnb.over-dark .gnb-nav .gnb-corp { color: var(--primary); }
-.gnb-nav .gnb-corp .ext-icon {
-  font-family: var(--font-en);
-  font-size: 11px;
-  font-weight: 700;
-  transition: transform .15s ease;
-  display: inline-block;
-}
-.gnb-nav .gnb-corp:hover .ext-icon {
-  transform: translate(2px, -2px);
-}
-
-.gnb-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--s-8);
-  height: 42px;
-  padding: 0 var(--s-20);
-  background: var(--ink);
-  color: var(--canvas);
-  font-family: var(--font-kr);
-  font-weight: 700;
-  font-size: 13.5px;
-  letter-spacing: 0.02em;
-  transition: background .15s ease, color .15s ease;
-}
-.gnb.over-dark .gnb-cta {
-  background: var(--canvas);
-  color: var(--ink);
-}
-.gnb-cta:hover { background: var(--primary); color: var(--canvas); }
-.gnb.over-dark .gnb-cta:hover { background: var(--primary); color: var(--canvas); }
-.gnb-cta .dot {
-  width: 6px; height: 6px;
-  background: var(--primary);
-  border-radius: 50%;
-  display: inline-block;
-  box-shadow: 0 0 0 3px rgba(255,0,0,0.25);
-}
-.gnb-cta:hover .dot { background: var(--canvas); box-shadow: 0 0 0 3px rgba(255,255,255,0.25); }
-
-@media (max-width: 900px) {
-  .gnb-nav { display: none; }
-}
+.gnb.over-dark .nav-link { color: var(--text-on-ink); }
+.gnb.over-dark .gnb-toggle span,
+.gnb.over-dark .gnb-toggle span::before,
+.gnb.over-dark .gnb-toggle span::after { background: var(--text-on-ink); }
 
 /* ═══════════════════════════════════════════════════════════════
    HERO — team photo background with dark overlay
@@ -1088,73 +1072,67 @@ h1, h2, h3, h4, p, blockquote {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   FOOTER — borrowed from index.html bottom band
+   FOOTER (faq.html / index.html과 공통)
    ═══════════════════════════════════════════════════════════════ */
-.page-foot {
-  background: var(--canvas);
+.footer-mini {
+  background: var(--primary);
   color: var(--ink);
-  padding: var(--s-24) 0;
-  border-top: 1px solid var(--line-soft);
+  padding: var(--s-56) 0 var(--s-32);
 }
-.page-foot-inner {
-  width: 100%;
-  max-width: var(--content-max);
-  margin: 0 auto;
-  padding: 0 var(--page-pad);
+.footer-mini .container {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  gap: var(--s-16);
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: var(--s-40);
+  align-items: end;
 }
-.page-foot-copyright {
+.footer-mini .brand {
   font-family: var(--font-en);
+  font-weight: 700;
+  font-size: clamp(40px, 6vw, 96px);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+.footer-mini .nav-list {
+  display: flex; flex-direction: column; gap: var(--s-12);
   font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  color: var(--ink);
-  display: inline-flex;
-  align-items: center;
-  gap: var(--s-16);
 }
-.page-foot-mark { display: inline-flex; align-items: center; }
-.page-foot-mark svg { height: 22px; width: auto; display: block; }
-.page-foot-copy-text { line-height: 1; }
-
-.page-foot-top {
-  font-family: var(--font-en);
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--ink);
-  display: inline-flex;
-  align-items: center;
-  gap: var(--s-8);
-  cursor: pointer;
-  transition: transform .15s ease, color .15s ease;
+.footer-mini .nav-list a:hover { opacity: 0.65; }
+.footer-mini .meta { font-size: 13px; line-height: 1.6; color: rgba(0,0,0,0.7); }
+.footer-mini .meta b { color: var(--ink); font-weight: 700; }
+.footer-bottom-bar {
+  background: var(--primary);
+  border-top: 1px solid rgba(0,0,0,0.18);
+  padding: var(--s-16) 0;
 }
-.page-foot-top:hover { transform: translateY(-2px); color: var(--primary); }
-
-.page-foot-email {
-  font-family: var(--font-en);
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--ink);
-  text-align: right;
-  transition: color .15s ease;
+.footer-bottom-bar .container {
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: var(--s-16);
+  font-family: var(--font-en); font-size: 11px;
+  font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(0,0,0,0.7);
 }
-.page-foot-email:hover { color: var(--primary); }
-
+.footer-bottom-bar a:hover { opacity: 0.65; }
 @media (max-width: 768px) {
-  .page-foot-inner {
-    grid-template-columns: 1fr;
-    text-align: left;
-    gap: var(--s-12);
-  }
-  .page-foot-top { display: none; }
-  .page-foot-email { text-align: left; }
+  .footer-mini .container { grid-template-columns: 1fr; gap: var(--s-32); }
+}
+
+/* ─────────────── Footer reveal — Alph.kr-style (index.html과 동일) ───────────────
+   .page-shell이 솔리드 배경 + z-index:2로 위 레이어를 형성하고,
+   .footer-wrap은 뷰포트 하단에 fixed로 항상 대기.
+   body padding-bottom은 JS가 푸터 실제 높이로 동기화 → 끝까지 스크롤하면 푸터가 드러남.
+   ※ .inq-modal은 z-index:2100으로 페이지 셸 위에 뜨므로 영향 없음. */
+body { position: relative; background: var(--canvas); }
+.page-shell { position: relative; z-index: 2; background: var(--canvas); }
+.footer-wrap {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  width: 100%;
+  z-index: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  /* 모션 감축 사용자: 푸터를 일반 흐름으로 되돌림 */
+  .footer-wrap { position: relative; }
+  body { padding-bottom: 0 !important; }
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -1447,37 +1425,48 @@ h1, h2, h3, h4, p, blockquote {
 </head>
 <body>
 
-<!-- ═════════════════════ GNB ═════════════════════ -->
-<header class="gnb" id="gnb">
+<!-- ─────────── GNB (공통) ─────────── -->
+<nav class="gnb" id="gnb" aria-label="Global navigation">
   <div class="gnb-inner">
-    <a href="/" class="gnb-brand" aria-label="ETRIBE 홈">
-      <svg viewBox="0 0 100 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M26.6318 3.34854L35.5026 3.32861V5.9483H29.6423L29.6437 7.65933H35.5039V10.1063H29.6437L29.6423 11.8213L35.5053 11.8227V14.4198L26.6292 14.4237L26.6318 3.34854Z" fill="black"/>
-        <path d="M90.981 3.32861H99.8479V5.94791H93.9737L93.9751 7.65956H99.8492V10.1074H93.9751L93.9737 11.8231L99.8492 11.8244L99.8571 14.4184L90.981 14.4237V3.32861Z" fill="black"/>
-        <path d="M43.3561 5.94666H39.9414V3.32861H49.927V5.94666H46.5109V14.4237H43.3561V5.94666Z" fill="black"/>
-        <path d="M68.7891 3.32861H72.1176V14.4237H68.7891V3.32861Z" fill="black"/>
-        <path d="M86.5401 11.1509C86.5401 12.1898 86.1552 12.995 85.3856 13.5665C84.6159 14.138 83.6114 14.4237 82.3733 14.4237H76.5544V3.32861H82.092C83.4561 3.32861 84.5071 3.61971 85.2449 4.20191C85.9827 4.78411 86.3516 5.5626 86.3516 6.54005C86.3516 7.0902 86.1645 7.58426 85.789 8.02091C85.5647 8.29064 85.2635 8.52966 84.888 8.73797C85.363 8.977 85.708 9.21602 85.9204 9.45504C86.3331 9.8997 86.5401 10.4659 86.5401 11.1509ZM83.1456 6.67892C83.1456 6.42921 83.0633 6.22758 82.9015 6.07135C82.6878 5.87372 82.376 5.77491 81.9633 5.77491H79.8387V7.58293H81.9633C82.376 7.58293 82.6759 7.4948 82.8643 7.31853C83.0514 7.14094 83.1456 6.92729 83.1456 6.67892ZM83.3327 10.996C83.3327 10.7369 83.2451 10.5179 83.07 10.3417C82.8563 10.1334 82.5445 10.0306 82.1305 10.0306H79.8374V11.9788H82.1305C82.5432 11.9788 82.847 11.8826 83.0408 11.6904C83.2359 11.4967 83.3327 11.2657 83.3327 10.996Z" fill="black"/>
-        <path d="M64.3533 14.4237H61.0674L58.7223 10.2985H57.6248V14.4224H54.3677V3.32861H59.6172C61.0322 3.32861 62.1544 3.69202 62.9867 4.42016C63.7562 5.09638 64.1403 5.92302 64.1403 6.90009C64.1403 7.59761 63.9104 8.21526 63.4518 8.75571C63.0677 9.20298 62.3034 9.69018 61.7076 9.94043L64.3533 14.4237ZM61.0139 6.89876C61.0139 6.59792 60.8858 6.33568 60.6324 6.11205C60.3776 5.88841 60.034 5.7766 59.5989 5.7766H57.6248V8.02225H59.5989C60.0327 8.02225 60.3776 7.91043 60.6324 7.6868C60.8858 7.46316 61.0139 7.20093 61.0139 6.89876Z" fill="black"/>
-        <path d="M15.142 15.1716C16.7573 13.578 17.7546 11.3755 17.7546 8.94003V8.93738C17.7546 12.5919 14.7599 15.5476 11.0602 15.5476C7.36044 15.5476 4.36579 12.5919 4.36579 8.94003V8.93738C4.36579 7.71965 4.86445 6.61839 5.67277 5.82025L5.67545 5.82157C6.54811 4.95989 7.68886 4.52972 8.83096 4.52972C9.97305 4.52972 11.1138 4.95989 11.9865 5.82157C9.36983 3.23786 5.13523 3.23786 2.5186 5.82157C-0.0966942 8.40528 -0.0966942 12.5866 2.5186 15.1703V15.169C4.26257 16.891 6.54676 17.7527 8.82962 17.7527C11.1138 17.7527 13.3967 16.8937 15.1406 15.1703" fill="black"/>
-        <path d="M2.61246 2.58131C0.997265 4.17643 0 6.37915 0 8.81484V8.81617C0 5.16262 2.99447 2.20537 6.69401 2.20537C10.3935 2.20537 13.388 5.1613 13.388 8.81352V8.81484C13.388 10.0327 12.8894 11.1341 12.0825 11.9323L12.0798 11.9309C11.2072 12.7914 10.0665 13.2216 8.92445 13.2216C7.78242 13.2216 6.64039 12.7914 5.76912 11.9309C8.3856 14.5149 12.62 14.5149 15.2351 11.9309C17.8516 9.34699 17.8516 5.16527 15.2351 2.58131V2.58263C13.4899 0.86176 11.2072 0 8.92445 0C6.64039 0 4.35767 0.860437 2.6138 2.58263" fill="black"/>
-      </svg>
+
+    <a href="index.html#hero" class="gnb-logo" aria-label="ETRIBE GEO 홈으로">
+      <span class="wordmark-box">
+        <img src="assets/etribe_wordmark.png" alt="ETRIBE" />
+      </span>
+      <span class="service-name">GEO</span>
     </a>
-    <nav class="gnb-nav" aria-label="주요 메뉴">
-      <a href="#about">About</a>
-      <a href="#philosophy">Philosophy</a>
-      <a href="#why">Why ETRIBE</a>
-      <a href="#ax-lineup">AX Lineup</a>
-      <a href="https://www.etribe.co.kr" target="_blank" rel="noopener noreferrer" class="gnb-corp">
-        Corporate Site
-        <span class="ext-icon" aria-hidden="true">↗</span>
-      </a>
-    </nav>
-    <a href="#" class="gnb-cta" data-open-inquiry>
-      <span class="dot" aria-hidden="true"></span>
-      사업문의
-    </a>
+
+    <div class="gnb-menu" id="gnb-menu">
+      <a class="nav-link kr" href="index.html#definition">GEO 개요</a>
+      <a class="nav-link kr" href="index.html#data">GEO 기술력</a>
+      <a class="nav-link kr" href="index.html#tools">ETRIBE GEO</a>
+      <a class="nav-link kr" href="index.html#positioning">프로세스</a>
+      <a class="nav-link kr" href="index.html#plans">요금정책</a>
+      <a class="nav-link kr" href="faq.html">FAQ</a>
+      <a class="nav-link kr active" href="about.html">회사소개</a>
+      <a class="nav-link kr" href="/blog" target="_blank" rel="noopener">기술블로그</a>
+    </div>
+
+    <button class="gnb-toggle" id="gnb-toggle" aria-label="메뉴 열기"><span></span></button>
   </div>
-</header>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <button class="close" id="menu-close" aria-label="메뉴 닫기">×</button>
+  <ul>
+    <li><a href="index.html#definition">GEO 개요</a></li>
+    <li><a href="index.html#data">GEO 기술력</a></li>
+    <li><a href="index.html#tools">ETRIBE GEO</a></li>
+    <li><a href="index.html#positioning">프로세스</a></li>
+    <li><a href="index.html#plans">요금정책</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+    <li><a href="about.html" class="active">회사소개</a></li>
+    <li><a href="/blog" target="_blank" rel="noopener">기술블로그</a></li>
+  </ul>
+</div>
+
+<!-- ─────────── PAGE SHELL — 푸터 reveal을 위해 콘텐츠를 한 레이어로 묶음 ─────────── -->
+<div class="page-shell">
 
 <!-- ═════════════════════ HERO ═════════════════════ -->
 <section class="hero" id="hero">
@@ -1791,31 +1780,34 @@ h1, h2, h3, h4, p, blockquote {
   </div>
 </section>
 
-<!-- ═════════════════════ FOOTER ═════════════════════ -->
-<footer class="page-foot">
-  <div class="page-foot-inner">
-    <div class="page-foot-copyright">
-      <span class="page-foot-mark" aria-label="ETRIBE">
-        <svg viewBox="0 0 100 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M26.6318 3.34854L35.5026 3.32861V5.9483H29.6423L29.6437 7.65933H35.5039V10.1063H29.6437L29.6423 11.8213L35.5053 11.8227V14.4198L26.6292 14.4237L26.6318 3.34854Z" fill="black"/>
-          <path d="M90.981 3.32861H99.8479V5.94791H93.9737L93.9751 7.65956H99.8492V10.1074H93.9751L93.9737 11.8231L99.8492 11.8244L99.8571 14.4184L90.981 14.4237V3.32861Z" fill="black"/>
-          <path d="M43.3561 5.94666H39.9414V3.32861H49.927V5.94666H46.5109V14.4237H43.3561V5.94666Z" fill="black"/>
-          <path d="M68.7891 3.32861H72.1176V14.4237H68.7891V3.32861Z" fill="black"/>
-          <path d="M86.5401 11.1509C86.5401 12.1898 86.1552 12.995 85.3856 13.5665C84.6159 14.138 83.6114 14.4237 82.3733 14.4237H76.5544V3.32861H82.092C83.4561 3.32861 84.5071 3.61971 85.2449 4.20191C85.9827 4.78411 86.3516 5.5626 86.3516 6.54005C86.3516 7.0902 86.1645 7.58426 85.789 8.02091C85.5647 8.29064 85.2635 8.52966 84.888 8.73797C85.363 8.977 85.708 9.21602 85.9204 9.45504C86.3331 9.8997 86.5401 10.4659 86.5401 11.1509ZM83.1456 6.67892C83.1456 6.42921 83.0633 6.22758 82.9015 6.07135C82.6878 5.87372 82.376 5.77491 81.9633 5.77491H79.8387V7.58293H81.9633C82.376 7.58293 82.6759 7.4948 82.8643 7.31853C83.0514 7.14094 83.1456 6.92729 83.1456 6.67892ZM83.3327 10.996C83.3327 10.7369 83.2451 10.5179 83.07 10.3417C82.8563 10.1334 82.5445 10.0306 82.1305 10.0306H79.8374V11.9788H82.1305C82.5432 11.9788 82.847 11.8826 83.0408 11.6904C83.2359 11.4967 83.3327 11.2657 83.3327 10.996Z" fill="black"/>
-          <path d="M64.3533 14.4237H61.0674L58.7223 10.2985H57.6248V14.4224H54.3677V3.32861H59.6172C61.0322 3.32861 62.1544 3.69202 62.9867 4.42016C63.7562 5.09638 64.1403 5.92302 64.1403 6.90009C64.1403 7.59761 63.9104 8.21526 63.4518 8.75571C63.0677 9.20298 62.3034 9.69018 61.7076 9.94043L64.3533 14.4237ZM61.0139 6.89876C61.0139 6.59792 60.8858 6.33568 60.6324 6.11205C60.3776 5.88841 60.034 5.7766 59.5989 5.7766H57.6248V8.02225H59.5989C60.0327 8.02225 60.3776 7.91043 60.6324 7.6868C60.8858 7.46316 61.0139 7.20093 61.0139 6.89876Z" fill="black"/>
-          <path d="M15.142 15.1716C16.7573 13.578 17.7546 11.3755 17.7546 8.94003V8.93738C17.7546 12.5919 14.7599 15.5476 11.0602 15.5476C7.36044 15.5476 4.36579 12.5919 4.36579 8.94003V8.93738C4.36579 7.71965 4.86445 6.61839 5.67277 5.82025L5.67545 5.82157C6.54811 4.95989 7.68886 4.52972 8.83096 4.52972C9.97305 4.52972 11.1138 4.95989 11.9865 5.82157C9.36983 3.23786 5.13523 3.23786 2.5186 5.82157C-0.0966942 8.40528 -0.0966942 12.5866 2.5186 15.1703V15.169C4.26257 16.891 6.54676 17.7527 8.82962 17.7527C11.1138 17.7527 13.3967 16.8937 15.1406 15.1703" fill="black"/>
-          <path d="M2.61246 2.58131C0.997265 4.17643 0 6.37915 0 8.81484V8.81617C0 5.16262 2.99447 2.20537 6.69401 2.20537C10.3935 2.20537 13.388 5.1613 13.388 8.81352V8.81484C13.388 10.0327 12.8894 11.1341 12.0825 11.9323L12.0798 11.9309C11.2072 12.7914 10.0665 13.2216 8.92445 13.2216C7.78242 13.2216 6.64039 12.7914 5.76912 11.9309C8.3856 14.5149 12.62 14.5149 15.2351 11.9309C17.8516 9.34699 17.8516 5.16527 15.2351 2.58131V2.58263C13.4899 0.86176 11.2072 0 8.92445 0C6.64039 0 4.35767 0.860437 2.6138 2.58263" fill="black"/>
-        </svg>
-      </span>
-      <span class="page-foot-copy-text">ALL RIGHTS RESERVED.</span>
+</div><!-- /.page-shell — 콘텐츠 레이어 종료, 아래 푸터가 뒤쪽에서 드러남 -->
+
+<!-- ─────────── Footer (공통) — Alph.kr-style reveal ─────────── -->
+<div class="footer-wrap">
+<footer class="footer-mini">
+  <div class="container">
+    <div class="brand">ETRIBE GEO</div>
+    <nav class="nav-list" aria-label="페이지 네비게이션">
+      <a href="index.html">메인으로</a>
+      <a href="index.html#plans">요금정책</a>
+      <a href="faq.html">FAQ</a>
+      <a href="/blog">기술블로그</a>
+    </nav>
+    <div class="meta">
+      <b>이트라이브 (ETRIBE)</b><br/>
+      서울특별시 마포구<br/>
+      월드컵북로 4길 81, 3F<br/>
+      hello@etribe.co.kr
     </div>
-    <button class="page-foot-top" id="back-to-top" type="button" aria-label="Back to top">
-      BACK TO TOP
-      <span aria-hidden="true">↑</span>
-    </button>
-    <a href="mailto:hello@etribe.co.kr" class="page-foot-email">HELLO@ETRIBE.CO.KR</a>
   </div>
 </footer>
+<div class="footer-bottom-bar">
+  <div class="container">
+    <span>© ETRIBE · All rights reserved.</span>
+    <a href="index.html">BACK TO HOME ↑</a>
+  </div>
+</div>
+</div><!-- /.footer-wrap -->
 
 <!-- ═════════════════════ INQUIRY MODAL (사업문의) ═════════════════════ -->
 <div class="inq-modal" id="inquiry-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="inq-title">
@@ -1907,28 +1899,49 @@ h1, h2, h3, h4, p, blockquote {
   els.forEach(el => io.observe(el));
 })();
 
-/* GNB: dark variant while hero is in view */
+/* ───────────────────────────────────────────────────────────
+   Mobile menu + GNB auto-hide (faq.html / index.html과 공통 동작)
+   ─────────────────────────────────────────────────────────── */
 (function(){
-  const gnb  = document.getElementById('gnb');
-  const hero = document.getElementById('hero');
-  if (!gnb || !hero) return;
-  const setMode = () => {
-    const rect = hero.getBoundingClientRect();
-    const overDark = rect.bottom > 60;
-    gnb.classList.toggle('over-dark', overDark);
-  };
-  setMode();
-  window.addEventListener('scroll', setMode, { passive: true });
-  window.addEventListener('resize', setMode);
-})();
+  /* Mobile menu */
+  const toggle = document.getElementById('gnb-toggle');
+  const menu   = document.getElementById('mobile-menu');
+  const close  = document.getElementById('menu-close');
+  const openMobileMenu  = () => { menu.classList.add('open');    document.body.classList.add('overlay-open'); };
+  const closeMobileMenu = () => { menu.classList.remove('open'); document.body.classList.remove('overlay-open'); };
+  if (toggle && menu) toggle.addEventListener('click', openMobileMenu);
+  if (close  && menu) close .addEventListener('click', closeMobileMenu);
+  menu && menu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobileMenu));
 
-/* Back to top */
-(function(){
-  const btn = document.getElementById('back-to-top');
-  if (!btn) return;
-  btn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
+  /* GNB auto-hide on scroll down + dark variant while hero is in view */
+  const gnb = document.getElementById('gnb');
+  const hero = document.getElementById('hero');
+  if (gnb) {
+    let lastY = window.scrollY;
+    const HIDE_AFTER_PX = 80;
+    const DELTA_MIN_PX  = 6;
+    const onScroll = () => {
+      const y = window.scrollY;
+      const mobileOpen = menu && menu.classList.contains('open');
+      if (mobileOpen || y < HIDE_AFTER_PX) {
+        gnb.classList.remove('is-hidden');
+      } else {
+        const dy = y - lastY;
+        if (Math.abs(dy) > DELTA_MIN_PX) {
+          gnb.classList.toggle('is-hidden', dy > 0);
+        }
+      }
+      // Hero 위에 있을 때 dark variant
+      if (hero) {
+        const r = hero.getBoundingClientRect();
+        gnb.classList.toggle('over-dark', r.bottom > 60);
+      }
+      lastY = y;
+    };
+    document.addEventListener('scroll', onScroll, { passive: true });
+    onScroll(); // 초기 상태 반영
+    gnb.addEventListener('mouseenter', () => gnb.classList.remove('is-hidden'));
+  }
 })();
 
 /* ───────────────────────────────────────────────────────────
@@ -2046,6 +2059,31 @@ h1, h2, h3, h4, p, blockquote {
     // Backend POST would go here in production
     showSuccess();
   });
+})();
+</script>
+
+<!-- ─────────── FOOTER REVEAL — body padding-bottom 동기화 (index.html과 동일) ───────────
+     푸터를 fixed로 띄워두고, body 하단에 푸터 높이만큼 여백을 만들어
+     사용자가 끝까지 스크롤할 때 콘텐츠 레이어가 위로 빠지며 푸터가 드러남.
+     창 크기·푸터 콘텐츠 변화 시 ResizeObserver로 자동 갱신. -->
+<script>
+(function () {
+  const footer = document.querySelector('.footer-wrap');
+  if (!footer) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  let raf = 0;
+  const sync = () => {
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(() => {
+      const h = Math.round(footer.getBoundingClientRect().height);
+      document.body.style.paddingBottom = h + 'px';
+    });
+  };
+  sync();
+  window.addEventListener('resize', sync);
+  window.addEventListener('load', sync); // 폰트·이미지 로드 후 재계산
+  if ('ResizeObserver' in window) new ResizeObserver(sync).observe(footer);
 })();
 </script>
 
