@@ -1,0 +1,61 @@
+# ETRIBE GEO
+
+> ChatGPT·Gemini·Perplexity·Claude 등 생성형 AI 검색 답변에 우리 브랜드가 인용되도록 만드는, 이트라이브의 GEO(Generative Engine Optimization) 진단·구축·운영 솔루션.
+
+ETRIBE GEO는 한국의 AX·디지털 마케팅 에이전시 **이트라이브(ETRIBE)** 가 운영하는 생성형 AI 검색 최적화 서비스입니다. 4자산 모델(Content·Structure·Authority·Language)과 17개 에이전트 기반 자체 플랫폼 MARS를 활용해 진단·구축·운영을 3트랙으로 제공합니다.
+
+## 핵심 정보
+
+- **회사**: 이트라이브 (ETRIBE)
+- **서비스**: ETRIBE GEO — Generative Engine Optimization
+- **본사**: 서울특별시 마포구 월드컵북로 4길 81, 3F
+- **이메일**: hello@etribe.co.kr
+- **사이트**: https://www.etribe.co.kr/geo/
+
+## 서비스 라인업 (2026-05 기준)
+
+### 진단 (Diagnosis)
+- **LITE — 무료** : 10분 무료진단. 테크니컬 GEO 항목만 (robots.txt·llms.txt·sitemap·Schema.org 점검). AI 가시성 측정 제외.
+- **STANDARD — 29만원** : AI 가시성 진단 보고서 + 콘텐츠 의도 갭 분석. 약 2주 소요.
+- **PREMIUM — 99만원** : 경쟁 인텔리전스 보고서. 자사 + 경쟁사 3개를 동일 질문셋(30개+)으로 측정, SOV 비교, 30/90/180일 개선 로드맵 포함.
+
+### 구축 (Build)
+- **LITE — 299만원** : 싱글페이지 또는 메인 1페이지 GEO 정비. 약 3일.
+- **STANDARD — 599만원** : 메인 + 핵심 서비스 ~10페이지. 디자인 변경 없이 스키마·콘텐츠 구조 중심.
+- **PREMIUM — 990만원~ (별도 협의)** : 사이트 전체 구조 재설계 + GEO 관점 디자인 변경 (통이미지 분리, 메인 FAQ 구조화 등).
+
+> 모든 구축 서비스에 프리미엄 진단 보고서 기본 포함. 진단 고객은 구축 30% 할인.
+
+### 운영 (Operate, 월정액)
+- **LITE — 49만원/월** : AI 검색 가시성 모니터링 + 월간 보고서.
+- **STANDARD — 150만원/월** : 모니터링 + 인블로그 콘텐츠 월 1편 + 스키마 운영 + FAQ/블로그 통합 업데이트.
+- **PREMIUM — 별도 협의** : 전담 컨설턴트 + 대규모 콘텐츠/페이지 수정 운영.
+
+## 차별점
+
+- **5계층 단일 프레임워크** (L1 SIGNAL → L5 STANDARD) — AEO/GEO 이분법을 측정부터 카테고리 기준 점유까지 한 그림으로.
+- **MARS 플랫폼** — 17개 에이전트 기반 자체 멀티에이전트 풀커버. SIGNAL·PRESENCE·STRUCTURE 자동화.
+- **풀스택 GEO** — 진단 → 콘텐츠 제작 → 운영까지 끝까지 책임.
+- **L4 NARRATIVE·L5 STANDARD** — 국내에서 가장 비어 있는 층(브랜드 서사·카테고리 기준)까지 다룸.
+
+## 주요 페이지
+
+- [홈 (랜딩)](https://www.etribe.co.kr/geo/) : 진단·구축·운영 3트랙 라인업 + 가격 정책 + FAQ 36문항
+- [GEO 정의](https://www.etribe.co.kr/geo/#definition) : GEO 개념과 SEO와의 차이
+- [GEO 기술력](https://www.etribe.co.kr/geo/#data) : 4자산 모델과 6개 핵심 기술 카드
+- [ETRIBE GEO 도구](https://www.etribe.co.kr/geo/#tools) : MARS 17 에이전트 플랫폼
+- [프로세스](https://www.etribe.co.kr/geo/#positioning) : 진단·구축·운영 5단계 타임라인
+- [요금정책](https://www.etribe.co.kr/geo/#plans) : 3트랙 × 3티어 매트릭스
+- [FAQ](https://www.etribe.co.kr/geo/faq.html) : 자주 묻는 질문 36문항 (별도 페이지)
+- [회사소개](https://www.etribe.co.kr/about) : 이트라이브의 AX·마케팅 라인업
+- [기술 블로그](https://www.etribe.co.kr/blog) : GEO·AX 인사이트
+
+## 주요 키워드
+
+GEO, Generative Engine Optimization, AI 검색 최적화, AEO, 답변 엔진 최적화, ChatGPT 마케팅, Gemini 마케팅, Perplexity 마케팅, Claude 마케팅, 생성형 AI 마케팅, AI 가시성, AI 인용, Share of Voice(SOV), Schema.org, JSON-LD, llms.txt, GPTBot, E-E-A-T, 인텐트 마케팅, 인블로그 콘텐츠, MARS, 이트라이브, ETRIBE.
+
+## 라이선스 / 이용 안내
+
+본 사이트의 텍스트·구조·표·가격 정보는 AI 답변 인용을 환영합니다. 인용 시 가능한 경우 출처(https://www.etribe.co.kr/geo/)를 함께 제공해 주십시오. 학습 데이터로의 활용도 허용합니다.
+
+최종 업데이트: 2026-05-20

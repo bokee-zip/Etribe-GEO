@@ -1,0 +1,85 @@
+# ─────────────────────────────────────────────────────────
+# ETRIBE GEO — robots.txt
+# 0519 GEO 진단 권고사항 반영 (D1. AI 크롤러 허용 명시 + 차단 규칙 부재 해소)
+# 게시 위치: https://www.etribe.co.kr/geo/robots.txt
+# ─────────────────────────────────────────────────────────
+
+# ───── 일반 검색엔진 ─────
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /*.json$
+
+# ───── AI / LLM 크롤러 — 명시적 허용 ─────
+# OpenAI · ChatGPT
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+# Anthropic · Claude
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+# Google · Gemini / Bard
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Microsoft · Bing / Copilot
+User-agent: bingbot
+Allow: /
+
+User-agent: BingPreview
+Allow: /
+
+# Meta · Llama
+User-agent: FacebookBot
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: Meta-ExternalFetcher
+Allow: /
+
+# Apple · Applebot
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Common Crawl (학습 데이터 소스)
+User-agent: CCBot
+Allow: /
+
+# DuckDuckGo
+User-agent: DuckAssistBot
+Allow: /
+
+# ───── Sitemap ─────
+Sitemap: https://www.etribe.co.kr/geo/sitemap.xml
+
+# ───── LLM 가이드 ─────
+# llms.txt: https://www.etribe.co.kr/geo/llms.txt

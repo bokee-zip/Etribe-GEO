@@ -1,0 +1,2053 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>ETRIBE — AI를 일하게 만드는 사람들 · 회사소개</title>
+<meta name="description" content="2006년부터 170명의 전문가가 거의 모든 산업에서 기업의 가장 복잡한 IT 과제를 해결해 온 검증된 파트너. AI를 매일 일하게 만드는 일, 그것이 이트라이브의 일입니다." />
+
+<!-- Wanted Sans (Korean) -->
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+<link rel="stylesheet" as="style" crossorigin
+  href="https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.3/packages/wanted-sans/fonts/webfontstatic/wanted-sans.css" />
+
+<!-- Red Hat Display (English) + IBM Plex Mono (system metadata) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   ETRIBE — AX COMPANY INTRO (BRANCH-COMMON PAGE)
+   Design tone: AI-Infra · system-grade · monochrome with red accent
+   ═══════════════════════════════════════════════════════════════ */
+:root {
+  --canvas:           #FFFFFF;
+  --ink:              #000000;
+  --primary:          #FF0000;
+  --primary-soft:     rgba(255, 0, 0, 0.10);
+  --primary-glow:     rgba(255, 0, 0, 0.45);
+
+  --surface-soft:     #F4F4F4;
+  --surface-ink:      #0A0A0A;
+  --surface-deep:     #050505;
+
+  --line-hard:        #000000;
+  --line-soft:        #E4E4E4;
+  --line-ink-soft:    rgba(255,255,255,0.12);
+  --line-ink-medium:  rgba(255,255,255,0.22);
+
+  --text-ink:         #000000;
+  --text-body:        #2A2A2A;
+  --text-muted:       #6A6A6A;
+  --text-on-ink:      #FFFFFF;
+  --text-on-ink-soft: rgba(255,255,255,0.70);
+  --text-on-ink-mute: rgba(255,255,255,0.45);
+
+  --s-4:   4px;  --s-8:   8px;   --s-12: 12px;  --s-16: 16px;
+  --s-20: 20px;  --s-24: 24px;   --s-32: 32px;  --s-40: 40px;
+  --s-48: 48px;  --s-56: 56px;   --s-64: 64px;  --s-80: 80px;
+  --s-120: 120px; --s-160: 160px;
+
+  --gnb-h:        80px;
+  --content-max:  1800px;
+  --page-pad:     60px;
+
+  --font-kr:  "Wanted Sans Variable", "Wanted Sans", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  --font-en:  "Red Hat Display", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", "SFMono-Regular", ui-monospace, "Menlo", monospace;
+}
+
+@media (max-width: 768px) {
+  :root { --page-pad: 20px; --gnb-h: 64px; }
+}
+
+/* BASE */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: var(--gnb-h); }
+body {
+  background: var(--canvas);
+  color: var(--text-ink);
+  font-family: var(--font-kr);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; border: 0; background: none; color: inherit; }
+::selection { background: var(--primary); color: var(--canvas); }
+
+h1, h2, h3, h4, p, blockquote {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 0 var(--page-pad);
+}
+
+.section { padding: var(--s-120) 0; position: relative; }
+@media (max-width: 768px) { .section { padding: var(--s-80) 0; } }
+
+/* REVEAL */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.in { opacity: 1; transform: none; }
+.reveal-stagger > * { opacity: 0; transform: translateY(20px); transition: opacity .65s ease, transform .65s ease; }
+.reveal-stagger.in > *:nth-child(1) { opacity: 1; transform: none; transition-delay: .05s; }
+.reveal-stagger.in > *:nth-child(2) { opacity: 1; transform: none; transition-delay: .12s; }
+.reveal-stagger.in > *:nth-child(3) { opacity: 1; transform: none; transition-delay: .19s; }
+.reveal-stagger.in > *:nth-child(4) { opacity: 1; transform: none; transition-delay: .26s; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal-stagger > * { opacity: 1 !important; transform: none !important; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   GNB
+   ═══════════════════════════════════════════════════════════════ */
+.gnb {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  height: var(--gnb-h);
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line-soft);
+  display: flex;
+  align-items: center;
+}
+.gnb.over-dark {
+  background: rgba(5,5,5,0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom-color: rgba(255,255,255,0.08);
+}
+.gnb-inner {
+  width: 100%;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 0 var(--page-pad);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-32);
+}
+.gnb-brand {
+  display: inline-flex;
+  align-items: center;
+  height: 100%;
+}
+/* Logo: 22px (20% larger than previous 18px) */
+.gnb-brand svg {
+  height: 22px;
+  width: auto;
+  display: block;
+  transition: filter .25s ease;
+}
+.gnb.over-dark .gnb-brand svg path { fill: #ffffff; }
+
+.gnb-nav {
+  display: flex;
+  gap: var(--s-32);
+  font-family: var(--font-en);
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.gnb-nav a {
+  color: var(--ink);
+  padding: var(--s-8) 0;
+  transition: color .15s ease, opacity .15s ease;
+  position: relative;
+}
+.gnb.over-dark .gnb-nav a { color: var(--text-on-ink); }
+.gnb-nav a:hover { color: var(--primary); }
+
+/* Corporate Site link — distinguishes with subtle red treatment */
+.gnb-nav .gnb-corp {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--primary);
+}
+.gnb.over-dark .gnb-nav .gnb-corp { color: var(--primary); }
+.gnb-nav .gnb-corp .ext-icon {
+  font-family: var(--font-en);
+  font-size: 11px;
+  font-weight: 700;
+  transition: transform .15s ease;
+  display: inline-block;
+}
+.gnb-nav .gnb-corp:hover .ext-icon {
+  transform: translate(2px, -2px);
+}
+
+.gnb-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-8);
+  height: 42px;
+  padding: 0 var(--s-20);
+  background: var(--ink);
+  color: var(--canvas);
+  font-family: var(--font-kr);
+  font-weight: 700;
+  font-size: 13.5px;
+  letter-spacing: 0.02em;
+  transition: background .15s ease, color .15s ease;
+}
+.gnb.over-dark .gnb-cta {
+  background: var(--canvas);
+  color: var(--ink);
+}
+.gnb-cta:hover { background: var(--primary); color: var(--canvas); }
+.gnb.over-dark .gnb-cta:hover { background: var(--primary); color: var(--canvas); }
+.gnb-cta .dot {
+  width: 6px; height: 6px;
+  background: var(--primary);
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 0 3px rgba(255,0,0,0.25);
+}
+.gnb-cta:hover .dot { background: var(--canvas); box-shadow: 0 0 0 3px rgba(255,255,255,0.25); }
+
+@media (max-width: 900px) {
+  .gnb-nav { display: none; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   HERO — team photo background with dark overlay
+   ═══════════════════════════════════════════════════════════════ */
+.hero {
+  position: relative;
+  background: var(--surface-deep);
+  color: var(--text-on-ink);
+  padding: calc(var(--gnb-h) + var(--s-120)) 0 var(--s-120);
+  overflow: hidden;
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('team-photo.jpg');
+  background-size: cover;
+  background-position: center 65%;
+  z-index: 0;
+}
+.hero-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to right,
+      rgba(0,0,0,0.70) 0%,
+      rgba(0,0,0,0.50) 45%,
+      rgba(0,0,0,0.28) 100%
+    ),
+    linear-gradient(to bottom,
+      rgba(0,0,0,0.25) 0%,
+      rgba(0,0,0,0.05) 40%,
+      rgba(0,0,0,0.60) 100%
+    );
+}
+.hero::before {
+  /* subtle system micro-grid */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.035) 1px, transparent 1px);
+  background-size: 80px 80px;
+  pointer-events: none;
+  z-index: 1;
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,0.55), transparent 80%);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.55), transparent 80%);
+}
+.hero::after {
+  /* red accent glow */
+  content: "";
+  position: absolute;
+  top: -120px; right: -200px;
+  width: 580px; height: 580px;
+  background: radial-gradient(circle, var(--primary-glow) 0%, rgba(255,0,0,0.06) 35%, transparent 65%);
+  pointer-events: none;
+  opacity: 0.4;
+  z-index: 1;
+}
+.hero .container { position: relative; z-index: 2; width: 100%; }
+
+.hero-h {
+  font-family: var(--font-kr);
+  font-weight: 700;
+  font-size: clamp(36px, 5.4vw, 76px);
+  line-height: 1.18;
+  letter-spacing: -0.025em;
+  margin-bottom: var(--s-48);
+  max-width: 1200px;
+  text-shadow: 0 2px 30px rgba(0,0,0,0.4);
+}
+.hero-h .red-mark { color: var(--primary); }
+.hero-h .ln { display: block; }
+
+.hero-sub {
+  max-width: 900px;
+  font-size: 19px;
+  line-height: 1.7;
+  color: var(--text-on-ink-soft);
+  margin-bottom: var(--s-80);
+}
+.hero-sub strong {
+  color: var(--text-on-ink);
+  font-weight: 700;
+}
+
+/* Metric row */
+.hero-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--line-ink-medium);
+  border-bottom: 1px solid var(--line-ink-medium);
+}
+.metric {
+  padding: var(--s-32) var(--s-24) var(--s-32) 0;
+  position: relative;
+}
+.metric + .metric {
+  padding-left: var(--s-40);
+  border-left: 1px solid var(--line-ink-soft);
+}
+.metric-num {
+  font-family: var(--font-en);
+  font-weight: 800;
+  font-size: clamp(48px, 6vw, 88px);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--text-on-ink);
+  display: inline-flex;
+  align-items: baseline;
+}
+.metric-num sup {
+  font-size: 0.30em;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--primary);
+  margin-left: 6px;
+  vertical-align: super;
+  font-family: var(--font-mono);
+}
+.metric-label {
+  margin-top: var(--s-12);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--text-on-ink-mute);
+  text-transform: uppercase;
+}
+.metric-desc {
+  margin-top: var(--s-8);
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--text-on-ink-soft);
+}
+
+@media (max-width: 768px) {
+  .hero { padding: calc(var(--gnb-h) + var(--s-64)) 0 var(--s-64); min-height: auto; }
+  .hero-metrics { grid-template-columns: 1fr; }
+  .metric { padding: var(--s-24) 0; }
+  .metric + .metric {
+    padding-left: 0;
+    border-left: 0;
+    border-top: 1px solid var(--line-ink-soft);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SECTION MARKERS — single label, no SECTION_NN prefix
+   ═══════════════════════════════════════════════════════════════ */
+.sec-marker {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-12);
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--s-40);
+}
+.sec-marker::before {
+  content: "";
+  width: 32px;
+  height: 1px;
+  background: var(--primary);
+}
+.sec-marker.on-ink { color: var(--text-on-ink-soft); }
+
+/* ═══════════════════════════════════════════════════════════════
+   ABOUT — clean two-column, no data block
+   ═══════════════════════════════════════════════════════════════ */
+.about .container {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: var(--s-80);
+  align-items: start;
+}
+@media (max-width: 1024px) {
+  .about .container { grid-template-columns: 1fr; gap: var(--s-48); }
+}
+.about-head {
+  position: sticky;
+  top: calc(var(--gnb-h) + var(--s-40));
+}
+@media (max-width: 1024px) { .about-head { position: static; } }
+
+.about-h {
+  font-weight: 700;
+  font-size: clamp(34px, 4.4vw, 56px);
+  line-height: 1.16;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: var(--s-24);
+}
+.about-h .accent {
+  border-bottom: 4px solid var(--primary);
+  padding-bottom: 4px;
+}
+
+.about-body {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding-top: var(--s-8);
+}
+.about-body p {
+  font-size: 18px;
+  line-height: 1.78;
+  color: var(--text-body);
+}
+.about-body p strong {
+  color: var(--ink);
+  font-weight: 700;
+  background: linear-gradient(to top, var(--primary-soft) 45%, transparent 45%);
+  padding: 0 2px;
+}
+.about-body .kicker {
+  font-size: 22px;
+  line-height: 1.55;
+  color: var(--ink);
+  font-weight: 600;
+  letter-spacing: -0.008em;
+  padding-top: var(--s-12);
+  border-top: 1px solid var(--line-soft);
+  margin-top: var(--s-8);
+}
+.about-body .kicker .em-red {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PHILOSOPHY — diagrammatic: compare grid + value cards
+   ═══════════════════════════════════════════════════════════════ */
+.philosophy {
+  background: var(--surface-ink);
+  color: var(--text-on-ink);
+}
+
+.philosophy-h {
+  font-weight: 700;
+  font-size: clamp(34px, 4.6vw, 64px);
+  line-height: 1.22;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--s-80);
+  max-width: 1280px;
+}
+.philosophy-h .red-mark { color: var(--primary); }
+.philosophy-h .muted-on-ink { color: var(--text-on-ink-mute); }
+
+/* Compare diagram: small "도입" card + big "운영" card (size = importance) */
+.philosophy-compare {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: var(--s-32);
+  align-items: stretch;
+  margin-top: var(--s-32);
+}
+@media (max-width: 900px) {
+  .philosophy-compare {
+    grid-template-columns: 1fr;
+    gap: var(--s-20);
+  }
+}
+
+.compare-col {
+  padding: var(--s-40);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.compare-col.left {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--line-ink-soft);
+  min-height: 320px;
+}
+
+.compare-col.right {
+  background:
+    linear-gradient(135deg, rgba(255,0,0,0.10) 0%, rgba(255,0,0,0.02) 100%),
+    rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,0,0,0.35);
+  position: relative;
+  min-height: 480px;
+}
+.compare-col.right::before {
+  /* big red corner accent */
+  content: "";
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 56px 56px 0;
+  border-color: transparent var(--primary) transparent transparent;
+}
+
+/* The connector between the two — only on desktop */
+.philosophy-compare-arrow {
+  display: none;
+}
+
+.compare-h {
+  font-weight: 700;
+  line-height: 1.22;
+  letter-spacing: -0.018em;
+  margin-bottom: var(--s-32);
+}
+.compare-col.left .compare-h {
+  font-size: clamp(20px, 2vw, 24px);
+  color: var(--text-on-ink-mute);
+}
+.compare-col.right .compare-h {
+  font-size: clamp(28px, 3.4vw, 40px);
+  color: var(--text-on-ink);
+}
+.compare-col.right .compare-h .red-mark { color: var(--primary); }
+
+.compare-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-12);
+  margin-bottom: var(--s-32);
+}
+.compare-col.left .compare-list {
+  gap: var(--s-8);
+}
+.compare-col.right .compare-list {
+  gap: var(--s-20);
+  margin-top: var(--s-12);
+}
+
+.compare-list li {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: var(--s-12);
+  align-items: baseline;
+  line-height: 1.55;
+}
+.compare-col.left .compare-list li {
+  font-size: 15px;
+  color: var(--text-on-ink-mute);
+}
+.compare-col.right .compare-list li {
+  font-size: 17px;
+  color: var(--text-on-ink-soft);
+}
+.compare-list .ix {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+.compare-col.left .compare-list .ix { color: var(--text-on-ink-mute); }
+.compare-col.right .compare-list .ix { color: var(--primary); font-size: 12px; font-weight: 600; }
+.compare-col.right .compare-list li strong {
+  color: var(--text-on-ink);
+  font-weight: 700;
+}
+
+.compare-foot {
+  margin-top: auto;
+  padding-top: var(--s-20);
+  border-top: 1px solid var(--line-ink-soft);
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.5;
+}
+.compare-col.left .compare-foot { color: var(--text-on-ink-mute); }
+.compare-col.right .compare-foot { color: var(--primary); }
+
+/* 3 value cards — keep, only add some top spacing */
+.philosophy-values-section {
+  margin-top: var(--s-120);
+}
+.philosophy-values-label {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-on-ink-soft);
+  margin-bottom: var(--s-12);
+  text-align: center;
+}
+.philosophy-values-h {
+  font-size: clamp(22px, 2.4vw, 30px);
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--text-on-ink);
+  margin-bottom: var(--s-48);
+  text-align: center;
+  letter-spacing: -0.01em;
+}
+.philosophy-values {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s-20);
+}
+@media (max-width: 768px) {
+  .philosophy-values { grid-template-columns: 1fr; }
+}
+.value-card {
+  padding: var(--s-32);
+  background: rgba(255,255,255,0.025);
+  border: 1px solid var(--line-ink-soft);
+  text-align: left;
+  transition: border-color .25s ease, background .25s ease;
+}
+.value-card:hover {
+  border-color: var(--primary);
+  background: rgba(255,0,0,0.04);
+}
+.value-icon {
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+  margin-bottom: var(--s-20);
+}
+.value-icon svg { width: 22px; height: 22px; display: block; }
+.value-h {
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.012em;
+  color: var(--text-on-ink);
+  margin-bottom: var(--s-8);
+}
+.value-p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-on-ink-soft);
+}
+
+/* Closing — now larger, the final punch */
+.philosophy-close {
+  margin-top: var(--s-120);
+  padding-top: var(--s-64);
+  border-top: 1px solid var(--line-ink-soft);
+  font-size: clamp(32px, 4.2vw, 56px);
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: var(--text-on-ink);
+  max-width: 1280px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.philosophy-close .red-mark { color: var(--primary); }
+
+/* ═══════════════════════════════════════════════════════════════
+   WHY E-TRIBE — bottom line of title is larger
+   ═══════════════════════════════════════════════════════════════ */
+.why .why-h {
+  font-weight: 700;
+  font-size: clamp(34px, 4.6vw, 60px);
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: var(--s-12);
+  max-width: 1100px;
+}
+.why .why-lead {
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--text-muted);
+  max-width: 760px;
+  margin-bottom: var(--s-80);
+}
+
+.why-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid var(--line-hard);
+}
+@media (max-width: 900px) {
+  .why-cards { grid-template-columns: 1fr; }
+}
+
+.why-card {
+  position: relative;
+  padding: var(--s-40) var(--s-32) var(--s-48);
+  background: var(--canvas);
+  display: flex;
+  flex-direction: column;
+  min-height: 420px;
+  transition: background .25s ease, color .25s ease;
+}
+.why-card + .why-card { border-left: 1px solid var(--line-hard); }
+@media (max-width: 900px) {
+  .why-card + .why-card { border-left: 0; border-top: 1px solid var(--line-hard); }
+}
+.why-card:hover {
+  background: var(--surface-ink);
+  color: var(--text-on-ink);
+}
+
+.why-card-num {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--primary);
+  margin-bottom: var(--s-24);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-8);
+}
+.why-card-num::before {
+  content: "";
+  width: 18px;
+  height: 1px;
+  background: var(--primary);
+  display: inline-block;
+}
+
+/* 2-line title: top line small/muted, bottom line large/bold */
+.why-card-h {
+  margin-bottom: var(--s-20);
+  letter-spacing: -0.015em;
+  transition: color .25s ease;
+  color: var(--ink);
+}
+.why-card-h .top {
+  display: block;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 1.35;
+  color: var(--text-muted);
+  margin-bottom: var(--s-8);
+  transition: color .25s ease;
+}
+.why-card-h .bottom {
+  display: block;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 1.22;
+  letter-spacing: -0.022em;
+}
+.why-card:hover .why-card-h { color: var(--text-on-ink); }
+.why-card:hover .why-card-h .top { color: var(--text-on-ink-mute); }
+
+.why-card-p {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--text-body);
+  transition: color .25s ease;
+  margin-bottom: var(--s-24);
+}
+.why-card:hover .why-card-p { color: var(--text-on-ink-soft); }
+.why-card-p strong {
+  color: var(--ink);
+  font-weight: 700;
+  transition: color .25s ease;
+}
+.why-card:hover .why-card-p strong { color: var(--primary); }
+
+.why-card-end {
+  margin-top: auto;
+  padding-top: var(--s-20);
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border-top: 1px solid var(--line-soft);
+  transition: color .25s ease, border-color .25s ease;
+}
+.why-card:hover .why-card-end {
+  color: var(--text-on-ink-mute);
+  border-color: var(--line-ink-soft);
+}
+
+/* Corporate site link under WHY cards — right-aligned */
+.why-corp-link {
+  margin-top: var(--s-32);
+  display: flex;
+  justify-content: flex-end;
+}
+.why-corp-link a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-12);
+  font-family: var(--font-kr);
+  font-weight: 700;
+  font-size: 14.5px;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+  padding: var(--s-12) 0;
+  border-bottom: 2px solid var(--ink);
+  transition: color .15s ease, border-color .15s ease, gap .15s ease;
+}
+.why-corp-link a:hover {
+  color: var(--primary);
+  border-color: var(--primary);
+  gap: var(--s-16);
+}
+.why-corp-link a .arrow {
+  font-family: var(--font-en);
+  font-size: 14px;
+  font-weight: 700;
+  display: inline-block;
+  transition: transform .15s ease;
+}
+.why-corp-link a:hover .arrow {
+  transform: translate(2px, -2px);
+}
+@media (max-width: 600px) {
+  .why-corp-link { justify-content: flex-start; }
+}
+
+@media (max-width: 600px) {
+  .why-card-h .bottom { font-size: 26px; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   AX LINEUP — 3 layers · 7 branches (no BR_XX red numbers)
+   ═══════════════════════════════════════════════════════════════ */
+.our-ax {
+  background: var(--surface-soft);
+}
+
+.our-ax-h {
+  font-weight: 700;
+  font-size: clamp(34px, 4.6vw, 60px);
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: var(--s-20);
+  max-width: 1100px;
+}
+.our-ax-lead {
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--text-body);
+  max-width: 900px;
+  margin-bottom: var(--s-80);
+}
+.our-ax-lead strong { color: var(--ink); font-weight: 700; }
+
+.ax-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-24);
+}
+
+.ax-layer {
+  background: var(--canvas);
+  border: 1px solid var(--line-hard);
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 0;
+}
+@media (max-width: 900px) {
+  .ax-layer { grid-template-columns: 1fr; }
+}
+
+.ax-layer-head {
+  padding: var(--s-32);
+  background: var(--ink);
+  color: var(--text-on-ink);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  min-height: 200px;
+}
+.ax-layer-head::before {
+  content: "";
+  position: absolute;
+  top: var(--s-20);
+  right: var(--s-20);
+  width: 8px; height: 8px;
+  background: var(--primary);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(255,0,0,0.18);
+}
+.ax-layer-tag {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-on-ink-mute);
+  margin-bottom: var(--s-16);
+}
+.ax-layer-name-en {
+  font-family: var(--font-en);
+  font-weight: 800;
+  font-size: 28px;
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+  color: var(--text-on-ink);
+  margin-bottom: var(--s-8);
+}
+.ax-layer-name-kr {
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--text-on-ink-soft);
+  margin-bottom: var(--s-24);
+}
+.ax-layer-purpose {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--text-on-ink-soft);
+}
+
+.ax-layer-branches {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+/* Branches: name + desc only (no red BR_XX) */
+.ax-branch {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  align-items: center;
+  gap: var(--s-32);
+  padding: var(--s-24) var(--s-32);
+  border-bottom: 1px solid var(--line-soft);
+  transition: background .15s ease;
+}
+.ax-branch:last-child { border-bottom: 0; }
+.ax-branch:hover { background: rgba(255,0,0,0.025); }
+@media (max-width: 768px) {
+  .ax-branch {
+    grid-template-columns: 1fr;
+    gap: var(--s-8);
+    padding: var(--s-20);
+  }
+}
+
+.ax-branch-name {
+  font-weight: 700;
+  font-size: 19px;
+  color: var(--ink);
+  letter-spacing: -0.008em;
+  position: relative;
+  padding-left: var(--s-20);
+}
+.ax-branch-name::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  background: var(--primary);
+}
+@media (max-width: 768px) {
+  .ax-branch-name { padding-left: var(--s-20); }
+}
+
+.ax-branch-desc {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-body);
+}
+
+.ax-stack-note {
+  margin-top: var(--s-48);
+  padding: var(--s-32);
+  background: var(--canvas);
+  border: 1px solid var(--line-hard);
+  border-left: 4px solid var(--primary);
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--ink);
+  font-weight: 700;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CLOSING
+   ═══════════════════════════════════════════════════════════════ */
+.closing {
+  background: var(--surface-deep);
+  color: var(--text-on-ink);
+  position: relative;
+  overflow: hidden;
+}
+.closing::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 80px 80px;
+  pointer-events: none;
+  mask-image: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+  -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+}
+.closing::after {
+  content: "";
+  position: absolute;
+  bottom: -200px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px; height: 400px;
+  background: radial-gradient(ellipse, var(--primary-glow) 0%, transparent 65%);
+  pointer-events: none;
+  opacity: 0.4;
+}
+.closing .container { position: relative; z-index: 2; text-align: center; }
+
+.closing-h {
+  font-weight: 700;
+  font-size: clamp(34px, 5vw, 64px);
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--s-48);
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.closing-h .red-mark { color: var(--primary); }
+
+.closing-ctas {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: var(--s-16);
+  justify-content: center;
+  margin-top: var(--s-24);
+}
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-12);
+  height: 56px;
+  padding: 0 var(--s-40);
+  font-family: var(--font-kr);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.01em;
+  transition: background .15s ease, color .15s ease, transform .15s ease;
+}
+.cta-primary {
+  background: var(--primary);
+  color: var(--canvas);
+}
+.cta-primary:hover {
+  background: var(--canvas);
+  color: var(--ink);
+  transform: translateY(-2px);
+}
+.cta .arrow {
+  width: 10px; height: 10px;
+  border-top: 2px solid currentColor;
+  border-right: 2px solid currentColor;
+  transform: rotate(45deg);
+  display: inline-block;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   FOOTER — borrowed from index.html bottom band
+   ═══════════════════════════════════════════════════════════════ */
+.page-foot {
+  background: var(--canvas);
+  color: var(--ink);
+  padding: var(--s-24) 0;
+  border-top: 1px solid var(--line-soft);
+}
+.page-foot-inner {
+  width: 100%;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 0 var(--page-pad);
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: var(--s-16);
+}
+.page-foot-copyright {
+  font-family: var(--font-en);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-16);
+}
+.page-foot-mark { display: inline-flex; align-items: center; }
+.page-foot-mark svg { height: 22px; width: auto; display: block; }
+.page-foot-copy-text { line-height: 1; }
+
+.page-foot-top {
+  font-family: var(--font-en);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-8);
+  cursor: pointer;
+  transition: transform .15s ease, color .15s ease;
+}
+.page-foot-top:hover { transform: translateY(-2px); color: var(--primary); }
+
+.page-foot-email {
+  font-family: var(--font-en);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-align: right;
+  transition: color .15s ease;
+}
+.page-foot-email:hover { color: var(--primary); }
+
+@media (max-width: 768px) {
+  .page-foot-inner {
+    grid-template-columns: 1fr;
+    text-align: left;
+    gap: var(--s-12);
+  }
+  .page-foot-top { display: none; }
+  .page-foot-email { text-align: left; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   INQUIRY MODAL — business inquiry form (사업문의)
+   ═══════════════════════════════════════════════════════════════ */
+.inq-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 2100;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: var(--s-24);
+}
+.inq-modal[aria-hidden="false"] {
+  display: flex;
+  animation: inq-fade .25s ease;
+}
+@keyframes inq-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes inq-pop {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.inq-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.68);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.inq-panel {
+  position: relative;
+  z-index: 1;
+  background: var(--canvas);
+  color: var(--ink);
+  width: 100%;
+  max-width: 560px;
+  max-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line-hard);
+  animation: inq-pop .3s cubic-bezier(.2,.7,.3,1);
+}
+.inq-close {
+  position: absolute;
+  top: var(--s-16);
+  right: var(--s-16);
+  width: 36px; height: 36px;
+  font-size: 26px;
+  line-height: 1;
+  color: var(--ink);
+  cursor: pointer;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: color .15s ease;
+}
+.inq-close:hover { color: var(--primary); }
+
+.inq-body {
+  padding: var(--s-48) var(--s-40) var(--s-40);
+  overflow-y: auto;
+  flex: 1;
+}
+
+.inq-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--s-8);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-12);
+}
+.inq-eyebrow::before {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: var(--primary);
+}
+.inq-h {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin-bottom: var(--s-12);
+}
+.inq-sub {
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--text-muted);
+  margin-bottom: var(--s-24);
+  padding-bottom: var(--s-20);
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.inq-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-16);
+}
+.inq-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-16);
+}
+@media (max-width: 480px) {
+  .inq-row { grid-template-columns: 1fr; }
+}
+
+.inq-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.inq-field label {
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.inq-req {
+  color: var(--primary);
+  font-weight: 700;
+}
+.inq-field input,
+.inq-field textarea {
+  width: 100%;
+  padding: 12px 14px;
+  background: var(--canvas);
+  border: 1px solid var(--line-hard);
+  border-radius: 0;
+  font: inherit;
+  font-size: 14.5px;
+  color: var(--ink);
+  outline: none;
+  transition: border-color .15s ease, box-shadow .15s ease;
+  -webkit-appearance: none;
+  appearance: none;
+  font-family: var(--font-kr);
+}
+.inq-field input { height: 44px; padding: 0 14px; }
+.inq-field textarea {
+  min-height: 120px;
+  resize: vertical;
+  line-height: 1.55;
+}
+.inq-field input::placeholder,
+.inq-field textarea::placeholder {
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+.inq-field input:hover,
+.inq-field textarea:hover {
+  border-color: var(--ink);
+}
+.inq-field input:focus,
+.inq-field textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(255,0,0,0.12);
+}
+.inq-field input.invalid,
+.inq-field textarea.invalid {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(255,0,0,0.16);
+}
+.inq-err {
+  display: none;
+  font-size: 11.5px;
+  color: var(--primary);
+  margin-top: 2px;
+  font-weight: 500;
+}
+.inq-field input.invalid ~ .inq-err,
+.inq-field textarea.invalid ~ .inq-err {
+  display: block;
+}
+
+.inq-count {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--text-muted);
+  text-align: right;
+  margin-top: 2px;
+  letter-spacing: 0.02em;
+}
+.inq-count .now { color: var(--ink); font-weight: 600; }
+.inq-count.is-over { color: var(--primary); }
+.inq-count.is-over .now { color: var(--primary); }
+
+.inq-submit {
+  margin-top: var(--s-8);
+  height: 52px;
+  background: var(--ink);
+  color: var(--canvas);
+  border: 1px solid var(--ink);
+  font-family: var(--font-kr);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-12);
+  transition: background .15s ease, color .15s ease, transform .15s ease;
+}
+.inq-submit:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  transform: translateY(-1px);
+}
+.inq-submit:active { transform: translateY(0); }
+.inq-submit .arrow {
+  width: 10px; height: 10px;
+  border-top: 2px solid currentColor;
+  border-right: 2px solid currentColor;
+  transform: rotate(45deg);
+  display: inline-block;
+}
+
+/* Success view */
+.inq-success {
+  text-align: center;
+  padding: var(--s-32) 0 var(--s-8);
+}
+.inq-success-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto var(--s-24);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary);
+  color: var(--canvas);
+  border-radius: 50%;
+}
+.inq-success h4 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: var(--s-12);
+  letter-spacing: -0.015em;
+}
+.inq-success p {
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--text-body);
+  margin-bottom: var(--s-32);
+}
+.inq-success-close {
+  height: 44px;
+  padding: 0 var(--s-32);
+  background: var(--canvas);
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  font-family: var(--font-kr);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease;
+}
+.inq-success-close:hover { background: var(--ink); color: var(--canvas); }
+
+@media (max-width: 600px) {
+  .inq-modal { padding: 0; }
+  .inq-panel {
+    max-height: 100vh;
+    height: 100vh;
+    max-width: 100vw;
+    border: 0;
+  }
+  .inq-body { padding: var(--s-40) var(--s-24) var(--s-32); }
+  .inq-h { font-size: 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═════════════════════ GNB ═════════════════════ -->
+<header class="gnb" id="gnb">
+  <div class="gnb-inner">
+    <a href="/" class="gnb-brand" aria-label="ETRIBE 홈">
+      <svg viewBox="0 0 100 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M26.6318 3.34854L35.5026 3.32861V5.9483H29.6423L29.6437 7.65933H35.5039V10.1063H29.6437L29.6423 11.8213L35.5053 11.8227V14.4198L26.6292 14.4237L26.6318 3.34854Z" fill="black"/>
+        <path d="M90.981 3.32861H99.8479V5.94791H93.9737L93.9751 7.65956H99.8492V10.1074H93.9751L93.9737 11.8231L99.8492 11.8244L99.8571 14.4184L90.981 14.4237V3.32861Z" fill="black"/>
+        <path d="M43.3561 5.94666H39.9414V3.32861H49.927V5.94666H46.5109V14.4237H43.3561V5.94666Z" fill="black"/>
+        <path d="M68.7891 3.32861H72.1176V14.4237H68.7891V3.32861Z" fill="black"/>
+        <path d="M86.5401 11.1509C86.5401 12.1898 86.1552 12.995 85.3856 13.5665C84.6159 14.138 83.6114 14.4237 82.3733 14.4237H76.5544V3.32861H82.092C83.4561 3.32861 84.5071 3.61971 85.2449 4.20191C85.9827 4.78411 86.3516 5.5626 86.3516 6.54005C86.3516 7.0902 86.1645 7.58426 85.789 8.02091C85.5647 8.29064 85.2635 8.52966 84.888 8.73797C85.363 8.977 85.708 9.21602 85.9204 9.45504C86.3331 9.8997 86.5401 10.4659 86.5401 11.1509ZM83.1456 6.67892C83.1456 6.42921 83.0633 6.22758 82.9015 6.07135C82.6878 5.87372 82.376 5.77491 81.9633 5.77491H79.8387V7.58293H81.9633C82.376 7.58293 82.6759 7.4948 82.8643 7.31853C83.0514 7.14094 83.1456 6.92729 83.1456 6.67892ZM83.3327 10.996C83.3327 10.7369 83.2451 10.5179 83.07 10.3417C82.8563 10.1334 82.5445 10.0306 82.1305 10.0306H79.8374V11.9788H82.1305C82.5432 11.9788 82.847 11.8826 83.0408 11.6904C83.2359 11.4967 83.3327 11.2657 83.3327 10.996Z" fill="black"/>
+        <path d="M64.3533 14.4237H61.0674L58.7223 10.2985H57.6248V14.4224H54.3677V3.32861H59.6172C61.0322 3.32861 62.1544 3.69202 62.9867 4.42016C63.7562 5.09638 64.1403 5.92302 64.1403 6.90009C64.1403 7.59761 63.9104 8.21526 63.4518 8.75571C63.0677 9.20298 62.3034 9.69018 61.7076 9.94043L64.3533 14.4237ZM61.0139 6.89876C61.0139 6.59792 60.8858 6.33568 60.6324 6.11205C60.3776 5.88841 60.034 5.7766 59.5989 5.7766H57.6248V8.02225H59.5989C60.0327 8.02225 60.3776 7.91043 60.6324 7.6868C60.8858 7.46316 61.0139 7.20093 61.0139 6.89876Z" fill="black"/>
+        <path d="M15.142 15.1716C16.7573 13.578 17.7546 11.3755 17.7546 8.94003V8.93738C17.7546 12.5919 14.7599 15.5476 11.0602 15.5476C7.36044 15.5476 4.36579 12.5919 4.36579 8.94003V8.93738C4.36579 7.71965 4.86445 6.61839 5.67277 5.82025L5.67545 5.82157C6.54811 4.95989 7.68886 4.52972 8.83096 4.52972C9.97305 4.52972 11.1138 4.95989 11.9865 5.82157C9.36983 3.23786 5.13523 3.23786 2.5186 5.82157C-0.0966942 8.40528 -0.0966942 12.5866 2.5186 15.1703V15.169C4.26257 16.891 6.54676 17.7527 8.82962 17.7527C11.1138 17.7527 13.3967 16.8937 15.1406 15.1703" fill="black"/>
+        <path d="M2.61246 2.58131C0.997265 4.17643 0 6.37915 0 8.81484V8.81617C0 5.16262 2.99447 2.20537 6.69401 2.20537C10.3935 2.20537 13.388 5.1613 13.388 8.81352V8.81484C13.388 10.0327 12.8894 11.1341 12.0825 11.9323L12.0798 11.9309C11.2072 12.7914 10.0665 13.2216 8.92445 13.2216C7.78242 13.2216 6.64039 12.7914 5.76912 11.9309C8.3856 14.5149 12.62 14.5149 15.2351 11.9309C17.8516 9.34699 17.8516 5.16527 15.2351 2.58131V2.58263C13.4899 0.86176 11.2072 0 8.92445 0C6.64039 0 4.35767 0.860437 2.6138 2.58263" fill="black"/>
+      </svg>
+    </a>
+    <nav class="gnb-nav" aria-label="주요 메뉴">
+      <a href="#about">About</a>
+      <a href="#philosophy">Philosophy</a>
+      <a href="#why">Why ETRIBE</a>
+      <a href="#ax-lineup">AX Lineup</a>
+      <a href="https://www.etribe.co.kr" target="_blank" rel="noopener noreferrer" class="gnb-corp">
+        Corporate Site
+        <span class="ext-icon" aria-hidden="true">↗</span>
+      </a>
+    </nav>
+    <a href="#" class="gnb-cta" data-open-inquiry>
+      <span class="dot" aria-hidden="true"></span>
+      사업문의
+    </a>
+  </div>
+</header>
+
+<!-- ═════════════════════ HERO ═════════════════════ -->
+<section class="hero" id="hero">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="container">
+    <h1 class="hero-h reveal">
+      <span class="ln">AI는 <span class="red-mark">새로운 일</span>이 아닙니다.</span>
+      <span class="ln">우리에게는, 20년 째 해온 일의</span>
+      <span class="ln"><span class="red-mark">다음 챕터</span>입니다.</span>
+    </h1>
+
+    <p class="hero-sub reveal">
+      이트라이브는 <strong>AI 스타트업이 아닙니다.</strong> 2006년부터 170명의 전문가가 거의 모든 산업에서 기업의 가장 복잡한 IT 과제를 해결해 온, 검증된 파트너입니다.
+    </p>
+
+    <div class="hero-metrics reveal-stagger">
+      <div class="metric">
+        <div class="metric-num">20<sup>YR+</sup></div>
+        <div class="metric-label">SINCE 2006</div>
+        <div class="metric-desc">기업의 가장 복잡한 IT 과제를 매일 해결해 온 시간</div>
+      </div>
+      <div class="metric">
+        <div class="metric-num">170<sup>EXP</sup></div>
+        <div class="metric-label">SPECIALIST GROUP</div>
+        <div class="metric-desc">SI·SM·AX를 한 조직 안에서 다루는 전문가 공동체</div>
+      </div>
+      <div class="metric">
+        <div class="metric-num">07<sup>+</sup></div>
+        <div class="metric-label">AX BRANCHES &amp; GROWING</div>
+        <div class="metric-desc">세 비즈니스 레이어 위에 계속 확장되는 AX Branch 라인업</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════════════ ABOUT ═════════════════════ -->
+<section class="section about" id="about">
+  <div class="container">
+    <div class="about-head reveal">
+      <div class="sec-marker">ABOUT</div>
+      <h2 class="about-h">20년의 IT,<br/>170명의 전문가,<br/><span class="accent">거의 모든 산업.</span></h2>
+    </div>
+
+    <div class="about-body reveal">
+      <p>이트라이브는 <strong>2006년부터</strong> 금융, 공공, 제조, 유통, 엔터테인먼트에 이르기까지 거의 모든 산업에서 기업의 가장 복잡한 IT 과제를 해결해 왔습니다.</p>
+
+      <p>SI(System Integration)와 SM(System Management)을 통해 축적된 도메인 이해, 운영 노하우, 그리고 170명의 전문가 조직. 이것이 한 번 만들고 끝나는 프로젝트가 아니라, <strong>매일 작동하는 시스템을 만드는 힘</strong>이 되었습니다.</p>
+
+      <p class="kicker">새로운 기술이 등장할 때마다 우리는 그것이 기업 안에서 매일 일하게 만드는 일을 해왔습니다. <span class="em-red">이번에는 그 기술이 AI입니다.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════════════ PHILOSOPHY ═════════════════════ -->
+<section class="section philosophy" id="philosophy">
+  <div class="container">
+    <div class="sec-marker on-ink reveal">PHILOSOPHY</div>
+
+    <h2 class="philosophy-h reveal">
+      누구나 AI를 <span class="muted-on-ink">도입할 수 있습니다.</span><br/>
+      우리는 AI를 <span class="red-mark">매일 일하게</span> 만듭니다.
+    </h2>
+
+    <!-- Asymmetric compare: small "도입" card + large "운영" card -->
+    <div class="philosophy-compare reveal">
+      <div class="compare-col left">
+        <h3 class="compare-h">누구나 할 수 있는<br/>AI 도입</h3>
+        <ul class="compare-list">
+          <li><span class="ix">01</span><span>도입은 했지만, 꾸준한 사용으로 이어지지 못합니다</span></li>
+          <li><span class="ix">02</span><span>쓸 줄은 알지만, 직접 운영하긴 어렵습니다</span></li>
+          <li><span class="ix">03</span><span>AI는 도는데, 비즈니스 변화로 연결되지 않습니다</span></li>
+        </ul>
+        <div class="compare-foot">— 도입은 끝났지만, AX는 아직입니다.</div>
+      </div>
+      <div class="compare-col right">
+        <h3 class="compare-h">우리가 만드는<br/>AI를 <span class="red-mark">매일 일하게</span> 만드는 일</h3>
+        <ul class="compare-list">
+          <li><span class="ix">01</span><span><strong>매일 같은 품질</strong>로 답하게 만들기</span></li>
+          <li><span class="ix">02</span><span><strong>운영팀이 직접</strong> 다룰 수 있게 만들기</span></li>
+          <li><span class="ix">03</span><span><strong>비즈니스 결과</strong>로 이어지게 만들기</span></li>
+        </ul>
+        <div class="compare-foot">— 이트라이브가 20년간 해온 일.</div>
+      </div>
+    </div>
+
+    <!-- 3 value cards -->
+    <div class="philosophy-values-section reveal">
+      <div class="philosophy-values-label">WHAT BUSINESS REALLY WANTS FROM AI</div>
+      <h3 class="philosophy-values-h">모델은 매일 바뀌어도, 기업이 AI에서 얻고자 하는 가치는 변하지 않습니다.</h3>
+
+      <div class="philosophy-values">
+        <div class="value-card">
+          <div class="value-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/>
+            </svg>
+          </div>
+          <div class="value-h">더 빠른 판단</div>
+          <div class="value-p">의사결정에 걸리는 시간을 줄여, 시장의 속도를 따라잡게 합니다.</div>
+        </div>
+        <div class="value-card">
+          <div class="value-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="7"/>
+              <path d="M21 21l-5-5"/>
+            </svg>
+          </div>
+          <div class="value-h">더 정확한 검색</div>
+          <div class="value-p">사내 어디에 있든, 필요한 정보를 정확하게 꺼내 답으로 만듭니다.</div>
+        </div>
+        <div class="value-card">
+          <div class="value-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+            </svg>
+          </div>
+          <div class="value-h">더 일관된 응대</div>
+          <div class="value-p">사람이 바뀌어도, 시간이 흘러도 같은 품질의 답을 매일 지켜냅니다.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Closing — the final big statement -->
+    <div class="philosophy-close reveal">
+      AI를 만드는 회사는 많습니다.<br/>
+      그 AI를 <span class="red-mark">매일 일하게 만드는 사람들</span>은 다릅니다.
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════════════ WHY E-TRIBE ═════════════════════ -->
+<section class="section why" id="why">
+  <div class="container">
+    <div class="sec-marker reveal">WHY E-TRIBE</div>
+
+    <h2 class="why-h reveal">
+      우리를 선택해야 하는<br/>세 가지 이유.
+    </h2>
+    <p class="why-lead reveal">
+      AI는 빠르게 변합니다. 그러나 그 위에서 매일 작동해야 하는 기업의 시스템은 흔들리면 안 됩니다.<br/>
+      이트라이브가 AX 파트너로서 제공하는 세 가지 안정성입니다.
+    </p>
+
+    <div class="why-cards reveal-stagger">
+      <article class="why-card">
+        <div class="why-card-num">REASON_01</div>
+        <h3 class="why-card-h">
+          <span class="top">신생이 아닌,</span>
+          <span class="bottom">20년의 안정성</span>
+        </h3>
+        <p class="why-card-p">
+          AX는 몇 달이 아닌 <strong>수년에 걸친 동행</strong>입니다.
+          이트라이브는 2006년부터 한자리에서 기업의 핵심 시스템을 책임져 온 회사입니다.
+          검증된 운영 실적과 재무 안정성으로, 다음 20년의 AX 파트너로 신뢰할 수 있습니다.
+        </p>
+        <div class="why-card-end">— STABILITY · 20-YEAR TRACK</div>
+      </article>
+
+      <article class="why-card">
+        <div class="why-card-num">REASON_02</div>
+        <h3 class="why-card-h">
+          <span class="top">도입이 아닌,</span>
+          <span class="bottom">운영의 전문성</span>
+        </h3>
+        <p class="why-card-p">
+          AI 도입은 출발점일 뿐입니다.
+          매일 같은 품질로 작동하고, 운영팀이 직접 다루며, 비즈니스 성과로 이어지는 것은 다른 차원의 일입니다.
+          <strong>20년 SI·SM으로 다져온 '매일 작동시키는 역량'</strong>을 AX에 그대로 적용합니다.
+        </p>
+        <div class="why-card-end">— OPERATIONS · SI/SM HERITAGE</div>
+      </article>
+
+      <article class="why-card">
+        <div class="why-card-num">REASON_03</div>
+        <h3 class="why-card-h">
+          <span class="top">모든 인더스트리,</span>
+          <span class="bottom">하나의 팀</span>
+        </h3>
+        <p class="why-card-p">
+          금융의 보안, 공공의 거버넌스, 제조의 데이터, 유통의 응대 — 이 모든 영역을 한 조직 안에서 다룹니다.
+          산업이 다르다고 외주로 돌리지 않습니다.
+          <strong>각 산업의 언어를 아는 PM과 엔지니어</strong>가 프로젝트 시작부터 함께합니다.
+        </p>
+        <div class="why-card-end">— DOMAIN · IN-HOUSE TEAM</div>
+      </article>
+    </div>
+
+    <div class="why-corp-link reveal">
+      <a href="https://www.etribe.co.kr" target="_blank" rel="noopener noreferrer">
+        이트라이브 대표홈페이지 바로가기
+        <span class="arrow" aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════════════ AX LINEUP ═════════════════════ -->
+<section class="section our-ax" id="ax-lineup">
+  <div class="container">
+    <div class="sec-marker reveal">AX LINEUP</div>
+
+    <h2 class="our-ax-h reveal">
+      세 개의 비즈니스 레이어,<br/>일곱 개의 AX Branch.
+    </h2>
+    <p class="our-ax-lead reveal">
+      이트라이브 AX는 세 개의 레이어로 구성됩니다.<br/>
+      <strong>인프라, 도구, 서비스</strong> — AI 기반을 다지는 일부터 현장에 쓰이는 도구, 사업으로 연결되는 서비스까지, 한 조직 안에서 모두 다룹니다.
+    </p>
+
+    <div class="ax-stack">
+
+      <!-- LAYER 01: AI INFRA -->
+      <div class="ax-layer reveal">
+        <div class="ax-layer-head">
+          <div>
+            <div class="ax-layer-tag">LAYER_01</div>
+            <div class="ax-layer-name-en">AI Infra</div>
+            <div class="ax-layer-name-kr">기업 안의 AI 기반</div>
+          </div>
+          <div class="ax-layer-purpose">
+            회사 데이터를 외부로 내보내지 않고도, 사내에서 AI가 안전하게 작동할 수 있게 만드는 기반.
+          </div>
+        </div>
+        <div class="ax-layer-branches">
+          <div class="ax-branch">
+            <div class="ax-branch-name">RAG</div>
+            <div class="ax-branch-desc">사내 자료를 AI가 정확히 찾아 답에 반영하게 만드는 검색 엔진</div>
+          </div>
+          <div class="ax-branch">
+            <div class="ax-branch-name">AI Server</div>
+            <div class="ax-branch-desc">회사 내부에서 직접 AI를 돌리는 전용 서버 — 데이터가 밖으로 나가지 않습니다</div>
+          </div>
+          <div class="ax-branch">
+            <div class="ax-branch-name">AI OS <span style="font-weight:400; color: var(--text-muted); font-size:0.82em;">(Hypervisor)</span></div>
+            <div class="ax-branch-desc">여러 AI 모델과 작업을 한 곳에서 통합 관리하는 운영체계</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LAYER 02: AI TOOL & SOLUTION -->
+      <div class="ax-layer reveal">
+        <div class="ax-layer-head">
+          <div>
+            <div class="ax-layer-tag">LAYER_02</div>
+            <div class="ax-layer-name-en">AI Tool<br/>&amp; Solution</div>
+            <div class="ax-layer-name-kr">업무로 들어오는 접점</div>
+          </div>
+          <div class="ax-layer-purpose">
+            고객 응대부터 회의 정리까지 — 임직원과 고객이 매일 AI를 만나는 접점.
+          </div>
+        </div>
+        <div class="ax-layer-branches">
+          <div class="ax-branch">
+            <div class="ax-branch-name">챗봇</div>
+            <div class="ax-branch-desc">고객·임직원 응대를 자동화하는, 우리 업종에 맞춰 학습된 대화형 AI</div>
+          </div>
+          <div class="ax-branch">
+            <div class="ax-branch-name">회의용 솔루션</div>
+            <div class="ax-branch-desc">회의 내용을 자동으로 정리하고, 요약·액션 아이템까지 뽑아주는 솔루션</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LAYER 03: AI SERVICE -->
+      <div class="ax-layer reveal">
+        <div class="ax-layer-head">
+          <div>
+            <div class="ax-layer-tag">LAYER_03</div>
+            <div class="ax-layer-name-en">AI Service</div>
+            <div class="ax-layer-name-kr">AX를 가속하는 패키지</div>
+          </div>
+          <div class="ax-layer-purpose">
+            AX 인프라를 빠르게 사업 성과로 만드는 패키지. 외부 노출과 가시성까지 챙깁니다.
+          </div>
+        </div>
+        <div class="ax-layer-branches">
+          <div class="ax-branch">
+            <div class="ax-branch-name">스타트업 패키지</div>
+            <div class="ax-branch-desc">스타트업이 빠르게 AX를 적용해 사업을 시작할 수 있는 통합 패키지</div>
+          </div>
+          <div class="ax-branch">
+            <div class="ax-branch-name">GEO</div>
+            <div class="ax-branch-desc">ChatGPT 같은 생성형 AI 답변에 우리 브랜드가 제대로 노출되게 만드는 서비스</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="ax-stack-note reveal">
+      3가지 레이어는 따로 도입할 수도, 함께 운영할 수도 있습니다.
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════════════ CLOSING ═════════════════════ -->
+<section class="section closing" id="closing">
+  <div class="container">
+    <h2 class="closing-h reveal">
+      AX는 한 번의 도입이 아니라,<br/>
+      <span class="red-mark">매일의 운영</span>입니다.<br/>
+      그 운영을 <span class="red-mark">20년간</span> 해온 회사가,<br/>다음 20년을 함께합니다.
+    </h2>
+
+    <div class="closing-ctas reveal">
+      <a href="#" class="cta cta-primary" data-open-inquiry>
+        사업문의
+        <span class="arrow" aria-hidden="true"></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════════════════ FOOTER ═════════════════════ -->
+<footer class="page-foot">
+  <div class="page-foot-inner">
+    <div class="page-foot-copyright">
+      <span class="page-foot-mark" aria-label="ETRIBE">
+        <svg viewBox="0 0 100 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M26.6318 3.34854L35.5026 3.32861V5.9483H29.6423L29.6437 7.65933H35.5039V10.1063H29.6437L29.6423 11.8213L35.5053 11.8227V14.4198L26.6292 14.4237L26.6318 3.34854Z" fill="black"/>
+          <path d="M90.981 3.32861H99.8479V5.94791H93.9737L93.9751 7.65956H99.8492V10.1074H93.9751L93.9737 11.8231L99.8492 11.8244L99.8571 14.4184L90.981 14.4237V3.32861Z" fill="black"/>
+          <path d="M43.3561 5.94666H39.9414V3.32861H49.927V5.94666H46.5109V14.4237H43.3561V5.94666Z" fill="black"/>
+          <path d="M68.7891 3.32861H72.1176V14.4237H68.7891V3.32861Z" fill="black"/>
+          <path d="M86.5401 11.1509C86.5401 12.1898 86.1552 12.995 85.3856 13.5665C84.6159 14.138 83.6114 14.4237 82.3733 14.4237H76.5544V3.32861H82.092C83.4561 3.32861 84.5071 3.61971 85.2449 4.20191C85.9827 4.78411 86.3516 5.5626 86.3516 6.54005C86.3516 7.0902 86.1645 7.58426 85.789 8.02091C85.5647 8.29064 85.2635 8.52966 84.888 8.73797C85.363 8.977 85.708 9.21602 85.9204 9.45504C86.3331 9.8997 86.5401 10.4659 86.5401 11.1509ZM83.1456 6.67892C83.1456 6.42921 83.0633 6.22758 82.9015 6.07135C82.6878 5.87372 82.376 5.77491 81.9633 5.77491H79.8387V7.58293H81.9633C82.376 7.58293 82.6759 7.4948 82.8643 7.31853C83.0514 7.14094 83.1456 6.92729 83.1456 6.67892ZM83.3327 10.996C83.3327 10.7369 83.2451 10.5179 83.07 10.3417C82.8563 10.1334 82.5445 10.0306 82.1305 10.0306H79.8374V11.9788H82.1305C82.5432 11.9788 82.847 11.8826 83.0408 11.6904C83.2359 11.4967 83.3327 11.2657 83.3327 10.996Z" fill="black"/>
+          <path d="M64.3533 14.4237H61.0674L58.7223 10.2985H57.6248V14.4224H54.3677V3.32861H59.6172C61.0322 3.32861 62.1544 3.69202 62.9867 4.42016C63.7562 5.09638 64.1403 5.92302 64.1403 6.90009C64.1403 7.59761 63.9104 8.21526 63.4518 8.75571C63.0677 9.20298 62.3034 9.69018 61.7076 9.94043L64.3533 14.4237ZM61.0139 6.89876C61.0139 6.59792 60.8858 6.33568 60.6324 6.11205C60.3776 5.88841 60.034 5.7766 59.5989 5.7766H57.6248V8.02225H59.5989C60.0327 8.02225 60.3776 7.91043 60.6324 7.6868C60.8858 7.46316 61.0139 7.20093 61.0139 6.89876Z" fill="black"/>
+          <path d="M15.142 15.1716C16.7573 13.578 17.7546 11.3755 17.7546 8.94003V8.93738C17.7546 12.5919 14.7599 15.5476 11.0602 15.5476C7.36044 15.5476 4.36579 12.5919 4.36579 8.94003V8.93738C4.36579 7.71965 4.86445 6.61839 5.67277 5.82025L5.67545 5.82157C6.54811 4.95989 7.68886 4.52972 8.83096 4.52972C9.97305 4.52972 11.1138 4.95989 11.9865 5.82157C9.36983 3.23786 5.13523 3.23786 2.5186 5.82157C-0.0966942 8.40528 -0.0966942 12.5866 2.5186 15.1703V15.169C4.26257 16.891 6.54676 17.7527 8.82962 17.7527C11.1138 17.7527 13.3967 16.8937 15.1406 15.1703" fill="black"/>
+          <path d="M2.61246 2.58131C0.997265 4.17643 0 6.37915 0 8.81484V8.81617C0 5.16262 2.99447 2.20537 6.69401 2.20537C10.3935 2.20537 13.388 5.1613 13.388 8.81352V8.81484C13.388 10.0327 12.8894 11.1341 12.0825 11.9323L12.0798 11.9309C11.2072 12.7914 10.0665 13.2216 8.92445 13.2216C7.78242 13.2216 6.64039 12.7914 5.76912 11.9309C8.3856 14.5149 12.62 14.5149 15.2351 11.9309C17.8516 9.34699 17.8516 5.16527 15.2351 2.58131V2.58263C13.4899 0.86176 11.2072 0 8.92445 0C6.64039 0 4.35767 0.860437 2.6138 2.58263" fill="black"/>
+        </svg>
+      </span>
+      <span class="page-foot-copy-text">ALL RIGHTS RESERVED.</span>
+    </div>
+    <button class="page-foot-top" id="back-to-top" type="button" aria-label="Back to top">
+      BACK TO TOP
+      <span aria-hidden="true">↑</span>
+    </button>
+    <a href="mailto:hello@etribe.co.kr" class="page-foot-email">HELLO@ETRIBE.CO.KR</a>
+  </div>
+</footer>
+
+<!-- ═════════════════════ INQUIRY MODAL (사업문의) ═════════════════════ -->
+<div class="inq-modal" id="inquiry-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="inq-title">
+  <div class="inq-backdrop" data-close></div>
+  <div class="inq-panel" role="document">
+    <button class="inq-close" type="button" data-close aria-label="닫기">×</button>
+    <div class="inq-body">
+
+      <!-- Form view -->
+      <div data-view="form">
+        <div class="inq-eyebrow">BUSINESS INQUIRY</div>
+        <h3 class="inq-h" id="inq-title">사업문의</h3>
+        <p class="inq-sub">아래 정보를 남겨주시면 영업일 기준 2일 이내에 담당자가 연락드립니다.</p>
+
+        <form class="inq-form" id="inquiry-form" novalidate>
+          <div class="inq-row">
+            <div class="inq-field">
+              <label for="inq-company">회사 <span class="inq-req" aria-hidden="true">*</span></label>
+              <input type="text" id="inq-company" name="company" required placeholder="회사명" autocomplete="organization" />
+              <span class="inq-err">회사명을 입력해 주세요.</span>
+            </div>
+            <div class="inq-field">
+              <label for="inq-name">이름 <span class="inq-req" aria-hidden="true">*</span></label>
+              <input type="text" id="inq-name" name="name" required placeholder="담당자명" autocomplete="name" />
+              <span class="inq-err">이름을 입력해 주세요.</span>
+            </div>
+          </div>
+
+          <div class="inq-field">
+            <label for="inq-email">이메일 <span class="inq-req" aria-hidden="true">*</span></label>
+            <input type="email" id="inq-email" name="email" required placeholder="name@company.com" autocomplete="email" />
+            <span class="inq-err">유효한 이메일을 입력해 주세요.</span>
+          </div>
+
+          <div class="inq-field">
+            <label for="inq-phone">연락처 <span class="inq-req" aria-hidden="true">*</span></label>
+            <input type="tel" id="inq-phone" name="phone" required placeholder="010-0000-0000" autocomplete="tel" inputmode="tel" />
+            <span class="inq-err">유효한 연락처를 입력해 주세요.</span>
+          </div>
+
+          <div class="inq-field">
+            <label for="inq-message">문의내용 <span class="inq-req" aria-hidden="true">*</span></label>
+            <textarea id="inq-message" name="message" required maxlength="500" placeholder="검토 중인 사항, 도입 일정 등 문의 내용을 작성해 주세요. (500자 이내)"></textarea>
+            <div class="inq-count" id="inq-count"><span class="now">0</span> / 500</div>
+            <span class="inq-err">문의 내용을 입력해 주세요.</span>
+          </div>
+
+          <button type="submit" class="inq-submit">
+            문의 보내기
+            <span class="arrow" aria-hidden="true"></span>
+          </button>
+        </form>
+      </div>
+
+      <!-- Success view -->
+      <div data-view="success" hidden>
+        <div class="inq-success">
+          <div class="inq-success-icon" aria-hidden="true">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 6L9 17l-5-5"/>
+            </svg>
+          </div>
+          <h4>문의가 접수되었습니다</h4>
+          <p>영업일 기준 2일 이내에 담당자가 연락드리겠습니다.<br/>감사합니다.</p>
+          <button type="button" class="inq-success-close" data-close>닫기</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+/* Reveal on scroll */
+(function(){
+  const els = document.querySelectorAll('.reveal, .reveal-stagger');
+  if (!('IntersectionObserver' in window) || !els.length) {
+    els.forEach(el => el.classList.add('in'));
+    return;
+  }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+  els.forEach(el => io.observe(el));
+})();
+
+/* GNB: dark variant while hero is in view */
+(function(){
+  const gnb  = document.getElementById('gnb');
+  const hero = document.getElementById('hero');
+  if (!gnb || !hero) return;
+  const setMode = () => {
+    const rect = hero.getBoundingClientRect();
+    const overDark = rect.bottom > 60;
+    gnb.classList.toggle('over-dark', overDark);
+  };
+  setMode();
+  window.addEventListener('scroll', setMode, { passive: true });
+  window.addEventListener('resize', setMode);
+})();
+
+/* Back to top */
+(function(){
+  const btn = document.getElementById('back-to-top');
+  if (!btn) return;
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
+
+/* ───────────────────────────────────────────────────────────
+   INQUIRY MODAL — 사업문의
+   Triggered by any element with [data-open-inquiry].
+   ─────────────────────────────────────────────────────────── */
+(function(){
+  const modal = document.getElementById('inquiry-modal');
+  const form  = document.getElementById('inquiry-form');
+  if (!modal || !form) return;
+
+  const formView    = modal.querySelector('[data-view="form"]');
+  const successView = modal.querySelector('[data-view="success"]');
+  const message     = form.elements['message'];
+  const countNode   = document.getElementById('inq-count');
+  const countNow    = countNode.querySelector('.now');
+
+  const showForm = () => {
+    formView.hidden = false;
+    successView.hidden = true;
+  };
+  const showSuccess = () => {
+    formView.hidden = true;
+    successView.hidden = false;
+  };
+
+  const updateCount = () => {
+    const len = message.value.length;
+    countNow.textContent = len;
+    countNode.classList.toggle('is-over', len >= 500);
+  };
+
+  const openModal = () => {
+    showForm();
+    form.reset();
+    form.querySelectorAll('input, textarea').forEach(i => i.classList.remove('invalid'));
+    updateCount();
+
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => {
+      const first = form.querySelector('input');
+      first && first.focus();
+    }, 50);
+  };
+
+  const closeModal = () => {
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  };
+
+  // Trigger delegation
+  document.addEventListener('click', (e) => {
+    const trigger = e.target.closest('[data-open-inquiry]');
+    if (!trigger) return;
+    e.preventDefault();
+    openModal();
+  });
+
+  // Close handlers
+  modal.querySelectorAll('[data-close]').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      closeModal();
+    });
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false') closeModal();
+  });
+
+  // Character count
+  message.addEventListener('input', updateCount);
+
+  // Validation
+  const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const phoneRe = /^(?:\+?\d{1,3}[-\s]?)?(?:\(?\d{2,4}\)?[-\s]?)?\d{3,4}[-\s]?\d{4}$/;
+
+  const validate = () => {
+    const company = form.elements['company'];
+    const name    = form.elements['name'];
+    const email   = form.elements['email'];
+    const phone   = form.elements['phone'];
+    const msg     = form.elements['message'];
+
+    const checks = [
+      [company, company.value.trim().length >= 1],
+      [name,    name.value.trim().length >= 1],
+      [email,   emailRe.test(email.value.trim())],
+      [phone,   phoneRe.test(phone.value.trim())],
+      [msg,     msg.value.trim().length >= 1 && msg.value.length <= 500],
+    ];
+
+    let firstInvalid = null;
+    checks.forEach(([el, ok]) => {
+      el.classList.toggle('invalid', !ok);
+      if (!ok && !firstInvalid) firstInvalid = el;
+    });
+
+    if (firstInvalid) {
+      firstInvalid.focus();
+      return false;
+    }
+    return true;
+  };
+
+  // Clear invalid state on input
+  form.querySelectorAll('input, textarea').forEach(el => {
+    el.addEventListener('input', () => el.classList.remove('invalid'));
+  });
+
+  // Submit
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!validate()) return;
+    // Backend POST would go here in production
+    showSuccess();
+  });
+})();
+</script>
+
+</body>
+</html>

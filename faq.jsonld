@@ -1,0 +1,302 @@
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "name": "ETRIBE GEO — 자주 묻는 질문",
+  "description": "AI 검색 가시성 진단·구축·운영 서비스 ETRIBE GEO에 대한 자주 묻는 질문 36가지.",
+  "inLanguage": "ko-KR",
+  "publisher": {
+    "@type": "Organization",
+    "name": "ETRIBE",
+    "url": "https://www.etribe.co.kr"
+  },
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "GEO(Generative Engine Optimization)란 무엇인가요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "GEO(Generative Engine Optimization)는 ChatGPT·Gemini·Perplexity·Claude 같은 생성형 AI가 답변을 만들 때 우리 브랜드와 콘텐츠가 인용되도록 사이트를 최적화하는 작업입니다. 검색결과 페이지(SERP)에 노출되는 것이 아니라 AI가 만들어내는 답변 문장 안에 들어가는 것이 목표이며, 콘텐츠·구조·권위·언어 4가지 자산을 함께 다룹니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "GEO와 SEO는 어떻게 다른가요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "SEO는 검색결과 페이지(SERP) 상위 노출이 목표이고, GEO는 생성형 AI의 답변 텍스트 안에 우리 브랜드가 인용되는 것이 목표입니다. SEO가 “클릭을 받는 게임”이라면 GEO는 “AI가 우리를 답으로 선택하는 게임”입니다. 두 작업은 스키마·E-E-A-T 같은 신호에서 일부 겹치지만, GEO는 4개 AI 엔진에서의 답변 점유율(SOV)을 핵심 지표로 삼는다는 점이 다릅니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "왜 지금 GEO가 필요한가요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "사용자가 검색창에 키워드를 치는 대신 ChatGPT와 Perplexity에 질문을 던지기 시작했고, AI 답변에 우리 브랜드가 없으면 잠재 고객의 의사결정에서 통째로 배제되기 때문입니다. SEO 트래픽이 빠지기 전에 AI 답변 점유율부터 확보해야 하며, ETRIBE GEO는 이 전환기를 위한 진단·구축·운영 솔루션입니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "AI 검색 답변에서 “인용된다”는 것은 무슨 의미인가요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "“인용된다”는 것은 ChatGPT·Gemini·Perplexity·Claude가 사용자 질문에 답변을 생성할 때 우리 사이트의 텍스트나 데이터를 출처로 사용해 결과 문장에 포함시키는 것을 의미합니다. 단순 링크 노출과 달리 답변 본문에 우리 브랜드명·사실·문구가 직접 등장하므로, 사용자가 사이트에 방문하지 않아도 인지·고려 단계가 발생합니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "AI 검색 점유율(SOV)은 어떻게 정의되나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "AI 검색 점유율(Share of Voice, SOV)은 산업과 관련된 대표 질문 세트를 ChatGPT·Gemini·Perplexity·Claude에 입력했을 때 답변 안에서 우리 브랜드가 인용·언급된 비율을 의미합니다. ETRIBE GEO는 STANDARD 진단부터 4개 AI 엔진과 동일 질문 세트(최대 30개+)로 SOV를 실측하고, PREMIUM에서 경쟁사 3개와 함께 비교합니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "E-E-A-T 신호는 GEO에 어떤 영향을 주나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "E-E-A-T(Experience·Expertise·Authoritativeness·Trustworthiness)는 AI가 답변 출처를 신뢰할지 판단하는 핵심 시그널이며, 부족하면 콘텐츠가 좋아도 인용되지 않습니다. ETRIBE GEO 진단은 저자 정보, 회사 정보, 외부 인용, 업데이트 빈도 등을 점검하고 부족한 권위 신호를 사이트 구조와 스키마로 보강합니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "ETRIBE GEO는 어떤 서비스를 제공하나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ETRIBE GEO는 AI 검색 가시성을 진단·구축·운영하는 3트랙 솔루션입니다. 진단(무료~99만원)은 현재 상태를 측정하고, 구축(299만원~)은 사이트와 콘텐츠 구조를 AI 인용 가능 상태로 정비하며, 운영(49만원/월~)은 인텐트 변화에 따라 콘텐츠·스키마·FAQ를 지속 업데이트합니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "진단·구축·운영의 역할은 어떻게 나뉘나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "진단은 “현재 우리가 AI에 어떻게 보이는가”를 측정하고, 구축은 “AI가 인용 가능한 상태로 사이트를 1회 정비”하며, 운영은 “인텐트와 경쟁 환경 변화에 맞춰 지속 갱신”합니다. 모든 구축 서비스에 프리미엄 진단 보고서가 기본 포함되며, 진단 고객은 구축 30% 할인을 받습니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "진단을 받지 않고 바로 구축을 시작해도 되나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "바로 구축을 시작할 수 있지만 권장하지 않습니다. 사이트의 현재 AI 가시성 수준과 경쟁사 대비 위치를 모르면 어디를 우선 수정할지 판단이 흐려지기 때문입니다. ETRIBE GEO는 모든 구축 서비스에 프리미엄 진단 보고서를 기본 포함시켜 이 문제를 해결합니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "진단 고객에게 적용되는 30% 할인은 어떻게 받나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "진단 서비스(STANDARD 29만원 또는 PREMIUM 99만원)를 결제한 고객이 구축 서비스를 계약할 때 자동으로 30% 할인이 적용됩니다. 예를 들어 진단 PREMIUM 99만원 + 구축 LITE 299만원의 경우, 구축 비용이 209만원으로 적용되어 합산 약 308만원이 됩니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "어떤 산업의 기업이 ETRIBE GEO와 협업하나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "유통·커머스, 금융, 부동산, 외식, 미디어 등 AI 검색에서 답변되어야 하는 모든 B2C·B2B 브랜드가 대상입니다. ETRIBE는 롯데월드몰·블루벤트·극동방송 등 산업별 디지털 마케팅 경험을 바탕으로 인텐트 구조와 콘텐츠 설계를 진행합니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "계약 후 실제 작업은 언제 시작되나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "계약 즉시 프리미엄 진단 보고서 작성이 시작되며, 구축 LITE는 약 3일(담당자 1명), STANDARD는 약 2~3주, PREMIUM은 별도 협의입니다. 초기 셋업은 LITE·STANDARD가 5영업일, PREMIUM이 10영업일 소요됩니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "10분 무료 진단으로 무엇을 알 수 있나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "10분 무료 진단(진단 LITE)은 robots.txt·GPTBot·llms.txt·sitemap·Schema.org 적용 현황 등 테크니컬 GEO 항목을 점검한 보고서를 이메일로 발송해 드립니다. AI 가시성 측정과 경쟁사 비교는 포함되지 않으며, 오픈 기념 이벤트 기간에는 AI 가시성을 다루는 STANDARD까지 무료로 제공합니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "진단 STANDARD와 PREMIUM의 차이는 무엇인가요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "STANDARD(29만원)는 자사 사이트의 AI 가시성과 콘텐츠 의도 갭 분석에 집중하고, PREMIUM(99만원)은 동일 질문 세트(30개+)로 경쟁사 3개를 함께 분석하는 경쟁 인텔리전스 보고서를 제공합니다. PREMIUM은 SOV 비교, 경쟁사 스키마 진단, 30/90/180일 개선 로드맵, GEO 컨설턴트 인사이트 요약까지 포함합니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "경쟁 인텔리전스 보고서에는 어떤 내용이 들어가나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "경쟁 인텔리전스 보고서는 자사와 경쟁사 3개를 동일한 질문 세트(30개+)로 측정해 4개 AI 엔진에서의 답변 점유율, 인용 빈도, 상단 노출, 스키마 구조, 테크니컬 진단을 비교합니다. 마지막에 GEO 컨설턴트의 인사이트 요약과 30/90/180일 개선 로드맵이 포함되어 어디서 점유율을 빼앗기는지가 명확해집니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "진단 결과를 받기까지 얼마나 걸리나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "진단 LITE는 신청 후 이메일로 회신되며, STANDARD는 약 2주, PREMIUM은 약 2주 + 보고서 핸들링 2일이 소요됩니다. PREMIUM은 경쟁사별 MARS 실행과 컨설턴트 인사이트가 추가되어 시간이 더 필요합니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "진단 PREMIUM은 어떤 기업에 추천되나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "경쟁사 대비 AI 검색 점유율 비교가 필요한 기업, 산업 내 1~3위를 다투는 브랜드, 신규 시장에 진입해 경쟁사의 GEO 전략을 파악해야 하는 기업에 추천됩니다. 진단 결과를 그대로 구축·운영 계약으로 이어가면 30% 할인이 적용되어 실질 부담이 줄어듭니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "진단만 받고 자체적으로 실행해도 효과가 있을까요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "대기업처럼 내부 개발·콘텐츠 인력이 충분하다면 진단 보고서만으로도 실행이 가능합니다. 다만 스키마·llms.txt·인블로그·FAQ를 동시에 갱신해야 하는 GEO 운영 특성상, 인력이 부족하거나 결과를 빠르게 보고 싶은 경우에는 구축·운영을 연계하는 것이 효과적입니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "구축 LITE 299만원은 어떤 사이트에 적합한가요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "구축 LITE(299만원)는 싱글페이지 구조이거나 메인 1페이지만 GEO 관점에서 정비하면 충분한 사이트에 적합합니다. 분석·수정 약 3일이 소요되며 디자인 변경은 포함되지 않습니다. 멀티페이지 사이트의 핵심 페이지군을 다뤄야 한다면 STANDARD(599만원) 이상을 권장합니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "구축 STANDARD와 PREMIUM의 작업 범위는 어떻게 다른가요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "STANDARD(599만원)는 메인 + 핵심 서비스 페이지 약 10페이지를 디자인 변경 없이 스키마와 GEO 콘텐츠 구조 중심으로 정비합니다. PREMIUM(990만원~)은 사이트 전체 구조 재설계와 GEO 관점의 디자인 변경(통이미지 분리, 메인 FAQ 구조화, 히어로 텍스트화 등)을 포함하며, 비용은 별도 협의됩니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "“GEO 관점의 디자인 변경”이란 무엇인가요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "GEO 관점의 디자인 변경은 일반 리뉴얼과 다르게 AI 크롤러와 인용 가능성을 우선시한 구조 개편을 뜻합니다. 통이미지를 텍스트+이미지로 분리하거나 히어로 카피를 텍스트화하고, FAQ를 GNB에 노출하며, 페이지별 인텐트에 맞는 콘텐츠 블록을 재배치하는 등 시각 디자인이 아닌 정보 구조의 재설계입니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "사이트 페이지가 10개를 초과하면 비용이 어떻게 되나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "STANDARD(599만원)는 메인 + 핵심 서비스 페이지 약 10페이지 기준입니다. 10페이지를 초과하면 추가 페이지당 비용을 별도 협의하거나, 사이트 전체 재설계가 필요한 경우 PREMIUM(990만원~)으로 진행됩니다. 추가 옵션 표에는 페이지 수정 추가 단가가 60만원/페이지로 책정되어 있습니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "구축 효과는 언제부터 AI 답변에 반영되나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "AI 크롤러가 변경된 사이트를 재수집하고 인덱스에 반영하는 데 통상 2~6주가 걸리며, ChatGPT처럼 학습 시점이 고정된 엔진은 실시간 웹 검색 옵션을 통해 더 빠르게 반영됩니다. 운영 계약을 함께 진행하면 변동을 매월 모니터링하며 추가 최적화를 적용할 수 있습니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "CMS 없이 정적 HTML로 운영 중이어도 GEO 구축이 가능한가요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "정적 HTML 사이트도 GEO 구축이 가능합니다. ETRIBE GEO는 초기에는 하드코딩으로 스키마와 콘텐츠를 적용한 뒤, 운영 규모가 커지면 CMS 전환을 별도 검토하는 방식을 권장합니다. 극동방송 사례처럼 13개 지사의 스키마 자동화가 필요한 경우에는 CMS 기반 자동화가 별도 계약으로 진행됩니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "ETRIBE GEO 운영 서비스는 어떤 일을 하나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ETRIBE GEO 운영은 신제품·이벤트·시즌 변화에 따라 사이트 콘텐츠·스키마·FAQ·인블로그 콘텐츠를 통합 업데이트해 AI 답변에서의 인용 지위를 유지하는 월정액 서비스입니다. LITE(49만원/월)는 모니터링만, STANDARD(150만원/월)는 모니터링 + 인블로그 + 스키마 운영, PREMIUM은 전담 컨설턴트와 함께 별도 협의로 진행됩니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "운영 LITE 49만원과 STANDARD 150만원은 어떻게 다른가요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "LITE(49만원/월)는 AI 검색 가시성 모니터링과 월간 보고서만 제공하며, STANDARD(150만원/월)는 여기에 인블로그 콘텐츠 월 1편 제작·발행과 스키마 운영, 인텐트 변화 시 FAQ·블로그 통합 업데이트가 추가됩니다. GEO에 가장 직접적인 영향을 주는 액션은 인블로그 콘텐츠이므로 STANDARD를 핵심 상품으로 권장합니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "왜 인블로그 콘텐츠가 GEO에 가장 직접적인가요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "스키마와 테크니컬 신호는 기반이지만 변경 빈도가 낮은 반면, 인블로그 콘텐츠는 새로운 인텐트가 등장할 때마다 AI에게 인용 거리(quotable text)를 제공할 수 있기 때문입니다. ETRIBE GEO는 민트 유닛 자동화 레시피를 통해 월 1편의 콘텐츠를 인블로그·스키마·FAQ에 동시 반영합니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "구축이 끝났는데도 운영 계약이 필요한 이유가 있나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "AI 모델은 학습 데이터와 답변 패턴이 주기적으로 바뀌고, 경쟁사가 새 콘텐츠를 올리면 우리 점유율도 함께 변동하기 때문입니다. 한 번의 구축으로 잡힌 인용 지위는 시간이 지나면 떨어지며, 운영 LITE 49만원/월부터 시작해 모니터링만이라도 유지하기를 권장합니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "운영 PREMIUM은 어떤 경우에 권장되나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "주력 상품이 자주 바뀌는 커머스, 시즌 프로그램이 매번 갱신되는 미디어·교육 기업, 다지사·다브랜드를 동시에 운영해야 하는 경우에 권장됩니다. 블루벤트 사례에서는 6개월 1,800만원(도가스 포함 2,000만원) 규모로 페이지 수정과 외부 콘텐츠 운영을 함께 진행했습니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "신제품 출시처럼 인텐트가 바뀔 때는 어떻게 대응하나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "신제품이 추가되면 메인 히어로 문구, 제품 상세 스키마, 메인 FAQ, 인블로그 콘텐츠를 한 번에 갱신해 새로운 인텐트에 대응합니다. 예를 들어 블루벤트에 믹서기 카테고리가 추가되면 “블루벤트 믹서기 가격·성능·경쟁사 비교”라는 인텐트가 동시에 발생하므로 4채널을 묶어 처리합니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "MARS는 어떤 도구이고 무엇을 자동화하나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "MARS는 ETRIBE가 자체 개발한 17개 에이전트 기반 GEO 진단·실행 플랫폼입니다. 사이트 크롤링, 스키마 점검, 4개 AI 엔진 실측, 경쟁사 비교, 보고서 작성을 자동화하며, 진단 STANDARD 이상 서비스에 적용됩니다. PREMIUM은 자사 1회 + 경쟁사 3회 = 총 4회 실행을 통합해 인텔리전스 보고서를 산출합니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Schema.org JSON-LD는 왜 GEO에 핵심적인가요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Schema.org JSON-LD는 AI 크롤러에게 페이지의 의미 구조(상품·FAQ·조직·이벤트 등)를 기계 판독 가능한 형태로 알려주기 때문에 GEO에 핵심적입니다. JSON-LD가 없으면 AI가 본문 텍스트를 직접 해석해야 하므로 인용 가능성이 낮아지고, 잘못된 발췌가 발생할 위험도 커집니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "llms.txt는 꼭 추가해야 하나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "llms.txt는 LLM 크롤러에게 우리 사이트에서 우선적으로 읽어야 할 핵심 페이지와 정보를 안내하는 표준 파일로, 추가를 권장합니다. robots.txt가 검색엔진을 위한 것이라면 llms.txt는 ChatGPT·Claude 같은 LLM을 위한 것으로, ETRIBE GEO 진단은 LITE부터 llms.txt 적용 현황을 점검합니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "AI 크롤러(GPTBot 등)가 사이트를 읽지 못하면 어떻게 되나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "GPTBot·ClaudeBot·PerplexityBot 같은 AI 크롤러가 차단되어 있으면 사이트는 AI 답변의 원천 데이터에서 통째로 제외됩니다. 즉, 콘텐츠가 아무리 좋아도 인용 자체가 불가능해집니다. ETRIBE GEO 진단은 robots.txt·서버 응답·CDN 정책을 점검해 차단 여부를 확인하고 수정 코드를 제공합니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "AI 검색 점유율은 어떻게 측정하나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ETRIBE GEO는 산업·브랜드별 대표 질문 세트(STANDARD 10개, PREMIUM 30개+)를 ChatGPT·Gemini·Perplexity·Claude 4개 엔진에 동일하게 입력한 뒤, 답변 안에서 우리 브랜드와 경쟁사가 인용된 비율을 집계합니다. 측정은 MARS가 자동화하며, PREMIUM은 경쟁사 3개와의 SOV 비교까지 포함됩니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "ETRIBE GEO의 결과 보고서는 어떻게 받게 되나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "진단 보고서는 신청 시 입력한 이메일로 PDF·웹 링크 형태로 발송됩니다. 구축·운영 계약 고객은 진단 보고서 + 액션플랜 + 경쟁사 분석을 포함한 상세 보고서를 받으며, 운영 STANDARD 이상은 월 1회(PREMIUM은 주 1회) 정기 리포트가 제공됩니다."
+      }
+    }
+  ]
+}
