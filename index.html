@@ -1956,34 +1956,57 @@
     /* —— 공통 CAROUSEL-PIN (모바일 scroll-jacking) ——
        래퍼는 (1 + (n-1)*0.85) viewport 만큼 키워두고, 안에 sticky stage가 뷰포트에 고정.
        JS가 스크롤 진행도에 비례해 .carousel-stage > .tools-grid|.tech-cards 를 가로 translate. */
-    .carousel-pin { position: relative; }
-    .carousel-stage { /* desktop: pass-through */ contents: ''; }
+    .carousel-pin {
+      position: relative;
+    }
+
+    .carousel-stage {
+      /* desktop: pass-through */
+      contents: '';
+    }
 
     @media (max-width: 768px) {
+
       /* Stage가 GNB 아래 뷰포트 전체를 덮어 사용자 시야에는 GNB와 stage만 남게 함.
          pin은 sticky 구간을 충분히 길게 잡아, 그 스크롤 거리만큼 카드가 가로로 슬라이드됨.
-         시각적으로 페이지가 "고정"되어 보이고 카드만 움직임. */
+         시각적으로 페이지가 "고정"되어 보이고 카드만 움직임.
+         섹션 헤더·스크롤 힌트가 stage 안에 있어 pinning 중에도 콘텐츠가 보임. */
       .carousel-pin {
-        --stage-h: calc(100vh - var(--gnb-h));
-        /* 카드 1장당 60vh의 sticky 스크롤 거리 → 가로 슬라이드 동안 페이지는 stage 뒤에서만 진행 */
-        height: calc(var(--stage-h) + (var(--card-count, 3)) * 60vh);
+        /* pin 높이는 JS가 stage 실측 높이 + (N-1)×60vh 로 동적 설정 */
+        position: relative;
       }
+
       .carousel-stage {
         position: sticky;
         top: var(--gnb-h);
-        height: var(--stage-h);
+        min-height: calc(100vh - var(--gnb-h));
         overflow: hidden;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        gap: var(--s-56);
         background: var(--canvas);
         /* 컨테이너 패딩 무시하고 화면 끝까지 확장 */
         margin-left: calc(var(--page-pad) * -1);
         margin-right: calc(var(--page-pad) * -1);
-        padding: 0 var(--page-pad);
+        padding: var(--s-56) var(--page-pad);
       }
+
+      /* 헤더 그룹 */
+      .carousel-header {
+        flex-shrink: 0;
+      }
+
+      /* 스크롤 힌트: stage 하단 고정 */
+      .carousel-stage .tech-scroll-hint,
+      .carousel-stage .tools-scroll-hint {
+        margin-top: auto;
+        flex-shrink: 0;
+      }
+
       /* .data 섹션 배경(surface-soft)이 stage와 다르므로 stage가 그 위를 덮도록 보강 */
-      .data .carousel-stage { background: var(--surface-soft); }
+      .data .carousel-stage {
+        background: var(--surface-soft);
+      }
     }
 
     /* —— TOOLS 모바일 카드 — scroll-jacking 트랙 (768px 이하) —— */
@@ -7224,6 +7247,25 @@
         states.push({ pin, stage, track });
       });
 
+      /* pin 높이 & stage top 동적 설정 */
+      const setPinHeights = () => {
+        states.forEach(({ pin, stage, track }) => {
+          if (!mq.matches) {
+            pin.style.height = '';
+            stage.style.top = '';
+            return;
+          }
+          const stageH = stage.offsetHeight;
+          const vh = window.innerHeight;
+          const cardCount = track.children.length;
+          const scrollPerCard = vh * 0.6; // 60vh
+          pin.style.height = (stageH + (cardCount - 1) * scrollPerCard) + 'px';
+          /* stage가 뷰포트보다 크면 top을 음수로 → 카드(하단)가 뷰포트에 맞춰 보임 */
+          const stickyTop = Math.min(vh - stageH, 72); // gnb-h = 72
+          stage.style.top = stickyTop + 'px';
+        });
+      };
+
       const update = () => {
         if (!mq.matches || reduceMotion) {
           states.forEach(s => { s.track.style.transform = ''; });
@@ -7252,8 +7294,9 @@
         raf = requestAnimationFrame(() => { raf = 0; update(); });
       };
       window.addEventListener('scroll', onScroll, { passive: true });
-      window.addEventListener('resize', update);
-      mq.addEventListener('change', update);
+      window.addEventListener('resize', () => { setPinHeights(); update(); });
+      mq.addEventListener('change', () => { setPinHeights(); update(); });
+      setPinHeights();
       update();
     })();
 
