@@ -3914,14 +3914,78 @@
       box-shadow: 12px 12px 0 0 var(--primary);
     }
 
+    /* —— Tablet (≤1100px): stack to single column —— */
     @media (max-width: 1100px) {
+      .report-grid {
+        grid-template-columns: 1fr;
+        gap: var(--s-20);
+      }
+      .report-card {
+        min-height: 0;
+        padding: var(--s-28);
+      }
       .report-card.tier-standard { transform: none; }
       .report-card.tier-standard:hover { transform: translateY(-4px); }
+      .report-card:hover { box-shadow: 8px 8px 0 0 var(--ink); }
+      .report-card.tier-premium:hover { box-shadow: 8px 8px 0 0 var(--primary); }
+      .report-card-num { font-size: 48px; }
+      .report-card-name { font-size: 24px; }
+      .report-card-name br { display: none; }
     }
+
+    /* —— Phone (≤700px): compact spacing & smaller hard shadow —— */
     @media (max-width: 700px) {
-      .report-card { min-height: 0; padding: var(--s-24); }
-      .report-card-num { font-size: 44px; }
-      .report-card-name { font-size: 22px; }
+      .report-grid { gap: var(--s-16); }
+      .report-card { padding: var(--s-24); }
+      .report-card::before { height: 6px; }
+      .report-card-num { font-size: 44px; margin-bottom: 4px; }
+      .report-card-tier {
+        font-size: 10px;
+        letter-spacing: 0.2em;
+        margin-bottom: var(--s-16);
+        gap: var(--s-8);
+      }
+      .report-card-tier::before { width: 20px; }
+      .report-card-name {
+        font-size: 22px;
+        line-height: 1.25;
+        margin-bottom: var(--s-12);
+      }
+      .report-card-desc {
+        font-size: 13.5px;
+        line-height: 1.6;
+        margin-bottom: var(--s-20);
+      }
+      .report-card-feats {
+        padding-top: var(--s-16);
+        margin-bottom: var(--s-24);
+        gap: var(--s-10);
+      }
+      .report-card-feats li { font-size: 12.5px; line-height: 1.5; }
+      .report-card-cta {
+        padding: 14px var(--s-16);
+        font-size: 12px;
+        letter-spacing: 0.14em;
+      }
+      .report-card-cta::after { font-size: 16px; }
+      .report-card-ribbon {
+        font-size: 9.5px;
+        padding: 4px 10px;
+        top: var(--s-12);
+        letter-spacing: 0.16em;
+      }
+      .report-card:hover { box-shadow: 6px 6px 0 0 var(--ink); transform: translateY(-2px); }
+      .report-card.tier-standard:hover { transform: translateY(-2px); }
+      .report-card.tier-premium:hover { box-shadow: 6px 6px 0 0 var(--primary); }
+    }
+
+    /* —— Small phone (≤480px) —— */
+    @media (max-width: 480px) {
+      .report-card { padding: var(--s-20); }
+      .report-card-num { font-size: 40px; }
+      .report-card-name { font-size: 20px; }
+      .report-card-desc { font-size: 13px; }
+      .report-card-cta { font-size: 11.5px; padding: 13px var(--s-14); }
     }
 
     /* —— Report preview MODAL (full-screen iframe popup) —— */
@@ -4030,70 +4094,9 @@
     }
 
     @media (max-width: 700px) {
-      .report-grid {
-        grid-template-columns: 1fr;
-        gap: var(--s-12);
-      }
-
       .report-examples {
         margin-top: var(--s-56);
         padding-top: var(--s-40);
-      }
-
-      /* ── 모바일 리스트형 카드: [텍스트 왼쪽 | 작은 이미지 오른쪽] ── */
-      .report-card {
-        flex-direction: row;
-        align-items: stretch;
-        min-height: 110px;
-      }
-      .report-card-body {
-        order: 1;
-        flex: 1 1 auto;
-        padding: var(--s-16) var(--s-16) var(--s-12);
-        gap: 6px;
-        min-width: 0;
-      }
-      .report-card-image {
-        order: 2;
-        flex: 0 0 110px;
-        width: 110px;
-        aspect-ratio: 1 / 1;
-        border-bottom: 0;
-        border-left: 1px solid var(--line-soft);
-      }
-      .report-card-image-label {
-        font-size: 9px;
-        padding: 4px 8px;
-        letter-spacing: 0.14em;
-      }
-      .report-card-tier {
-        font-size: 10px;
-        letter-spacing: 0.18em;
-      }
-      .report-card-tier.is-featured {
-        padding: 2px 8px;
-        font-size: 9.5px;
-      }
-      .report-card-name {
-        font-size: 15px;
-        line-height: 1.3;
-        letter-spacing: -0.01em;
-      }
-      .report-card-desc {
-        font-size: 12.5px;
-        line-height: 1.5;
-        color: var(--text-muted);
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-      }
-      .report-card-cta {
-        padding-top: var(--s-8);
-        padding-bottom: 2px;
-        font-size: 12px;
-        align-self: flex-start;
       }
     }
 
