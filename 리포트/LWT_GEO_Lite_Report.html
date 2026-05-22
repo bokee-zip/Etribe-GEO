@@ -1,0 +1,3115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>○○○쇼핑몰 · GEO 진단 보고서 (PREMIUM)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.4/packages/wanted-sans/fonts/webfontvariable/variable/WantedSansVariable.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;700;900&family=Red+Hat+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* 베이스 톤 */
+    --bg: #FFFFFF;
+    --bg-soft: #EFEFEF;
+    --bg-card: #FFFFFF;
+    --line: #E4E4E4;
+    --line-2: #F0F0F0;
+    --line-strong: #000000;
+
+    /* 텍스트 */
+    --text: #000000;
+    --text-2: #333333;
+    --text-3: #555555;
+    --text-4: #999999;
+
+    /* 포인트 */
+    --navy: #000000;
+    --navy-2: #1A1A1A;
+    --navy-soft: #F5F5F5;
+    --red: #dc2626;
+    --red-soft: #fef2f2;
+    --red-2: #b91c1c;
+
+    /* 보조 */
+    --amber: #b45309;
+    --amber-soft: #fef3c7;
+    --green: #047857;
+    --green-soft: #d1fae5;
+
+    /* 코드 */
+    --code-bg: #090909;
+    --code-bg-2: #1A1A1A;
+    --code-border: #333333;
+    --code-text: #e8eaf0;
+    --code-cmt: #7c8497;
+    --code-tag: #8ab4f8;
+    --code-attr: #f7c873;
+    --code-str: #b5e87a;
+    --code-prop: #87d3ff;
+    --code-val: #f08c8c;
+    --code-kw: #d9a3ff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Wanted Sans Variable', 'Wanted Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 400;
+    line-height: 1.7;
+    font-size: 14.5px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ============ 모노/세리프 유틸 ============ */
+  .mono { font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-feature-settings: "tnum"; }
+  .serif { font-family: 'Wanted Sans Variable', 'Wanted Sans', -apple-system, BlinkMacSystemFont, sans-serif; }
+  .num { font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-feature-settings: "tnum"; }
+
+  /* ============ STICKY HEADER ============ */
+  .report-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+    padding: 0 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+  .header-brand {
+    display: flex; align-items: center; gap: 14px;
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: var(--text-3);
+    text-transform: uppercase;
+  }
+  .header-brand .mars {
+    color: var(--red);
+    font-weight: 500;
+  }
+  .header-brand .sep {
+    color: var(--text-4);
+  }
+  .header-nav {
+    display: flex; gap: 24px;
+  }
+  .header-nav a {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--text-3);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color .18s ease;
+    padding: 4px 0;
+  }
+  .header-nav a:hover { color: var(--navy); }
+  .header-badge {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    color: #fff;
+    background: var(--text-3);
+    padding: 4px 11px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  /* LITE 전용 — 업셀 박스 */
+  .upsell-box {
+    margin-top: 40px;
+    padding: 36px 40px;
+    background: linear-gradient(135deg, var(--navy) 0%, #2a3658 100%);
+    border-radius: 8px;
+    color: #fff;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 32px;
+    align-items: center;
+  }
+  .upsell-box-left {}
+  .upsell-label {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10.5px;
+    color: #ff7a8b;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+  .upsell-title {
+    font-family: 'Wanted Sans Variable', 'Wanted Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 22px;
+    color: #fff;
+    line-height: 1.45;
+    font-weight: 700;
+    margin-bottom: 12px;
+    letter-spacing: -0.015em;
+  }
+  .upsell-title em {
+    color: #ff7a8b;
+    font-style: normal;
+    font-weight: 900;
+  }
+  .upsell-body {
+    font-size: 13.5px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.8;
+    max-width: 640px;
+  }
+  .upsell-body strong {
+    color: #fff;
+    font-weight: 500;
+  }
+  .upsell-right {
+    text-align: right;
+  }
+  .upsell-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #fff;
+    color: var(--navy);
+    padding: 14px 26px;
+    border-radius: 4px;
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+  .upsell-cta .price {
+    color: var(--red);
+    font-weight: 700;
+  }
+  .upsell-tier-line {
+    margin-top: 14px;
+    display: flex;
+    gap: 6px;
+    justify-content: flex-end;
+  }
+  .upsell-tier {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px;
+    padding: 3px 9px;
+    border-radius: 2px;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+    background: rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.7);
+  }
+  .upsell-tier.active {
+    background: var(--red);
+    color: #fff;
+  }
+  /* LITE 차단 항목 표시 */
+  .locked-section {
+    margin-top: 28px;
+    padding: 28px 32px;
+    background: var(--bg-soft);
+    border: 1px dashed var(--line-strong);
+    border-radius: 6px;
+    text-align: center;
+  }
+  .locked-label {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    color: var(--text-3);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .locked-title {
+    font-family: 'Wanted Sans Variable', 'Wanted Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 17px;
+    color: var(--text-2);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .locked-desc {
+    font-size: 13px;
+    color: var(--text-3);
+    line-height: 1.7;
+    max-width: 580px;
+    margin: 0 auto;
+  }
+
+  /* ============ HERO ============ */
+  .hero {
+    padding: 80px 48px 64px;
+    border-bottom: 1px solid var(--line);
+    background: linear-gradient(180deg, #EFEFEF 0%, #FFFFFF 100%);
+  }
+  .hero-inner {
+    max-width: 1320px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 64px;
+    align-items: end;
+  }
+  .hero-meta {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    color: var(--text-3);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .hero-meta .dot { color: var(--red); margin: 0 8px; }
+  .hero-title {
+    font-family: 'Wanted Sans Variable', 'Wanted Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 44px;
+    line-height: 1.25;
+    color: var(--navy);
+    margin-bottom: 20px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .hero-title em {
+    color: var(--red);
+    font-style: normal;
+    font-weight: 900;
+  }
+  .hero-sub {
+    font-size: 15px;
+    color: var(--text-2);
+    line-height: 1.85;
+    max-width: 540px;
+    font-weight: 400;
+  }
+  .hero-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .stat-cell {
+    background: #fff;
+    padding: 26px 24px;
+  }
+  .stat-label {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px;
+    color: var(--text-3);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .stat-value {
+    font-family: 'Wanted Sans Variable', 'Wanted Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 40px;
+    line-height: 1;
+    color: var(--navy);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .stat-value .unit {
+    font-size: 16px;
+    color: var(--text-3);
+    margin-left: 2px;
+    font-family: 'Wanted Sans Variable', 'Wanted Sans', sans-serif;
+    font-weight: 400;
+  }
+  .stat-value.red { color: var(--red); }
+  .stat-value.amber { color: var(--amber); }
+  .stat-value.navy { color: var(--navy); }
+  .stat-value.green { color: var(--green); }
+  .stat-desc {
+    font-size: 12px;
+    color: var(--text-3);
+    margin-top: 8px;
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    letter-spacing: 0.04em;
+  }
+
+  /* ============ TOC ============ */
+  .toc {
+    padding: 26px 48px;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+    background: var(--bg-soft);
+  }
+  .toc-inner {
+    max-width: 1320px;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .toc-label {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px;
+    color: var(--text-3);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-right: 14px;
+    font-weight: 500;
+  }
+  .toc-item {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    color: var(--text-2);
+    text-decoration: none;
+    padding: 6px 12px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    transition: all .15s ease;
+    letter-spacing: 0.04em;
+  }
+  .toc-item:hover {
+    border-color: var(--navy);
+    color: var(--navy);
+  }
+
+  /* ============ SECTION ============ */
+  .section {
+    padding: 72px 48px;
+    border-bottom: 1px solid var(--line);
+  }
+  .section-inner {
+    max-width: 1320px;
+    margin: 0 auto;
+  }
+  .section-header {
+    margin-bottom: 44px;
+  }
+  .section-num {
+    display: inline-block;
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    color: var(--red);
+    letter-spacing: 0.18em;
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+  .section-title {
+    font-family: 'Wanted Sans Variable', 'Wanted Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 30px;
+    color: var(--navy);
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+  .section-lead {
+    font-size: 14.5px;
+    color: var(--text-2);
+    line-height: 1.85;
+    max-width: 820px;
+  }
+
+  /* ============ NOTICE ============ */
+  .notice {
+    padding: 16px 22px;
+    background: var(--navy-soft);
+    border-left: 3px solid var(--navy);
+    border-radius: 2px;
+    font-size: 13px;
+    color: var(--text-2);
+    margin-bottom: 32px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    line-height: 1.7;
+  }
+  .notice.notice-red {
+    background: var(--red-soft);
+    border-left-color: var(--red);
+  }
+  .notice.notice-amber {
+    background: var(--amber-soft);
+    border-left-color: var(--amber);
+  }
+  .notice-icon {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px;
+    color: var(--navy);
+    letter-spacing: 0.12em;
+    font-weight: 500;
+    flex-shrink: 0;
+    padding-top: 2px;
+    min-width: 40px;
+  }
+  .notice.notice-red .notice-icon { color: var(--red); }
+  .notice.notice-amber .notice-icon { color: var(--amber); }
+
+  /* ============ FRAME GRID (측정 개요) ============ */
+  .frame-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+  .frame-cell {
+    background: #fff;
+    padding: 22px 22px;
+  }
+  .frame-label {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px;
+    color: var(--text-3);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .frame-val {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.65;
+    font-weight: 500;
+  }
+  .frame-val .sub {
+    display: block;
+    font-size: 12px;
+    color: var(--text-3);
+    font-weight: 400;
+    margin-top: 4px;
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  .frame-val .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 8px;
+  }
+  .type-tag {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px;
+    padding: 3px 9px;
+    background: var(--navy-soft);
+    border: 1px solid transparent;
+    border-radius: 2px;
+    color: var(--navy);
+    letter-spacing: 0.04em;
+    font-weight: 500;
+  }
+
+  /* ============ QUESTION TYPE CARDS ============ */
+  .qtype-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-top: 32px;
+  }
+  .qtype-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 20px 22px;
+  }
+  .qtype-name {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    color: var(--red);
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .qtype-title {
+    font-family: 'Wanted Sans Variable', 'Wanted Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 16px;
+    color: var(--navy);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .qtype-desc {
+    font-size: 12.5px;
+    color: var(--text-2);
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+  .qtype-example {
+    padding: 10px 12px;
+    background: var(--bg-soft);
+    border-radius: 3px;
+    font-size: 12px;
+    color: var(--text-2);
+    line-height: 1.6;
+    font-style: italic;
+    border-left: 2px solid var(--line-strong);
+  }
+  .qtype-example::before {
+    content: '예: ';
+    font-style: normal;
+    color: var(--text-3);
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+  }
+</style>
+
+<!-- ============ ETribe AI Service Brand Override v3 (PDF spec aligned) ============ -->
+<style>
+  :root {
+    --canvas: #FFFFFF;
+    --ink: #000000;
+    --primary: #DDF300;
+    --primary-active: #C5D900;
+    --primary-soft: rgba(221, 243, 0, 0.15);
+    --primary-deep: #B8CC00;
+    --surface-soft: #EFEFEF;
+    --surface-lime: #DDF300;
+    --surface-ink: #000000;
+    --line-hard: #000000;
+    --line-soft: #E4E4E4;
+    --text-ink: #000000;
+    --text-body: #333333;
+    --text-muted: #555555;
+    --text-on-lime: #000000;
+    --text-on-ink: #FFFFFF;
+    --lime: #DDF300;
+    --font-kr: 'Wanted Sans Variable', 'Wanted Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-en: 'Red Hat Display', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  body {
+    font-family: var(--font-kr);
+    font-feature-settings: "tnum";
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--text-body);
+  }
+  h1, h2, h3, h4, p, blockquote,
+  .hero-title, .section-title, .insight-title, .qlog-q, .priority-title {
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+  .hero-title, .section-title, .insight-title { text-wrap: balance; }
+  ::selection { background: var(--primary); color: #000; }
+
+  /* ============ ETRIBE CORPORATE STRIP ============ */
+  .etribe-strip {
+    background: #000;
+    color: #fff;
+    font-family: var(--font-en);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border-bottom: 1px solid #1a1a1a;
+  }
+  .etribe-strip-inner {
+    max-width: 1320px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 10px 48px;
+    align-items: center;
+  }
+  .etribe-strip-inner .es-1 { color: var(--primary); font-weight: 700; }
+  .etribe-strip-inner .es-2 { text-align: center; color: #aaa; }
+  .etribe-strip-inner .es-3 { text-align: center; color: #aaa; }
+  .etribe-strip-inner .es-4 { text-align: right; color: var(--primary); }
+  .etribe-strip-inner .es-4::before { content: attr(data-tier); }
+
+  /* ============ TYPOGRAPHY SCALE (PDF spec) ============ */
+  /* Display 64 / 128% / Bold */
+  .hero-title {
+    font-family: var(--font-kr);
+    font-weight: 700;
+    font-size: clamp(40px, 5vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    color: var(--ink) !important;
+  }
+  /* H1 56 / 128% / Bold — used for major section openers if any */
+  /* H2 40 / 148% / Medium — section-title */
+  .section-title {
+    font-weight: 500;
+    font-size: clamp(28px, 3.2vw, 40px);
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  /* H3 28 / 148% / Regular — insight-title, priority-title etc */
+  .insight-title, .priority-title, .qlog-q, .subsection-title,
+  .roadmap-phase-title, .keypoint-title, .consultant-name, .qtype-title {
+    font-weight: 700;
+    font-size: clamp(20px, 1.6vw, 24px);
+    line-height: 1.4;
+    letter-spacing: -0.005em;
+    color: var(--ink);
+  }
+  .consultant-pullquote {
+    font-family: var(--font-kr);
+    font-weight: 500;
+    font-size: clamp(22px, 2vw, 28px);
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  /* Body S/Label 14 / 148% / Medium */
+  .frame-label, .stat-label, .section-num, .toc-label,
+  .insight-num, .insight-col-label, .score-cat, .score-detail-head,
+  .qlog-id, .citation-donut-title, .citation-side-label,
+  .domain-block-title, .sov-engine, .sov-section-title,
+  .roadmap-phase-marker, .priority-impact-label, .qlog-engine-name,
+  .keypoint-num, .consultant-role, .qtype-name, .insight-index-title,
+  .gantt-head, .header-brand, .header-nav a, .toc-item,
+  .footer-brand, .footer-meta {
+    font-family: var(--font-en);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    line-height: 1.4;
+  }
+
+  /* ============ HERO — LIME canvas ============ */
+  .hero {
+    background: var(--primary) !important;
+    border-bottom: 1px solid #000;
+  }
+  .hero-meta {
+    color: var(--ink);
+    font-family: var(--font-en);
+    letter-spacing: 0.18em;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-meta::before {
+    content: "";
+    display: inline-block;
+    width: 32px; height: 1px;
+    background: var(--ink);
+  }
+  .hero-meta .dot { color: var(--ink); }
+  .hero-title em {
+    background: #fff !important;
+    color: #000 !important;
+    padding: 0 16px 4px !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    font-weight: 900;
+    font-style: normal;
+  }
+  .hero-sub { color: #1a1a1a !important; font-weight: 500; }
+
+  .hero-stats { border-radius: 0 !important; border: 1px solid #000; background: #000; }
+  .hero-stats .stat-cell { border-radius: 0 !important; }
+
+  /* ============ SHARP CORNERS ============ */
+  .frame-grid, .frame-cell,
+  .score-grid, .score-card,
+  .qtype-card, .qtype-example,
+  .insight-block, .insight-head, .insight-body, .insight-row, .insight-col, .insight-explain,
+  .code-block, .code-header,
+  .citation-donut, .citation-side,
+  .sov-grid, .sov-cell, .sov-cat-row, .sov-cat-track, .sov-track, .sov-fill,
+  .priority-item, .priority-impact,
+  .consultant-block,
+  .keypoint-card,
+  .roadmap-track-wrap, .roadmap-phases, .roadmap-phase, .roadmap-phase-goal,
+  .kpi-projection,
+  .geo-total,
+  .insight-index,
+  .comp-table,
+  .qlog, .qlog-engine,
+  .notice,
+  .toc, .toc-item,
+  .type-tag, .insight-chip, .engine-pill, .own-tag, .score-pill, .meta-tag,
+  .qlog-id .qtype,
+  .header-badge,
+  .geo-grade,
+  .gantt-bar, .gantt-row-track {
+    border-radius: 0 !important;
+  }
+  .consultant-avatar { border-radius: 50% !important; }
+
+  /* ============ LOGO LOCKUP — eTribe wordmark ============ */
+  .header-brand {
+    font-family: var(--font-en);
+    letter-spacing: 0.14em;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .header-brand .mars {
+    background: #000;
+    color: var(--primary);
+    padding: 6px 12px;
+    letter-spacing: 0.18em;
+    font-weight: 900;
+    font-family: var(--font-en);
+    font-size: 13px;
+  }
+  .header-badge {
+    background: transparent !important;
+    border: 1px solid #000 !important;
+    color: #000 !important;
+    font-family: var(--font-en);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 6px 14px;
+    font-size: 12px;
+  }
+  .header-nav a { letter-spacing: 0.12em; font-weight: 500; }
+
+  /* ============ SECTION EYEBROW ============ */
+  .section-num {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 12px !important;
+    background: transparent !important;
+    color: var(--ink) !important;
+    padding: 0 !important;
+    text-transform: uppercase;
+    margin-bottom: 20px !important;
+  }
+  .section-num::before {
+    content: "";
+    width: 24px; height: 1px;
+    background: var(--ink);
+    flex-shrink: 0;
+  }
+
+  /* ============ SECTION SPACING — 8 base ============ */
+  .section { padding: 96px 48px; border-bottom: 1px solid var(--line-soft); }
+  .section-header { margin-bottom: 48px; }
+
+  /* ============ GEO TOTAL — LIME COLOR BLOCK ============ */
+  .geo-total {
+    background: var(--primary) !important;
+    color: var(--ink) !important;
+    padding: 56px 48px !important;
+    border: 1px solid #000 !important;
+    display: grid !important;
+    grid-template-columns: 320px 1fr !important;
+    gap: 48px !important;
+  }
+  .geo-total-score {
+    color: var(--ink) !important;
+    font-family: var(--font-en) !important;
+    font-weight: 700 !important;
+    font-size: clamp(80px, 9vw, 128px) !important;
+    line-height: 0.9 !important;
+    letter-spacing: -0.04em !important;
+  }
+  .geo-total-score .out-of {
+    color: rgba(0,0,0,0.55) !important;
+    font-family: var(--font-en) !important;
+    font-weight: 500 !important;
+  }
+  .geo-total-info { border-left-color: rgba(0,0,0,0.18) !important; }
+  .geo-grade {
+    background: #000 !important;
+    color: var(--primary) !important;
+    font-family: var(--font-en);
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    padding: 6px 14px;
+    display: inline-block;
+  }
+  .geo-total-desc { color: rgba(0,0,0,0.85) !important; }
+  .geo-total-desc strong { color: #000 !important; }
+  .geo-total-summary { border-top-color: rgba(0,0,0,0.18) !important; }
+  .geo-total-summary .item-label { color: rgba(0,0,0,0.55) !important; }
+  .geo-total-summary .item-val { color: #000 !important; font-family: var(--font-en); font-weight: 700; }
+
+  /* ============ STAT/SCORE numbers — Display Bold + lime underline ============ */
+  .stat-value, .score-num, .roadmap-phase-day {
+    font-family: var(--font-en);
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+  .stat-cell .stat-value {
+    position: relative; display: inline-block;
+    font-size: clamp(40px, 4vw, 56px);
+    line-height: 0.95;
+  }
+  .score-card .score-num {
+    position: relative; display: inline-block;
+    font-size: clamp(36px, 3.6vw, 48px);
+    line-height: 0.95;
+  }
+  .stat-cell .stat-value::after,
+  .score-card .score-num::after {
+    content: "";
+    position: absolute;
+    left: 0; bottom: -10px;
+    width: 32px; height: 4px;
+    background: var(--primary);
+  }
+  .stat-value.red, .score-num.low { color: #000 !important; }
+  .stat-value.red::after, .score-num.low::after { background: #dc2626; }
+  .stat-value .unit { font-family: var(--font-kr); font-size: 0.45em; font-weight: 500; margin-left: 6px; }
+
+  /* ============ CITATION SIDE — Black block ============ */
+  .citation-side { background: #000 !important; }
+  .citation-side-headline em { color: var(--primary) !important; }
+  .citation-bar-fill.own { background: var(--primary); color: #000; }
+  .citation-bar-fill.authority { background: #555; }
+  .citation-bar-fill.other { background: #dc2626; }
+  .own-tag.own { background: var(--primary); color: #000; }
+
+  /* ============ CHIPS / TAGS ============ */
+  .insight-chip { font-family: var(--font-en); letter-spacing: 0.08em; font-size: 11px; font-weight: 700; padding: 4px 10px; }
+  .chip-critical { background: #dc2626; color: #fff; }
+  .chip-high { background: var(--primary); color: #000; }
+  .chip-mid { background: var(--surface-soft); color: #000; }
+  .type-tag {
+    background: transparent;
+    border: 1px solid #000;
+    color: #000;
+    font-family: var(--font-en);
+    letter-spacing: 0.08em;
+    font-weight: 500;
+    padding: 4px 10px;
+  }
+
+  /* ============ QLOG ============ */
+  .qlog-id { color: #000; }
+  .qlog-id .qtype { background: #000; color: var(--primary); padding: 3px 8px; font-family: var(--font-en); }
+  .qlog-q { font-family: var(--font-kr); }
+
+  /* ============ TOC ============ */
+  .toc { background: var(--surface-soft); border-bottom: 1px solid #000; }
+  .toc-item {
+    border: 1px solid #000; background: transparent;
+    font-family: var(--font-en); letter-spacing: 0.08em; font-weight: 500;
+    padding: 6px 12px;
+  }
+  .toc-item:hover { background: #000; color: #fff; }
+
+  /* ============ PILLS / score ============ */
+  .score-pill {
+    font-family: var(--font-en); border: 1px solid #000;
+    background: transparent; color: #000; padding: 5px 11px;
+    font-weight: 700; letter-spacing: 0.06em;
+  }
+  .pill-f { background: #000; color: var(--primary); border-color: #000; }
+  .pill-d { background: var(--primary); color: #000; border-color: #000; }
+  .pill-c { background: transparent; color: #000; border-color: #000; }
+  .pill-b { background: #000; color: #fff; border-color: #000; }
+
+  /* ============ PRIORITY LIST — lime accent r1 ============ */
+  .priority-item { border-left-width: 4px; }
+  .priority-item.r1 {
+    border-left-color: var(--primary) !important;
+    background: var(--primary-soft);
+  }
+  .priority-item.r1 .priority-rank,
+  .priority-item.r2 .priority-rank,
+  .priority-item.r3 .priority-rank { color: #000 !important; font-family: var(--font-en); font-weight: 900; }
+
+  /* ============ NOTICES ============ */
+  .notice.notice-amber { border-left-color: var(--primary); background: var(--primary-soft); }
+
+  /* ============ CODE BLOCK — Dark with lime accents ============ */
+  .code-block { background: #090909; border-color: #1a1a1a; }
+  .code-header { background: #111; border-bottom-color: #1a1a1a; }
+  .code-tab.active { border-bottom-color: var(--primary); }
+  .code-prop, .code-attr { color: var(--primary); }
+  .code-lang { border-color: #333; }
+
+  /* ============ ROADMAP ============ */
+  .roadmap-phase-day { color: #000 !important; }
+  .roadmap-phase.p1 .roadmap-phase-goal { border-left-color: #000 !important; background: var(--primary-soft); }
+  .roadmap-phase.p2 .roadmap-phase-goal { border-left-color: var(--primary) !important; }
+  .roadmap-phase.p3 .roadmap-phase-goal { border-left-color: #000 !important; }
+  .gantt-bar.b-build   { background: #000; }
+  .gantt-bar.b-verify  { background: var(--primary); color: #000 !important; }
+  .gantt-bar.b-content { background: #555; }
+  .gantt-bar.b-monitor { background: var(--primary); color: #000 !important; }
+
+  /* ============ SOV bars ============ */
+  .sov-fill.self { background: #000; }
+  .sov-fill.other { background: var(--primary); opacity: 1; }
+  .sov-fill.dim { background: #ccc; }
+  .sov-cat-seg.self { background: #000; }
+  .sov-cat-seg.c1 { background: var(--primary); color: #000 !important; }
+  .sov-cat-seg.c2 { background: #777; }
+  .sov-cat-seg.c3 { background: #bbb; }
+  .sov-cat-rank { font-family: var(--font-en); color: #000 !important; font-weight: 900; }
+
+  /* ============ CONSULTANT block — Soft surface ============ */
+  .consultant-block { background: var(--surface-soft); border: 1px solid var(--line-soft); }
+  .consultant-pullquote { border-left-color: #000; }
+  .consultant-pullquote em { color: #000; background: var(--primary); padding: 0 8px; font-style: normal; }
+  .keypoint-card { border-top: 3px solid #000; background: #fff; }
+  .keypoint-card.n2 { border-top-color: var(--primary); }
+  .keypoint-card.n3 { border-top-color: #555; }
+
+  /* ============ FOOTER — Black band ============ */
+  .report-footer {
+    border-top: 2px solid #000;
+    background: #000;
+    color: #fff;
+    padding: 56px 48px;
+  }
+  .report-footer .footer-brand { color: #fff; }
+  .report-footer .footer-brand .mars { background: var(--primary); color: #000; }
+  .report-footer .footer-brand .sep { color: #555; }
+  .report-footer .footer-meta { color: #888; }
+  .report-footer .footer-disclaimer { color: #999; border-top-color: #333; }
+
+  /* ============ Reduced motion ============ */
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+
+  /* =================================================================
+     v4 — AI Service Design Guide deepening (Header / Hero / CTA)
+     Lime + Black colour-block, bold display, 8px-base spacing
+     ================================================================= */
+
+  /* --- ETRIBE corporate strip: tighter, brand chip + tier arrow --- */
+  .etribe-strip { padding: 0; }
+  .etribe-strip-inner {
+    grid-template-columns: auto 1fr auto;
+    gap: 24px;
+    padding: 12px 48px;
+    align-items: center;
+  }
+  .etribe-strip-inner .es-1 {
+    background: var(--primary);
+    color: #000;
+    padding: 4px 10px;
+    font-weight: 900;
+    letter-spacing: 0.2em;
+  }
+  .etribe-strip-inner .es-2 { display: none; }
+  .etribe-strip-inner .es-3 { text-align: left; color: #fff; letter-spacing: 0.18em; }
+  .etribe-strip-inner .es-4 { text-align: right; color: var(--primary); font-weight: 700; }
+  .etribe-strip-inner .es-4::after {
+    content: ""; display: inline-block; width: 24px; height: 1px;
+    background: var(--primary); margin-left: 12px; vertical-align: middle;
+  }
+
+  /* --- Report header: solid white panel, no blur, hard 1px bottom --- */
+  .report-header {
+    background: #fff !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border-bottom: 1px solid #000 !important;
+    height: 64px;
+    padding: 0 48px;
+  }
+  .header-brand { color: #000; font-weight: 500; font-size: 12px; }
+  .header-brand .mars {
+    font-family: var(--font-en);
+    background: #000;
+    color: var(--primary);
+    padding: 6px 12px;
+    letter-spacing: 0.2em;
+    font-weight: 900;
+    font-size: 12px;
+  }
+  .header-brand .sep { color: #ccc; margin: 0 4px; }
+  .header-nav a {
+    color: #000;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    padding: 6px 0;
+    border-bottom: 2px solid transparent;
+    transition: border-color .15s ease;
+  }
+  .header-nav a:hover { border-bottom-color: var(--primary); color: #000; }
+
+  /* --- Hero: full lime block, display 64px, framed stats --- */
+  .hero {
+    padding: 96px 48px 80px;
+  }
+  .hero-inner {
+    grid-template-columns: 1.15fr 1fr;
+    gap: 80px;
+  }
+  .hero-meta {
+    margin-bottom: 32px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .hero-title {
+    margin-bottom: 32px;
+    font-size: clamp(44px, 5.4vw, 72px) !important;
+    line-height: 1.02 !important;
+    letter-spacing: -0.03em !important;
+  }
+  .hero-title em {
+    display: inline-block;
+    background: #000 !important;
+    color: var(--primary) !important;
+    padding: 2px 18px 6px !important;
+    font-weight: 900;
+    line-height: 1;
+    margin-top: 8px;
+  }
+  .hero-sub {
+    max-width: 560px;
+    font-size: 16px !important;
+    line-height: 1.75 !important;
+    color: #0d0d0d !important;
+  }
+  .hero-stats {
+    border: 2px solid #000 !important;
+    background: #000 !important;
+    gap: 2px !important;
+  }
+  .hero-stats .stat-cell {
+    background: #fff !important;
+    padding: 32px 28px !important;
+  }
+  .hero-stats .stat-label {
+    color: #555 !important;
+    letter-spacing: 0.16em !important;
+    font-size: 11px !important;
+  }
+  .hero-stats .stat-value {
+    font-size: clamp(44px, 4.4vw, 64px) !important;
+    line-height: 1 !important;
+  }
+  .hero-stats .stat-desc {
+    margin-top: 16px !important;
+    color: #555;
+  }
+  /* LOCKED stat-cell: black inverted */
+  .hero-stats .stat-cell[style*="LOCKED"], .hero-stats .stat-cell:has(.stat-value:not(.unit) ~ .stat-desc[style*="STANDARD"]) {
+    background: #000 !important;
+  }
+  .hero-stats .stat-cell[style*="LOCKED"] .stat-label,
+  .hero-stats .stat-cell[style*="LOCKED"] .stat-value,
+  .hero-stats .stat-cell[style*="LOCKED"] .stat-desc {
+    color: var(--primary) !important;
+  }
+  .hero-stats .stat-cell[style*="LOCKED"] .stat-value::after { background: var(--primary) !important; }
+
+  /* --- TOC: black tags with primary hover, looser --- */
+  .toc { padding: 20px 48px; }
+  .toc-label { color: #000; font-weight: 700; letter-spacing: 0.18em; }
+
+  /* --- Section eyebrow + title: stronger hierarchy --- */
+  .section-num { font-size: 12px !important; font-weight: 700 !important; letter-spacing: 0.18em !important; }
+  .section-title {
+    font-size: clamp(32px, 3.6vw, 48px) !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.02em !important;
+    line-height: 1.15 !important;
+    margin-bottom: 16px !important;
+  }
+  .section-lead { font-size: 16px; line-height: 1.85; color: #333; max-width: 880px; }
+
+  /* --- Upsell box: lime-black colour block, bold split layout --- */
+  .upsell-box {
+    background: var(--primary) !important;
+    color: #000 !important;
+    border: 2px solid #000 !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    grid-template-columns: 1.4fr 1fr !important;
+    gap: 0 !important;
+    margin-top: 64px !important;
+    overflow: hidden;
+  }
+  .upsell-box-left, .upsell-box > div:first-child {
+    padding: 56px 56px 48px !important;
+    border-right: 2px solid #000;
+  }
+  .upsell-label {
+    font-family: var(--font-en) !important;
+    color: #000 !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.2em !important;
+    margin-bottom: 24px !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .upsell-label::before {
+    content: ""; width: 24px; height: 1px; background: #000;
+  }
+  .upsell-title {
+    font-family: var(--font-kr) !important;
+    color: #000 !important;
+    font-size: clamp(28px, 2.6vw, 38px) !important;
+    line-height: 1.2 !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.02em !important;
+    margin-bottom: 24px !important;
+  }
+  .upsell-title em {
+    background: #000 !important;
+    color: var(--primary) !important;
+    font-style: normal !important;
+    font-weight: 900 !important;
+    padding: 2px 12px 4px !important;
+    display: inline-block;
+  }
+  .upsell-body {
+    color: #1a1a1a !important;
+    font-size: 15px !important;
+    line-height: 1.85 !important;
+    max-width: none !important;
+  }
+  .upsell-body strong { color: #000 !important; font-weight: 700; }
+  .upsell-right {
+    background: #000;
+    color: #fff;
+    padding: 56px 48px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    text-align: left !important;
+  }
+  .upsell-cta {
+    background: var(--primary) !important;
+    color: #000 !important;
+    border-radius: 0 !important;
+    padding: 22px 28px !important;
+    font-family: var(--font-en) !important;
+    font-size: 14px !important;
+    font-weight: 900 !important;
+    letter-spacing: 0.18em !important;
+    text-decoration: none !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .upsell-cta::after {
+    content: "→";
+    font-size: 22px;
+    font-weight: 700;
+    transform: translateY(-1px);
+  }
+  .upsell-cta .price {
+    color: #000 !important;
+    font-family: var(--font-kr) !important;
+    font-weight: 900 !important;
+    font-size: 18px !important;
+    letter-spacing: -0.01em !important;
+  }
+  .upsell-tier-line {
+    display: flex !important;
+    gap: 0 !important;
+    margin-top: 32px !important;
+    justify-content: flex-start !important;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    padding-top: 24px;
+  }
+  .upsell-tier {
+    font-family: var(--font-en) !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.16em !important;
+    color: #555 !important;
+    background: transparent !important;
+    border: 0 !important;
+    padding: 0 16px 0 0 !important;
+    border-radius: 0 !important;
+    position: relative;
+  }
+  .upsell-tier + .upsell-tier { padding-left: 16px; }
+  .upsell-tier + .upsell-tier::before {
+    content: "/";
+    position: absolute;
+    left: 0;
+    color: #333;
+  }
+  .upsell-tier.active {
+    color: var(--primary) !important;
+    background: transparent !important;
+  }
+
+  /* --- Locked sections: minimal outlined with lime LOCKED tag --- */
+  .locked-section {
+    background: var(--surface-soft) !important;
+    border: 1px solid #000 !important;
+    border-radius: 0 !important;
+    padding: 48px !important;
+    text-align: left !important;
+  }
+  .locked-label {
+    background: #000 !important;
+    color: var(--primary) !important;
+    font-family: var(--font-en) !important;
+    font-weight: 900 !important;
+    letter-spacing: 0.18em !important;
+    padding: 6px 12px !important;
+    border-radius: 0 !important;
+    display: inline-block;
+    margin-bottom: 20px;
+  }
+  .locked-title {
+    font-family: var(--font-kr) !important;
+    font-size: clamp(20px, 1.8vw, 26px) !important;
+    font-weight: 700 !important;
+    color: #000 !important;
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+  .locked-desc { max-width: 720px; margin: 0 !important; color: #333 !important; }
+
+  /* --- Footer: lime mars chip stays, tighten typography --- */
+  .report-footer { padding: 64px 48px !important; }
+  .report-footer .footer-brand { font-size: 12px; letter-spacing: 0.16em; }
+  .report-footer .footer-brand .mars {
+    padding: 6px 12px;
+    font-weight: 900;
+    letter-spacing: 0.2em;
+  }
+
+  /* --- Hero on smaller widths --- */
+  @media (max-width: 1100px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+  }
+
+  /* =================================================================
+     ETRIBE-STYLED FOOTER — borrowed from etribe.co.kr homepage
+     Lime hero (ETRIBE AX) / white service strip / upsell hook /
+     CORE SUITE / lime copyright band
+     ================================================================= */
+  .etx-footer { position: relative; margin-top: 0; }
+  .etx-container { max-width: 1800px; margin: 0 auto; padding: 0 48px; }
+
+  .etx-footer-hero {
+    background: var(--primary);
+    color: #000;
+    position: relative;
+    overflow: hidden;
+  }
+  .etx-footer-hero-top { padding: 80px 0 12px; position: relative; }
+  .etx-h-left {
+    font-family: var(--font-en);
+    font-weight: 700;
+    font-size: clamp(60px, 11.4vw, 190px);
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    color: #000;
+  }
+  .etx-footer-socials {
+    position: absolute; bottom: 24px; right: 48px;
+    display: inline-flex; align-items: center; gap: 16px; z-index: 3;
+  }
+  .etx-footer-socials a {
+    width: 36px; height: 36px;
+    display: inline-flex; align-items: center; justify-content: center;
+    color: #000; text-decoration: none;
+    transition: transform .15s ease, opacity .15s ease;
+  }
+  .etx-footer-socials a:hover { transform: translateY(-2px); opacity: .7; }
+  .etx-footer-socials .blog-tag {
+    display: inline-flex; align-items: center; justify-content: center;
+    height: 28px; padding: 0 10px;
+    background: #000; color: var(--primary);
+    font-family: var(--font-en); font-size: 11px; font-weight: 700; letter-spacing: 0.05em;
+  }
+
+  .etx-services-strip { height: 44px; position: relative; z-index: 2; }
+  .etx-services-strip .etx-container { height: 100%; }
+  .etx-services {
+    height: 100%; background: #fff;
+    display: grid; grid-template-columns: repeat(7, 1fr);
+    align-items: center;
+  }
+  .etx-services a {
+    font-family: var(--font-en);
+    font-size: 15px; font-weight: 700;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    color: #000; text-align: center;
+    height: 100%; display: flex; align-items: center; justify-content: center;
+    text-decoration: none;
+    transition: opacity .15s ease, background .15s ease, color .15s ease;
+  }
+  .etx-services a:hover { opacity: .6; }
+  .etx-services a.current { background: #000; color: var(--primary); }
+
+  .etx-footer-hero-bot { padding: 12px 0 60px; }
+  .etx-h-right {
+    font-family: var(--font-en);
+    font-weight: 700;
+    font-size: clamp(60px, 11.4vw, 190px);
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    color: #000;
+    text-align: right;
+  }
+
+  /* Upsell hook within the lime hero */
+  .etx-upsell {
+    padding: 56px 0 8px;
+    border-top: 1px solid rgba(0,0,0,0.15);
+  }
+  .etx-upsell.etx-upsell--solo {
+    padding: 80px 0;
+    border-top: 0;
+  }
+
+  /* TOC label tier badge */
+  .toc-label {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px !important;
+    background: #000 !important;
+    color: var(--primary) !important;
+    font-family: var(--font-en) !important;
+    font-weight: 900 !important;
+    letter-spacing: 0.2em !important;
+    font-size: 12px !important;
+    margin-right: 20px !important;
+  }
+  .toc-label::before {
+    content: "";
+    display: inline-block;
+    width: 8px; height: 8px;
+    background: var(--primary);
+    border-radius: 50%;
+  }
+  .toc-label--lite::before { background: #d0d6e0; }
+  .toc-label--standard::before { background: var(--primary); }
+  .toc-label--premium::before { background: #fff; box-shadow: 0 0 0 2px var(--primary); }
+  .etx-upsell .etx-container {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    gap: 64px;
+    align-items: stretch;
+  }
+  .etx-upsell-label {
+    font-family: var(--font-en);
+    font-size: 12px; font-weight: 700; letter-spacing: 0.2em;
+    color: #000;
+    display: inline-flex; align-items: center; gap: 12px;
+    margin-bottom: 24px;
+  }
+  .etx-upsell-label::before { content: ""; width: 24px; height: 1px; background: #000; }
+  .etx-upsell-title {
+    font-family: var(--font-kr);
+    font-size: clamp(28px, 3vw, 44px);
+    line-height: 1.15; font-weight: 700;
+    letter-spacing: -0.02em; color: #000;
+    margin: 0 0 20px;
+    word-break: keep-all;
+  }
+  .etx-upsell-title em {
+    background: #000; color: var(--primary);
+    font-style: normal; font-weight: 900;
+    padding: 0 14px 4px;
+    display: inline-block;
+    margin-top: 6px;
+  }
+  .etx-upsell-body {
+    color: #1a1a1a;
+    font-size: 15px; line-height: 1.85;
+    margin: 0;
+    max-width: 640px;
+  }
+  .etx-upsell-body strong { font-weight: 700; color: #000; }
+  .etx-upsell-aside {
+    background: #000; color: #fff;
+    padding: 36px 32px;
+    display: flex; flex-direction: column;
+    justify-content: space-between;
+    min-height: 200px;
+  }
+  .etx-upsell-cta {
+    display: flex;
+    align-items: center; justify-content: space-between; gap: 16px;
+    background: var(--primary); color: #000;
+    padding: 22px 28px;
+    font-family: var(--font-en);
+    font-size: 14px; font-weight: 900;
+    letter-spacing: 0.18em;
+    text-decoration: none;
+  }
+  .etx-upsell-cta .price {
+    font-family: var(--font-kr); font-weight: 900;
+    font-size: 18px; letter-spacing: -0.01em;
+  }
+  .etx-upsell-cta::after { content: "→"; font-size: 22px; transform: translateY(-1px); }
+  .etx-tier-line {
+    display: flex; gap: 12px;
+    margin-top: 24px; padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    font-family: var(--font-en);
+    font-size: 11px; font-weight: 700; letter-spacing: 0.16em;
+  }
+  .etx-tier-line .tier { color: #555; }
+  .etx-tier-line .tier.active { color: var(--primary); }
+  .etx-tier-line .sep { color: #333; }
+
+  /* Band 3 — Copyright */
+  .etx-band-3 {
+    background: var(--primary);
+    color: #000;
+    padding: 24px 0;
+    border-top: 1px solid rgba(0,0,0,0.08);
+  }
+  .etx-band-3 .etx-container {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 16px;
+  }
+  .etx-copyright {
+    font-family: var(--font-en);
+    font-size: 14px; font-weight: 700; letter-spacing: 0.06em;
+    color: #000;
+    display: inline-flex; align-items: center; gap: 16px;
+  }
+  .etx-mark { display: inline-flex; align-items: center; }
+  .etx-mark svg { height: 22px; width: auto; display: block; }
+  .etx-band-mid {
+    font-family: var(--font-en);
+    font-size: 12px; font-weight: 500; letter-spacing: 0.1em;
+    color: #000;
+    text-align: center;
+  }
+  .etx-email {
+    font-family: var(--font-en);
+    font-size: 13px; font-weight: 700; letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #000;
+    text-align: right;
+    text-decoration: none;
+  }
+  .etx-email:hover { text-decoration: underline; }
+
+  @media (max-width: 900px) {
+    .etx-container { padding: 0 20px; }
+    .etx-footer-hero-top { padding: 40px 0 0; }
+    .etx-footer-hero-bot { padding: 0 0 40px; }
+    .etx-h-left { font-size: clamp(56px, 16vw, 96px); margin-bottom: 6px; }
+    .etx-h-right { text-align: left; font-size: 0; }
+    .etx-h-right .word-core, .etx-h-right .word-suite {
+      display: block;
+      font-size: clamp(56px, 16vw, 96px);
+      font-weight: 700; line-height: 1;
+      letter-spacing: -0.03em; color: #000;
+    }
+    .etx-h-right .word-core { padding-left: 18vw; }
+    .etx-h-right .word-suite { padding-left: 36vw; margin-top: 6px; }
+    .etx-footer-socials { position: static; padding: 20px; justify-content: flex-end; }
+    .etx-services { display: flex; overflow-x: auto; }
+    .etx-services a { padding: 0 24px; flex: 0 0 auto; }
+    .etx-upsell .etx-container { grid-template-columns: 1fr; gap: 32px; }
+    .etx-band-3 .etx-container { grid-template-columns: 1fr; text-align: left; gap: 8px; }
+    .etx-band-mid { text-align: left; }
+    .etx-email { text-align: left; }
+  }
+</style></head>
+<body>
+<!-- ETRIBE corporate strip -->
+<style>
+  /* ============ GEO 종합 점수 ============ */
+  .geo-total {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 36px;
+    align-items: stretch;
+    margin-bottom: 36px;
+    padding: 32px 36px;
+    background: var(--navy);
+    border-radius: 8px;
+    color: #fff;
+  }
+  .geo-total-score {
+    font-family: 'Wanted Sans Variable', 'Wanted Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 100px;
+    line-height: 0.95;
+    color: #fff;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    position: relative;
+  }
+  .geo-total-score .out-of {
+    display: block;
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    margin-top: 12px;
+    line-height: 1;
+  }
+  .geo-total-info {
+    border-left: 1px solid rgba(255,255,255,0.15);
+    padding-left: 36px;
+  }
+  .geo-grade {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12px;
+    color: var(--red);
+    letter-spacing: 0.14em;
+    margin-bottom: 12px;
+    font-weight: 500;
+    background: rgba(200,16,46,0.18);
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 2px;
+  }
+  .geo-total-desc {
+    font-size: 14px;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.85);
+    max-width: 640px;
+    margin-bottom: 16px;
+  }
+  .geo-total-summary {
+    display: flex;
+    gap: 28px;
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+  }
+  .geo-total-summary .item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .geo-total-summary .item-label {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .geo-total-summary .item-val {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 15px;
+    color: #fff;
+    font-weight: 500;
+  }
+
+  .score-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 28px;
+  }
+  .score-card {
+    background: #fff;
+    padding: 22px 22px 20px;
+  }
+  .score-cat {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px;
+    color: var(--text-3);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+  .score-cat .grade {
+    display: inline-block;
+    margin-left: 4px;
+    color: var(--red);
+  }
+  .score-num {
+    font-family: 'Wanted Sans Variable', 'Wanted Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 38px;
+    line-height: 1;
+    color: var(--navy);
+    font-weight: 700;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+  .score-num.low { color: var(--red); }
+  .score-num.mid { color: var(--amber); }
+  .score-num.high { color: var(--green); }
+  .score-num .out { font-size: 14px; color: var(--text-3); font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-weight: 400; }
+
+  .score-bar {
+    height: 4px;
+    background: var(--line-2);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 14px;
+  }
+  .score-fill { height: 100%; border-radius: 2px; }
+  .score-fill.low { background: var(--red); }
+  .score-fill.mid { background: var(--amber); }
+  .score-fill.high { background: var(--green); }
+
+  .score-note {
+    font-size: 11.5px;
+    color: var(--text-2);
+    line-height: 1.6;
+  }
+
+  .score-detail {
+    margin-top: 20px;
+  }
+  .score-detail-head {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    color: var(--text-3);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+  .score-detail-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .score-detail-table th, .score-detail-table td {
+    text-align: left;
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--line-2);
+  }
+  .score-detail-table th {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10.5px;
+    color: var(--text-3);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+    background: var(--bg-soft);
+    border-bottom: 1px solid var(--line);
+  }
+  .score-detail-table td.num {
+    text-align: right;
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    color: var(--navy);
+    font-weight: 500;
+    width: 90px;
+  }
+  .score-detail-table td.num.low { color: var(--red); }
+  .score-detail-table td.cat-head {
+    font-weight: 500;
+    color: var(--navy);
+  }
+  .score-detail-table td.basis {
+    color: var(--text-2);
+    font-size: 12.5px;
+    line-height: 1.6;
+  }
+
+  /* ============ INSIGHT BLOCK ============ */
+  .insight-block {
+    margin-bottom: 56px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+  }
+  .insight-head {
+    padding: 28px 32px 24px;
+    border-bottom: 1px solid var(--line);
+    background: var(--bg-soft);
+  }
+  .insight-tags {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 14px;
+    align-items: center;
+  }
+  .insight-num {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    color: var(--text-3);
+    letter-spacing: 0.14em;
+    font-weight: 500;
+  }
+  .insight-chip {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px;
+    padding: 3px 9px;
+    border-radius: 2px;
+    letter-spacing: 0.06em;
+    font-weight: 500;
+  }
+  .chip-critical { background: var(--red-soft); color: var(--red-2); }
+  .chip-high { background: var(--amber-soft); color: var(--amber); }
+  .chip-mid { background: var(--navy-soft); color: var(--navy); }
+  .insight-title {
+    font-family: 'Wanted Sans Variable', 'Wanted Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 24px;
+    color: var(--navy);
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+    margin-bottom: 10px;
+  }
+  .insight-title em {
+    color: var(--red);
+    font-style: normal;
+    font-weight: 900;
+  }
+  .insight-subtitle {
+    font-size: 13.5px;
+    color: var(--text-2);
+    line-height: 1.7;
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    letter-spacing: -0.005em;
+  }
+  .insight-subtitle .strong {
+    color: var(--navy);
+    font-weight: 500;
+  }
+  .insight-body {
+    padding: 28px 32px;
+  }
+  .insight-explain {
+    font-size: 14px;
+    color: var(--text-2);
+    line-height: 1.85;
+    margin-bottom: 26px;
+    padding: 16px 18px;
+    background: var(--bg-soft);
+    border-radius: 4px;
+    border-left: 3px solid var(--navy);
+  }
+  .insight-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+  .insight-col {
+    background: #fff;
+    padding: 22px 24px;
+  }
+  .insight-col.asis { background: #fffafa; }
+  .insight-col.tobe { background: #f8fcf8; }
+  .insight-col-label {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .insight-col.asis .insight-col-label { color: var(--red); }
+  .insight-col.tobe .insight-col-label { color: var(--green); }
+  .insight-col p {
+    font-size: 13.5px;
+    color: var(--text);
+    line-height: 1.8;
+  }
+  .insight-col ul {
+    margin: 8px 0 0 0;
+    padding-left: 18px;
+  }
+  .insight-col ul li {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.75;
+    margin-bottom: 4px;
+  }
+  .dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+  }
+  .dot-red { background: var(--red); }
+  .dot-green { background: var(--green); }
+
+  /* ============ CODE BLOCK (다크) ============ */
+  .code-section {
+    margin-top: 8px;
+  }
+  .code-section-label {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10.5px;
+    color: var(--red);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .code-section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+  .code-block {
+    background: var(--code-bg);
+    border: 1px solid var(--code-border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .code-header {
+    padding: 12px 18px;
+    background: var(--code-bg-2);
+    border-bottom: 1px solid var(--code-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .code-title {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12px;
+    color: #c8cdd9;
+    letter-spacing: 0.04em;
+  }
+  .code-lang {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px;
+    color: #7c8497;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border: 1px solid var(--code-border);
+    border-radius: 2px;
+  }
+  .code-tabs {
+    display: flex;
+    background: var(--code-bg);
+    border-bottom: 1px solid var(--code-border);
+    overflow-x: auto;
+  }
+  .code-tab {
+    padding: 10px 18px;
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11.5px;
+    color: #7c8497;
+    cursor: pointer;
+    border-right: 1px solid var(--code-border);
+    transition: all .15s ease;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    user-select: none;
+  }
+  .code-tab:hover { color: #c8cdd9; background: rgba(255,255,255,0.03); }
+  .code-tab.active {
+    color: #fff;
+    background: var(--code-bg-2);
+    border-bottom: 2px solid var(--red);
+    margin-bottom: -1px;
+  }
+  .code-pane {
+    display: none;
+    padding: 22px 22px;
+    overflow-x: auto;
+  }
+  .code-pane.active { display: block; }
+  .code-pane pre {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12.5px;
+    line-height: 1.75;
+    color: var(--code-text);
+    white-space: pre;
+    tab-size: 2;
+  }
+  .code-cmt { color: var(--code-cmt); font-style: italic; }
+  .code-tag { color: var(--code-tag); }
+  .code-attr { color: var(--code-attr); }
+  .code-str { color: var(--code-str); }
+  .code-prop { color: var(--code-prop); }
+  .code-val { color: var(--code-val); }
+  .code-kw { color: var(--code-kw); }
+
+  /* ============ CITATION (인용 출처 분석) ============ */
+  .citation-overview {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 36px;
+    margin-bottom: 36px;
+  }
+  .citation-donut {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 28px 32px;
+  }
+  .citation-donut-title {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    color: var(--text-3);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    font-weight: 500;
+  }
+  .citation-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .citation-bar-row {
+    display: grid;
+    grid-template-columns: 110px 1fr 88px;
+    align-items: center;
+    gap: 16px;
+  }
+  .citation-bar-label {
+    font-size: 12.5px;
+    color: var(--text);
+    font-weight: 500;
+  }
+  .citation-bar-label .sub {
+    display: block;
+    font-size: 10.5px;
+    color: var(--text-3);
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-weight: 400;
+    margin-top: 2px;
+  }
+  .citation-bar-track {
+    height: 22px;
+    background: var(--bg-soft);
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+  }
+  .citation-bar-fill {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    color: #fff;
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10.5px;
+    font-weight: 500;
+  }
+  .citation-bar-fill.own { background: var(--navy); }
+  .citation-bar-fill.authority { background: #4a5168; }
+  .citation-bar-fill.other { background: var(--red); }
+  .citation-bar-num {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12px;
+    color: var(--text-2);
+    text-align: right;
+  }
+  .citation-bar-num .pct {
+    color: var(--navy);
+    font-weight: 500;
+  }
+
+  .citation-side {
+    background: var(--navy);
+    color: #fff;
+    border-radius: 8px;
+    padding: 28px 32px;
+  }
+  .citation-side-label {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10.5px;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+  .citation-side-headline {
+    font-family: 'Wanted Sans Variable', 'Wanted Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 22px;
+    color: #fff;
+    line-height: 1.45;
+    font-weight: 700;
+    margin-bottom: 16px;
+    letter-spacing: -0.015em;
+  }
+  .citation-side-headline em {
+    color: #ff7a8b;
+    font-style: normal;
+    font-weight: 900;
+  }
+  .citation-side-body {
+    font-size: 13.5px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.85;
+  }
+
+  /* 도메인 테이블 */
+  .domain-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-bottom: 24px;
+  }
+  .domain-table th, .domain-table td {
+    text-align: left;
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--line-2);
+  }
+  .domain-table th {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10.5px;
+    color: var(--text-3);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+    background: var(--bg-soft);
+    border-bottom: 1px solid var(--line);
+  }
+  .domain-table td.mono {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12px;
+    color: var(--text-2);
+  }
+  .domain-table td.num {
+    text-align: right;
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    color: var(--navy);
+    font-weight: 500;
+    width: 100px;
+  }
+  .domain-table td.tag-cell { width: 130px; }
+  .own-tag {
+    display: inline-block;
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 2px;
+    letter-spacing: 0.06em;
+    font-weight: 500;
+  }
+  .own-tag.own { background: var(--navy-soft); color: var(--navy); }
+  .own-tag.authority { background: #eaeef3; color: var(--text-2); }
+  .own-tag.other { background: var(--red-soft); color: var(--red-2); }
+
+  /* 도메인 그리드 */
+  .domain-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+  .domain-block-title {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    color: var(--red);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+  .domain-block-title.navy { color: var(--navy); }
+</style>
+<style>
+  /* ============ Q&A RESPONSE LOG ============ */
+  .qlog {
+    margin-bottom: 28px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+    background: #fff;
+  }
+  .qlog-head {
+    padding: 18px 24px;
+    background: var(--bg-soft);
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .qlog-head-l {
+    flex: 1;
+  }
+  .qlog-id {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    color: var(--red);
+    letter-spacing: 0.14em;
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+  .qlog-id .qtype {
+    color: var(--navy);
+    background: var(--navy-soft);
+    padding: 2px 8px;
+    border-radius: 2px;
+    margin-left: 6px;
+    font-size: 10px;
+  }
+  .qlog-q {
+    font-family: 'Wanted Sans Variable', 'Wanted Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 17px;
+    color: var(--navy);
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+  }
+  .qlog-rank {
+    flex-shrink: 0;
+    text-align: right;
+  }
+  .qlog-rank-label {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px;
+    color: var(--text-3);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .qlog-rank-val {
+    font-family: 'Wanted Sans Variable', 'Wanted Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--green);
+    line-height: 1;
+  }
+  .qlog-rank-val.warn { color: var(--amber); }
+  .qlog-rank-val.bad { color: var(--red); }
+
+  .qlog-body {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line-2);
+  }
+  .qlog-engine {
+    background: #fff;
+    padding: 18px 22px;
+  }
+  .qlog-engine-name {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    font-weight: 500;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .engine-pill {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 9.5px;
+    padding: 2px 7px;
+    border-radius: 2px;
+    letter-spacing: 0.06em;
+    font-weight: 500;
+  }
+  .pill-yes { background: var(--green-soft); color: var(--green); }
+  .pill-no { background: var(--red-soft); color: var(--red-2); }
+  .qlog-engine-body {
+    font-size: 12.5px;
+    color: var(--text-2);
+    line-height: 1.75;
+    margin-bottom: 12px;
+  }
+  .qlog-engine-meta {
+    display: flex;
+    gap: 14px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--line);
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10.5px;
+    color: var(--text-3);
+  }
+  .qlog-engine-meta .v {
+    color: var(--navy);
+    font-weight: 500;
+  }
+
+  /* ============ COMPETITOR TABLE ============ */
+  .comp-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-bottom: 24px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .comp-table th, .comp-table td {
+    text-align: left;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--line-2);
+  }
+  .comp-table th {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10.5px;
+    color: var(--text-3);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+    background: var(--bg-soft);
+    border-bottom: 1px solid var(--line);
+  }
+  .comp-table tr:last-child td { border-bottom: none; }
+  .comp-table td.center { text-align: center; }
+  .comp-table .comp-self {
+    font-weight: 700;
+    color: var(--red);
+  }
+  .comp-table .comp-name {
+    font-weight: 500;
+    color: var(--navy);
+  }
+  .score-pill {
+    display: inline-block;
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 3px;
+    letter-spacing: 0.04em;
+    font-weight: 500;
+  }
+  .pill-f { background: var(--red-soft); color: var(--red-2); }
+  .pill-d { background: var(--amber-soft); color: var(--amber); }
+  .pill-c { background: var(--navy-soft); color: var(--navy); }
+  .pill-b { background: var(--green-soft); color: var(--green); }
+  .check { color: var(--green); font-weight: 500; }
+  .cross { color: var(--red); font-weight: 500; }
+  .warn { color: var(--amber); font-weight: 500; }
+
+  /* ============ SOV CARDS ============ */
+  .sov-section-title {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    color: var(--red);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin: 32px 0 16px;
+    font-weight: 500;
+  }
+  .sov-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 28px;
+  }
+  .sov-cell {
+    background: #fff;
+    padding: 22px 22px;
+  }
+  .sov-engine {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    color: var(--navy);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    font-weight: 500;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line-2);
+  }
+  .sov-engine.avg { color: var(--red); }
+  .sov-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .sov-bar-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 38px;
+    align-items: center;
+    gap: 8px;
+  }
+  .sov-brand {
+    font-size: 11.5px;
+    color: var(--text-2);
+    font-weight: 500;
+  }
+  .sov-brand.self {
+    color: var(--red);
+    font-weight: 700;
+  }
+  .sov-track {
+    height: 8px;
+    background: var(--bg-soft);
+    border-radius: 1px;
+    overflow: hidden;
+  }
+  .sov-fill { height: 100%; border-radius: 1px; }
+  .sov-fill.self { background: var(--red); }
+  .sov-fill.other { background: var(--navy); opacity: 0.6; }
+  .sov-fill.dim { background: var(--text-4); }
+  .sov-pct {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    color: var(--text-2);
+    text-align: right;
+    font-weight: 500;
+  }
+
+  /* SOV by category */
+  .sov-cat-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .sov-cat-row {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 18px 22px;
+    display: grid;
+    grid-template-columns: 180px 1fr 80px;
+    gap: 20px;
+    align-items: center;
+  }
+  .sov-cat-name {
+    font-family: 'Wanted Sans Variable', 'Wanted Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 15px;
+    color: var(--navy);
+    font-weight: 700;
+  }
+  .sov-cat-name .sub {
+    display: block;
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10.5px;
+    color: var(--text-3);
+    font-weight: 400;
+    margin-top: 2px;
+    letter-spacing: 0.04em;
+  }
+  .sov-cat-track {
+    display: flex;
+    height: 24px;
+    background: var(--bg-soft);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .sov-cat-seg {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 9px;
+    color: #fff;
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10.5px;
+    font-weight: 500;
+    border-right: 1px solid #fff;
+  }
+  .sov-cat-seg:last-child { border-right: none; }
+  .sov-cat-seg.self { background: var(--red); }
+  .sov-cat-seg.c1 { background: var(--navy); }
+  .sov-cat-seg.c2 { background: #5a6480; }
+  .sov-cat-seg.c3 { background: #9098ad; }
+  .sov-cat-rank {
+    font-family: 'Wanted Sans Variable', 'Wanted Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--red);
+    text-align: right;
+  }
+  .sov-cat-rank.warn { color: var(--amber); }
+
+  .sov-legend {
+    display: flex;
+    gap: 18px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+  .sov-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10.5px;
+    color: var(--text-3);
+    letter-spacing: 0.04em;
+  }
+  .sov-legend-swatch {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+  }
+
+  /* ============ PRIORITY ============ */
+  .priority-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .priority-item {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--text-4);
+    border-radius: 4px;
+    padding: 22px 24px;
+    display: grid;
+    grid-template-columns: 48px 1fr 220px;
+    gap: 24px;
+    align-items: flex-start;
+  }
+  .priority-item.r1 { border-left-color: var(--red); }
+  .priority-item.r2 { border-left-color: var(--amber); }
+  .priority-item.r3 { border-left-color: var(--navy); }
+
+  .priority-rank {
+    font-family: 'Wanted Sans Variable', 'Wanted Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 36px;
+    line-height: 0.95;
+    color: var(--text-4);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+  }
+  .priority-item.r1 .priority-rank { color: var(--red); }
+  .priority-item.r2 .priority-rank { color: var(--amber); }
+  .priority-item.r3 .priority-rank { color: var(--navy); }
+
+  .priority-content { flex: 1; }
+  .priority-title {
+    font-family: 'Wanted Sans Variable', 'Wanted Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 17px;
+    color: var(--navy);
+    font-weight: 700;
+    margin-bottom: 8px;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+  }
+  .priority-desc {
+    font-size: 13px;
+    color: var(--text-2);
+    line-height: 1.75;
+  }
+  .priority-impact {
+    background: var(--bg-soft);
+    border: 1px solid var(--line-2);
+    border-radius: 4px;
+    padding: 14px 16px;
+  }
+  .priority-impact-label {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px;
+    color: var(--text-3);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .priority-impact-val {
+    font-family: 'Wanted Sans Variable', 'Wanted Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 18px;
+    color: var(--navy);
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+  .priority-impact-val .arrow {
+    color: var(--red);
+    margin: 0 5px;
+  }
+  .priority-impact-val em {
+    color: var(--red);
+    font-style: normal;
+  }
+  .priority-impact-meta {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+  }
+  .meta-tag {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 9.5px;
+    padding: 2px 7px;
+    border-radius: 2px;
+    letter-spacing: 0.06em;
+    font-weight: 500;
+  }
+  .tag-urgent { background: var(--red-soft); color: var(--red-2); }
+  .tag-week { background: var(--amber-soft); color: var(--amber); }
+  .tag-month { background: var(--navy-soft); color: var(--navy); }
+  .tag-dev { background: #eaeef3; color: var(--text-2); }
+
+  /* ============ FOOTER ============ */
+  .report-footer {
+    padding: 36px 48px 32px;
+    border-top: 2px solid var(--navy);
+    background: var(--bg-soft);
+  }
+  .report-footer-inner {
+    max-width: 1320px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .footer-brand {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12px;
+    color: var(--text-2);
+    letter-spacing: 0.1em;
+  }
+  .footer-brand .mars { color: var(--red); font-weight: 500; }
+  .footer-brand .sep { color: var(--text-4); margin: 0 6px; }
+  .footer-meta {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    color: var(--text-3);
+    letter-spacing: 0.06em;
+  }
+  .footer-disclaimer {
+    max-width: 1320px;
+    margin: 18px auto 0;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    font-size: 11.5px;
+    color: var(--text-3);
+    line-height: 1.7;
+  }
+
+  /* ============ DIVIDER ============ */
+  .divider {
+    height: 1px;
+    background: var(--line);
+    margin: 36px 0;
+  }
+  .divider-strong {
+    height: 2px;
+    background: var(--navy);
+    margin: 36px 0;
+    opacity: 0.1;
+  }
+
+  /* ============ MISC ============ */
+  .subsection-title {
+    font-family: 'Wanted Sans Variable', 'Wanted Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 20px;
+    color: var(--navy);
+    font-weight: 700;
+    margin: 36px 0 18px;
+    letter-spacing: -0.01em;
+  }
+  .subsection-lead {
+    font-size: 13.5px;
+    color: var(--text-2);
+    line-height: 1.8;
+    margin-bottom: 20px;
+    max-width: 820px;
+  }
+
+  /* ============ INSIGHT INDEX ============ */
+  .insight-index {
+    margin-bottom: 36px;
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 22px 28px;
+  }
+  .insight-index-title {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    color: var(--text-3);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+  .insight-index ol {
+    list-style: none;
+    counter-reset: ix;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 28px;
+  }
+  .insight-index li {
+    counter-increment: ix;
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.65;
+    padding-left: 36px;
+    position: relative;
+  }
+  .insight-index li::before {
+    content: '0' counter(ix);
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    color: var(--red);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+  }
+  .insight-index li .lt {
+    color: var(--text-3);
+    font-size: 11.5px;
+    margin-left: 4px;
+  }
+</style>
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-meta">
+        GEO 기술 진단 보고서<span class="dot">·</span>2026.05.15<span class="dot">·</span>○○○쇼핑몰
+      </div>
+      <h1 class="hero-title">
+        AI가 우리 사이트를<br>
+        제대로 읽을 수 있을까?<br>
+        <em>10분 무료 진단</em>
+      </h1>
+      <p class="hero-sub">
+        AI 검색 시대, 가장 먼저 확인해야 할 것은 "AI 크롤러가 우리 사이트에 접근하고, 페이지를 이해할 수 있는가" 입니다. 본 LITE 진단은 사이트의 기술 구조(robots.txt · sitemap · Schema.org · 메타데이터 · E-E-A-T 신호)를 자동 분석하여, AI에 노출되기 위한 최소 요건을 갖췄는지 무료로 점검해드립니다.
+      </p>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-cell">
+        <div class="stat-label">GEO 종합 점수</div>
+        <div class="stat-value red">43<span class="unit">/100</span></div>
+        <div class="stat-desc">F 등급 · 0~49점</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">긴급 조치 항목</div>
+        <div class="stat-value red">5<span class="unit">건</span></div>
+        <div class="stat-desc">Schema.org · H1 · 본문 콘텐츠</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">기술 진단 페이지</div>
+        <div class="stat-value navy">20<span class="unit">P</span></div>
+        <div class="stat-desc">정적 HTML 크롤링</div>
+      </div>
+      <div class="stat-cell" style="background:linear-gradient(135deg,#fef3f5 0%,#fff 100%); position:relative;">
+        <div class="stat-label" style="color:var(--red);">실측·경쟁사 분석</div>
+        <div class="stat-value" style="color:var(--text-4); font-size:30px;">LOCKED</div>
+        <div class="stat-desc" style="color:var(--red);">STANDARD · PREMIUM 제공</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TOC ============ -->
+<div class="toc">
+  <div class="toc-inner">
+    <span class="toc-label toc-label--lite">LITE 콘텐츠</span>
+    <a href="#overview" class="toc-item">01 측정 개요</a>
+    <a href="#score" class="toc-item">02 GEO 점수</a>
+    <a href="#findings" class="toc-item">03 핵심 발견 사항 TOP 3</a>
+  </div>
+</div>
+
+<!-- ============ 01 측정 개요 ============ -->
+<section id="overview" class="section">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-num">CHAPTER 01</div>
+      <h2 class="section-title">측정 개요</h2>
+      <p class="section-lead">
+        본 LITE 진단은 사이트의 기술 구조와 메타데이터를 자동 분석하여 GEO 준비도를 점수화합니다. AI 엔진 실측·경쟁사 비교·즉시 적용 수정 코드는 STANDARD·PREMIUM에서 제공됩니다.
+      </p>
+    </div>
+
+    <div class="notice">
+      <span class="notice-icon">FRAME</span>
+      <span>측정 프레임은 업종 무관하게 적용되는 MARS 표준입니다. <strong>AI 크롤러 접근성 + 구조화 데이터 + E-E-A-T 신호 + 메타데이터 완성도</strong>를 100점 만점으로 점수화하여 즉시 비교 가능한 형태로 제공합니다.</span>
+    </div>
+
+    <div class="frame-grid">
+      <div class="frame-cell">
+        <div class="frame-label">분석 대상</div>
+        <div class="frame-val">
+          ○○○쇼핑몰
+          <span class="sub">ourmall.co.kr</span>
+        </div>
+      </div>
+      <div class="frame-cell">
+        <div class="frame-label">분석 범위</div>
+        <div class="frame-val">
+          사이트 기술 구조
+          <span class="sub">정적 HTML · 메타 · robots · sitemap</span>
+        </div>
+      </div>
+      <div class="frame-cell">
+        <div class="frame-label">크롤링 페이지</div>
+        <div class="frame-val">
+          20개 페이지
+          <span class="sub">완료 20 · 실패 0</span>
+        </div>
+      </div>
+      <div class="frame-cell">
+        <div class="frame-label">분석 기준일</div>
+        <div class="frame-val">
+          2026.05.15
+          <span class="sub">KST · 약 10분 자동 진단</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="frame-grid">
+      <div class="frame-cell">
+        <div class="frame-label">진단 항목</div>
+        <div class="frame-val">
+          <div class="tag-list">
+            <span class="type-tag">AI 크롤러 접근성</span>
+            <span class="type-tag">구조화 데이터</span>
+            <span class="type-tag">E-E-A-T 신호</span>
+            <span class="type-tag">메타데이터</span>
+          </div>
+        </div>
+      </div>
+      <div class="frame-cell">
+        <div class="frame-label">제외 항목</div>
+        <div class="frame-val" style="color:var(--text-3);">
+          AI 엔진 실측 응답
+          <span class="sub" style="color:var(--text-3);">→ STANDARD에서 제공</span>
+        </div>
+      </div>
+      <div class="frame-cell">
+        <div class="frame-label">제외 항목</div>
+        <div class="frame-val" style="color:var(--text-3);">
+          경쟁사 비교 · SOV
+          <span class="sub" style="color:var(--text-3);">→ PREMIUM에서 제공</span>
+        </div>
+      </div>
+      <div class="frame-cell">
+        <div class="frame-label">제외 항목</div>
+        <div class="frame-val" style="color:var(--text-3);">
+          즉시 적용 수정 코드
+          <span class="sub" style="color:var(--text-3);">→ STANDARD·PREMIUM 제공</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ============ 02 GEO 종합 점수 ============ -->
+<section id="score" class="section">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-num">CHAPTER 02</div>
+      <h2 class="section-title">GEO 종합 점수</h2>
+      <p class="section-lead">
+        GEO 점수는 100점 만점, 5개 카테고리(콘텐츠 구조 · 콘텐츠 품질 · 신뢰성 · 기술 접근성 · 표현 명확성) 각 20점씩 합산됩니다. 본 LITE 진단의 핵심 결과로, AI 크롤러가 우리 사이트를 어떻게 인식하는지를 한눈에 보여드립니다.
+      </p>
+    </div>
+
+    <div class="geo-total">
+      <div class="geo-total-score">
+        43<span class="out-of">/ 100</span>
+      </div>
+      <div class="geo-total-info">
+        <span class="geo-grade">F 등급 · 0~49점</span>
+        <p class="geo-total-desc">
+          메타데이터 기본 완성도(Title · Description 100%)는 우수하나, JavaScript SPA 렌더링 구조로 정적 HTML에 본문 콘텐츠가 노출되지 않습니다. 그 결과 <strong style="color:#fff;">Schema.org 0%, H1 태그 0%</strong>로 AI 크롤러가 페이지의 주제와 구조를 인식하지 못하는 상태입니다. AI 검색 시대의 가시성 확보가 시급합니다.
+        </p>
+        <div class="geo-total-summary">
+          <div class="item">
+            <span class="item-label">긴급 조치</span>
+            <span class="item-val">5개 항목</span>
+          </div>
+          <div class="item">
+            <span class="item-label">기술 접근성</span>
+            <span class="item-val">14 / 20 · B</span>
+          </div>
+          <div class="item">
+            <span class="item-label">구조화 데이터</span>
+            <span class="item-val">0 / 20 · F</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="score-grid">
+      <div class="score-card">
+        <div class="score-cat">A · 콘텐츠 구조 <span class="grade">F</span></div>
+        <div class="score-num low">3<span class="out">/20</span></div>
+        <div class="score-bar"><div class="score-fill low" style="width:15%"></div></div>
+        <div class="score-note">Schema.org 0%, H1 0%, FAQ 0%. AI가 페이지를 구조화된 정보로 인식하지 못함.</div>
+      </div>
+      <div class="score-card">
+        <div class="score-cat">B · 콘텐츠 품질 <span class="grade">F</span></div>
+        <div class="score-num low">2<span class="out">/20</span></div>
+        <div class="score-bar"><div class="score-fill low" style="width:10%"></div></div>
+        <div class="score-note">정적 HTML 3,058 bytes. 본문 깊이·구체성·전문성 모두 텍스트 미노출로 평가 불가.</div>
+      </div>
+      <div class="score-card">
+        <div class="score-cat">C · 신뢰성 <span style="color:var(--amber)">C</span></div>
+        <div class="score-num mid">10<span class="out">/20</span></div>
+        <div class="score-bar"><div class="score-fill mid" style="width:50%"></div></div>
+        <div class="score-note">모기업 그룹 브랜드 권위·HTTPS는 강하나, 사업자 정보·외부 검증 신호가 부족.</div>
+      </div>
+      <div class="score-card">
+        <div class="score-cat">D · 기술 접근성 <span style="color:var(--green)">B</span></div>
+        <div class="score-num high">14<span class="out">/20</span></div>
+        <div class="score-bar"><div class="score-fill high" style="width:70%"></div></div>
+        <div class="score-note">robots.txt 허용, sitemap 90개 등록, 모바일 viewport 모두 양호.</div>
+      </div>
+      <div class="score-card">
+        <div class="score-cat">E · 표현 명확성 <span style="color:var(--green)">B</span></div>
+        <div class="score-num high">14<span class="out">/20</span></div>
+        <div class="score-bar"><div class="score-fill high" style="width:70%"></div></div>
+        <div class="score-note">Title 100%·Meta Description 100%. 다만 본문 가독성은 SPA 미노출로 평가 불가.</div>
+      </div>
+    </div>
+
+    <div class="score-detail">
+      <div class="score-detail-head">카테고리별 세부 채점 근거</div>
+      <table class="score-detail-table">
+        <thead>
+          <tr>
+            <th style="width:180px;">카테고리</th>
+            <th style="width:200px;">세부 항목</th>
+            <th>채점 근거</th>
+            <th class="num" style="text-align:right;">점수</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td rowspan="5" class="cat-head">A · 콘텐츠 구조</td><td>A1 Schema.org JSON-LD</td><td class="basis">20개 페이지 전체에서 JSON-LD 0개 발견. Organization·LocalBusiness·Place·Event·Restaurant 모두 미적용.</td><td class="num low">0/6</td></tr>
+          <tr><td>A2 FAQPage/HowTo</td><td class="basis">FAQ 페이지 자체가 존재하지 않음. 자주 묻는 질문 콘텐츠 0개.</td><td class="num low">0/4</td></tr>
+          <tr><td>A3 OG 태그 완성도</td><td class="basis">메인 페이지(/ko)에만 og:title·og:description·og:image 완전 적용. 서브 19개 페이지 미확인.</td><td class="num">2/4</td></tr>
+          <tr><td>A4 Canonical URL</td><td class="basis">메인 페이지에만 canonical 설정. 서브 페이지 미확인.</td><td class="num">1/2</td></tr>
+          <tr><td>A5 H1~H3 계층</td><td class="basis">정적 HTML 기준 H1~H6 태그 0/20 페이지. SPA 렌더링 영향.</td><td class="num low">0/4</td></tr>
+
+          <tr><td rowspan="4" class="cat-head">B · 콘텐츠 품질</td><td>B1 깊이·구체성</td><td class="basis">정적 HTML 크기 3,058 bytes. 본문 텍스트 미노출로 평가 불가.</td><td class="num low">0/6</td></tr>
+          <tr><td>B2 주제 전문성</td><td class="basis">정적 HTML에 본문 미노출로 평가 불가.</td><td class="num low">0/4</td></tr>
+          <tr><td>B3 정보 객관성</td><td class="basis">정적 HTML에 본문 미노출로 평가 불가.</td><td class="num low">0/4</td></tr>
+          <tr><td>B4 AI 인용 적합 구조</td><td class="basis">메타 디스크립션에만 기본 정보 포함. 독립 인용 가능한 팩트문 부족.</td><td class="num">2/6</td></tr>
+
+          <tr><td rowspan="5" class="cat-head">C · 신뢰성</td><td>C1 사업자/조직 정보</td><td class="basis">사업자번호·정확한 상호명 정적 HTML에 미노출. 연락처 부분 노출.</td><td class="num">2/6</td></tr>
+          <tr><td>C2 브랜드 권위</td><td class="basis">"서울 최대 복합쇼핑몰" 메타에 명시. 모기업 그룹 계열사로 권위 신호 강함.</td><td class="num high">4/4</td></tr>
+          <tr><td>C3 출처/저자</td><td class="basis">모기업 그룹 소속 명시 없음. 조직 정보 정적 HTML 미노출.</td><td class="num low">0/4</td></tr>
+          <tr><td>C4 외부 검증 가능성</td><td class="basis">공식 SNS·한국관광공사 등재 확인. 인증번호·특허번호 미명시.</td><td class="num">2/4</td></tr>
+          <tr><td>C5 HTTPS 보안</td><td class="basis">HTTPS 적용 확인.</td><td class="num high">2/2</td></tr>
+
+          <tr><td rowspan="5" class="cat-head">D · 기술 접근성</td><td>D1 robots.txt AI 크롤러 허용</td><td class="basis">User-agent: * / Allow: / 설정. ClaudeBot·GPTBot·Gemini·Perplexity 명시적 차단 없음.</td><td class="num high">6/6</td></tr>
+          <tr><td>D2 sitemap.xml</td><td class="basis">존재. 90개 URL 등록. 우선순위 1.00 (48개) · 0.80 (42개).</td><td class="num high">4/4</td></tr>
+          <tr><td>D3 모바일 최적화</td><td class="basis">viewport 메타 태그 적용. 반응형 설정 확인.</td><td class="num high">4/4</td></tr>
+          <tr><td>D4 이미지 접근성</td><td class="basis">정적 HTML 기준 이미지 0개. alt 텍스트 평가 불가.</td><td class="num low">0/4</td></tr>
+          <tr><td>D5 페이지 로딩 추정</td><td class="basis">JS 파일 로드 필요. 초기 렌더링 지연 예상.</td><td class="num low">0/2</td></tr>
+
+          <tr><td rowspan="4" class="cat-head">E · 표현 명확성</td><td>E1 title 태그</td><td class="basis">20/20 페이지에 title 설정. 핵심 키워드 + 브랜드 + 적정 길이.</td><td class="num high">4/4</td></tr>
+          <tr><td>E2 meta description</td><td class="basis">20/20 페이지에 meta description 설정. 고유 + 적정 길이.</td><td class="num high">6/6</td></tr>
+          <tr><td>E3 콘텐츠 가독성</td><td class="basis">정적 HTML에 본문·단락·표·리스트 미포함. 평가 불가.</td><td class="num low">0/4</td></tr>
+          <tr><td>E4 브랜드/서비스 명확성</td><td class="basis">메타에 "서울 최대 복합쇼핑몰" 명시. 본문 콘텐츠 부족.</td><td class="num">4/6</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 핵심 발견 사항 TOP 3 ============ -->
+<section id="findings" class="section">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-num">CHAPTER 03</div>
+      <h2 class="section-title">핵심 발견 사항 TOP 3</h2>
+      <p class="section-lead">
+        본 LITE 진단에서 사이트 기술 구조 분석으로 발견된 가장 시급한 3가지 이슈입니다. 각 발견 사항은 <strong>한 줄 결론 → 수치 근거 → 현황(AS-IS) / 처방(TO-BE)</strong> 순으로 정리되어 있습니다. 즉시 적용 가능한 수정 코드는 STANDARD 패키지에서 제공됩니다.
+      </p>
+    </div>
+
+    <div class="insight-index">
+      <div class="insight-index-title">사이트 기술 구조 분석으로 도출된 3가지 이슈</div>
+      <ol>
+        <li>AI 크롤러가 우리 사이트에서 <strong>한 글자도 읽지 못한다</strong> <span class="lt">· SPA 콘텐츠 미노출</span></li>
+        <li>"우리가 어떤 회사인지" 알려주는 <strong>구조화 데이터가 전무</strong>하다 <span class="lt">· Schema.org 0%</span></li>
+        <li><strong>FAQ 페이지 부재</strong>로 "문제해결형 질문"에서 우리가 답이 될 수 없다 <span class="lt">· 콘텐츠 의도 갭</span></li>
+      </ol>
+    </div>
+
+    <!-- ============ FINDING 01 ============ -->
+    <div class="insight-block">
+      <div class="insight-head">
+        <div class="insight-tags">
+          <span class="insight-num">FINDING 01</span>
+          <span class="insight-chip chip-critical">SPA 콘텐츠 미노출</span>
+          <span class="insight-chip chip-critical">긴급</span>
+        </div>
+        <h3 class="insight-title">
+          AI 크롤러가 우리 사이트에서 <em>한 글자도 읽지 못한다.</em>
+        </h3>
+        <p class="insight-subtitle">
+          <span class="strong">정적 HTML 3,058 bytes</span> · H1 태그 0/20 페이지 · 본문 텍스트 0%
+        </p>
+      </div>
+      <div class="insight-body">
+        <div class="insight-explain">
+          우리 사이트는 JavaScript로 화면을 그리는 SPA(Single Page Application) 구조입니다. 사용자가 브라우저로 접속하면 멋진 화면이 보이지만, AI 크롤러가 처음 페이지를 받아왔을 때 그 안에는 단 <strong>3,058 bytes(A4 한 페이지의 1/10 분량)</strong>의 코드만 들어 있고, 정작 "이 페이지가 뭐에 관한 페이지인지" 알려주는 본문 텍스트는 없습니다. AI 입장에서는 "주소만 있고 본문이 비어있는 편지"를 받는 셈입니다.
+        </div>
+
+        <div class="insight-row">
+          <div class="insight-col asis">
+            <div class="insight-col-label"><span class="dot dot-red"></span>현황 · AS-IS</div>
+            <ul>
+              <li>정적 HTML 크기 <strong>3,058 bytes</strong> (메타 데이터 + 스크립트 로더만 포함)</li>
+              <li>본문 콘텐츠는 <code>/assets/client.js</code> + <code>/assets/main.js</code> 로드 후 클라이언트에서 동적 생성</li>
+              <li>H1 태그 <strong>0/20 페이지</strong>, 이미지 alt 텍스트 0개 (정적 HTML 기준)</li>
+              <li>AI 크롤러가 페이지 주제를 메타 디스크립션 1~2줄로만 추측해야 하는 상태</li>
+              <li>"이 페이지가 명품 쇼핑 가이드인지, 아쿠아리움 안내인지"를 AI가 텍스트로 확인 불가</li>
+            </ul>
+          </div>
+          <div class="insight-col tobe">
+            <div class="insight-col-label"><span class="dot dot-green"></span>처방 · TO-BE</div>
+            <ul>
+              <li>SPA 구조 변경 없이 <strong><code>&lt;body&gt;</code> 최상단에 정적 콘텐츠 블록 인라인 삽입</strong> (display:none + aria-hidden 처리하여 화면 영향 없음)</li>
+              <li>페이지당 H1 1개 + 핵심 텍스트 300자 이상 + 주요 시설·브랜드 명칭 노출</li>
+              <li>중장기로 <strong>SSR(Server-Side Rendering)</strong> 또는 프리렌더링 도입 검토</li>
+              <li>예상 효과: AI 크롤러 페이지 주제 인식률 0% → 100%</li>
+              <li style="color:var(--text-3); font-size:12px; margin-top:8px;">※ 즉시 적용 가능한 수정 코드는 STANDARD에서 제공됩니다.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ FINDING 02 ============ -->
+    <div class="insight-block">
+      <div class="insight-head">
+        <div class="insight-tags">
+          <span class="insight-num">FINDING 02</span>
+          <span class="insight-chip chip-critical">Schema.org 0%</span>
+          <span class="insight-chip chip-critical">긴급</span>
+        </div>
+        <h3 class="insight-title">
+          "우리가 어떤 회사인지" 알려주는 <em>구조화 데이터가 0%</em>다.
+        </h3>
+        <p class="insight-subtitle">
+          <span class="strong">Schema.org JSON-LD 0/20 페이지</span> · Organization · LocalBusiness · Restaurant · Product 전부 미적용
+        </p>
+      </div>
+      <div class="insight-body">
+        <div class="insight-explain">
+          Schema.org는 사이트의 정보를 AI와 검색엔진이 이해하기 쉬운 "표준 양식"으로 정리해주는 코드입니다. "이 페이지는 음식점입니다 / 가게 이름은 X / 영업시간은 Y / 가격대는 Z" 같은 정보를 명함처럼 정리해서 건네는 셈입니다. 우리 사이트에는 이 명함이 한 장도 없습니다. AI는 우리가 쇼핑몰인지 호텔인지 박물관인지조차 코드 레벨에서는 알 수 없는 상태입니다.
+        </div>
+
+        <div class="insight-row">
+          <div class="insight-col asis">
+            <div class="insight-col-label"><span class="dot dot-red"></span>현황 · AS-IS</div>
+            <ul>
+              <li>크롤링한 <strong>20개 페이지 전체</strong>에서 JSON-LD 구조화 데이터 0개 발견</li>
+              <li>GEO 필수 @type 모두 미적용: Organization, LocalBusiness, ShoppingCenter, Place, Restaurant, Product, Event, FAQPage, BreadcrumbList</li>
+              <li>업종 평균 적용률: 약 35~60% (동종 복합쇼핑몰 기준)</li>
+              <li>AI 엔진이 주소·영업시간·시설·브랜드 정보를 정형화된 형태로 인식 불가</li>
+            </ul>
+          </div>
+          <div class="insight-col tobe">
+            <div class="insight-col-label"><span class="dot dot-green"></span>처방 · TO-BE</div>
+            <ul>
+              <li><strong>1순위 (Day 1):</strong> Organization + LocalBusiness/ShoppingCenter + FAQPage 메인 페이지 적용</li>
+              <li><strong>2순위 (Week 1):</strong> 브랜드 목록 페이지에 Product, 식당 가이드에 Restaurant, 이벤트 페이지에 Event 스키마 적용</li>
+              <li><strong>3순위 (Week 2):</strong> 시설별 페이지에 Place + BreadcrumbList로 사이트 계층 구조 전달</li>
+              <li>예상 효과: GEO 점수 A 카테고리 0/20 → 15/20 회복</li>
+              <li style="color:var(--text-3); font-size:12px; margin-top:8px;">※ 즉시 적용 가능한 수정 코드는 STANDARD에서 제공됩니다.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ FINDING 03 ============ -->
+    <div class="insight-block">
+      <div class="insight-head">
+        <div class="insight-tags">
+          <span class="insight-num">FINDING 03</span>
+          <span class="insight-chip chip-high">콘텐츠 의도 갭</span>
+          <span class="insight-chip chip-high">높음</span>
+        </div>
+        <h3 class="insight-title">
+          <em>FAQ 페이지 부재</em>로 "문제해결형 질문"에서 우리가 답이 될 수 없다.
+        </h3>
+        <p class="insight-subtitle">
+          <span class="strong">FAQ 페이지 0개</span> · HowTo 콘텐츠 0개 · 자주 묻는 질문 공식 답변 부재
+        </p>
+      </div>
+      <div class="insight-body">
+        <div class="insight-explain">
+          "[자사 권역]에서 어린이랑 시간 보낼 만한 곳", "외국인 택스리펀 어떻게 받나요" 같은 <strong>문제해결형 질문</strong>은 AI가 가장 자주 답하는 유형입니다. 그런데 우리 사이트에는 이런 질문에 직접 답해주는 FAQ 페이지가 없습니다. 그래서 AI는 어쩔 수 없이 외부 블로그·여행 후기에서 답변을 가져옵니다. <strong>우리는 시설과 서비스를 보유하고 있는데, AI는 그 사실을 모른 채 답하는</strong> 답답한 상황입니다.
+        </div>
+
+        <div class="insight-row">
+          <div class="insight-col asis">
+            <div class="insight-col-label"><span class="dot dot-red"></span>현황 · AS-IS</div>
+            <ul>
+              <li>사이트 내 FAQ 페이지 자체가 존재하지 않음 — 자주 묻는 질문에 대한 공식 답변 0개</li>
+              <li>HowTo·가이드 콘텐츠 부재 — 어린이 방문·외국인 가이드·교통 안내 등 페르소나별 콘텐츠 없음</li>
+              <li>영업시간·주차·교통·시설 안내는 메타 디스크립션 1~2줄로만 존재</li>
+              <li>비교 분석 콘텐츠 부재 — "○○○쇼핑몰 vs [경쟁몰 가]" 같은 비교형 질문에서 자사 인용 불가</li>
+            </ul>
+          </div>
+          <div class="insight-col tobe">
+            <div class="insight-col-label"><span class="dot dot-green"></span>처방 · TO-BE</div>
+            <ul>
+              <li><strong>FAQ 페이지 신설</strong> + FAQPage 스키마 적용 — 영업시간·주차·교통·키즈 시설·외국인 서비스·예약 등 Q&A 20개 이상</li>
+              <li>"어린이와 함께" "외국인 가이드" 등 페르소나별 정적 콘텐츠 페이지 신설</li>
+              <li>비교 콘텐츠 정기 발행 — 자사가 비교형 질문의 1차 출처가 되도록</li>
+              <li>예상 효과: 문제해결형 매칭률 +30%p, 자사 인용률 +10%p</li>
+              <li style="color:var(--text-3); font-size:12px; margin-top:8px;">※ AI 엔진 실측 결과와 카테고리별 매칭 분석은 STANDARD에서 제공됩니다.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ ETRIBE-STYLED FOOTER — Upsell only ============ -->
+<footer class="etx-footer">
+  <div class="etx-footer-hero">
+    <div class="etx-upsell etx-upsell--solo">
+      <div class="etx-container">
+        <div>
+          <div class="etx-upsell-label">DEEPER ANALYSIS · UPGRADE</div>
+          <h3 class="etx-upsell-title">
+            <em>AI가 실제로 우리를 뭐라고 답하는지</em><br>
+            이제 직접 들어볼 차례입니다.
+          </h3>
+          <p class="etx-upsell-body">
+            본 LITE 진단은 "AI가 우리 사이트를 읽을 수 있는가"까지를 확인했습니다. STANDARD는 한 단계 더 들어가서 <strong>4개 AI 엔진(Claude · Gemini · Perplexity · ChatGPT)에 실제 질문을 던지고 응답을 수집</strong>합니다. 우리 브랜드가 어떤 질문에서 어떤 순위로 노출되는지, 어떤 외부 사이트가 우리 정보의 출처가 되고 있는지, 6가지 인사이트와 함께 <strong>즉시 적용 가능한 수정 코드까지</strong> 한 권에 받아보실 수 있습니다.
+          </p>
+        </div>
+        <aside class="etx-upsell-aside">
+          <a href="#" class="etx-upsell-cta">STANDARD <span class="price">29만원</span></a>
+          <div class="etx-tier-line">
+            <span class="tier active">LITE</span>
+            <span class="sep">/</span>
+            <span class="tier">STANDARD</span>
+            <span class="sep">/</span>
+            <span class="tier">PREMIUM</span>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ JS: 코드 탭 전환 (LITE에는 코드 블록 없음 - 호환성 유지) ============ -->
+<script>
+  document.addEventListener('click', function(e) {
+    const tab = e.target.closest('.code-tab');
+    if (!tab) return;
+    const target = tab.getAttribute('data-target');
+    if (!target) return;
+    const block = tab.closest('.code-block');
+    if (!block) return;
+    block.querySelectorAll('.code-tab').forEach(t => t.classList.remove('active'));
+    block.querySelectorAll('.code-pane').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    const pane = document.getElementById(target);
+    if (pane) pane.classList.add('active');
+  });
+</script>
+
+</body>
+</html>

@@ -3709,143 +3709,316 @@
       font-weight: 700;
     }
 
+    /* ─────────────────────────────────────────────────────────
+       REPORT CARDS — Bold tier-themed cover style
+       LITE = white/outline · STANDARD = lime · PREMIUM = black
+       ───────────────────────────────────────────────────────── */
     .report-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: var(--s-32);
+      gap: var(--s-24);
+      align-items: stretch;
     }
 
     .report-card {
+      position: relative;
       display: flex;
       flex-direction: column;
       background: var(--canvas);
-      border: 1px solid var(--line-soft);
+      border: 2px solid var(--ink);
+      padding: var(--s-32);
+      min-height: 480px;
+      transition: transform .28s ease, box-shadow .28s ease;
       overflow: hidden;
-      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    }
+
+    .report-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 8px;
+      background: var(--ink);
     }
 
     .report-card:hover {
-      transform: translateY(-2px);
-      border-color: var(--line-hard);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      transform: translateY(-4px);
+      box-shadow: 12px 12px 0 0 var(--ink);
     }
 
-    /* —— Image placeholder area (replace .report-card-image-bg with <img> later) —— */
-    .report-card-image {
-      position: relative;
-      aspect-ratio: 4 / 3;
-      background: var(--surface-soft);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      border-bottom: 1px solid var(--line-soft);
-    }
-
-    .report-card-image::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(135deg, transparent 49.5%, rgba(0, 0, 0, 0.08) 50%, transparent 50.5%),
-        linear-gradient(45deg, transparent 49.5%, rgba(0, 0, 0, 0.08) 50%, transparent 50.5%);
-    }
-
-    .report-card-image-label {
-      position: relative;
-      z-index: 1;
-      display: inline-flex;
-      align-items: center;
-      gap: var(--s-8);
-      padding: var(--s-8) var(--s-16);
-      background: var(--canvas);
-      border: 1px solid var(--line-soft);
+    /* Massive tier number — Red Hat Display, top-left */
+    .report-card-num {
       font-family: var(--font-en);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
-
-    .report-card-image-label::before {
-      content: "";
-      display: inline-block;
-      width: 6px;
-      height: 6px;
-      background: var(--primary);
-      border-radius: 50%;
-    }
-
-    .report-card-image img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      z-index: 2;
-    }
-
-    .report-card-body {
-      padding: var(--s-32);
-      display: flex;
-      flex-direction: column;
-      gap: var(--s-12);
-      flex: 1;
+      font-size: 56px;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: var(--ink);
+      margin-bottom: var(--s-8);
     }
 
     .report-card-tier {
       font-family: var(--font-en);
       font-size: 11px;
-      font-weight: 700;
+      font-weight: 800;
       letter-spacing: 0.22em;
-      color: var(--text-muted);
-    }
-
-    .report-card-tier.is-featured {
-      align-self: flex-start;
-      background: var(--primary);
+      text-transform: uppercase;
       color: var(--ink);
-      padding: var(--s-4) var(--s-12);
+      display: inline-flex;
+      align-items: center;
+      gap: var(--s-8);
+      margin-bottom: var(--s-24);
+    }
+    .report-card-tier::before {
+      content: "";
+      width: 24px; height: 2px;
+      background: var(--ink);
+      display: inline-block;
     }
 
     .report-card-name {
-      font-size: 22px;
+      font-family: var(--font-kr);
+      font-size: 26px;
       font-weight: 700;
-      line-height: 1.3;
-      letter-spacing: -0.015em;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
       color: var(--ink);
+      margin-bottom: var(--s-16);
+      word-break: keep-all;
     }
 
     .report-card-desc {
-      font-size: 15px;
-      line-height: 1.65;
-      color: var(--text-muted);
+      font-size: 14.5px;
+      line-height: 1.7;
+      color: var(--text-body);
+      margin-bottom: var(--s-24);
+    }
+
+    .report-card-feats {
+      list-style: none;
+      margin: 0 0 var(--s-32);
+      padding: var(--s-20) 0 0;
+      border-top: 1px solid var(--line-soft);
+      display: flex;
+      flex-direction: column;
+      gap: var(--s-12);
+    }
+    .report-card-feats li {
+      font-size: 13.5px;
+      line-height: 1.5;
+      color: var(--ink);
+      display: flex;
+      align-items: flex-start;
+      gap: var(--s-12);
+      padding-left: 0;
+    }
+    .report-card-feats li::before {
+      content: "→";
+      font-family: var(--font-en);
+      font-weight: 900;
+      color: var(--ink);
+      flex-shrink: 0;
+      font-size: 14px;
+      line-height: 1.5;
     }
 
     .report-card-cta {
       margin-top: auto;
-      padding-top: var(--s-20);
-      display: inline-flex;
-      align-self: flex-start;
-      font-family: var(--font-kr);
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--ink);
-      border-bottom: 1px solid var(--ink);
-      padding-bottom: var(--s-4);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--s-12);
+      width: 100%;
+      padding: var(--s-16) var(--s-20);
+      background: var(--ink);
+      color: var(--primary);
+      border: 0;
+      font-family: var(--font-en);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
       cursor: pointer;
-      background: none;
-      border-top: 0;
-      border-left: 0;
-      border-right: 0;
-      transition: opacity .15s ease, transform .15s ease;
+      transition: background .2s ease, color .2s ease, transform .2s ease;
+    }
+    .report-card-cta::after {
+      content: "→";
+      font-size: 18px;
+      transition: transform .2s ease;
+    }
+    .report-card-cta:hover {
+      background: var(--primary);
+      color: var(--ink);
+      box-shadow: inset 0 0 0 2px var(--ink);
+    }
+    .report-card-cta:hover::after { transform: translateX(4px); }
+
+    /* —— LITE variant: outline only —— */
+    .report-card.tier-lite { background: var(--canvas); }
+    .report-card.tier-lite::before { background: var(--ink); }
+
+    /* —— STANDARD variant: lime full block + RECOMMENDED ribbon —— */
+    .report-card.tier-standard {
+      background: var(--primary);
+      transform: translateY(-8px);
+    }
+    .report-card.tier-standard:hover {
+      transform: translateY(-12px);
+    }
+    .report-card.tier-standard::before { background: var(--ink); }
+    .report-card.tier-standard .report-card-feats { border-top-color: rgba(0,0,0,0.18); }
+    .report-card.tier-standard .report-card-desc { color: var(--ink); }
+    .report-card-ribbon {
+      position: absolute;
+      top: var(--s-16);
+      right: -1px;
+      background: var(--ink);
+      color: var(--primary);
+      font-family: var(--font-en);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      padding: 5px 14px;
     }
 
-    .report-card-cta:hover {
-      opacity: 0.65;
-      transform: translateX(2px);
+    /* —— PREMIUM variant: black full block —— */
+    .report-card.tier-premium {
+      background: var(--ink);
+      border-color: var(--ink);
+    }
+    .report-card.tier-premium::before { background: var(--primary); }
+    .report-card.tier-premium .report-card-num,
+    .report-card.tier-premium .report-card-tier,
+    .report-card.tier-premium .report-card-name {
+      color: var(--canvas);
+    }
+    .report-card.tier-premium .report-card-num { color: var(--primary); }
+    .report-card.tier-premium .report-card-tier::before { background: var(--primary); }
+    .report-card.tier-premium .report-card-desc { color: #cccccc; }
+    .report-card.tier-premium .report-card-feats {
+      border-top-color: rgba(255,255,255,0.18);
+    }
+    .report-card.tier-premium .report-card-feats li { color: var(--canvas); }
+    .report-card.tier-premium .report-card-feats li::before { color: var(--primary); }
+    .report-card.tier-premium .report-card-cta {
+      background: var(--primary);
+      color: var(--ink);
+    }
+    .report-card.tier-premium .report-card-cta:hover {
+      background: var(--canvas);
+      color: var(--ink);
+      box-shadow: inset 0 0 0 2px var(--primary);
+    }
+    .report-card.tier-premium:hover {
+      box-shadow: 12px 12px 0 0 var(--primary);
+    }
+
+    @media (max-width: 1100px) {
+      .report-card.tier-standard { transform: none; }
+      .report-card.tier-standard:hover { transform: translateY(-4px); }
+    }
+    @media (max-width: 700px) {
+      .report-card { min-height: 0; padding: var(--s-24); }
+      .report-card-num { font-size: 44px; }
+      .report-card-name { font-size: 22px; }
+    }
+
+    /* —— Report preview MODAL (full-screen iframe popup) —— */
+    .report-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 2200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: var(--s-20);
+    }
+    .report-modal[aria-hidden="false"] { display: flex; }
+    .report-modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.78);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      animation: tm-fade .25s ease;
+    }
+    .report-modal-panel {
+      position: relative;
+      z-index: 1;
+      background: #fff;
+      width: 100%;
+      max-width: 1280px;
+      height: calc(100vh - 40px);
+      max-height: calc(100vh - 40px);
+      display: flex;
+      flex-direction: column;
+      border: 2px solid #000;
+      animation: tm-pop .3s cubic-bezier(.2, .7, .3, 1);
+    }
+    .report-modal-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 18px;
+      border-bottom: 2px solid #000;
+      background: var(--primary);
+      flex-shrink: 0;
+    }
+    .report-modal-tag {
+      font-family: var(--font-en);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.2em;
+      color: #000;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .report-modal-tag::before {
+      content: "";
+      display: inline-block;
+      width: 8px; height: 8px;
+      background: #000;
+      border-radius: 50%;
+    }
+    .report-modal-actions {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .report-modal-action {
+      font-family: var(--font-en);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #000;
+      border: 1px solid #000;
+      padding: 7px 12px;
+      background: transparent;
+      cursor: pointer;
+      transition: background .15s ease, color .15s ease;
+      line-height: 1;
+    }
+    .report-modal-action:hover { background: #000; color: var(--primary); }
+    .report-modal-action.is-close { background: #000; color: var(--primary); }
+    .report-modal-action.is-close:hover { background: #fff; color: #000; }
+    .report-modal-body {
+      flex: 1;
+      overflow: hidden;
+      background: #fff;
+      min-height: 0;
+    }
+    .report-modal-body iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+    @media (max-width: 700px) {
+      .report-modal { padding: 0; }
+      .report-modal-panel { border-width: 0; height: 100vh; max-height: 100vh; }
+      .report-modal-action { padding: 7px 10px; font-size: 10px; }
     }
 
     @media (max-width: 1100px) {
@@ -6134,52 +6307,53 @@
         <div class="report-grid reveal-stagger">
 
           <!-- LITE — 기술 진단 보고서 -->
-          <div class="report-card">
-            <div class="report-card-image">
-              <span class="report-card-image-label">Report Preview · LITE</span>
-              <!-- <img src="images/report-lite.png" alt="기술 진단 보고서 예시" /> -->
-            </div>
-            <div class="report-card-body">
-              <div class="report-card-tier">LITE</div>
-              <h4 class="report-card-name">기술 진단 보고서</h4>
-              <p class="report-card-desc">
-                AI 봇의 접근성 · 스키마 · llms.txt 등 기술 인프라 점검 결과를 한 페이지로 정리합니다.
-              </p>
-              <button class="report-card-cta" type="button">샘플 보고서 보기 →</button>
-            </div>
-          </div>
+          <article class="report-card tier-lite">
+            <div class="report-card-num">01</div>
+            <div class="report-card-tier">LITE</div>
+            <h4 class="report-card-name">기술 진단<br>보고서</h4>
+            <p class="report-card-desc">
+              AI 봇의 접근성 · 스키마 · llms.txt 등 기술 인프라 점검 결과를 한 페이지로 정리.
+            </p>
+            <ul class="report-card-feats">
+              <li>AI 크롤러 접근성 + robots.txt</li>
+              <li>Schema.org · H1 · 메타데이터</li>
+              <li>GEO 종합 점수 100점 만점</li>
+            </ul>
+            <button class="report-card-cta" type="button" data-report="lite">샘플 보고서 보기</button>
+          </article>
 
           <!-- STANDARD — AI 가시성 진단 보고서 (Featured) -->
-          <div class="report-card">
-            <div class="report-card-image">
-              <span class="report-card-image-label">Report Preview · STANDARD</span>
-              <!-- <img src="images/report-standard.png" alt="AI 가시성 진단 보고서 예시" /> -->
-            </div>
-            <div class="report-card-body">
-              <div class="report-card-tier is-featured">STANDARD · RECOMMENDED</div>
-              <h4 class="report-card-name">AI 가시성 진단 보고서</h4>
-              <p class="report-card-desc">
-                4대 LLM에서의 인용 빈도 · SOV · 인텐트 매칭률 · 콘텐츠 의도 갭을 종합한 진단 리포트입니다.
-              </p>
-              <button class="report-card-cta" type="button">샘플 보고서 보기 →</button>
-            </div>
-          </div>
+          <article class="report-card tier-standard">
+            <span class="report-card-ribbon">RECOMMENDED</span>
+            <div class="report-card-num">02</div>
+            <div class="report-card-tier">STANDARD</div>
+            <h4 class="report-card-name">AI 가시성<br>진단 보고서</h4>
+            <p class="report-card-desc">
+              4대 LLM 실측 응답 · 인용 출처 · 6가지 인사이트와 즉시 적용 가능한 수정 코드까지.
+            </p>
+            <ul class="report-card-feats">
+              <li>4개 AI 엔진 실측 응답 수집</li>
+              <li>인용 출처 · SOV 분석</li>
+              <li>즉시 적용 가능한 수정 코드</li>
+            </ul>
+            <button class="report-card-cta" type="button" data-report="standard">샘플 보고서 보기</button>
+          </article>
 
           <!-- PREMIUM — 경쟁 인텔리전스 보고서 -->
-          <div class="report-card">
-            <div class="report-card-image">
-              <span class="report-card-image-label">Report Preview · PREMIUM</span>
-              <!-- <img src="images/report-premium.png" alt="경쟁 인텔리전스 보고서 예시" /> -->
-            </div>
-            <div class="report-card-body">
-              <div class="report-card-tier">PREMIUM</div>
-              <h4 class="report-card-name">경쟁 인텔리전스 보고서</h4>
-              <p class="report-card-desc">
-                경쟁사 3개 대비 SOV · 스키마 구조 · AI 답변 점유율을 비교 분석한 심층 리포트입니다.
-              </p>
-              <button class="report-card-cta" type="button">샘플 보고서 보기 →</button>
-            </div>
-          </div>
+          <article class="report-card tier-premium">
+            <div class="report-card-num">03</div>
+            <div class="report-card-tier">PREMIUM</div>
+            <h4 class="report-card-name">경쟁 인텔리전스<br>보고서</h4>
+            <p class="report-card-desc">
+              경쟁사 3사 비교 · SOV · 컨설턴트 인사이트 · 30·90·180일 단계별 로드맵.
+            </p>
+            <ul class="report-card-feats">
+              <li>경쟁사 3사 동일 프레임 진단</li>
+              <li>GEO 컨설턴트 직접 인사이트</li>
+              <li>30 · 90 · 180일 단계별 로드맵</li>
+            </ul>
+            <button class="report-card-cta" type="button" data-report="premium">샘플 보고서 보기</button>
+          </article>
 
         </div>
       </div>
@@ -6471,6 +6645,23 @@
         </div>
         <div class="tier-modal-foot">
           <a href="#" class="btn btn-primary" data-close data-open-inquiry>10분 무료 진단 신청 →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── REPORT PREVIEW MODAL — full-screen iframe of sample report ─── -->
+    <div class="report-modal" id="report-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="report-modal-tag">
+      <div class="report-modal-backdrop" data-close></div>
+      <div class="report-modal-panel" role="document">
+        <div class="report-modal-head">
+          <span class="report-modal-tag" id="report-modal-tag">REPORT · LITE</span>
+          <div class="report-modal-actions">
+            <a class="report-modal-action" id="report-modal-open" href="#" target="_blank" rel="noopener">새 창에서 열기 ↗</a>
+            <button class="report-modal-action is-close" type="button" data-close aria-label="닫기">✕ 닫기</button>
+          </div>
+        </div>
+        <div class="report-modal-body">
+          <iframe id="report-modal-iframe" src="about:blank" title="샘플 보고서"></iframe>
         </div>
       </div>
     </div>
@@ -7235,6 +7426,62 @@
             e.preventDefault();
             closeModal();
           }
+        });
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false') closeModal();
+      });
+    })();
+
+    /* ───────────────────────────────────────────────────────────
+       REPORT PREVIEW MODAL — full-screen iframe of sample report
+       Triggered by buttons carrying [data-report="lite|standard|premium"].
+       Also fades in iframe previews inside report cards once loaded.
+       ─────────────────────────────────────────────────────────── */
+    (function () {
+      const modal = document.getElementById('report-modal');
+      if (!modal) return;
+      const frame = document.getElementById('report-modal-iframe');
+      const tag = document.getElementById('report-modal-tag');
+      const openInNewTab = document.getElementById('report-modal-open');
+
+      const REPORTS = {
+        lite:     { src: '리포트/LWT_GEO_Lite_Report.html',     label: 'REPORT · LITE' },
+        standard: { src: '리포트/LWT_GEO_Standard_Report.html', label: 'REPORT · STANDARD' },
+        premium:  { src: '리포트/LWT_GEO_Premium_Report.html',  label: 'REPORT · PREMIUM' }
+      };
+
+      const openModal = (key) => {
+        const r = REPORTS[key];
+        if (!r) return;
+        frame.src = r.src;
+        tag.textContent = r.label;
+        if (openInNewTab) openInNewTab.href = r.src;
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        document.body.classList.add('overlay-open');
+        const closeBtn = modal.querySelector('.report-modal-action.is-close');
+        closeBtn && closeBtn.focus();
+      };
+
+      const closeModal = () => {
+        modal.setAttribute('aria-hidden', 'true');
+        // Reset iframe to stop any audio/video and free memory
+        if (frame) frame.src = 'about:blank';
+        document.body.style.overflow = '';
+        if (!document.querySelector('.tier-modal[aria-hidden="false"], .inquiry-modal[aria-hidden="false"], .mobile-menu.open')) {
+          document.body.classList.remove('overlay-open');
+        }
+      };
+
+      document.querySelectorAll('[data-report]').forEach(btn => {
+        btn.addEventListener('click', () => openModal(btn.getAttribute('data-report')));
+      });
+      modal.querySelectorAll('[data-close]').forEach(el => {
+        el.addEventListener('click', (e) => {
+          if (el.tagName === 'A' && el.getAttribute('href')) return;
+          e.preventDefault();
+          closeModal();
         });
       });
       document.addEventListener('keydown', (e) => {

@@ -1,0 +1,4611 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>○○○쇼핑몰 · GEO 진단 보고서 (PREMIUM)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.4/packages/wanted-sans/fonts/webfontvariable/variable/WantedSansVariable.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;700;900&family=Red+Hat+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* 베이스 톤 */
+    --bg: #FFFFFF;
+    --bg-soft: #EFEFEF;
+    --bg-card: #FFFFFF;
+    --line: #E4E4E4;
+    --line-2: #F0F0F0;
+    --line-strong: #000000;
+
+    /* 텍스트 */
+    --text: #000000;
+    --text-2: #333333;
+    --text-3: #555555;
+    --text-4: #999999;
+
+    /* 포인트 */
+    --navy: #000000;
+    --navy-2: #1A1A1A;
+    --navy-soft: #F5F5F5;
+    --red: #dc2626;
+    --red-soft: #fef2f2;
+    --red-2: #b91c1c;
+
+    /* 보조 */
+    --amber: #b45309;
+    --amber-soft: #fef3c7;
+    --green: #047857;
+    --green-soft: #d1fae5;
+
+    /* 코드 */
+    --code-bg: #090909;
+    --code-bg-2: #1A1A1A;
+    --code-border: #333333;
+    --code-text: #e8eaf0;
+    --code-cmt: #7c8497;
+    --code-tag: #8ab4f8;
+    --code-attr: #f7c873;
+    --code-str: #b5e87a;
+    --code-prop: #87d3ff;
+    --code-val: #f08c8c;
+    --code-kw: #d9a3ff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Wanted Sans Variable', 'Wanted Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 400;
+    line-height: 1.7;
+    font-size: 14.5px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ============ 모노/세리프 유틸 ============ */
+  .mono { font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-feature-settings: "tnum"; }
+  .serif { font-family: 'Wanted Sans Variable', 'Wanted Sans', -apple-system, BlinkMacSystemFont, sans-serif; }
+  .num { font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-feature-settings: "tnum"; }
+
+  /* ============ STICKY HEADER ============ */
+  .report-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+    padding: 0 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+  .header-brand {
+    display: flex; align-items: center; gap: 14px;
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: var(--text-3);
+    text-transform: uppercase;
+  }
+  .header-brand .mars {
+    color: var(--red);
+    font-weight: 500;
+  }
+  .header-brand .sep {
+    color: var(--text-4);
+  }
+  .header-nav {
+    display: flex; gap: 24px;
+  }
+  .header-nav a {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--text-3);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color .18s ease;
+    padding: 4px 0;
+  }
+  .header-nav a:hover { color: var(--navy); }
+  .header-badge {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    color: #fff;
+    background: var(--navy);
+    padding: 4px 11px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  /* STANDARD 전용 — PREMIUM 업셀 박스 */
+  .upsell-box {
+    margin-top: 40px;
+    padding: 36px 40px;
+    background: linear-gradient(135deg, var(--navy) 0%, #2a3658 100%);
+    border-radius: 8px;
+    color: #fff;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 32px;
+    align-items: center;
+  }
+  .upsell-label {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10.5px;
+    color: #ff7a8b;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+  .upsell-title {
+    font-family: 'Wanted Sans Variable', 'Wanted Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 22px;
+    color: #fff;
+    line-height: 1.45;
+    font-weight: 700;
+    margin-bottom: 12px;
+    letter-spacing: -0.015em;
+  }
+  .upsell-title em {
+    color: #ff7a8b;
+    font-style: normal;
+    font-weight: 900;
+  }
+  .upsell-body {
+    font-size: 13.5px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.8;
+    max-width: 640px;
+  }
+  .upsell-body strong { color: #fff; font-weight: 500; }
+  .upsell-right { text-align: right; }
+  .upsell-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #fff;
+    color: var(--navy);
+    padding: 14px 26px;
+    border-radius: 4px;
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+  .upsell-cta .price { color: var(--red); font-weight: 700; }
+  .upsell-tier-line {
+    margin-top: 14px;
+    display: flex;
+    gap: 6px;
+    justify-content: flex-end;
+  }
+  .upsell-tier {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px;
+    padding: 3px 9px;
+    border-radius: 2px;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+    background: rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.7);
+  }
+  .upsell-tier.active { background: var(--red); color: #fff; }
+
+  /* ============ HERO ============ */
+  .hero {
+    padding: 80px 48px 64px;
+    border-bottom: 1px solid var(--line);
+    background: linear-gradient(180deg, #EFEFEF 0%, #FFFFFF 100%);
+  }
+  .hero-inner {
+    max-width: 1320px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 64px;
+    align-items: end;
+  }
+  .hero-meta {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    color: var(--text-3);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .hero-meta .dot { color: var(--red); margin: 0 8px; }
+  .hero-title {
+    font-family: 'Wanted Sans Variable', 'Wanted Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 44px;
+    line-height: 1.25;
+    color: var(--navy);
+    margin-bottom: 20px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .hero-title em {
+    color: var(--red);
+    font-style: normal;
+    font-weight: 900;
+  }
+  .hero-sub {
+    font-size: 15px;
+    color: var(--text-2);
+    line-height: 1.85;
+    max-width: 540px;
+    font-weight: 400;
+  }
+  .hero-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .stat-cell {
+    background: #fff;
+    padding: 26px 24px;
+  }
+  .stat-label {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px;
+    color: var(--text-3);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .stat-value {
+    font-family: 'Wanted Sans Variable', 'Wanted Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 40px;
+    line-height: 1;
+    color: var(--navy);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .stat-value .unit {
+    font-size: 16px;
+    color: var(--text-3);
+    margin-left: 2px;
+    font-family: 'Wanted Sans Variable', 'Wanted Sans', sans-serif;
+    font-weight: 400;
+  }
+  .stat-value.red { color: var(--red); }
+  .stat-value.amber { color: var(--amber); }
+  .stat-value.navy { color: var(--navy); }
+  .stat-value.green { color: var(--green); }
+  .stat-desc {
+    font-size: 12px;
+    color: var(--text-3);
+    margin-top: 8px;
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    letter-spacing: 0.04em;
+  }
+
+  /* ============ TOC ============ */
+  .toc {
+    padding: 26px 48px;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+    background: var(--bg-soft);
+  }
+  .toc-inner {
+    max-width: 1320px;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .toc-label {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px;
+    color: var(--text-3);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-right: 14px;
+    font-weight: 500;
+  }
+  .toc-item {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    color: var(--text-2);
+    text-decoration: none;
+    padding: 6px 12px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    transition: all .15s ease;
+    letter-spacing: 0.04em;
+  }
+  .toc-item:hover {
+    border-color: var(--navy);
+    color: var(--navy);
+  }
+
+  /* ============ SECTION ============ */
+  .section {
+    padding: 72px 48px;
+    border-bottom: 1px solid var(--line);
+  }
+  .section-inner {
+    max-width: 1320px;
+    margin: 0 auto;
+  }
+  .section-header {
+    margin-bottom: 44px;
+  }
+  .section-num {
+    display: inline-block;
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    color: var(--red);
+    letter-spacing: 0.18em;
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+  .section-title {
+    font-family: 'Wanted Sans Variable', 'Wanted Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 30px;
+    color: var(--navy);
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+  .section-lead {
+    font-size: 14.5px;
+    color: var(--text-2);
+    line-height: 1.85;
+    max-width: 820px;
+  }
+
+  /* ============ NOTICE ============ */
+  .notice {
+    padding: 16px 22px;
+    background: var(--navy-soft);
+    border-left: 3px solid var(--navy);
+    border-radius: 2px;
+    font-size: 13px;
+    color: var(--text-2);
+    margin-bottom: 32px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    line-height: 1.7;
+  }
+  .notice.notice-red {
+    background: var(--red-soft);
+    border-left-color: var(--red);
+  }
+  .notice.notice-amber {
+    background: var(--amber-soft);
+    border-left-color: var(--amber);
+  }
+  .notice-icon {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px;
+    color: var(--navy);
+    letter-spacing: 0.12em;
+    font-weight: 500;
+    flex-shrink: 0;
+    padding-top: 2px;
+    min-width: 40px;
+  }
+  .notice.notice-red .notice-icon { color: var(--red); }
+  .notice.notice-amber .notice-icon { color: var(--amber); }
+
+  /* ============ FRAME GRID (측정 개요) ============ */
+  .frame-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+  .frame-cell {
+    background: #fff;
+    padding: 22px 22px;
+  }
+  .frame-label {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px;
+    color: var(--text-3);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .frame-val {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.65;
+    font-weight: 500;
+  }
+  .frame-val .sub {
+    display: block;
+    font-size: 12px;
+    color: var(--text-3);
+    font-weight: 400;
+    margin-top: 4px;
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  .frame-val .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 8px;
+  }
+  .type-tag {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px;
+    padding: 3px 9px;
+    background: var(--navy-soft);
+    border: 1px solid transparent;
+    border-radius: 2px;
+    color: var(--navy);
+    letter-spacing: 0.04em;
+    font-weight: 500;
+  }
+
+  /* ============ QUESTION TYPE CARDS ============ */
+  .qtype-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-top: 32px;
+  }
+  .qtype-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 20px 22px;
+  }
+  .qtype-name {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    color: var(--red);
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .qtype-title {
+    font-family: 'Wanted Sans Variable', 'Wanted Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 16px;
+    color: var(--navy);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .qtype-desc {
+    font-size: 12.5px;
+    color: var(--text-2);
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+  .qtype-example {
+    padding: 10px 12px;
+    background: var(--bg-soft);
+    border-radius: 3px;
+    font-size: 12px;
+    color: var(--text-2);
+    line-height: 1.6;
+    font-style: italic;
+    border-left: 2px solid var(--line-strong);
+  }
+  .qtype-example::before {
+    content: '예: ';
+    font-style: normal;
+    color: var(--text-3);
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+  }
+</style>
+
+<!-- ============ ETribe AI Service Brand Override v3 (PDF spec aligned) ============ -->
+<style>
+  :root {
+    --canvas: #FFFFFF;
+    --ink: #000000;
+    --primary: #DDF300;
+    --primary-active: #C5D900;
+    --primary-soft: rgba(221, 243, 0, 0.15);
+    --primary-deep: #B8CC00;
+    --surface-soft: #EFEFEF;
+    --surface-lime: #DDF300;
+    --surface-ink: #000000;
+    --line-hard: #000000;
+    --line-soft: #E4E4E4;
+    --text-ink: #000000;
+    --text-body: #333333;
+    --text-muted: #555555;
+    --text-on-lime: #000000;
+    --text-on-ink: #FFFFFF;
+    --lime: #DDF300;
+    --font-kr: 'Wanted Sans Variable', 'Wanted Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-en: 'Red Hat Display', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  body {
+    font-family: var(--font-kr);
+    font-feature-settings: "tnum";
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--text-body);
+  }
+  h1, h2, h3, h4, p, blockquote,
+  .hero-title, .section-title, .insight-title, .qlog-q, .priority-title {
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+  .hero-title, .section-title, .insight-title { text-wrap: balance; }
+  ::selection { background: var(--primary); color: #000; }
+
+  /* ============ ETRIBE CORPORATE STRIP ============ */
+  .etribe-strip {
+    background: #000;
+    color: #fff;
+    font-family: var(--font-en);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border-bottom: 1px solid #1a1a1a;
+  }
+  .etribe-strip-inner {
+    max-width: 1320px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 10px 48px;
+    align-items: center;
+  }
+  .etribe-strip-inner .es-1 { color: var(--primary); font-weight: 700; }
+  .etribe-strip-inner .es-2 { text-align: center; color: #aaa; }
+  .etribe-strip-inner .es-3 { text-align: center; color: #aaa; }
+  .etribe-strip-inner .es-4 { text-align: right; color: var(--primary); }
+  .etribe-strip-inner .es-4::before { content: attr(data-tier); }
+
+  /* ============ TYPOGRAPHY SCALE (PDF spec) ============ */
+  /* Display 64 / 128% / Bold */
+  .hero-title {
+    font-family: var(--font-kr);
+    font-weight: 700;
+    font-size: clamp(40px, 5vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    color: var(--ink) !important;
+  }
+  /* H1 56 / 128% / Bold — used for major section openers if any */
+  /* H2 40 / 148% / Medium — section-title */
+  .section-title {
+    font-weight: 500;
+    font-size: clamp(28px, 3.2vw, 40px);
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  /* H3 28 / 148% / Regular — insight-title, priority-title etc */
+  .insight-title, .priority-title, .qlog-q, .subsection-title,
+  .roadmap-phase-title, .keypoint-title, .consultant-name, .qtype-title {
+    font-weight: 700;
+    font-size: clamp(20px, 1.6vw, 24px);
+    line-height: 1.4;
+    letter-spacing: -0.005em;
+    color: var(--ink);
+  }
+  .consultant-pullquote {
+    font-family: var(--font-kr);
+    font-weight: 500;
+    font-size: clamp(22px, 2vw, 28px);
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  /* Body S/Label 14 / 148% / Medium */
+  .frame-label, .stat-label, .section-num, .toc-label,
+  .insight-num, .insight-col-label, .score-cat, .score-detail-head,
+  .qlog-id, .citation-donut-title, .citation-side-label,
+  .domain-block-title, .sov-engine, .sov-section-title,
+  .roadmap-phase-marker, .priority-impact-label, .qlog-engine-name,
+  .keypoint-num, .consultant-role, .qtype-name, .insight-index-title,
+  .gantt-head, .header-brand, .header-nav a, .toc-item,
+  .footer-brand, .footer-meta {
+    font-family: var(--font-en);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    line-height: 1.4;
+  }
+
+  /* ============ HERO — LIME canvas ============ */
+  .hero {
+    background: var(--primary) !important;
+    border-bottom: 1px solid #000;
+  }
+  .hero-meta {
+    color: var(--ink);
+    font-family: var(--font-en);
+    letter-spacing: 0.18em;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-meta::before {
+    content: "";
+    display: inline-block;
+    width: 32px; height: 1px;
+    background: var(--ink);
+  }
+  .hero-meta .dot { color: var(--ink); }
+  .hero-title em {
+    background: #fff !important;
+    color: #000 !important;
+    padding: 0 16px 4px !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    font-weight: 900;
+    font-style: normal;
+  }
+  .hero-sub { color: #1a1a1a !important; font-weight: 500; }
+
+  .hero-stats { border-radius: 0 !important; border: 1px solid #000; background: #000; }
+  .hero-stats .stat-cell { border-radius: 0 !important; }
+
+  /* ============ SHARP CORNERS ============ */
+  .frame-grid, .frame-cell,
+  .score-grid, .score-card,
+  .qtype-card, .qtype-example,
+  .insight-block, .insight-head, .insight-body, .insight-row, .insight-col, .insight-explain,
+  .code-block, .code-header,
+  .citation-donut, .citation-side,
+  .sov-grid, .sov-cell, .sov-cat-row, .sov-cat-track, .sov-track, .sov-fill,
+  .priority-item, .priority-impact,
+  .consultant-block,
+  .keypoint-card,
+  .roadmap-track-wrap, .roadmap-phases, .roadmap-phase, .roadmap-phase-goal,
+  .kpi-projection,
+  .geo-total,
+  .insight-index,
+  .comp-table,
+  .qlog, .qlog-engine,
+  .notice,
+  .toc, .toc-item,
+  .type-tag, .insight-chip, .engine-pill, .own-tag, .score-pill, .meta-tag,
+  .qlog-id .qtype,
+  .header-badge,
+  .geo-grade,
+  .gantt-bar, .gantt-row-track {
+    border-radius: 0 !important;
+  }
+  .consultant-avatar { border-radius: 50% !important; }
+
+  /* ============ LOGO LOCKUP — eTribe wordmark ============ */
+  .header-brand {
+    font-family: var(--font-en);
+    letter-spacing: 0.14em;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .header-brand .mars {
+    background: #000;
+    color: var(--primary);
+    padding: 6px 12px;
+    letter-spacing: 0.18em;
+    font-weight: 900;
+    font-family: var(--font-en);
+    font-size: 13px;
+  }
+  .header-badge {
+    background: transparent !important;
+    border: 1px solid #000 !important;
+    color: #000 !important;
+    font-family: var(--font-en);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 6px 14px;
+    font-size: 12px;
+  }
+  .header-nav a { letter-spacing: 0.12em; font-weight: 500; }
+
+  /* ============ SECTION EYEBROW ============ */
+  .section-num {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 12px !important;
+    background: transparent !important;
+    color: var(--ink) !important;
+    padding: 0 !important;
+    text-transform: uppercase;
+    margin-bottom: 20px !important;
+  }
+  .section-num::before {
+    content: "";
+    width: 24px; height: 1px;
+    background: var(--ink);
+    flex-shrink: 0;
+  }
+
+  /* ============ SECTION SPACING — 8 base ============ */
+  .section { padding: 96px 48px; border-bottom: 1px solid var(--line-soft); }
+  .section-header { margin-bottom: 48px; }
+
+  /* ============ GEO TOTAL — LIME COLOR BLOCK ============ */
+  .geo-total {
+    background: var(--primary) !important;
+    color: var(--ink) !important;
+    padding: 56px 48px !important;
+    border: 1px solid #000 !important;
+    display: grid !important;
+    grid-template-columns: 320px 1fr !important;
+    gap: 48px !important;
+  }
+  .geo-total-score {
+    color: var(--ink) !important;
+    font-family: var(--font-en) !important;
+    font-weight: 700 !important;
+    font-size: clamp(80px, 9vw, 128px) !important;
+    line-height: 0.9 !important;
+    letter-spacing: -0.04em !important;
+  }
+  .geo-total-score .out-of {
+    color: rgba(0,0,0,0.55) !important;
+    font-family: var(--font-en) !important;
+    font-weight: 500 !important;
+  }
+  .geo-total-info { border-left-color: rgba(0,0,0,0.18) !important; }
+  .geo-grade {
+    background: #000 !important;
+    color: var(--primary) !important;
+    font-family: var(--font-en);
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    padding: 6px 14px;
+    display: inline-block;
+  }
+  .geo-total-desc { color: rgba(0,0,0,0.85) !important; }
+  .geo-total-desc strong { color: #000 !important; }
+  .geo-total-summary { border-top-color: rgba(0,0,0,0.18) !important; }
+  .geo-total-summary .item-label { color: rgba(0,0,0,0.55) !important; }
+  .geo-total-summary .item-val { color: #000 !important; font-family: var(--font-en); font-weight: 700; }
+
+  /* ============ STAT/SCORE numbers — Display Bold + lime underline ============ */
+  .stat-value, .score-num, .roadmap-phase-day {
+    font-family: var(--font-en);
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+  .stat-cell .stat-value {
+    position: relative; display: inline-block;
+    font-size: clamp(40px, 4vw, 56px);
+    line-height: 0.95;
+  }
+  .score-card .score-num {
+    position: relative; display: inline-block;
+    font-size: clamp(36px, 3.6vw, 48px);
+    line-height: 0.95;
+  }
+  .stat-cell .stat-value::after,
+  .score-card .score-num::after {
+    content: "";
+    position: absolute;
+    left: 0; bottom: -10px;
+    width: 32px; height: 4px;
+    background: var(--primary);
+  }
+  .stat-value.red, .score-num.low { color: #000 !important; }
+  .stat-value.red::after, .score-num.low::after { background: #dc2626; }
+  .stat-value .unit { font-family: var(--font-kr); font-size: 0.45em; font-weight: 500; margin-left: 6px; }
+
+  /* ============ CITATION SIDE — Black block ============ */
+  .citation-side { background: #000 !important; }
+  .citation-side-headline em { color: var(--primary) !important; }
+  .citation-bar-fill.own { background: var(--primary); color: #000; }
+  .citation-bar-fill.authority { background: #555; }
+  .citation-bar-fill.other { background: #dc2626; }
+  .own-tag.own { background: var(--primary); color: #000; }
+
+  /* ============ CHIPS / TAGS ============ */
+  .insight-chip { font-family: var(--font-en); letter-spacing: 0.08em; font-size: 11px; font-weight: 700; padding: 4px 10px; }
+  .chip-critical { background: #dc2626; color: #fff; }
+  .chip-high { background: var(--primary); color: #000; }
+  .chip-mid { background: var(--surface-soft); color: #000; }
+  .type-tag {
+    background: transparent;
+    border: 1px solid #000;
+    color: #000;
+    font-family: var(--font-en);
+    letter-spacing: 0.08em;
+    font-weight: 500;
+    padding: 4px 10px;
+  }
+
+  /* ============ QLOG ============ */
+  .qlog-id { color: #000; }
+  .qlog-id .qtype { background: #000; color: var(--primary); padding: 3px 8px; font-family: var(--font-en); }
+  .qlog-q { font-family: var(--font-kr); }
+
+  /* ============ TOC ============ */
+  .toc { background: var(--surface-soft); border-bottom: 1px solid #000; }
+  .toc-item {
+    border: 1px solid #000; background: transparent;
+    font-family: var(--font-en); letter-spacing: 0.08em; font-weight: 500;
+    padding: 6px 12px;
+  }
+  .toc-item:hover { background: #000; color: #fff; }
+
+  /* ============ PILLS / score ============ */
+  .score-pill {
+    font-family: var(--font-en); border: 1px solid #000;
+    background: transparent; color: #000; padding: 5px 11px;
+    font-weight: 700; letter-spacing: 0.06em;
+  }
+  .pill-f { background: #000; color: var(--primary); border-color: #000; }
+  .pill-d { background: var(--primary); color: #000; border-color: #000; }
+  .pill-c { background: transparent; color: #000; border-color: #000; }
+  .pill-b { background: #000; color: #fff; border-color: #000; }
+
+  /* ============ PRIORITY LIST — lime accent r1 ============ */
+  .priority-item { border-left-width: 4px; }
+  .priority-item.r1 {
+    border-left-color: var(--primary) !important;
+    background: var(--primary-soft);
+  }
+  .priority-item.r1 .priority-rank,
+  .priority-item.r2 .priority-rank,
+  .priority-item.r3 .priority-rank { color: #000 !important; font-family: var(--font-en); font-weight: 900; }
+
+  /* ============ NOTICES ============ */
+  .notice.notice-amber { border-left-color: var(--primary); background: var(--primary-soft); }
+
+  /* ============ CODE BLOCK — Dark with lime accents ============ */
+  .code-block { background: #090909; border-color: #1a1a1a; }
+  .code-header { background: #111; border-bottom-color: #1a1a1a; }
+  .code-tab.active { border-bottom-color: var(--primary); }
+  .code-prop, .code-attr { color: var(--primary); }
+  .code-lang { border-color: #333; }
+
+  /* ============ ROADMAP ============ */
+  .roadmap-phase-day { color: #000 !important; }
+  .roadmap-phase.p1 .roadmap-phase-goal { border-left-color: #000 !important; background: var(--primary-soft); }
+  .roadmap-phase.p2 .roadmap-phase-goal { border-left-color: var(--primary) !important; }
+  .roadmap-phase.p3 .roadmap-phase-goal { border-left-color: #000 !important; }
+  .gantt-bar.b-build   { background: #000; }
+  .gantt-bar.b-verify  { background: var(--primary); color: #000 !important; }
+  .gantt-bar.b-content { background: #555; }
+  .gantt-bar.b-monitor { background: var(--primary); color: #000 !important; }
+
+  /* ============ SOV bars ============ */
+  .sov-fill.self { background: #000; }
+  .sov-fill.other { background: var(--primary); opacity: 1; }
+  .sov-fill.dim { background: #ccc; }
+  .sov-cat-seg.self { background: #000; }
+  .sov-cat-seg.c1 { background: var(--primary); color: #000 !important; }
+  .sov-cat-seg.c2 { background: #777; }
+  .sov-cat-seg.c3 { background: #bbb; }
+  .sov-cat-rank { font-family: var(--font-en); color: #000 !important; font-weight: 900; }
+
+  /* ============ CONSULTANT block — Soft surface ============ */
+  .consultant-block { background: var(--surface-soft); border: 1px solid var(--line-soft); }
+  .consultant-pullquote { border-left-color: #000; }
+  .consultant-pullquote em { color: #000; background: var(--primary); padding: 0 8px; font-style: normal; }
+  .keypoint-card { border-top: 3px solid #000; background: #fff; }
+  .keypoint-card.n2 { border-top-color: var(--primary); }
+  .keypoint-card.n3 { border-top-color: #555; }
+
+  /* ============ FOOTER — Black band ============ */
+  .report-footer {
+    border-top: 2px solid #000;
+    background: #000;
+    color: #fff;
+    padding: 56px 48px;
+  }
+  .report-footer .footer-brand { color: #fff; }
+  .report-footer .footer-brand .mars { background: var(--primary); color: #000; }
+  .report-footer .footer-brand .sep { color: #555; }
+  .report-footer .footer-meta { color: #888; }
+  .report-footer .footer-disclaimer { color: #999; border-top-color: #333; }
+
+  /* ============ Reduced motion ============ */
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+
+  /* =================================================================
+     v4 — AI Service Design Guide deepening (Header / Hero / CTA)
+     Lime + Black colour-block, bold display, 8px-base spacing
+     ================================================================= */
+
+  .etribe-strip { padding: 0; }
+  .etribe-strip-inner {
+    grid-template-columns: auto 1fr auto;
+    gap: 24px;
+    padding: 12px 48px;
+    align-items: center;
+  }
+  .etribe-strip-inner .es-1 {
+    background: var(--primary);
+    color: #000;
+    padding: 4px 10px;
+    font-weight: 900;
+    letter-spacing: 0.2em;
+  }
+  .etribe-strip-inner .es-2 { display: none; }
+  .etribe-strip-inner .es-3 { text-align: left; color: #fff; letter-spacing: 0.18em; }
+  .etribe-strip-inner .es-4 { text-align: right; color: var(--primary); font-weight: 700; }
+  .etribe-strip-inner .es-4::after {
+    content: ""; display: inline-block; width: 24px; height: 1px;
+    background: var(--primary); margin-left: 12px; vertical-align: middle;
+  }
+
+  .report-header {
+    background: #fff !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border-bottom: 1px solid #000 !important;
+    height: 64px;
+    padding: 0 48px;
+  }
+  .header-brand { color: #000; font-weight: 500; font-size: 12px; }
+  .header-brand .mars {
+    font-family: var(--font-en);
+    background: #000;
+    color: var(--primary);
+    padding: 6px 12px;
+    letter-spacing: 0.2em;
+    font-weight: 900;
+    font-size: 12px;
+  }
+  .header-brand .sep { color: #ccc; margin: 0 4px; }
+  .header-nav a {
+    color: #000;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    padding: 6px 0;
+    border-bottom: 2px solid transparent;
+    transition: border-color .15s ease;
+  }
+  .header-nav a:hover { border-bottom-color: var(--primary); color: #000; }
+
+  .hero { padding: 96px 48px 80px; }
+  .hero-inner { grid-template-columns: 1.15fr 1fr; gap: 80px; }
+  .hero-meta { margin-bottom: 32px; font-size: 12px; font-weight: 700; }
+  .hero-title {
+    margin-bottom: 32px;
+    font-size: clamp(44px, 5.4vw, 72px) !important;
+    line-height: 1.02 !important;
+    letter-spacing: -0.03em !important;
+  }
+  .hero-title em {
+    display: inline-block;
+    background: #000 !important;
+    color: var(--primary) !important;
+    padding: 2px 18px 6px !important;
+    font-weight: 900;
+    line-height: 1;
+    margin-top: 8px;
+  }
+  .hero-sub {
+    max-width: 560px;
+    font-size: 16px !important;
+    line-height: 1.75 !important;
+    color: #0d0d0d !important;
+  }
+  .hero-stats {
+    border: 2px solid #000 !important;
+    background: #000 !important;
+    gap: 2px !important;
+  }
+  .hero-stats .stat-cell { background: #fff !important; padding: 32px 28px !important; }
+  .hero-stats .stat-label { color: #555 !important; letter-spacing: 0.16em !important; font-size: 11px !important; }
+  .hero-stats .stat-value { font-size: clamp(44px, 4.4vw, 64px) !important; line-height: 1 !important; }
+  .hero-stats .stat-desc { margin-top: 16px !important; color: #555; }
+  .hero-stats .stat-cell[style*="LOCKED"] { background: #000 !important; }
+  .hero-stats .stat-cell[style*="LOCKED"] .stat-label,
+  .hero-stats .stat-cell[style*="LOCKED"] .stat-value,
+  .hero-stats .stat-cell[style*="LOCKED"] .stat-desc { color: var(--primary) !important; }
+  .hero-stats .stat-cell[style*="LOCKED"] .stat-value::after { background: var(--primary) !important; }
+
+  .toc { padding: 20px 48px; }
+  .toc-label { color: #000; font-weight: 700; letter-spacing: 0.18em; }
+
+  .section-num { font-size: 12px !important; font-weight: 700 !important; letter-spacing: 0.18em !important; }
+  .section-title {
+    font-size: clamp(32px, 3.6vw, 48px) !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.02em !important;
+    line-height: 1.15 !important;
+    margin-bottom: 16px !important;
+  }
+  .section-lead { font-size: 16px; line-height: 1.85; color: #333; max-width: 880px; }
+
+  .upsell-box {
+    background: var(--primary) !important;
+    color: #000 !important;
+    border: 2px solid #000 !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    grid-template-columns: 1.4fr 1fr !important;
+    gap: 0 !important;
+    margin-top: 64px !important;
+    overflow: hidden;
+  }
+  .upsell-box-left, .upsell-box > div:first-child {
+    padding: 56px 56px 48px !important;
+    border-right: 2px solid #000;
+  }
+  .upsell-label {
+    font-family: var(--font-en) !important;
+    color: #000 !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.2em !important;
+    margin-bottom: 24px !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .upsell-label::before { content: ""; width: 24px; height: 1px; background: #000; }
+  .upsell-title {
+    font-family: var(--font-kr) !important;
+    color: #000 !important;
+    font-size: clamp(28px, 2.6vw, 38px) !important;
+    line-height: 1.2 !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.02em !important;
+    margin-bottom: 24px !important;
+  }
+  .upsell-title em {
+    background: #000 !important;
+    color: var(--primary) !important;
+    font-style: normal !important;
+    font-weight: 900 !important;
+    padding: 2px 12px 4px !important;
+    display: inline-block;
+  }
+  .upsell-body {
+    color: #1a1a1a !important;
+    font-size: 15px !important;
+    line-height: 1.85 !important;
+    max-width: none !important;
+  }
+  .upsell-body strong { color: #000 !important; font-weight: 700; }
+  .upsell-right {
+    background: #000;
+    color: #fff;
+    padding: 56px 48px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    text-align: left !important;
+  }
+  .upsell-cta {
+    background: var(--primary) !important;
+    color: #000 !important;
+    border-radius: 0 !important;
+    padding: 22px 28px !important;
+    font-family: var(--font-en) !important;
+    font-size: 14px !important;
+    font-weight: 900 !important;
+    letter-spacing: 0.18em !important;
+    text-decoration: none !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .upsell-cta::after { content: "→"; font-size: 22px; font-weight: 700; transform: translateY(-1px); }
+  .upsell-cta .price {
+    color: #000 !important;
+    font-family: var(--font-kr) !important;
+    font-weight: 900 !important;
+    font-size: 18px !important;
+    letter-spacing: -0.01em !important;
+  }
+  .upsell-tier-line {
+    display: flex !important;
+    gap: 0 !important;
+    margin-top: 32px !important;
+    justify-content: flex-start !important;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    padding-top: 24px;
+  }
+  .upsell-tier {
+    font-family: var(--font-en) !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.16em !important;
+    color: #555 !important;
+    background: transparent !important;
+    border: 0 !important;
+    padding: 0 16px 0 0 !important;
+    border-radius: 0 !important;
+    position: relative;
+  }
+  .upsell-tier + .upsell-tier { padding-left: 16px; }
+  .upsell-tier + .upsell-tier::before { content: "/"; position: absolute; left: 0; color: #333; }
+  .upsell-tier.active { color: var(--primary) !important; background: transparent !important; }
+
+  .locked-section {
+    background: var(--surface-soft) !important;
+    border: 1px solid #000 !important;
+    border-radius: 0 !important;
+    padding: 48px !important;
+    text-align: left !important;
+  }
+  .locked-label {
+    background: #000 !important;
+    color: var(--primary) !important;
+    font-family: var(--font-en) !important;
+    font-weight: 900 !important;
+    letter-spacing: 0.18em !important;
+    padding: 6px 12px !important;
+    border-radius: 0 !important;
+    display: inline-block;
+    margin-bottom: 20px;
+  }
+  .locked-title {
+    font-family: var(--font-kr) !important;
+    font-size: clamp(20px, 1.8vw, 26px) !important;
+    font-weight: 700 !important;
+    color: #000 !important;
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+  .locked-desc { max-width: 720px; margin: 0 !important; color: #333 !important; }
+
+  .report-footer { padding: 64px 48px !important; }
+  .report-footer .footer-brand { font-size: 12px; letter-spacing: 0.16em; }
+  .report-footer .footer-brand .mars {
+    padding: 6px 12px;
+    font-weight: 900;
+    letter-spacing: 0.2em;
+  }
+
+  @media (max-width: 1100px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+  }
+
+  /* =================================================================
+     ETRIBE-STYLED FOOTER — borrowed from etribe.co.kr homepage
+     ================================================================= */
+  .etx-footer { position: relative; margin-top: 0; }
+  .etx-container { max-width: 1800px; margin: 0 auto; padding: 0 48px; }
+
+  .etx-footer-hero {
+    background: var(--primary);
+    color: #000;
+    position: relative;
+    overflow: hidden;
+  }
+  .etx-footer-hero-top { padding: 80px 0 12px; position: relative; }
+  .etx-h-left {
+    font-family: var(--font-en);
+    font-weight: 700;
+    font-size: clamp(60px, 11.4vw, 190px);
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    color: #000;
+  }
+  .etx-footer-socials {
+    position: absolute; bottom: 24px; right: 48px;
+    display: inline-flex; align-items: center; gap: 16px; z-index: 3;
+  }
+  .etx-footer-socials a {
+    width: 36px; height: 36px;
+    display: inline-flex; align-items: center; justify-content: center;
+    color: #000; text-decoration: none;
+    transition: transform .15s ease, opacity .15s ease;
+  }
+  .etx-footer-socials a:hover { transform: translateY(-2px); opacity: .7; }
+  .etx-footer-socials .blog-tag {
+    display: inline-flex; align-items: center; justify-content: center;
+    height: 28px; padding: 0 10px;
+    background: #000; color: var(--primary);
+    font-family: var(--font-en); font-size: 11px; font-weight: 700; letter-spacing: 0.05em;
+  }
+
+  .etx-services-strip { height: 44px; position: relative; z-index: 2; }
+  .etx-services-strip .etx-container { height: 100%; }
+  .etx-services {
+    height: 100%; background: #fff;
+    display: grid; grid-template-columns: repeat(7, 1fr);
+    align-items: center;
+  }
+  .etx-services a {
+    font-family: var(--font-en);
+    font-size: 15px; font-weight: 700;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    color: #000; text-align: center;
+    height: 100%; display: flex; align-items: center; justify-content: center;
+    text-decoration: none;
+    transition: opacity .15s ease, background .15s ease, color .15s ease;
+  }
+  .etx-services a:hover { opacity: .6; }
+  .etx-services a.current { background: #000; color: var(--primary); }
+
+  .etx-footer-hero-bot { padding: 12px 0 60px; }
+  .etx-h-right {
+    font-family: var(--font-en);
+    font-weight: 700;
+    font-size: clamp(60px, 11.4vw, 190px);
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    color: #000;
+    text-align: right;
+  }
+
+  .etx-upsell {
+    padding: 56px 0 8px;
+    border-top: 1px solid rgba(0,0,0,0.15);
+  }
+  .etx-upsell.etx-upsell--solo {
+    padding: 80px 0;
+    border-top: 0;
+  }
+
+  /* TOC label tier badge */
+  .toc-label {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px !important;
+    background: #000 !important;
+    color: var(--primary) !important;
+    font-family: var(--font-en) !important;
+    font-weight: 900 !important;
+    letter-spacing: 0.2em !important;
+    font-size: 12px !important;
+    margin-right: 20px !important;
+  }
+  .toc-label::before {
+    content: "";
+    display: inline-block;
+    width: 8px; height: 8px;
+    background: var(--primary);
+    border-radius: 50%;
+  }
+  .toc-label--lite::before { background: #d0d6e0; }
+  .toc-label--standard::before { background: var(--primary); }
+  .toc-label--premium::before { background: #fff; box-shadow: 0 0 0 2px var(--primary); }
+  .etx-upsell .etx-container {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    gap: 64px;
+    align-items: stretch;
+  }
+  .etx-upsell-label {
+    font-family: var(--font-en);
+    font-size: 12px; font-weight: 700; letter-spacing: 0.2em;
+    color: #000;
+    display: inline-flex; align-items: center; gap: 12px;
+    margin-bottom: 24px;
+  }
+  .etx-upsell-label::before { content: ""; width: 24px; height: 1px; background: #000; }
+  .etx-upsell-title {
+    font-family: var(--font-kr);
+    font-size: clamp(28px, 3vw, 44px);
+    line-height: 1.15; font-weight: 700;
+    letter-spacing: -0.02em; color: #000;
+    margin: 0 0 20px;
+    word-break: keep-all;
+  }
+  .etx-upsell-title em {
+    background: #000; color: var(--primary);
+    font-style: normal; font-weight: 900;
+    padding: 0 14px 4px;
+    display: inline-block;
+    margin-top: 6px;
+  }
+  .etx-upsell-body {
+    color: #1a1a1a;
+    font-size: 15px; line-height: 1.85;
+    margin: 0;
+    max-width: 640px;
+  }
+  .etx-upsell-body strong { font-weight: 700; color: #000; }
+  .etx-upsell-aside {
+    background: #000; color: #fff;
+    padding: 36px 32px;
+    display: flex; flex-direction: column;
+    justify-content: space-between;
+    min-height: 200px;
+  }
+  .etx-upsell-cta {
+    display: flex;
+    align-items: center; justify-content: space-between; gap: 16px;
+    background: var(--primary); color: #000;
+    padding: 22px 28px;
+    font-family: var(--font-en);
+    font-size: 14px; font-weight: 900;
+    letter-spacing: 0.18em;
+    text-decoration: none;
+  }
+  .etx-upsell-cta .price {
+    font-family: var(--font-kr); font-weight: 900;
+    font-size: 18px; letter-spacing: -0.01em;
+  }
+  .etx-upsell-cta::after { content: "→"; font-size: 22px; transform: translateY(-1px); }
+  .etx-tier-line {
+    display: flex; gap: 12px;
+    margin-top: 24px; padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    font-family: var(--font-en);
+    font-size: 11px; font-weight: 700; letter-spacing: 0.16em;
+  }
+  .etx-tier-line .tier { color: #555; }
+  .etx-tier-line .tier.active { color: var(--primary); }
+  .etx-tier-line .sep { color: #333; }
+
+  .etx-band-3 {
+    background: var(--primary);
+    color: #000;
+    padding: 24px 0;
+    border-top: 1px solid rgba(0,0,0,0.08);
+  }
+  .etx-band-3 .etx-container {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 16px;
+  }
+  .etx-copyright {
+    font-family: var(--font-en);
+    font-size: 14px; font-weight: 700; letter-spacing: 0.06em;
+    color: #000;
+    display: inline-flex; align-items: center; gap: 16px;
+  }
+  .etx-mark { display: inline-flex; align-items: center; }
+  .etx-mark svg { height: 22px; width: auto; display: block; }
+  .etx-band-mid {
+    font-family: var(--font-en);
+    font-size: 12px; font-weight: 500; letter-spacing: 0.1em;
+    color: #000;
+    text-align: center;
+  }
+  .etx-email {
+    font-family: var(--font-en);
+    font-size: 13px; font-weight: 700; letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #000;
+    text-align: right;
+    text-decoration: none;
+  }
+  .etx-email:hover { text-decoration: underline; }
+
+  @media (max-width: 900px) {
+    .etx-container { padding: 0 20px; }
+    .etx-footer-hero-top { padding: 40px 0 0; }
+    .etx-footer-hero-bot { padding: 0 0 40px; }
+    .etx-h-left { font-size: clamp(56px, 16vw, 96px); margin-bottom: 6px; }
+    .etx-h-right { text-align: left; font-size: 0; }
+    .etx-h-right .word-core, .etx-h-right .word-suite {
+      display: block;
+      font-size: clamp(56px, 16vw, 96px);
+      font-weight: 700; line-height: 1;
+      letter-spacing: -0.03em; color: #000;
+    }
+    .etx-h-right .word-core { padding-left: 18vw; }
+    .etx-h-right .word-suite { padding-left: 36vw; margin-top: 6px; }
+    .etx-footer-socials { position: static; padding: 20px; justify-content: flex-end; }
+    .etx-services { display: flex; overflow-x: auto; }
+    .etx-services a { padding: 0 24px; flex: 0 0 auto; }
+    .etx-upsell .etx-container { grid-template-columns: 1fr; gap: 32px; }
+    .etx-band-3 .etx-container { grid-template-columns: 1fr; text-align: left; gap: 8px; }
+    .etx-band-mid { text-align: left; }
+    .etx-email { text-align: left; }
+  }
+</style></head>
+<body>
+<!-- ETRIBE corporate strip -->
+<style>
+  /* ============ GEO 종합 점수 ============ */
+  .geo-total {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 36px;
+    align-items: stretch;
+    margin-bottom: 36px;
+    padding: 32px 36px;
+    background: var(--navy);
+    border-radius: 8px;
+    color: #fff;
+  }
+  .geo-total-score {
+    font-family: 'Wanted Sans Variable', 'Wanted Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 100px;
+    line-height: 0.95;
+    color: #fff;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    position: relative;
+  }
+  .geo-total-score .out-of {
+    display: block;
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    margin-top: 12px;
+    line-height: 1;
+  }
+  .geo-total-info {
+    border-left: 1px solid rgba(255,255,255,0.15);
+    padding-left: 36px;
+  }
+  .geo-grade {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12px;
+    color: var(--red);
+    letter-spacing: 0.14em;
+    margin-bottom: 12px;
+    font-weight: 500;
+    background: rgba(200,16,46,0.18);
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 2px;
+  }
+  .geo-total-desc {
+    font-size: 14px;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.85);
+    max-width: 640px;
+    margin-bottom: 16px;
+  }
+  .geo-total-summary {
+    display: flex;
+    gap: 28px;
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+  }
+  .geo-total-summary .item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .geo-total-summary .item-label {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .geo-total-summary .item-val {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 15px;
+    color: #fff;
+    font-weight: 500;
+  }
+
+  .score-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 28px;
+  }
+  .score-card {
+    background: #fff;
+    padding: 22px 22px 20px;
+  }
+  .score-cat {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px;
+    color: var(--text-3);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+  .score-cat .grade {
+    display: inline-block;
+    margin-left: 4px;
+    color: var(--red);
+  }
+  .score-num {
+    font-family: 'Wanted Sans Variable', 'Wanted Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 38px;
+    line-height: 1;
+    color: var(--navy);
+    font-weight: 700;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+  .score-num.low { color: var(--red); }
+  .score-num.mid { color: var(--amber); }
+  .score-num.high { color: var(--green); }
+  .score-num .out { font-size: 14px; color: var(--text-3); font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-weight: 400; }
+
+  .score-bar {
+    height: 4px;
+    background: var(--line-2);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 14px;
+  }
+  .score-fill { height: 100%; border-radius: 2px; }
+  .score-fill.low { background: var(--red); }
+  .score-fill.mid { background: var(--amber); }
+  .score-fill.high { background: var(--green); }
+
+  .score-note {
+    font-size: 11.5px;
+    color: var(--text-2);
+    line-height: 1.6;
+  }
+
+  .score-detail {
+    margin-top: 20px;
+  }
+  .score-detail-head {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    color: var(--text-3);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+  .score-detail-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .score-detail-table th, .score-detail-table td {
+    text-align: left;
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--line-2);
+  }
+  .score-detail-table th {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10.5px;
+    color: var(--text-3);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+    background: var(--bg-soft);
+    border-bottom: 1px solid var(--line);
+  }
+  .score-detail-table td.num {
+    text-align: right;
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    color: var(--navy);
+    font-weight: 500;
+    width: 90px;
+  }
+  .score-detail-table td.num.low { color: var(--red); }
+  .score-detail-table td.cat-head {
+    font-weight: 500;
+    color: var(--navy);
+  }
+  .score-detail-table td.basis {
+    color: var(--text-2);
+    font-size: 12.5px;
+    line-height: 1.6;
+  }
+
+  /* ============ INSIGHT BLOCK ============ */
+  .insight-block {
+    margin-bottom: 56px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+  }
+  .insight-head {
+    padding: 28px 32px 24px;
+    border-bottom: 1px solid var(--line);
+    background: var(--bg-soft);
+  }
+  .insight-tags {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 14px;
+    align-items: center;
+  }
+  .insight-num {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    color: var(--text-3);
+    letter-spacing: 0.14em;
+    font-weight: 500;
+  }
+  .insight-chip {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px;
+    padding: 3px 9px;
+    border-radius: 2px;
+    letter-spacing: 0.06em;
+    font-weight: 500;
+  }
+  .chip-critical { background: var(--red-soft); color: var(--red-2); }
+  .chip-high { background: var(--amber-soft); color: var(--amber); }
+  .chip-mid { background: var(--navy-soft); color: var(--navy); }
+  .insight-title {
+    font-family: 'Wanted Sans Variable', 'Wanted Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 24px;
+    color: var(--navy);
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+    margin-bottom: 10px;
+  }
+  .insight-title em {
+    color: var(--red);
+    font-style: normal;
+    font-weight: 900;
+  }
+  .insight-subtitle {
+    font-size: 13.5px;
+    color: var(--text-2);
+    line-height: 1.7;
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    letter-spacing: -0.005em;
+  }
+  .insight-subtitle .strong {
+    color: var(--navy);
+    font-weight: 500;
+  }
+  .insight-body {
+    padding: 28px 32px;
+  }
+  .insight-explain {
+    font-size: 14px;
+    color: var(--text-2);
+    line-height: 1.85;
+    margin-bottom: 26px;
+    padding: 16px 18px;
+    background: var(--bg-soft);
+    border-radius: 4px;
+    border-left: 3px solid var(--navy);
+  }
+  .insight-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+  .insight-col {
+    background: #fff;
+    padding: 22px 24px;
+  }
+  .insight-col.asis { background: #fffafa; }
+  .insight-col.tobe { background: #f8fcf8; }
+  .insight-col-label {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .insight-col.asis .insight-col-label { color: var(--red); }
+  .insight-col.tobe .insight-col-label { color: var(--green); }
+  .insight-col p {
+    font-size: 13.5px;
+    color: var(--text);
+    line-height: 1.8;
+  }
+  .insight-col ul {
+    margin: 8px 0 0 0;
+    padding-left: 18px;
+  }
+  .insight-col ul li {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.75;
+    margin-bottom: 4px;
+  }
+  .dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+  }
+  .dot-red { background: var(--red); }
+  .dot-green { background: var(--green); }
+
+  /* ============ CODE BLOCK (다크) ============ */
+  .code-section {
+    margin-top: 8px;
+  }
+  .code-section-label {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10.5px;
+    color: var(--red);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .code-section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+  .code-block {
+    background: var(--code-bg);
+    border: 1px solid var(--code-border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .code-header {
+    padding: 12px 18px;
+    background: var(--code-bg-2);
+    border-bottom: 1px solid var(--code-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .code-title {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12px;
+    color: #c8cdd9;
+    letter-spacing: 0.04em;
+  }
+  .code-lang {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px;
+    color: #7c8497;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border: 1px solid var(--code-border);
+    border-radius: 2px;
+  }
+  .code-tabs {
+    display: flex;
+    background: var(--code-bg);
+    border-bottom: 1px solid var(--code-border);
+    overflow-x: auto;
+  }
+  .code-tab {
+    padding: 10px 18px;
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11.5px;
+    color: #7c8497;
+    cursor: pointer;
+    border-right: 1px solid var(--code-border);
+    transition: all .15s ease;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    user-select: none;
+  }
+  .code-tab:hover { color: #c8cdd9; background: rgba(255,255,255,0.03); }
+  .code-tab.active {
+    color: #fff;
+    background: var(--code-bg-2);
+    border-bottom: 2px solid var(--red);
+    margin-bottom: -1px;
+  }
+  .code-pane {
+    display: none;
+    padding: 22px 22px;
+    overflow-x: auto;
+  }
+  .code-pane.active { display: block; }
+  .code-pane pre {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12.5px;
+    line-height: 1.75;
+    color: var(--code-text);
+    white-space: pre;
+    tab-size: 2;
+  }
+  .code-cmt { color: var(--code-cmt); font-style: italic; }
+  .code-tag { color: var(--code-tag); }
+  .code-attr { color: var(--code-attr); }
+  .code-str { color: var(--code-str); }
+  .code-prop { color: var(--code-prop); }
+  .code-val { color: var(--code-val); }
+  .code-kw { color: var(--code-kw); }
+
+  /* ============ CITATION (인용 출처 분석) ============ */
+  .citation-overview {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 36px;
+    margin-bottom: 36px;
+  }
+  .citation-donut {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 28px 32px;
+  }
+  .citation-donut-title {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    color: var(--text-3);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    font-weight: 500;
+  }
+  .citation-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .citation-bar-row {
+    display: grid;
+    grid-template-columns: 110px 1fr 88px;
+    align-items: center;
+    gap: 16px;
+  }
+  .citation-bar-label {
+    font-size: 12.5px;
+    color: var(--text);
+    font-weight: 500;
+  }
+  .citation-bar-label .sub {
+    display: block;
+    font-size: 10.5px;
+    color: var(--text-3);
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-weight: 400;
+    margin-top: 2px;
+  }
+  .citation-bar-track {
+    height: 22px;
+    background: var(--bg-soft);
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+  }
+  .citation-bar-fill {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    color: #fff;
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10.5px;
+    font-weight: 500;
+  }
+  .citation-bar-fill.own { background: var(--navy); }
+  .citation-bar-fill.authority { background: #4a5168; }
+  .citation-bar-fill.other { background: var(--red); }
+  .citation-bar-num {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12px;
+    color: var(--text-2);
+    text-align: right;
+  }
+  .citation-bar-num .pct {
+    color: var(--navy);
+    font-weight: 500;
+  }
+
+  .citation-side {
+    background: var(--navy);
+    color: #fff;
+    border-radius: 8px;
+    padding: 28px 32px;
+  }
+  .citation-side-label {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10.5px;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+  .citation-side-headline {
+    font-family: 'Wanted Sans Variable', 'Wanted Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 22px;
+    color: #fff;
+    line-height: 1.45;
+    font-weight: 700;
+    margin-bottom: 16px;
+    letter-spacing: -0.015em;
+  }
+  .citation-side-headline em {
+    color: #ff7a8b;
+    font-style: normal;
+    font-weight: 900;
+  }
+  .citation-side-body {
+    font-size: 13.5px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.85;
+  }
+
+  /* 도메인 테이블 */
+  .domain-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-bottom: 24px;
+  }
+  .domain-table th, .domain-table td {
+    text-align: left;
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--line-2);
+  }
+  .domain-table th {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10.5px;
+    color: var(--text-3);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+    background: var(--bg-soft);
+    border-bottom: 1px solid var(--line);
+  }
+  .domain-table td.mono {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12px;
+    color: var(--text-2);
+  }
+  .domain-table td.num {
+    text-align: right;
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    color: var(--navy);
+    font-weight: 500;
+    width: 100px;
+  }
+  .domain-table td.tag-cell { width: 130px; }
+  .own-tag {
+    display: inline-block;
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 2px;
+    letter-spacing: 0.06em;
+    font-weight: 500;
+  }
+  .own-tag.own { background: var(--navy-soft); color: var(--navy); }
+  .own-tag.authority { background: #eaeef3; color: var(--text-2); }
+  .own-tag.other { background: var(--red-soft); color: var(--red-2); }
+
+  /* 도메인 그리드 */
+  .domain-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+  .domain-block-title {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    color: var(--red);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+  .domain-block-title.navy { color: var(--navy); }
+</style>
+<style>
+  /* ============ Q&A RESPONSE LOG ============ */
+  .qlog {
+    margin-bottom: 28px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+    background: #fff;
+  }
+  .qlog-head {
+    padding: 18px 24px;
+    background: var(--bg-soft);
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .qlog-head-l {
+    flex: 1;
+  }
+  .qlog-id {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    color: var(--red);
+    letter-spacing: 0.14em;
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+  .qlog-id .qtype {
+    color: var(--navy);
+    background: var(--navy-soft);
+    padding: 2px 8px;
+    border-radius: 2px;
+    margin-left: 6px;
+    font-size: 10px;
+  }
+  .qlog-q {
+    font-family: 'Wanted Sans Variable', 'Wanted Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 17px;
+    color: var(--navy);
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+  }
+  .qlog-rank {
+    flex-shrink: 0;
+    text-align: right;
+  }
+  .qlog-rank-label {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px;
+    color: var(--text-3);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .qlog-rank-val {
+    font-family: 'Wanted Sans Variable', 'Wanted Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--green);
+    line-height: 1;
+  }
+  .qlog-rank-val.warn { color: var(--amber); }
+  .qlog-rank-val.bad { color: var(--red); }
+
+  .qlog-body {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line-2);
+  }
+  .qlog-engine {
+    background: #fff;
+    padding: 18px 22px;
+  }
+  .qlog-engine-name {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    font-weight: 500;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .engine-pill {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 9.5px;
+    padding: 2px 7px;
+    border-radius: 2px;
+    letter-spacing: 0.06em;
+    font-weight: 500;
+  }
+  .pill-yes { background: var(--green-soft); color: var(--green); }
+  .pill-no { background: var(--red-soft); color: var(--red-2); }
+  .qlog-engine-body {
+    font-size: 12.5px;
+    color: var(--text-2);
+    line-height: 1.75;
+    margin-bottom: 12px;
+  }
+  .qlog-engine-meta {
+    display: flex;
+    gap: 14px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--line);
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10.5px;
+    color: var(--text-3);
+  }
+  .qlog-engine-meta .v {
+    color: var(--navy);
+    font-weight: 500;
+  }
+
+  /* ============ COMPETITOR TABLE ============ */
+  .comp-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-bottom: 24px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .comp-table th, .comp-table td {
+    text-align: left;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--line-2);
+  }
+  .comp-table th {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10.5px;
+    color: var(--text-3);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+    background: var(--bg-soft);
+    border-bottom: 1px solid var(--line);
+  }
+  .comp-table tr:last-child td { border-bottom: none; }
+  .comp-table td.center { text-align: center; }
+  .comp-table .comp-self {
+    font-weight: 700;
+    color: var(--red);
+  }
+  .comp-table .comp-name {
+    font-weight: 500;
+    color: var(--navy);
+  }
+  .score-pill {
+    display: inline-block;
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 3px;
+    letter-spacing: 0.04em;
+    font-weight: 500;
+  }
+  .pill-f { background: var(--red-soft); color: var(--red-2); }
+  .pill-d { background: var(--amber-soft); color: var(--amber); }
+  .pill-c { background: var(--navy-soft); color: var(--navy); }
+  .pill-b { background: var(--green-soft); color: var(--green); }
+  .check { color: var(--green); font-weight: 500; }
+  .cross { color: var(--red); font-weight: 500; }
+  .warn { color: var(--amber); font-weight: 500; }
+
+  /* ============ SOV CARDS ============ */
+  .sov-section-title {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    color: var(--red);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin: 32px 0 16px;
+    font-weight: 500;
+  }
+  .sov-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 28px;
+  }
+  .sov-cell {
+    background: #fff;
+    padding: 22px 22px;
+  }
+  .sov-engine {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    color: var(--navy);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    font-weight: 500;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line-2);
+  }
+  .sov-engine.avg { color: var(--red); }
+  .sov-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .sov-bar-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 38px;
+    align-items: center;
+    gap: 8px;
+  }
+  .sov-brand {
+    font-size: 11.5px;
+    color: var(--text-2);
+    font-weight: 500;
+  }
+  .sov-brand.self {
+    color: var(--red);
+    font-weight: 700;
+  }
+  .sov-track {
+    height: 8px;
+    background: var(--bg-soft);
+    border-radius: 1px;
+    overflow: hidden;
+  }
+  .sov-fill { height: 100%; border-radius: 1px; }
+  .sov-fill.self { background: var(--red); }
+  .sov-fill.other { background: var(--navy); opacity: 0.6; }
+  .sov-fill.dim { background: var(--text-4); }
+  .sov-pct {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    color: var(--text-2);
+    text-align: right;
+    font-weight: 500;
+  }
+
+  /* SOV by category */
+  .sov-cat-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .sov-cat-row {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 18px 22px;
+    display: grid;
+    grid-template-columns: 180px 1fr 80px;
+    gap: 20px;
+    align-items: center;
+  }
+  .sov-cat-name {
+    font-family: 'Wanted Sans Variable', 'Wanted Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 15px;
+    color: var(--navy);
+    font-weight: 700;
+  }
+  .sov-cat-name .sub {
+    display: block;
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10.5px;
+    color: var(--text-3);
+    font-weight: 400;
+    margin-top: 2px;
+    letter-spacing: 0.04em;
+  }
+  .sov-cat-track {
+    display: flex;
+    height: 24px;
+    background: var(--bg-soft);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .sov-cat-seg {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 9px;
+    color: #fff;
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10.5px;
+    font-weight: 500;
+    border-right: 1px solid #fff;
+  }
+  .sov-cat-seg:last-child { border-right: none; }
+  .sov-cat-seg.self { background: var(--red); }
+  .sov-cat-seg.c1 { background: var(--navy); }
+  .sov-cat-seg.c2 { background: #5a6480; }
+  .sov-cat-seg.c3 { background: #9098ad; }
+  .sov-cat-rank {
+    font-family: 'Wanted Sans Variable', 'Wanted Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--red);
+    text-align: right;
+  }
+  .sov-cat-rank.warn { color: var(--amber); }
+
+  .sov-legend {
+    display: flex;
+    gap: 18px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+  .sov-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10.5px;
+    color: var(--text-3);
+    letter-spacing: 0.04em;
+  }
+  .sov-legend-swatch {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+  }
+
+  /* ============ PRIORITY ============ */
+  .priority-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .priority-item {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--text-4);
+    border-radius: 4px;
+    padding: 22px 24px;
+    display: grid;
+    grid-template-columns: 48px 1fr 220px;
+    gap: 24px;
+    align-items: flex-start;
+  }
+  .priority-item.r1 { border-left-color: var(--red); }
+  .priority-item.r2 { border-left-color: var(--amber); }
+  .priority-item.r3 { border-left-color: var(--navy); }
+
+  .priority-rank {
+    font-family: 'Wanted Sans Variable', 'Wanted Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 36px;
+    line-height: 0.95;
+    color: var(--text-4);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+  }
+  .priority-item.r1 .priority-rank { color: var(--red); }
+  .priority-item.r2 .priority-rank { color: var(--amber); }
+  .priority-item.r3 .priority-rank { color: var(--navy); }
+
+  .priority-content { flex: 1; }
+  .priority-title {
+    font-family: 'Wanted Sans Variable', 'Wanted Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 17px;
+    color: var(--navy);
+    font-weight: 700;
+    margin-bottom: 8px;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+  }
+  .priority-desc {
+    font-size: 13px;
+    color: var(--text-2);
+    line-height: 1.75;
+  }
+  .priority-impact {
+    background: var(--bg-soft);
+    border: 1px solid var(--line-2);
+    border-radius: 4px;
+    padding: 14px 16px;
+  }
+  .priority-impact-label {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 10px;
+    color: var(--text-3);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .priority-impact-val {
+    font-family: 'Wanted Sans Variable', 'Wanted Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 18px;
+    color: var(--navy);
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+  .priority-impact-val .arrow {
+    color: var(--red);
+    margin: 0 5px;
+  }
+  .priority-impact-val em {
+    color: var(--red);
+    font-style: normal;
+  }
+  .priority-impact-meta {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+  }
+  .meta-tag {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 9.5px;
+    padding: 2px 7px;
+    border-radius: 2px;
+    letter-spacing: 0.06em;
+    font-weight: 500;
+  }
+  .tag-urgent { background: var(--red-soft); color: var(--red-2); }
+  .tag-week { background: var(--amber-soft); color: var(--amber); }
+  .tag-month { background: var(--navy-soft); color: var(--navy); }
+  .tag-dev { background: #eaeef3; color: var(--text-2); }
+
+  /* ============ FOOTER ============ */
+  .report-footer {
+    padding: 36px 48px 32px;
+    border-top: 2px solid var(--navy);
+    background: var(--bg-soft);
+  }
+  .report-footer-inner {
+    max-width: 1320px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .footer-brand {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12px;
+    color: var(--text-2);
+    letter-spacing: 0.1em;
+  }
+  .footer-brand .mars { color: var(--red); font-weight: 500; }
+  .footer-brand .sep { color: var(--text-4); margin: 0 6px; }
+  .footer-meta {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    color: var(--text-3);
+    letter-spacing: 0.06em;
+  }
+  .footer-disclaimer {
+    max-width: 1320px;
+    margin: 18px auto 0;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    font-size: 11.5px;
+    color: var(--text-3);
+    line-height: 1.7;
+  }
+
+  /* ============ DIVIDER ============ */
+  .divider {
+    height: 1px;
+    background: var(--line);
+    margin: 36px 0;
+  }
+  .divider-strong {
+    height: 2px;
+    background: var(--navy);
+    margin: 36px 0;
+    opacity: 0.1;
+  }
+
+  /* ============ MISC ============ */
+  .subsection-title {
+    font-family: 'Wanted Sans Variable', 'Wanted Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 20px;
+    color: var(--navy);
+    font-weight: 700;
+    margin: 36px 0 18px;
+    letter-spacing: -0.01em;
+  }
+  .subsection-lead {
+    font-size: 13.5px;
+    color: var(--text-2);
+    line-height: 1.8;
+    margin-bottom: 20px;
+    max-width: 820px;
+  }
+
+  /* ============ INSIGHT INDEX ============ */
+  .insight-index {
+    margin-bottom: 36px;
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 22px 28px;
+  }
+  .insight-index-title {
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    color: var(--text-3);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+  .insight-index ol {
+    list-style: none;
+    counter-reset: ix;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 28px;
+  }
+  .insight-index li {
+    counter-increment: ix;
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.65;
+    padding-left: 36px;
+    position: relative;
+  }
+  .insight-index li::before {
+    content: '0' counter(ix);
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-family: 'Red Hat Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px;
+    color: var(--red);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+  }
+  .insight-index li .lt {
+    color: var(--text-3);
+    font-size: 11.5px;
+    margin-left: 4px;
+  }
+</style>
+<!-- ============ HEADER ============ -->
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-meta">
+        AI 가시성 진단 보고서<span class="dot">·</span>2026.05.15<span class="dot">·</span>○○○쇼핑몰
+      </div>
+      <h1 class="hero-title">
+        AI 검색에서 우리 브랜드는<br>
+        얼마나 보이고 있을까?<br>
+        <em>○○○쇼핑몰 AI 가시성 진단</em>
+      </h1>
+      <p class="hero-sub">
+        Claude · Gemini · Perplexity · ChatGPT 4개 AI 엔진에 10개의 실제 사용자 질문을 던지고, 응답 본문 · 인용 출처를 실측 분석했습니다. 사이트 기술 진단부터 6가지 핵심 인사이트와 즉시 적용 가능한 수정 코드까지 한 권에 담았습니다.
+      </p>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-cell">
+        <div class="stat-label">GEO 종합 점수</div>
+        <div class="stat-value red">43<span class="unit">/100</span></div>
+        <div class="stat-desc">F 등급 · 0~49점</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">AI 가시성 점수</div>
+        <div class="stat-value amber">72<span class="unit">/100</span></div>
+        <div class="stat-desc">Good · 직접 언급 70%</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">자사 인용 점유율</div>
+        <div class="stat-value red">16.3<span class="unit">%</span></div>
+        <div class="stat-desc">190건 중 31건 (자사 도메인)</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-label">개선 시 자사 인용률</div>
+        <div class="stat-value green">40<span class="unit">%+</span></div>
+        <div class="stat-desc">1순위 처방 적용 시 기대</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TOC ============ -->
+<div class="toc">
+  <div class="toc-inner">
+    <span class="toc-label toc-label--standard">STANDARD 콘텐츠</span>
+    <a href="#overview" class="toc-item">01 측정 개요</a>
+    <a href="#score" class="toc-item">02 GEO 점수</a>
+    <a href="#insights" class="toc-item">03 핵심 인사이트</a>
+    <a href="#citation" class="toc-item">04 인용 출처 분석</a>
+    <a href="#engines" class="toc-item">05 엔진별 응답 실측</a>
+    <a href="#priority" class="toc-item">06 개선 우선순위</a>
+  </div>
+</div>
+<!-- ============ 01 측정 개요 ============ -->
+<section id="overview" class="section">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-num">CHAPTER 01</div>
+      <h2 class="section-title">측정 개요</h2>
+      <p class="section-lead">
+        이번 진단은 "실제 사용자가 AI에 던질 법한 질문 10개"를 설계한 뒤, 3개 AI 엔진에 각각 던져 응답 본문과 인용 출처를 그대로 수집하는 방식으로 진행되었습니다. 어림짐작이 아닌 실측 데이터를 기반으로 한 분석입니다.
+      </p>
+    </div>
+
+    <div class="notice">
+      <span class="notice-icon">FRAME</span>
+      <span>측정 프레임은 업종 무관하게 적용되는 MARS의 표준 4유형 질문 세트(<strong>정의형·비교형·추천형·문제해결형</strong>)를 사용합니다. 어떤 고객사든 동일한 기준으로 측정·비교할 수 있습니다.</span>
+    </div>
+
+    <div class="frame-grid">
+      <div class="frame-cell">
+        <div class="frame-label">분석 대상</div>
+        <div class="frame-val">
+          ○○○쇼핑몰
+          <span class="sub">ourmall.co.kr</span>
+        </div>
+      </div>
+      <div class="frame-cell">
+        <div class="frame-label">질문 세트</div>
+        <div class="frame-val">
+          10개 질문
+          <span class="sub">× 3개 엔진 = 30회 응답</span>
+        </div>
+      </div>
+      <div class="frame-cell">
+        <div class="frame-label">AI 엔진</div>
+        <div class="frame-val">
+          <div class="tag-list">
+            <span class="type-tag">Claude</span>
+            <span class="type-tag">Gemini</span>
+            <span class="type-tag">Perplexity</span>
+          </div>
+          <span class="sub" style="margin-top:8px;">GPT 미수집 (검색 API 제약)</span>
+        </div>
+      </div>
+      <div class="frame-cell">
+        <div class="frame-label">질문 유형</div>
+        <div class="frame-val">
+          <div class="tag-list">
+            <span class="type-tag">정의형</span>
+            <span class="type-tag">비교형</span>
+            <span class="type-tag">추천형</span>
+            <span class="type-tag">문제해결형</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="frame-grid">
+      <div class="frame-cell">
+        <div class="frame-label">크롤링 페이지</div>
+        <div class="frame-val">
+          20개 페이지
+          <span class="sub">완료 20 · 실패 0</span>
+        </div>
+      </div>
+      <div class="frame-cell">
+        <div class="frame-label">분석 기준일</div>
+        <div class="frame-val">
+          2026.05.15
+          <span class="sub">KST</span>
+        </div>
+      </div>
+      <div class="frame-cell">
+        <div class="frame-label">경쟁사 비교</div>
+        <div class="frame-val">
+          3개사
+          <span class="sub">[경쟁몰 가] · [경쟁몰 나] · [경쟁몰 다]</span>
+        </div>
+      </div>
+      <div class="frame-cell">
+        <div class="frame-label">고유 인용 URL</div>
+        <div class="frame-val">
+          190건
+          <span class="sub">자사 31건 (16.3%)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection-title">4가지 질문 유형 정의</div>
+    <p class="subsection-lead">
+      사용자가 AI에 던지는 질문은 의도에 따라 4가지로 나뉩니다. 각 유형마다 AI가 답변을 구성하는 방식과 자사 사이트의 인용 가능성이 다르기 때문에, 4유형 모두를 골고루 측정해야 사각지대 없이 진단할 수 있습니다.
+    </p>
+
+    <div class="qtype-grid">
+      <div class="qtype-card">
+        <div class="qtype-name">정의형 · DEFINITION</div>
+        <div class="qtype-title">"무엇인가?"</div>
+        <div class="qtype-desc">
+          브랜드·시설의 기본 정보를 묻는 질문. 메타 데이터와 Schema.org가 결정적으로 작용합니다.
+        </div>
+        <div class="qtype-example">○○○쇼핑몰은 어떤 쇼핑몰이고 어떤 브랜드들이 입점해 있어?</div>
+      </div>
+      <div class="qtype-card">
+        <div class="qtype-name">비교형 · COMPARISON</div>
+        <div class="qtype-title">"어디가 더 나아?"</div>
+        <div class="qtype-desc">
+          경쟁사와의 차이를 묻는 질문. 비교 기준이 명확한 콘텐츠가 있어야 AI가 자사를 인용합니다.
+        </div>
+        <div class="qtype-example">○○○쇼핑몰과 [경쟁몰 가] 중 가족 단위로 가기 좋은 곳은?</div>
+      </div>
+      <div class="qtype-card">
+        <div class="qtype-name">추천형 · RECOMMENDATION</div>
+        <div class="qtype-title">"뭘 추천해?"</div>
+        <div class="qtype-desc">
+          특정 상황·페르소나에 맞는 추천을 묻는 질문. 외부 블로그·여행 사이트가 우선 인용되는 경향이 강합니다.
+        </div>
+        <div class="qtype-example">외국인 관광객이 가기 좋은 서울 도심 복합쇼핑몰 추천해줘</div>
+      </div>
+      <div class="qtype-card">
+        <div class="qtype-name">문제해결형 · TASK</div>
+        <div class="qtype-title">"어떻게 해야 해?"</div>
+        <div class="qtype-desc">
+          구체적 상황에서의 실행 방법을 묻는 질문. FAQ 페이지와 HowTo 콘텐츠가 핵심입니다.
+        </div>
+        <div class="qtype-example">[자사 권역] ○○○쇼핑몰에서 어린이랑 시간 보낼 만한 시설이 있나?</div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ============ 02 GEO 종합 점수 ============ -->
+<section id="score" class="section">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-num">CHAPTER 02</div>
+      <h2 class="section-title">GEO 종합 점수</h2>
+      <p class="section-lead">
+        GEO 점수는 100점 만점, 5개 카테고리(콘텐츠 구조 · 콘텐츠 품질 · 신뢰성 · 기술 접근성 · 표현 명확성) 각 20점씩 합산됩니다. AI 가시성 점수(72점)와는 별개로, 사이트 자체의 AI 친화도를 측정한 점수입니다.
+      </p>
+    </div>
+
+    <div class="geo-total">
+      <div class="geo-total-score">
+        43<span class="out-of">/ 100</span>
+      </div>
+      <div class="geo-total-info">
+        <span class="geo-grade">F 등급 · 0~49점</span>
+        <p class="geo-total-desc">
+          메타데이터 기본 완성도(Title · Description 100%)는 우수하나, JavaScript SPA 렌더링 구조로 정적 HTML에 본문 콘텐츠가 노출되지 않습니다. 그 결과 <strong style="color:#fff;">Schema.org 0%, H1 태그 0%</strong>로 AI 크롤러가 페이지의 주제와 구조를 인식하지 못하고, 자사 사이트 인용률이 16.3%에 머무는 상태입니다.
+        </p>
+        <div class="geo-total-summary">
+          <div class="item">
+            <span class="item-label">AI 가시성</span>
+            <span class="item-val">72 · Good</span>
+          </div>
+          <div class="item">
+            <span class="item-label">자사 인용률</span>
+            <span class="item-val">16.3%</span>
+          </div>
+          <div class="item">
+            <span class="item-label">긴급 조치</span>
+            <span class="item-val">5개 항목</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="score-grid">
+      <div class="score-card">
+        <div class="score-cat">A · 콘텐츠 구조 <span class="grade">F</span></div>
+        <div class="score-num low">3<span class="out">/20</span></div>
+        <div class="score-bar"><div class="score-fill low" style="width:15%"></div></div>
+        <div class="score-note">Schema.org 0%, H1 0%, FAQ 0%. AI가 페이지를 구조화된 정보로 인식하지 못함.</div>
+      </div>
+      <div class="score-card">
+        <div class="score-cat">B · 콘텐츠 품질 <span class="grade">F</span></div>
+        <div class="score-num low">2<span class="out">/20</span></div>
+        <div class="score-bar"><div class="score-fill low" style="width:10%"></div></div>
+        <div class="score-note">정적 HTML 3,058 bytes. 본문 깊이·구체성·전문성 모두 텍스트 미노출로 평가 불가.</div>
+      </div>
+      <div class="score-card">
+        <div class="score-cat">C · 신뢰성 <span style="color:var(--amber)">C</span></div>
+        <div class="score-num mid">10<span class="out">/20</span></div>
+        <div class="score-bar"><div class="score-fill mid" style="width:50%"></div></div>
+        <div class="score-note">모기업 그룹 브랜드 권위·HTTPS는 강하나, 사업자 정보·외부 검증 신호가 부족.</div>
+      </div>
+      <div class="score-card">
+        <div class="score-cat">D · 기술 접근성 <span style="color:var(--green)">B</span></div>
+        <div class="score-num high">14<span class="out">/20</span></div>
+        <div class="score-bar"><div class="score-fill high" style="width:70%"></div></div>
+        <div class="score-note">robots.txt 허용, sitemap 90개 등록, 모바일 viewport 모두 양호.</div>
+      </div>
+      <div class="score-card">
+        <div class="score-cat">E · 표현 명확성 <span style="color:var(--green)">B</span></div>
+        <div class="score-num high">14<span class="out">/20</span></div>
+        <div class="score-bar"><div class="score-fill high" style="width:70%"></div></div>
+        <div class="score-note">Title 100%·Meta Description 100%. 다만 본문 가독성은 SPA 미노출로 평가 불가.</div>
+      </div>
+    </div>
+
+    <div class="score-detail">
+      <div class="score-detail-head">카테고리별 세부 채점 근거</div>
+      <table class="score-detail-table">
+        <thead>
+          <tr>
+            <th style="width:180px;">카테고리</th>
+            <th style="width:200px;">세부 항목</th>
+            <th>채점 근거</th>
+            <th class="num" style="text-align:right;">점수</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td rowspan="5" class="cat-head">A · 콘텐츠 구조</td><td>A1 Schema.org JSON-LD</td><td class="basis">20개 페이지 전체에서 JSON-LD 0개 발견. Organization·LocalBusiness·Place·Event·Restaurant 모두 미적용.</td><td class="num low">0/6</td></tr>
+          <tr><td>A2 FAQPage/HowTo</td><td class="basis">FAQ 페이지 자체가 존재하지 않음. 자주 묻는 질문 콘텐츠 0개.</td><td class="num low">0/4</td></tr>
+          <tr><td>A3 OG 태그 완성도</td><td class="basis">메인 페이지(/ko)에만 og:title·og:description·og:image 완전 적용. 서브 19개 페이지 미확인.</td><td class="num">2/4</td></tr>
+          <tr><td>A4 Canonical URL</td><td class="basis">메인 페이지에만 canonical 설정. 서브 페이지 미확인.</td><td class="num">1/2</td></tr>
+          <tr><td>A5 H1~H3 계층</td><td class="basis">정적 HTML 기준 H1~H6 태그 0/20 페이지. SPA 렌더링 영향.</td><td class="num low">0/4</td></tr>
+
+          <tr><td rowspan="4" class="cat-head">B · 콘텐츠 품질</td><td>B1 깊이·구체성</td><td class="basis">정적 HTML 크기 3,058 bytes. 본문 텍스트 미노출로 평가 불가.</td><td class="num low">0/6</td></tr>
+          <tr><td>B2 주제 전문성</td><td class="basis">정적 HTML에 본문 미노출로 평가 불가.</td><td class="num low">0/4</td></tr>
+          <tr><td>B3 정보 객관성</td><td class="basis">정적 HTML에 본문 미노출로 평가 불가.</td><td class="num low">0/4</td></tr>
+          <tr><td>B4 AI 인용 적합 구조</td><td class="basis">메타 디스크립션에만 기본 정보 포함. 독립 인용 가능한 팩트문 부족.</td><td class="num">2/6</td></tr>
+
+          <tr><td rowspan="5" class="cat-head">C · 신뢰성</td><td>C1 사업자/조직 정보</td><td class="basis">사업자번호·정확한 상호명 정적 HTML에 미노출. 연락처 부분 노출.</td><td class="num">2/6</td></tr>
+          <tr><td>C2 브랜드 권위</td><td class="basis">"서울 최대 복합쇼핑몰" 메타에 명시. 모기업 그룹 계열사로 권위 신호 강함.</td><td class="num high">4/4</td></tr>
+          <tr><td>C3 출처/저자</td><td class="basis">모기업 그룹 소속 명시 없음. 조직 정보 정적 HTML 미노출.</td><td class="num low">0/4</td></tr>
+          <tr><td>C4 외부 검증 가능성</td><td class="basis">공식 SNS·한국관광공사 등재 확인. 인증번호·특허번호 미명시.</td><td class="num">2/4</td></tr>
+          <tr><td>C5 HTTPS 보안</td><td class="basis">HTTPS 적용 확인.</td><td class="num high">2/2</td></tr>
+
+          <tr><td rowspan="5" class="cat-head">D · 기술 접근성</td><td>D1 robots.txt AI 크롤러 허용</td><td class="basis">User-agent: * / Allow: / 설정. ClaudeBot·GPTBot·Gemini·Perplexity 명시적 차단 없음.</td><td class="num high">6/6</td></tr>
+          <tr><td>D2 sitemap.xml</td><td class="basis">존재. 90개 URL 등록. 우선순위 1.00 (48개) · 0.80 (42개).</td><td class="num high">4/4</td></tr>
+          <tr><td>D3 모바일 최적화</td><td class="basis">viewport 메타 태그 적용. 반응형 설정 확인.</td><td class="num high">4/4</td></tr>
+          <tr><td>D4 이미지 접근성</td><td class="basis">정적 HTML 기준 이미지 0개. alt 텍스트 평가 불가.</td><td class="num low">0/4</td></tr>
+          <tr><td>D5 페이지 로딩 추정</td><td class="basis">JS 파일 로드 필요. 초기 렌더링 지연 예상.</td><td class="num low">0/2</td></tr>
+
+          <tr><td rowspan="4" class="cat-head">E · 표현 명확성</td><td>E1 title 태그</td><td class="basis">20/20 페이지에 title 설정. 핵심 키워드 + 브랜드 + 적정 길이.</td><td class="num high">4/4</td></tr>
+          <tr><td>E2 meta description</td><td class="basis">20/20 페이지에 meta description 설정. 고유 + 적정 길이.</td><td class="num high">6/6</td></tr>
+          <tr><td>E3 콘텐츠 가독성</td><td class="basis">정적 HTML에 본문·단락·표·리스트 미포함. 평가 불가.</td><td class="num low">0/4</td></tr>
+          <tr><td>E4 브랜드/서비스 명확성</td><td class="basis">메타에 "서울 최대 복합쇼핑몰" 명시. 본문 콘텐츠 부족.</td><td class="num">4/6</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+<!-- ============ 03 핵심 인사이트 & 처방 ============ -->
+<section id="insights" class="section">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-num">CHAPTER 03</div>
+      <h2 class="section-title">핵심 인사이트 & 즉시 적용 처방</h2>
+      <p class="section-lead">
+        측정 데이터에서 발견된 6가지 핵심 인사이트입니다. 각 인사이트는 <strong>한 줄 결론 → 수치 근거 → 현황(AS-IS) / 처방(TO-BE) → 즉시 적용 가능한 수정 코드</strong> 순서로 구성되어 있습니다. 비전문가도 결론 한 줄만 읽으면 핵심을 파악할 수 있도록 정리했습니다.
+      </p>
+    </div>
+
+    <!-- INSIGHT INDEX -->
+    <div class="insight-index">
+      <div class="insight-index-title">이번 진단에서 발견된 6가지 핵심 인사이트</div>
+      <ol>
+        <li>AI가 우리 사이트가 아닌 <strong>나무위키와 블로그</strong>를 보고 답한다 <span class="lt">· 자가 발화권 상실</span></li>
+        <li>AI 크롤러가 우리 사이트에서 <strong>한 글자도 읽지 못한다</strong> <span class="lt">· SPA 콘텐츠 미노출</span></li>
+        <li>"우리가 어떤 회사인지" 알려주는 <strong>구조화 데이터가 전무</strong>하다 <span class="lt">· Schema.org 0%</span></li>
+        <li>외국인 관광객 질문에서 <strong>Claude가 우리를 언급하지 않는다</strong> <span class="lt">· 다국어 GEO 공백</span></li>
+        <li>"비교형" 질문에서 1위인데도 <strong>출처는 경쟁사 사이트로 흘러간다</strong> <span class="lt">· 인용 누수</span></li>
+        <li>FAQ 페이지 부재로 <strong>"문제해결형" 질문에서 자사 인용이 어렵다</strong> <span class="lt">· 인텐트 미스매치</span></li>
+      </ol>
+    </div>
+
+    <!-- ============ INSIGHT 01 ============ -->
+    <div class="insight-block">
+      <div class="insight-head">
+        <div class="insight-tags">
+          <span class="insight-num">INSIGHT 01</span>
+          <span class="insight-chip chip-critical">자가 발화권 상실</span>
+          <span class="insight-chip chip-critical">긴급</span>
+        </div>
+        <h3 class="insight-title">
+          AI가 우리 대신 <em>나무위키와 블로그</em>를 보고 답하고 있다.
+        </h3>
+        <p class="insight-subtitle">
+          <span class="strong">자사 인용률 16.3%</span> · 외부 출처 84% (블로그·위키 78.4% + 권위지 5.3%) — <span class="strong">31건 / 190건</span>
+        </p>
+      </div>
+      <div class="insight-body">
+        <div class="insight-explain">
+          AI는 답변을 만들 때 여러 출처를 참고하는데, 그중 우리 공식 사이트에서 가져온 정보는 <strong>10건 중 1.6건에 불과</strong>합니다. 나머지 8.4건은 나무위키, 개인 블로그, 여행 정보 사이트 같은 2차 출처에서 가져온 정보입니다. 즉 AI가 "○○○쇼핑몰은 이런 곳입니다"라고 답할 때, 그 말의 근거가 우리가 직접 쓴 글이 아니라 외부에서 우리에 대해 쓴 글이라는 뜻입니다. 정보의 정확성과 톤을 우리가 통제할 수 없는 구조입니다.
+        </div>
+
+        <div class="insight-row">
+          <div class="insight-col asis">
+            <div class="insight-col-label"><span class="dot dot-red"></span>현황 · AS-IS</div>
+            <ul>
+              <li><strong>자사 도메인 인용 31건</strong> (ourmall.co.kr 13건 + parentco.co.kr 4건 + affiliate-a.co.kr 6건 등 8개 도메인)</li>
+              <li><strong>외부 출처 159건</strong> (나무위키 8건, ko.wikipedia 1건, tripadvisor 4건, trip.com 2건, brunch.co.kr 2건, 기타 블로그 141건)</li>
+              <li>특히 나무위키 문서가 <strong>3개 엔진 모두에 공통 인용</strong>되어 있어 사실상 브랜드 1차 정보원 역할</li>
+              <li>공식 SNS(Facebook·Instagram) 인용은 각 1건에 그침</li>
+            </ul>
+          </div>
+          <div class="insight-col tobe">
+            <div class="insight-col-label"><span class="dot dot-green"></span>처방 · TO-BE</div>
+            <ul>
+              <li><strong>Organization + LocalBusiness + AggregateRating</strong> 스키마를 메인 페이지에 즉시 적용 — AI가 공식 출처의 정형화된 데이터를 1차 신호로 인식</li>
+              <li>모기업 그룹 소속·수상 이력·누적 방문객 등 <strong>E-E-A-T 신호</strong>를 단일 팩트시트 페이지에 구조화</li>
+              <li>공식 블로그에 "명품 쇼핑 가이드", "가족 방문 코스" 등 정보성 콘텐츠를 정기 발행 → 블로그·위키가 차지한 자리를 공식 채널이 회수</li>
+              <li><strong>예상 효과:</strong> 자사 인용률 16.3% → 40%+ (1순위 처방 단독 적용 시)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="code-section">
+          <div class="code-section-label">수정 코드 · 메인 페이지 &lt;head&gt; 내 삽입</div>
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-title">Organization + LocalBusiness + AggregateRating</span>
+              <span class="code-lang">JSON-LD</span>
+            </div>
+            <div class="code-tabs">
+              <div class="code-tab active" data-target="i01-org">Organization</div>
+              <div class="code-tab" data-target="i01-local">LocalBusiness</div>
+              <div class="code-tab" data-target="i01-rating">AggregateRating</div>
+            </div>
+            <div id="i01-org" class="code-pane active">
+<pre><span class="code-cmt">&lt;!-- 메인 페이지 &lt;head&gt; 내, &lt;/head&gt; 직전 삽입 --&gt;</span>
+<span class="code-tag">&lt;script</span> <span class="code-attr">type</span>=<span class="code-str">"application/ld+json"</span><span class="code-tag">&gt;</span>
+{
+  <span class="code-prop">"@context"</span>: <span class="code-str">"https://schema.org"</span>,
+  <span class="code-prop">"@type"</span>: <span class="code-str">"Organization"</span>,
+  <span class="code-prop">"name"</span>: <span class="code-str">"○○○쇼핑몰"</span>,
+  <span class="code-prop">"alternateName"</span>: [<span class="code-str">"○○○쇼핑몰"</span>, <span class="code-str">"Subject Shopping Mall"</span>],
+  <span class="code-prop">"url"</span>: <span class="code-str">"https://www.ourmall.co.kr/ko"</span>,
+  <span class="code-prop">"logo"</span>: <span class="code-str">"https://www.ourmall.co.kr/assets/images/logo.png"</span>,
+  <span class="code-prop">"image"</span>: <span class="code-str">"https://www.ourmall.co.kr/assets/images/og_img.png"</span>,
+  <span class="code-prop">"description"</span>: <span class="code-str">"서울 최대 규모 복합쇼핑몰. 명품 쇼핑, 프리미엄 다이닝, 아쿠아리움, 시네마, 콘서트홀."</span>,
+  <span class="code-prop">"parentOrganization"</span>: {
+    <span class="code-prop">"@type"</span>: <span class="code-str">"Organization"</span>,
+    <span class="code-prop">"name"</span>: <span class="code-str">"모기업"</span>,
+    <span class="code-prop">"url"</span>: <span class="code-str">"https://www.parentco.co.kr"</span>
+  },
+  <span class="code-prop">"address"</span>: {
+    <span class="code-prop">"@type"</span>: <span class="code-str">"PostalAddress"</span>,
+    <span class="code-prop">"streetAddress"</span>: <span class="code-str">"○○로 300"</span>,
+    <span class="code-prop">"addressLocality"</span>: <span class="code-str">"○○구"</span>,
+    <span class="code-prop">"addressRegion"</span>: <span class="code-str">"서울특별시"</span>,
+    <span class="code-prop">"postalCode"</span>: <span class="code-str">"05551"</span>,
+    <span class="code-prop">"addressCountry"</span>: <span class="code-str">"KR"</span>
+  },
+  <span class="code-prop">"telephone"</span>: <span class="code-str">"+82-2-3213-5000"</span>,
+  <span class="code-prop">"sameAs"</span>: [
+    <span class="code-str">"https://www.facebook.com/ourmall"</span>,
+    <span class="code-str">"https://www.instagram.com/lotte_worldmall/"</span>,
+    <span class="code-str">"https://ko.wikipedia.org/wiki/○○○쇼핑몰"</span>
+  ]
+}
+<span class="code-tag">&lt;/script&gt;</span></pre>
+            </div>
+            <div id="i01-local" class="code-pane">
+<pre><span class="code-tag">&lt;script</span> <span class="code-attr">type</span>=<span class="code-str">"application/ld+json"</span><span class="code-tag">&gt;</span>
+{
+  <span class="code-prop">"@context"</span>: <span class="code-str">"https://schema.org"</span>,
+  <span class="code-prop">"@type"</span>: <span class="code-str">"ShoppingCenter"</span>,
+  <span class="code-prop">"name"</span>: <span class="code-str">"○○○쇼핑몰"</span>,
+  <span class="code-prop">"image"</span>: <span class="code-str">"https://www.ourmall.co.kr/assets/images/og_img.png"</span>,
+  <span class="code-prop">"priceRange"</span>: <span class="code-str">"$$$"</span>,
+  <span class="code-prop">"openingHoursSpecification"</span>: [
+    {
+      <span class="code-prop">"@type"</span>: <span class="code-str">"OpeningHoursSpecification"</span>,
+      <span class="code-prop">"dayOfWeek"</span>: [
+        <span class="code-str">"Monday"</span>, <span class="code-str">"Tuesday"</span>, <span class="code-str">"Wednesday"</span>,
+        <span class="code-str">"Thursday"</span>, <span class="code-str">"Friday"</span>, <span class="code-str">"Saturday"</span>, <span class="code-str">"Sunday"</span>
+      ],
+      <span class="code-prop">"opens"</span>: <span class="code-str">"10:30"</span>,
+      <span class="code-prop">"closes"</span>: <span class="code-str">"22:00"</span>
+    }
+  ],
+  <span class="code-prop">"geo"</span>: {
+    <span class="code-prop">"@type"</span>: <span class="code-str">"GeoCoordinates"</span>,
+    <span class="code-prop">"latitude"</span>: <span class="code-val">37.5125</span>,
+    <span class="code-prop">"longitude"</span>: <span class="code-val">127.1025</span>
+  },
+  <span class="code-prop">"hasMap"</span>: <span class="code-str">"https://maps.google.com/?q=○○○쇼핑몰"</span>,
+  <span class="code-prop">"publicAccess"</span>: <span class="code-kw">true</span>,
+  <span class="code-prop">"smokingAllowed"</span>: <span class="code-kw">false</span>,
+  <span class="code-prop">"amenityFeature"</span>: [
+    { <span class="code-prop">"@type"</span>: <span class="code-str">"LocationFeatureSpecification"</span>,
+      <span class="code-prop">"name"</span>: <span class="code-str">"지하 주차장"</span>, <span class="code-prop">"value"</span>: <span class="code-kw">true</span> },
+    { <span class="code-prop">"@type"</span>: <span class="code-str">"LocationFeatureSpecification"</span>,
+      <span class="code-prop">"name"</span>: <span class="code-str">"지하철 ○○역 직결"</span>, <span class="code-prop">"value"</span>: <span class="code-kw">true</span> },
+    { <span class="code-prop">"@type"</span>: <span class="code-str">"LocationFeatureSpecification"</span>,
+      <span class="code-prop">"name"</span>: <span class="code-str">"택스리펀 서비스"</span>, <span class="code-prop">"value"</span>: <span class="code-kw">true</span> }
+  ]
+}
+<span class="code-tag">&lt;/script&gt;</span></pre>
+            </div>
+            <div id="i01-rating" class="code-pane">
+<pre><span class="code-cmt">// 신뢰도 신호 강화 — E-E-A-T 직접 전달</span>
+<span class="code-tag">&lt;script</span> <span class="code-attr">type</span>=<span class="code-str">"application/ld+json"</span><span class="code-tag">&gt;</span>
+{
+  <span class="code-prop">"@context"</span>: <span class="code-str">"https://schema.org"</span>,
+  <span class="code-prop">"@type"</span>: <span class="code-str">"ShoppingCenter"</span>,
+  <span class="code-prop">"name"</span>: <span class="code-str">"○○○쇼핑몰"</span>,
+  <span class="code-prop">"aggregateRating"</span>: {
+    <span class="code-prop">"@type"</span>: <span class="code-str">"AggregateRating"</span>,
+    <span class="code-prop">"ratingValue"</span>: <span class="code-str">"4.5"</span>,
+    <span class="code-prop">"reviewCount"</span>: <span class="code-str">"12500"</span>,
+    <span class="code-prop">"bestRating"</span>: <span class="code-str">"5"</span>
+  },
+  <span class="code-prop">"award"</span>: [
+    <span class="code-str">"한국산업의 브랜드파워 1위 (2024)"</span>,
+    <span class="code-str">"외국인 관광객 선호 쇼핑몰 1위"</span>,
+    <span class="code-str">"누적 방문객 1억 명 돌파"</span>
+  ],
+  <span class="code-prop">"numberOfEmployees"</span>: {
+    <span class="code-prop">"@type"</span>: <span class="code-str">"QuantitativeValue"</span>,
+    <span class="code-prop">"value"</span>: <span class="code-val">3000</span>
+  },
+  <span class="code-prop">"foundingDate"</span>: <span class="code-str">"2014-10-14"</span>,
+  <span class="code-prop">"slogan"</span>: <span class="code-str">"서울 최대 복합쇼핑몰"</span>
+}
+<span class="code-tag">&lt;/script&gt;</span></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ INSIGHT 02 ============ -->
+    <div class="insight-block">
+      <div class="insight-head">
+        <div class="insight-tags">
+          <span class="insight-num">INSIGHT 02</span>
+          <span class="insight-chip chip-critical">SPA 콘텐츠 미노출</span>
+          <span class="insight-chip chip-critical">긴급</span>
+        </div>
+        <h3 class="insight-title">
+          AI 크롤러가 우리 사이트에서 <em>한 글자도 읽지 못한다.</em>
+        </h3>
+        <p class="insight-subtitle">
+          <span class="strong">정적 HTML 3,058 bytes</span> · H1 태그 0/20 페이지 · 본문 텍스트 0%
+        </p>
+      </div>
+      <div class="insight-body">
+        <div class="insight-explain">
+          우리 사이트는 JavaScript로 화면을 그리는 SPA(Single Page Application) 구조입니다. 사용자가 브라우저로 접속하면 멋진 화면이 보이지만, AI 크롤러가 처음 페이지를 받아왔을 때 그 안에는 단 <strong>3,058 bytes(A4 한 페이지의 1/10 분량)</strong>의 코드만 들어 있고, 정작 "이 페이지가 뭐에 관한 페이지인지" 알려주는 본문 텍스트는 없습니다. AI 입장에서는 "주소만 있고 본문이 비어있는 편지"를 받는 셈입니다.
+        </div>
+
+        <div class="insight-row">
+          <div class="insight-col asis">
+            <div class="insight-col-label"><span class="dot dot-red"></span>현황 · AS-IS</div>
+            <ul>
+              <li>정적 HTML 크기 <strong>3,058 bytes</strong> (메타 데이터 + 스크립트 로더만 포함)</li>
+              <li>본문 콘텐츠는 <code>/assets/client.js</code> + <code>/assets/main.js</code> 로드 후 클라이언트에서 동적 생성</li>
+              <li>H1 태그 <strong>0/20 페이지</strong>, 이미지 alt 텍스트 0개 (정적 HTML 기준)</li>
+              <li>AI 크롤러가 페이지 주제를 메타 디스크립션 1~2줄로만 추측해야 하는 상태</li>
+              <li>"이 페이지가 명품 쇼핑 가이드인지, 아쿠아리움 안내인지"를 AI가 텍스트로 확인 불가</li>
+            </ul>
+          </div>
+          <div class="insight-col tobe">
+            <div class="insight-col-label"><span class="dot dot-green"></span>처방 · TO-BE</div>
+            <ul>
+              <li>SPA 구조 변경 없이 <strong><code>&lt;body&gt;</code> 최상단에 정적 콘텐츠 블록 인라인 삽입</strong> (display:none + aria-hidden 처리하여 화면 영향 없음)</li>
+              <li>페이지당 H1 1개 + 핵심 텍스트 300자 이상 + 주요 시설·브랜드 명칭 노출</li>
+              <li>중장기로 <strong>SSR(Server-Side Rendering)</strong> 또는 프리렌더링 도입 검토</li>
+              <li><strong>예상 효과:</strong> AI 크롤러 페이지 주제 인식률 0% → 100% (구조화 데이터와 결합 시 인용률 추가 상승)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="code-section">
+          <div class="code-section-label">수정 코드 · &lt;body&gt; 최상단, 앱 마운트 이전</div>
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-title">정적 콘텐츠 + H1 블록 (메인 페이지)</span>
+              <span class="code-lang">HTML</span>
+            </div>
+            <div class="code-tabs">
+              <div class="code-tab active" data-target="i02-main">메인 페이지</div>
+              <div class="code-tab" data-target="i02-shop">쇼핑 페이지</div>
+              <div class="code-tab" data-target="i02-fnb">F&B 페이지</div>
+            </div>
+            <div id="i02-main" class="code-pane active">
+<pre><span class="code-cmt">&lt;!-- 메인 페이지 &lt;body&gt; 최상단, React/Vue 앱 마운트 이전 삽입 --&gt;</span>
+<span class="code-cmt">&lt;!-- 화면에 보이지 않지만 AI 크롤러는 읽습니다 --&gt;</span>
+<span class="code-tag">&lt;main</span> <span class="code-attr">id</span>=<span class="code-str">"geo-content"</span> <span class="code-attr">style</span>=<span class="code-str">"position:absolute;left:-9999px;"</span> <span class="code-attr">aria-hidden</span>=<span class="code-str">"true"</span><span class="code-tag">&gt;</span>
+
+  <span class="code-tag">&lt;h1&gt;</span>○○○쇼핑몰 — 서울 최대 복합쇼핑몰<span class="code-tag">&lt;/h1&gt;</span>
+
+  <span class="code-tag">&lt;section&gt;</span>
+    <span class="code-tag">&lt;h2&gt;</span>한눈에 보기<span class="code-tag">&lt;/h2&gt;</span>
+    <span class="code-tag">&lt;p&gt;</span>○○○쇼핑몰은 서울 ○○구 [자사 권역]에 위치한 서울 최대 규모의
+    복합쇼핑몰입니다. 프리미엄관동(명품관) · 쇼핑몰동 · 엔터테인먼트동으로
+    구성되며, 지상 10층 · 지하 4층 규모에 명품 · 패션 · 식음료 · 엔터테인먼트
+    시설을 통합 운영합니다. 영업시간은 매일 오전 10시 30분부터 오후 10시까지.<span class="code-tag">&lt;/p&gt;</span>
+  <span class="code-tag">&lt;/section&gt;</span>
+
+  <span class="code-tag">&lt;section&gt;</span>
+    <span class="code-tag">&lt;h2&gt;</span>명품 쇼핑 — 프리미엄관<span class="code-tag">&lt;/h2&gt;</span>
+    <span class="code-tag">&lt;p&gt;</span>프리미엄관에서 에르메스, 샤넬, 루이비통, 디올, 구찌, 프라다,
+    보테가베네타, 생로랑 등 세계 최고급 럭셔리 브랜드를 만나실 수 있습니다.
+    까르띠에 · 티파니 · 불가리 · 반클리프아펠 4대 주얼리, 그리고 롤렉스 부티크가
+    국내 최대 규모로 입점되어 있습니다.<span class="code-tag">&lt;/p&gt;</span>
+  <span class="code-tag">&lt;/section&gt;</span>
+
+  <span class="code-tag">&lt;section&gt;</span>
+    <span class="code-tag">&lt;h2&gt;</span>가족과 함께 — 아쿠아리움 · 시네마 · 콘서트홀<span class="code-tag">&lt;/h2&gt;</span>
+    <span class="code-tag">&lt;p&gt;</span>수족관은 650종 55,000마리, 5,200톤 규모의 도심형
+    아쿠아리움입니다. 영화관(21개관) · 콘서트홀(국내 최초
+    빈야드 스타일) · 전망대 전망대(118~123층)까지 한곳에서 즐기실 수 있습니다.<span class="code-tag">&lt;/p&gt;</span>
+  <span class="code-tag">&lt;/section&gt;</span>
+
+  <span class="code-tag">&lt;section&gt;</span>
+    <span class="code-tag">&lt;h2&gt;</span>외국인 관광객을 위한 서비스<span class="code-tag">&lt;/h2&gt;</span>
+    <span class="code-tag">&lt;p&gt;</span>영어 · 중국어 · 일본어 안내 데스크를 운영하며, 알리페이 · 위챗페이 ·
+    유니온페이 결제가 가능합니다. 일정 금액 이상 구매 시 즉시 택스리펀 서비스를
+    제공합니다. 지하철 2호선 · 8호선 ○○역 6번 출구와 직접 연결되어 있습니다.<span class="code-tag">&lt;/p&gt;</span>
+  <span class="code-tag">&lt;/section&gt;</span>
+
+<span class="code-tag">&lt;/main&gt;</span>
+
+<span class="code-cmt">&lt;!-- 이후 React/Vue 앱이 마운트되는 div --&gt;</span>
+<span class="code-tag">&lt;div</span> <span class="code-attr">id</span>=<span class="code-str">"app"</span><span class="code-tag">&gt;&lt;/div&gt;</span></pre>
+            </div>
+            <div id="i02-shop" class="code-pane">
+<pre><span class="code-cmt">&lt;!-- /shopping/all.do 페이지에 동일 패턴 적용 --&gt;</span>
+<span class="code-tag">&lt;main</span> <span class="code-attr">id</span>=<span class="code-str">"geo-content"</span> <span class="code-attr">style</span>=<span class="code-str">"position:absolute;left:-9999px;"</span> <span class="code-attr">aria-hidden</span>=<span class="code-str">"true"</span><span class="code-tag">&gt;</span>
+
+  <span class="code-tag">&lt;h1&gt;</span>○○○쇼핑몰 입점 브랜드 — 전체 목록<span class="code-tag">&lt;/h1&gt;</span>
+
+  <span class="code-tag">&lt;section&gt;</span>
+    <span class="code-tag">&lt;h2&gt;</span>명품 (Luxury)<span class="code-tag">&lt;/h2&gt;</span>
+    <span class="code-tag">&lt;ul&gt;</span>
+      <span class="code-tag">&lt;li&gt;</span>에르메스 (Hermès) — B1F 프리미엄관<span class="code-tag">&lt;/li&gt;</span>
+      <span class="code-tag">&lt;li&gt;</span>샤넬 (Chanel) — 1F 프리미엄관<span class="code-tag">&lt;/li&gt;</span>
+      <span class="code-tag">&lt;li&gt;</span>루이비통 (Louis Vuitton) — 1F 프리미엄관<span class="code-tag">&lt;/li&gt;</span>
+      <span class="code-tag">&lt;li&gt;</span>디올 · 구찌 · 프라다 · 생로랑 · 보테가베네타<span class="code-tag">&lt;/li&gt;</span>
+    <span class="code-tag">&lt;/ul&gt;</span>
+  <span class="code-tag">&lt;/section&gt;</span>
+
+  <span class="code-tag">&lt;section&gt;</span>
+    <span class="code-tag">&lt;h2&gt;</span>주얼리 · 시계 (Jewelry & Watches)<span class="code-tag">&lt;/h2&gt;</span>
+    <span class="code-tag">&lt;ul&gt;</span>
+      <span class="code-tag">&lt;li&gt;</span>까르띠에 (Cartier)<span class="code-tag">&lt;/li&gt;</span>
+      <span class="code-tag">&lt;li&gt;</span>티파니 (Tiffany & Co.)<span class="code-tag">&lt;/li&gt;</span>
+      <span class="code-tag">&lt;li&gt;</span>불가리 (Bulgari)<span class="code-tag">&lt;/li&gt;</span>
+      <span class="code-tag">&lt;li&gt;</span>반클리프 아펠 (Van Cleef & Arpels)<span class="code-tag">&lt;/li&gt;</span>
+      <span class="code-tag">&lt;li&gt;</span>롤렉스 (Rolex) — 부티크<span class="code-tag">&lt;/li&gt;</span>
+    <span class="code-tag">&lt;/ul&gt;</span>
+  <span class="code-tag">&lt;/section&gt;</span>
+
+  <span class="code-cmt">&lt;!-- ... K-뷰티, 패션, 컨템포러리 등 카테고리별 반복 --&gt;</span>
+<span class="code-tag">&lt;/main&gt;</span></pre>
+            </div>
+            <div id="i02-fnb" class="code-pane">
+<pre><span class="code-cmt">&lt;!-- /fnb/all.do 페이지 --&gt;</span>
+<span class="code-tag">&lt;main</span> <span class="code-attr">id</span>=<span class="code-str">"geo-content"</span> <span class="code-attr">style</span>=<span class="code-str">"position:absolute;left:-9999px;"</span> <span class="code-attr">aria-hidden</span>=<span class="code-str">"true"</span><span class="code-tag">&gt;</span>
+
+  <span class="code-tag">&lt;h1&gt;</span>○○○쇼핑몰 식당 가이드 — 점심·저녁 추천<span class="code-tag">&lt;/h1&gt;</span>
+
+  <span class="code-tag">&lt;p&gt;</span>○○○쇼핑몰은 <span class="code-kw">159곳 이상</span>의 식음료 매장을 운영하고 있으며,
+  5층 식당가 · 지하 푸드코트 · 백화점 지하 식당가로 구성되어 있습니다.<span class="code-tag">&lt;/p&gt;</span>
+
+  <span class="code-tag">&lt;section&gt;</span>
+    <span class="code-tag">&lt;h2&gt;</span>한식<span class="code-tag">&lt;/h2&gt;</span>
+    <span class="code-tag">&lt;p&gt;</span>한국집, 하트파트, 미포집, 보부선부대보쌈 등.<span class="code-tag">&lt;/p&gt;</span>
+  <span class="code-tag">&lt;/section&gt;</span>
+
+  <span class="code-tag">&lt;section&gt;</span>
+    <span class="code-tag">&lt;h2&gt;</span>일식<span class="code-tag">&lt;/h2&gt;</span>
+    <span class="code-tag">&lt;p&gt;</span>오레노라멘, 도쿄 마제소바 칸다, 진가와, 해목 등.<span class="code-tag">&lt;/p&gt;</span>
+  <span class="code-tag">&lt;/section&gt;</span>
+
+  <span class="code-cmt">&lt;!-- 양식, 중식, 멕시칸, 카페, 디저트 등 카테고리 반복 --&gt;</span>
+<span class="code-tag">&lt;/main&gt;</span></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section" style="border-top:none;padding-top:0;border-bottom:none;padding-bottom:0;">
+  <div class="section-inner">
+
+    <!-- ============ INSIGHT 03 ============ -->
+    <div class="insight-block">
+      <div class="insight-head">
+        <div class="insight-tags">
+          <span class="insight-num">INSIGHT 03</span>
+          <span class="insight-chip chip-critical">Schema.org 0%</span>
+          <span class="insight-chip chip-critical">긴급</span>
+        </div>
+        <h3 class="insight-title">
+          "우리가 어떤 회사인지" 알려주는 <em>구조화 데이터가 0%</em>다.
+        </h3>
+        <p class="insight-subtitle">
+          <span class="strong">Schema.org JSON-LD 0/20 페이지</span> · Organization · LocalBusiness · Restaurant · Product 전부 미적용
+        </p>
+      </div>
+      <div class="insight-body">
+        <div class="insight-explain">
+          Schema.org는 사이트의 정보를 AI와 검색엔진이 이해하기 쉬운 "표준 양식"으로 정리해주는 코드입니다. "이 페이지는 음식점입니다 / 가게 이름은 X / 영업시간은 Y / 가격대는 Z" 같은 정보를 명함처럼 정리해서 건네는 셈입니다. 우리 사이트에는 이 명함이 한 장도 없습니다. AI는 우리가 쇼핑몰인지 호텔인지 박물관인지조차 코드 레벨에서는 알 수 없는 상태입니다.
+        </div>
+
+        <div class="insight-row">
+          <div class="insight-col asis">
+            <div class="insight-col-label"><span class="dot dot-red"></span>현황 · AS-IS</div>
+            <ul>
+              <li>크롤링한 <strong>20개 페이지 전체</strong>에서 JSON-LD 구조화 데이터 0개 발견</li>
+              <li>GEO 필수 @type 모두 미적용: Organization, LocalBusiness, ShoppingCenter, Place, Restaurant, Product, Event, FAQPage, BreadcrumbList</li>
+              <li>경쟁사 비교: [경쟁몰 가] 부분 적용 · [경쟁몰 나] 부분 적용 · <strong>[경쟁몰 다] 전체 적용</strong></li>
+              <li>AI 엔진이 주소·영업시간·시설·브랜드 정보를 정형화된 형태로 인식 불가 → 외부 위키·블로그 의존</li>
+            </ul>
+          </div>
+          <div class="insight-col tobe">
+            <div class="insight-col-label"><span class="dot dot-green"></span>처방 · TO-BE</div>
+            <ul>
+              <li><strong>1순위 (Day 1):</strong> Organization + LocalBusiness/ShoppingCenter + FAQPage 메인 페이지 적용</li>
+              <li><strong>2순위 (Week 1):</strong> 브랜드 목록 페이지에 Product, 식당 가이드에 Restaurant, 이벤트 페이지에 Event 스키마 적용</li>
+              <li><strong>3순위 (Week 2):</strong> 시설별 페이지에 Place + BreadcrumbList로 사이트 계층 구조 전달</li>
+              <li><strong>예상 효과:</strong> 정의형 질문(브랜드·시설 정보)에서 자사 인용률 +15~20%p, AI 답변 정확도 대폭 향상</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="code-section">
+          <div class="code-section-label">수정 코드 · 페이지별 Schema.org JSON-LD</div>
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-title">FAQPage · Restaurant · Product 스키마</span>
+              <span class="code-lang">JSON-LD</span>
+            </div>
+            <div class="code-tabs">
+              <div class="code-tab active" data-target="i03-faq">FAQPage</div>
+              <div class="code-tab" data-target="i03-rest">Restaurant</div>
+              <div class="code-tab" data-target="i03-prod">Product (브랜드)</div>
+              <div class="code-tab" data-target="i03-bc">BreadcrumbList</div>
+            </div>
+            <div id="i03-faq" class="code-pane active">
+<pre><span class="code-cmt">&lt;!-- FAQ 페이지 또는 메인 페이지 &lt;head&gt; 내 삽입 --&gt;</span>
+<span class="code-tag">&lt;script</span> <span class="code-attr">type</span>=<span class="code-str">"application/ld+json"</span><span class="code-tag">&gt;</span>
+{
+  <span class="code-prop">"@context"</span>: <span class="code-str">"https://schema.org"</span>,
+  <span class="code-prop">"@type"</span>: <span class="code-str">"FAQPage"</span>,
+  <span class="code-prop">"mainEntity"</span>: [
+    {
+      <span class="code-prop">"@type"</span>: <span class="code-str">"Question"</span>,
+      <span class="code-prop">"name"</span>: <span class="code-str">"○○○쇼핑몰 영업시간은 어떻게 되나요?"</span>,
+      <span class="code-prop">"acceptedAnswer"</span>: {
+        <span class="code-prop">"@type"</span>: <span class="code-str">"Answer"</span>,
+        <span class="code-prop">"text"</span>: <span class="code-str">"쇼핑몰동 10:30~22:00, 프리미엄관 10:30~20:00, 아쿠아리움 10:00~20:00, 전망대 평일 10:30~22:00 / 금토 ~23:00 운영합니다."</span>
+      }
+    },
+    {
+      <span class="code-prop">"@type"</span>: <span class="code-str">"Question"</span>,
+      <span class="code-prop">"name"</span>: <span class="code-str">"주차 요금은 얼마인가요?"</span>,
+      <span class="code-prop">"acceptedAnswer"</span>: {
+        <span class="code-prop">"@type"</span>: <span class="code-str">"Answer"</span>,
+        <span class="code-prop">"text"</span>: <span class="code-str">"평일 10분당 300원, 주말 10분당 500원이며 일일 최대 45,000원입니다. 일정 금액 이상 구매 시 주차 할인 혜택을 제공합니다."</span>
+      }
+    },
+    {
+      <span class="code-prop">"@type"</span>: <span class="code-str">"Question"</span>,
+      <span class="code-prop">"name"</span>: <span class="code-str">"대중교통으로 어떻게 가나요?"</span>,
+      <span class="code-prop">"acceptedAnswer"</span>: {
+        <span class="code-prop">"@type"</span>: <span class="code-str">"Answer"</span>,
+        <span class="code-prop">"text"</span>: <span class="code-str">"지하철 2호선·8호선 ○○역 6번 출구에서 도보 1분, 지하 직접 연결로 접근합니다. 인천공항에서 공항철도 환승으로 약 45분 소요됩니다."</span>
+      }
+    },
+    {
+      <span class="code-prop">"@type"</span>: <span class="code-str">"Question"</span>,
+      <span class="code-prop">"name"</span>: <span class="code-str">"외국인 택스리펀이 가능한가요?"</span>,
+      <span class="code-prop">"acceptedAnswer"</span>: {
+        <span class="code-prop">"@type"</span>: <span class="code-str">"Answer"</span>,
+        <span class="code-prop">"text"</span>: <span class="code-str">"가능합니다. 여권 지참 후 안내데스크에서 즉시 환급 또는 공항 환급을 선택할 수 있습니다. 알리페이·위챗페이·유니온페이 결제도 지원합니다."</span>
+      }
+    },
+    {
+      <span class="code-prop">"@type"</span>: <span class="code-str">"Question"</span>,
+      <span class="code-prop">"name"</span>: <span class="code-str">"어린이와 함께 갈 만한 시설이 있나요?"</span>,
+      <span class="code-prop">"acceptedAnswer"</span>: {
+        <span class="code-prop">"@type"</span>: <span class="code-str">"Answer"</span>,
+        <span class="code-prop">"text"</span>: <span class="code-str">"수족관(650종 55,000마리), 테마파크, 키즈카페, 베이비라운지를 운영합니다. 유모차 대여와 수유실도 갖추고 있습니다."</span>
+      }
+    }
+  ]
+}
+<span class="code-tag">&lt;/script&gt;</span></pre>
+            </div>
+            <div id="i03-rest" class="code-pane">
+<pre><span class="code-cmt">&lt;!-- /fnb/all.do 또는 식당 상세 페이지 적용 --&gt;</span>
+<span class="code-tag">&lt;script</span> <span class="code-attr">type</span>=<span class="code-str">"application/ld+json"</span><span class="code-tag">&gt;</span>
+{
+  <span class="code-prop">"@context"</span>: <span class="code-str">"https://schema.org"</span>,
+  <span class="code-prop">"@type"</span>: <span class="code-str">"ItemList"</span>,
+  <span class="code-prop">"name"</span>: <span class="code-str">"○○○쇼핑몰 식당 가이드"</span>,
+  <span class="code-prop">"numberOfItems"</span>: <span class="code-val">159</span>,
+  <span class="code-prop">"itemListElement"</span>: [
+    {
+      <span class="code-prop">"@type"</span>: <span class="code-str">"Restaurant"</span>,
+      <span class="code-prop">"name"</span>: <span class="code-str">"한국집"</span>,
+      <span class="code-prop">"servesCuisine"</span>: <span class="code-str">"한식"</span>,
+      <span class="code-prop">"priceRange"</span>: <span class="code-str">"$$"</span>,
+      <span class="code-prop">"address"</span>: {
+        <span class="code-prop">"@type"</span>: <span class="code-str">"PostalAddress"</span>,
+        <span class="code-prop">"streetAddress"</span>: <span class="code-str">"○○로 300 ○○○쇼핑몰 5F"</span>,
+        <span class="code-prop">"addressLocality"</span>: <span class="code-str">"○○구"</span>,
+        <span class="code-prop">"addressRegion"</span>: <span class="code-str">"서울"</span>
+      },
+      <span class="code-prop">"openingHours"</span>: <span class="code-str">"Mo-Su 10:30-22:00"</span>,
+      <span class="code-prop">"acceptsReservations"</span>: <span class="code-kw">true</span>
+    },
+    {
+      <span class="code-prop">"@type"</span>: <span class="code-str">"Restaurant"</span>,
+      <span class="code-prop">"name"</span>: <span class="code-str">"오레노라멘"</span>,
+      <span class="code-prop">"servesCuisine"</span>: <span class="code-str">"일식"</span>,
+      <span class="code-prop">"priceRange"</span>: <span class="code-str">"$$"</span>
+    },
+    {
+      <span class="code-prop">"@type"</span>: <span class="code-str">"Restaurant"</span>,
+      <span class="code-prop">"name"</span>: <span class="code-str">"온더보더"</span>,
+      <span class="code-prop">"servesCuisine"</span>: <span class="code-str">"멕시칸"</span>,
+      <span class="code-prop">"priceRange"</span>: <span class="code-str">"$$"</span>
+    }
+    <span class="code-cmt">// ... 159개 식당을 반복 등록</span>
+  ]
+}
+<span class="code-tag">&lt;/script&gt;</span></pre>
+            </div>
+            <div id="i03-prod" class="code-pane">
+<pre><span class="code-cmt">&lt;!-- /shopping/all.do 브랜드 목록 페이지 --&gt;</span>
+<span class="code-tag">&lt;script</span> <span class="code-attr">type</span>=<span class="code-str">"application/ld+json"</span><span class="code-tag">&gt;</span>
+{
+  <span class="code-prop">"@context"</span>: <span class="code-str">"https://schema.org"</span>,
+  <span class="code-prop">"@type"</span>: <span class="code-str">"ItemList"</span>,
+  <span class="code-prop">"name"</span>: <span class="code-str">"○○○쇼핑몰 입점 브랜드"</span>,
+  <span class="code-prop">"itemListElement"</span>: [
+    {
+      <span class="code-prop">"@type"</span>: <span class="code-str">"Brand"</span>,
+      <span class="code-prop">"name"</span>: <span class="code-str">"에르메스"</span>,
+      <span class="code-prop">"alternateName"</span>: <span class="code-str">"Hermès"</span>,
+      <span class="code-prop">"logo"</span>: <span class="code-str">"https://www.ourmall.co.kr/assets/brand/hermes.png"</span>,
+      <span class="code-prop">"sameAs"</span>: <span class="code-str">"https://www.hermes.com"</span>,
+      <span class="code-prop">"category"</span>: <span class="code-str">"Luxury Fashion"</span>
+    },
+    {
+      <span class="code-prop">"@type"</span>: <span class="code-str">"Brand"</span>,
+      <span class="code-prop">"name"</span>: <span class="code-str">"샤넬"</span>,
+      <span class="code-prop">"alternateName"</span>: <span class="code-str">"Chanel"</span>,
+      <span class="code-prop">"category"</span>: <span class="code-str">"Luxury Fashion"</span>
+    },
+    {
+      <span class="code-prop">"@type"</span>: <span class="code-str">"Brand"</span>,
+      <span class="code-prop">"name"</span>: <span class="code-str">"루이비통"</span>,
+      <span class="code-prop">"alternateName"</span>: <span class="code-str">"Louis Vuitton"</span>,
+      <span class="code-prop">"category"</span>: <span class="code-str">"Luxury Fashion"</span>
+    },
+    {
+      <span class="code-prop">"@type"</span>: <span class="code-str">"Brand"</span>,
+      <span class="code-prop">"name"</span>: <span class="code-str">"롤렉스"</span>,
+      <span class="code-prop">"alternateName"</span>: <span class="code-str">"Rolex"</span>,
+      <span class="code-prop">"category"</span>: <span class="code-str">"Luxury Watches"</span>
+    }
+    <span class="code-cmt">// ... 200개 이상 브랜드 반복 등록</span>
+  ]
+}
+<span class="code-tag">&lt;/script&gt;</span></pre>
+            </div>
+            <div id="i03-bc" class="code-pane">
+<pre><span class="code-cmt">&lt;!-- 사이트 계층 구조를 AI에 명시 — 모든 서브 페이지에 적용 --&gt;</span>
+<span class="code-tag">&lt;script</span> <span class="code-attr">type</span>=<span class="code-str">"application/ld+json"</span><span class="code-tag">&gt;</span>
+{
+  <span class="code-prop">"@context"</span>: <span class="code-str">"https://schema.org"</span>,
+  <span class="code-prop">"@type"</span>: <span class="code-str">"BreadcrumbList"</span>,
+  <span class="code-prop">"itemListElement"</span>: [
+    {
+      <span class="code-prop">"@type"</span>: <span class="code-str">"ListItem"</span>,
+      <span class="code-prop">"position"</span>: <span class="code-val">1</span>,
+      <span class="code-prop">"name"</span>: <span class="code-str">"홈"</span>,
+      <span class="code-prop">"item"</span>: <span class="code-str">"https://www.ourmall.co.kr/ko"</span>
+    },
+    {
+      <span class="code-prop">"@type"</span>: <span class="code-str">"ListItem"</span>,
+      <span class="code-prop">"position"</span>: <span class="code-val">2</span>,
+      <span class="code-prop">"name"</span>: <span class="code-str">"쇼핑"</span>,
+      <span class="code-prop">"item"</span>: <span class="code-str">"https://www.ourmall.co.kr/ko/shopping/all.do"</span>
+    },
+    {
+      <span class="code-prop">"@type"</span>: <span class="code-str">"ListItem"</span>,
+      <span class="code-prop">"position"</span>: <span class="code-val">3</span>,
+      <span class="code-prop">"name"</span>: <span class="code-str">"명품"</span>,
+      <span class="code-prop">"item"</span>: <span class="code-str">"https://www.ourmall.co.kr/ko/shopping/all.do?category=luxury"</span>
+    }
+  ]
+}
+<span class="code-tag">&lt;/script&gt;</span></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ INSIGHT 04 ============ -->
+    <div class="insight-block">
+      <div class="insight-head">
+        <div class="insight-tags">
+          <span class="insight-num">INSIGHT 04</span>
+          <span class="insight-chip chip-high">다국어 GEO 공백</span>
+          <span class="insight-chip chip-high">높음</span>
+        </div>
+        <h3 class="insight-title">
+          외국인 관광객 추천 질문에서 <em>Claude가 우리를 한 번도 언급하지 않았다.</em>
+        </h3>
+        <p class="insight-subtitle">
+          <span class="strong">Q2 (외국인 관광객 추천)</span> · Claude 미언급 · Gemini 4위 · Perplexity 3위 · [경쟁몰 가]·[경쟁몰 다]에 자리 내줌
+        </p>
+      </div>
+      <div class="insight-body">
+        <div class="insight-explain">
+          외국인 관광객을 대상으로 한 쇼핑몰 추천 질문에서 우리 브랜드는 노출 순위가 가장 약한 카테고리입니다. /en · /cn · /jp 다국어 페이지는 갖추고 있지만, 언어별 페이지 관계를 AI에 알려주는 <strong>hreflang 태그</strong>가 없고, 다국어 OG 태그도 미설정 상태입니다. 알리페이·위챗페이·택스리펀 같은 외국인 핵심 정보가 정적 콘텐츠로 노출되지 않아, AI가 "외국인 친화적인 쇼핑몰"을 추천할 때 우리를 후보에 올리지 못합니다.
+        </div>
+
+        <div class="insight-row">
+          <div class="insight-col asis">
+            <div class="insight-col-label"><span class="dot dot-red"></span>현황 · AS-IS</div>
+            <ul>
+              <li>Q2 (외국인 관광객 추천): <strong>Claude 미언급</strong> · Gemini 4위 ([경쟁몰 가] 1위) · Perplexity 3위 ([경쟁시설 자] 1위)</li>
+              <li>Perplexity 응답 원문: "교통 접근성(지하철·공항철도·환승), K-뷰티·K-패션·식품 쇼핑, 식사·카페·관광 연계성을 기준으로 고르는 게 좋습니다" — <strong>교통 접근성</strong>에서 [자사 권역] 입지가 약점으로 작용</li>
+              <li>/en (42개 URL) · /cn · /jp 경로 존재하나 hreflang 미설정, OG 다국어 확장 미적용</li>
+              <li>Q10 (중국인 관광객 가이드): 자사 인용 점수 D등급 — 알리페이·위챗페이·택스리펀 정적 콘텐츠 없음</li>
+            </ul>
+          </div>
+          <div class="insight-col tobe">
+            <div class="insight-col-label"><span class="dot dot-green"></span>처방 · TO-BE</div>
+            <ul>
+              <li>모든 언어 페이지에 <strong>hreflang 태그 + 언어별 OG 태그</strong> 추가 (즉시)</li>
+              <li>"공항철도 접근 안내" 페이지 신설 — Q2에서 1위를 차지한 [경쟁시설 자]의 접근성 약점을 우리 강점인 "[자사 권역] = 한국 최대 명품 쇼핑+엔터테인먼트"로 전환하는 비교 콘텐츠</li>
+              <li>외국인 맞춤 가이드 페이지 신설: 알리페이·위챗페이 사용법, 택스리펀 절차, 중국인 선호 K-뷰티 브랜드 목록, 인천공항 ↔ [자사 권역] 교통 안내</li>
+              <li><strong>예상 효과:</strong> Q2 노출 순위 미언급/3~4위 → 2위 이내, Q10 매칭 등급 D → B</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="code-section">
+          <div class="code-section-label">수정 코드 · 다국어 hreflang + OG 확장</div>
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-title">hreflang · 다국어 OG · 교통 접근성 강조</span>
+              <span class="code-lang">HTML</span>
+            </div>
+            <div class="code-tabs">
+              <div class="code-tab active" data-target="i04-hreflang">hreflang</div>
+              <div class="code-tab" data-target="i04-og">다국어 OG (영어)</div>
+              <div class="code-tab" data-target="i04-transit">교통 접근성 스키마</div>
+            </div>
+            <div id="i04-hreflang" class="code-pane active">
+<pre><span class="code-cmt">&lt;!-- 모든 언어 페이지 &lt;head&gt; 내 삽입 (한국어 페이지 예시) --&gt;</span>
+<span class="code-tag">&lt;link</span> <span class="code-attr">rel</span>=<span class="code-str">"alternate"</span> <span class="code-attr">hreflang</span>=<span class="code-str">"ko"</span>
+      <span class="code-attr">href</span>=<span class="code-str">"https://www.ourmall.co.kr/ko"</span><span class="code-tag">&gt;</span>
+<span class="code-tag">&lt;link</span> <span class="code-attr">rel</span>=<span class="code-str">"alternate"</span> <span class="code-attr">hreflang</span>=<span class="code-str">"en"</span>
+      <span class="code-attr">href</span>=<span class="code-str">"https://www.ourmall.co.kr/en"</span><span class="code-tag">&gt;</span>
+<span class="code-tag">&lt;link</span> <span class="code-attr">rel</span>=<span class="code-str">"alternate"</span> <span class="code-attr">hreflang</span>=<span class="code-str">"zh-CN"</span>
+      <span class="code-attr">href</span>=<span class="code-str">"https://www.ourmall.co.kr/cn"</span><span class="code-tag">&gt;</span>
+<span class="code-tag">&lt;link</span> <span class="code-attr">rel</span>=<span class="code-str">"alternate"</span> <span class="code-attr">hreflang</span>=<span class="code-str">"ja"</span>
+      <span class="code-attr">href</span>=<span class="code-str">"https://www.ourmall.co.kr/jp"</span><span class="code-tag">&gt;</span>
+<span class="code-tag">&lt;link</span> <span class="code-attr">rel</span>=<span class="code-str">"alternate"</span> <span class="code-attr">hreflang</span>=<span class="code-str">"x-default"</span>
+      <span class="code-attr">href</span>=<span class="code-str">"https://www.ourmall.co.kr/en"</span><span class="code-tag">&gt;</span>
+
+<span class="code-cmt">&lt;!-- canonical도 함께 명시 --&gt;</span>
+<span class="code-tag">&lt;link</span> <span class="code-attr">rel</span>=<span class="code-str">"canonical"</span>
+      <span class="code-attr">href</span>=<span class="code-str">"https://www.ourmall.co.kr/ko"</span><span class="code-tag">&gt;</span></pre>
+            </div>
+            <div id="i04-og" class="code-pane">
+<pre><span class="code-cmt">&lt;!-- /en 영어 페이지 &lt;head&gt; — 영어로 작성된 OG 태그 --&gt;</span>
+<span class="code-tag">&lt;meta</span> <span class="code-attr">property</span>=<span class="code-str">"og:locale"</span>
+      <span class="code-attr">content</span>=<span class="code-str">"en_US"</span><span class="code-tag">&gt;</span>
+<span class="code-tag">&lt;meta</span> <span class="code-attr">property</span>=<span class="code-str">"og:locale:alternate"</span>
+      <span class="code-attr">content</span>=<span class="code-str">"ko_KR"</span><span class="code-tag">&gt;</span>
+<span class="code-tag">&lt;meta</span> <span class="code-attr">property</span>=<span class="code-str">"og:locale:alternate"</span>
+      <span class="code-attr">content</span>=<span class="code-str">"zh_CN"</span><span class="code-tag">&gt;</span>
+<span class="code-tag">&lt;meta</span> <span class="code-attr">property</span>=<span class="code-str">"og:locale:alternate"</span>
+      <span class="code-attr">content</span>=<span class="code-str">"ja_JP"</span><span class="code-tag">&gt;</span>
+
+<span class="code-tag">&lt;meta</span> <span class="code-attr">property</span>=<span class="code-str">"og:title"</span>
+      <span class="code-attr">content</span>=<span class="code-str">"Subject Shopping Mall — Seoul's Largest Shopping Complex"</span><span class="code-tag">&gt;</span>
+<span class="code-tag">&lt;meta</span> <span class="code-attr">property</span>=<span class="code-str">"og:description"</span>
+      <span class="code-attr">content</span>=<span class="code-str">"Luxury shopping (Hermès · Chanel · Louis Vuitton), aquarium, cinema, observatory. Tax-free shopping, Alipay/WeChat Pay accepted. Direct subway connection at Jamsil Station (Line 2·8)."</span><span class="code-tag">&gt;</span>
+<span class="code-tag">&lt;meta</span> <span class="code-attr">property</span>=<span class="code-str">"og:image"</span>
+      <span class="code-attr">content</span>=<span class="code-str">"https://www.ourmall.co.kr/assets/images/og_en.png"</span><span class="code-tag">&gt;</span>
+<span class="code-tag">&lt;meta</span> <span class="code-attr">property</span>=<span class="code-str">"og:url"</span>
+      <span class="code-attr">content</span>=<span class="code-str">"https://www.ourmall.co.kr/en"</span><span class="code-tag">&gt;</span>
+
+<span class="code-cmt">&lt;!-- Twitter Card도 함께 --&gt;</span>
+<span class="code-tag">&lt;meta</span> <span class="code-attr">name</span>=<span class="code-str">"twitter:card"</span>
+      <span class="code-attr">content</span>=<span class="code-str">"summary_large_image"</span><span class="code-tag">&gt;</span>
+<span class="code-tag">&lt;meta</span> <span class="code-attr">name</span>=<span class="code-str">"twitter:title"</span>
+      <span class="code-attr">content</span>=<span class="code-str">"Subject Shopping Mall"</span><span class="code-tag">&gt;</span></pre>
+            </div>
+            <div id="i04-transit" class="code-pane">
+<pre><span class="code-cmt">// LocalBusiness에 공항·지하철 접근성 명시</span>
+<span class="code-cmt">// Q2에서 우리가 밀린 1순위 사유 = 교통 접근성</span>
+<span class="code-tag">&lt;script</span> <span class="code-attr">type</span>=<span class="code-str">"application/ld+json"</span><span class="code-tag">&gt;</span>
+{
+  <span class="code-prop">"@context"</span>: <span class="code-str">"https://schema.org"</span>,
+  <span class="code-prop">"@type"</span>: <span class="code-str">"ShoppingCenter"</span>,
+  <span class="code-prop">"name"</span>: <span class="code-str">"○○○쇼핑몰"</span>,
+  <span class="code-prop">"hasMap"</span>: <span class="code-str">"https://maps.google.com/?q=○○○쇼핑몰"</span>,
+  <span class="code-prop">"isAccessibleForFree"</span>: <span class="code-kw">true</span>,
+  <span class="code-prop">"amenityFeature"</span>: [
+    {
+      <span class="code-prop">"@type"</span>: <span class="code-str">"LocationFeatureSpecification"</span>,
+      <span class="code-prop">"name"</span>: <span class="code-str">"지하철 직결"</span>,
+      <span class="code-prop">"description"</span>: <span class="code-str">"2호선·8호선 ○○역 6번 출구 지하 직접 연결, 도보 1분"</span>,
+      <span class="code-prop">"value"</span>: <span class="code-kw">true</span>
+    },
+    {
+      <span class="code-prop">"@type"</span>: <span class="code-str">"LocationFeatureSpecification"</span>,
+      <span class="code-prop">"name"</span>: <span class="code-str">"인천공항 접근"</span>,
+      <span class="code-prop">"description"</span>: <span class="code-str">"공항철도 → 서울역(약 43분) → 2호선 ○○역(약 35분). 총 약 80분"</span>,
+      <span class="code-prop">"value"</span>: <span class="code-kw">true</span>
+    },
+    {
+      <span class="code-prop">"@type"</span>: <span class="code-str">"LocationFeatureSpecification"</span>,
+      <span class="code-prop">"name"</span>: <span class="code-str">"알리페이·위챗페이 결제"</span>,
+      <span class="code-prop">"value"</span>: <span class="code-kw">true</span>
+    },
+    {
+      <span class="code-prop">"@type"</span>: <span class="code-str">"LocationFeatureSpecification"</span>,
+      <span class="code-prop">"name"</span>: <span class="code-str">"택스리펀 (즉시환급)"</span>,
+      <span class="code-prop">"value"</span>: <span class="code-kw">true</span>
+    },
+    {
+      <span class="code-prop">"@type"</span>: <span class="code-str">"LocationFeatureSpecification"</span>,
+      <span class="code-prop">"name"</span>: <span class="code-str">"다국어 안내 (영·중·일)"</span>,
+      <span class="code-prop">"value"</span>: <span class="code-kw">true</span>
+    }
+  ]
+}
+<span class="code-tag">&lt;/script&gt;</span></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+<section class="section" style="border-top:none;padding-top:0;">
+  <div class="section-inner">
+
+    <!-- ============ INSIGHT 05 ============ -->
+    <div class="insight-block">
+      <div class="insight-head">
+        <div class="insight-tags">
+          <span class="insight-num">INSIGHT 05</span>
+          <span class="insight-chip chip-high">인용 누수</span>
+          <span class="insight-chip chip-high">높음</span>
+        </div>
+        <h3 class="insight-title">
+          비교형 질문에서 <em>1위로 평가받지만</em>, 출처 링크는 외부로 새고 있다.
+        </h3>
+        <p class="insight-subtitle">
+          <span class="strong">명품 쇼핑 비교 SOV 65%</span> (Claude 기준 1위) · 그러나 인용 URL 중 자사 30% · 나무위키·블로그 70%
+        </p>
+      </div>
+      <div class="insight-body">
+        <div class="insight-explain">
+          이건 GEO 진단에서 가장 안타까운 패턴입니다. AI는 "명품 쇼핑이라면 ○○○쇼핑몰이 1위"라고 분명히 말합니다. 그런데 그 답변 아래에 첨부되는 출처 링크는 우리 사이트가 아닌 나무위키와 블로그로 흘러갑니다. <strong>"브랜드 평가는 우리가 받지만, 트래픽은 외부 사이트가 가져가는"</strong> 구조입니다. 사용자가 "더 자세히 알고 싶다"며 링크를 클릭할 때, 그 첫 인상이 우리 사이트가 아닌 위키 문서에서 만들어집니다.
+        </div>
+
+        <div class="insight-row">
+          <div class="insight-col asis">
+            <div class="insight-col-label"><span class="dot dot-red"></span>현황 · AS-IS</div>
+            <ul>
+              <li>Q8 (명품 쇼핑 비교): 3개 엔진 모두 <strong>○○○쇼핑몰 1위 평가</strong> (Claude 6회·Gemini 4회·Perplexity 7회 자발 언급)</li>
+              <li>그러나 Q8 인용 URL 분석: 자사 도메인 30%, 나무위키 20%, 블로그·여행 사이트 50%</li>
+              <li>Claude Q1 (가족 단위 비교) 인용 10건 중 공식 URL 3건 (30%)</li>
+              <li>Gemini Q2 (외국인 추천) 인용 8건 중 공식 URL <strong>0건 (0%)</strong></li>
+              <li>Perplexity Q5 (영업시간·주차) 인용 8건 중 공식 URL 2건 (25%)</li>
+            </ul>
+          </div>
+          <div class="insight-col tobe">
+            <div class="insight-col-label"><span class="dot dot-green"></span>처방 · TO-BE</div>
+            <ul>
+              <li><strong>비교 콘텐츠 자체 발행</strong> — "○○○쇼핑몰 vs [경쟁몰 가] vs [경쟁몰 나]: 명품 쇼핑 가이드" 같은 자사 비교 콘텐츠를 공식 블로그에 발행 (편향 우려 시 객관 지표 기반으로)</li>
+              <li>Article 스키마 + author 정보(○○○쇼핑몰 공식 에디터) 적용 → AI 엔진의 공식 출처 인용 유도</li>
+              <li>"명품 브랜드 입점 현황 팩트시트" 단일 페이지 신설 — 브랜드 200개 + 층별 위치 + 입점 일자를 구조화. 나무위키가 이 역할을 대신하지 못하도록 1차 정보원 확보</li>
+              <li><strong>예상 효과:</strong> 비교형·정의형 질문에서 자사 도메인 인용률 30% → 50%+</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="code-section">
+          <div class="code-section-label">수정 코드 · Article 스키마 + 비교 콘텐츠 구조화</div>
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-title">Article (공식 비교 콘텐츠) + ItemList (브랜드 팩트시트)</span>
+              <span class="code-lang">JSON-LD</span>
+            </div>
+            <div class="code-tabs">
+              <div class="code-tab active" data-target="i05-article">Article (비교 콘텐츠)</div>
+              <div class="code-tab" data-target="i05-fact">브랜드 팩트시트</div>
+            </div>
+            <div id="i05-article" class="code-pane active">
+<pre><span class="code-cmt">&lt;!-- 공식 블로그 또는 /guide/luxury-shopping 페이지 --&gt;</span>
+<span class="code-tag">&lt;script</span> <span class="code-attr">type</span>=<span class="code-str">"application/ld+json"</span><span class="code-tag">&gt;</span>
+{
+  <span class="code-prop">"@context"</span>: <span class="code-str">"https://schema.org"</span>,
+  <span class="code-prop">"@type"</span>: <span class="code-str">"Article"</span>,
+  <span class="code-prop">"headline"</span>: <span class="code-str">"서울 명품 쇼핑 가이드 — ○○○쇼핑몰 프리미엄관의 모든 것"</span>,
+  <span class="code-prop">"description"</span>: <span class="code-str">"3대 명품(에르메스·샤넬·루이비통)과 4대 주얼리 부티크가 모두 입점한 국내 최대 규모 럭셔리 백화점 프리미엄관. 층별 입점 브랜드와 쇼핑 동선을 안내합니다."</span>,
+  <span class="code-prop">"author"</span>: {
+    <span class="code-prop">"@type"</span>: <span class="code-str">"Organization"</span>,
+    <span class="code-prop">"name"</span>: <span class="code-str">"○○○쇼핑몰 공식 에디터"</span>,
+    <span class="code-prop">"url"</span>: <span class="code-str">"https://www.ourmall.co.kr/ko"</span>
+  },
+  <span class="code-prop">"publisher"</span>: {
+    <span class="code-prop">"@type"</span>: <span class="code-str">"Organization"</span>,
+    <span class="code-prop">"name"</span>: <span class="code-str">"○○○쇼핑몰"</span>,
+    <span class="code-prop">"logo"</span>: {
+      <span class="code-prop">"@type"</span>: <span class="code-str">"ImageObject"</span>,
+      <span class="code-prop">"url"</span>: <span class="code-str">"https://www.ourmall.co.kr/assets/images/logo.png"</span>
+    }
+  },
+  <span class="code-prop">"datePublished"</span>: <span class="code-str">"2026-05-15"</span>,
+  <span class="code-prop">"dateModified"</span>: <span class="code-str">"2026-05-15"</span>,
+  <span class="code-prop">"image"</span>: <span class="code-str">"https://www.ourmall.co.kr/assets/blog/luxury-guide.jpg"</span>,
+  <span class="code-prop">"mainEntityOfPage"</span>: <span class="code-str">"https://www.ourmall.co.kr/ko/guide/luxury-shopping"</span>,
+  <span class="code-prop">"about"</span>: [
+    { <span class="code-prop">"@type"</span>: <span class="code-str">"Brand"</span>, <span class="code-prop">"name"</span>: <span class="code-str">"에르메스"</span> },
+    { <span class="code-prop">"@type"</span>: <span class="code-str">"Brand"</span>, <span class="code-prop">"name"</span>: <span class="code-str">"샤넬"</span> },
+    { <span class="code-prop">"@type"</span>: <span class="code-str">"Brand"</span>, <span class="code-prop">"name"</span>: <span class="code-str">"루이비통"</span> }
+  ]
+}
+<span class="code-tag">&lt;/script&gt;</span></pre>
+            </div>
+            <div id="i05-fact" class="code-pane">
+<pre><span class="code-cmt">&lt;!-- /guide/brand-factsheet — 단일 페이지에 모든 브랜드 정리 --&gt;</span>
+<span class="code-tag">&lt;script</span> <span class="code-attr">type</span>=<span class="code-str">"application/ld+json"</span><span class="code-tag">&gt;</span>
+{
+  <span class="code-prop">"@context"</span>: <span class="code-str">"https://schema.org"</span>,
+  <span class="code-prop">"@type"</span>: <span class="code-str">"Dataset"</span>,
+  <span class="code-prop">"name"</span>: <span class="code-str">"○○○쇼핑몰 입점 브랜드 팩트시트"</span>,
+  <span class="code-prop">"description"</span>: <span class="code-str">"○○○쇼핑몰에 입점한 200개 이상 브랜드의 카테고리·층별 위치·입점 정보. 매주 업데이트."</span>,
+  <span class="code-prop">"creator"</span>: {
+    <span class="code-prop">"@type"</span>: <span class="code-str">"Organization"</span>,
+    <span class="code-prop">"name"</span>: <span class="code-str">"○○○쇼핑몰"</span>
+  },
+  <span class="code-prop">"keywords"</span>: [
+    <span class="code-str">"명품"</span>, <span class="code-str">"luxury"</span>, <span class="code-str">"프리미엄관"</span>,
+    <span class="code-str">"브랜드 입점"</span>, <span class="code-str">"한국 명품 쇼핑"</span>
+  ],
+  <span class="code-prop">"temporalCoverage"</span>: <span class="code-str">"2026/.."</span>,
+  <span class="code-prop">"variableMeasured"</span>: [
+    <span class="code-str">"브랜드명"</span>, <span class="code-str">"카테고리"</span>,
+    <span class="code-str">"층"</span>, <span class="code-str">"입점일"</span>
+  ],
+  <span class="code-prop">"distribution"</span>: {
+    <span class="code-prop">"@type"</span>: <span class="code-str">"DataDownload"</span>,
+    <span class="code-prop">"encodingFormat"</span>: <span class="code-str">"text/html"</span>,
+    <span class="code-prop">"contentUrl"</span>: <span class="code-str">"https://www.ourmall.co.kr/ko/guide/brand-factsheet"</span>
+  },
+  <span class="code-prop">"isBasedOn"</span>: <span class="code-str">"https://www.ourmall.co.kr/ko/shopping/all.do"</span>,
+  <span class="code-prop">"license"</span>: <span class="code-str">"https://www.ourmall.co.kr/ko/about/terms"</span>
+}
+<span class="code-tag">&lt;/script&gt;</span></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ INSIGHT 06 ============ -->
+    <div class="insight-block">
+      <div class="insight-head">
+        <div class="insight-tags">
+          <span class="insight-num">INSIGHT 06</span>
+          <span class="insight-chip chip-mid">인텐트 미스매치</span>
+          <span class="insight-chip chip-mid">중간</span>
+        </div>
+        <h3 class="insight-title">
+          "어린이랑 갈 만한 곳" 같은 <em>문제해결형 질문</em>에서 우리가 후보로 떠오르지 못한다.
+        </h3>
+        <p class="insight-subtitle">
+          <span class="strong">문제해결형 매칭률 50%</span> · 10개 질문 중 5개에서 자사 인용 가능 · FAQ 페이지 부재
+        </p>
+      </div>
+      <div class="insight-body">
+        <div class="insight-explain">
+          "[자사 권역]에서 어린이랑 시간 보낼 만한 곳", "○○○쇼핑몰에서 점심 먹을 만한 식당" 같은 <strong>문제해결형 질문</strong>은 AI가 가장 자주 답하는 유형입니다. 그런데 우리 사이트에는 이런 질문에 직접 답해주는 FAQ 페이지가 없습니다. 그래서 AI는 어쩔 수 없이 외부 블로그에서 "[키즈체험관 타], [키즈체험관 파]" 같은 답변을 가져옵니다. <strong>우리는 시설을 보유하고 있는데, AI는 그 사실을 모른 채 답하는</strong> 답답한 상황입니다.
+        </div>
+
+        <div class="insight-row">
+          <div class="insight-col asis">
+            <div class="insight-col-label"><span class="dot dot-red"></span>현황 · AS-IS</div>
+            <ul>
+              <li>Q3 (어린이 시설): 3개 엔진 모두 "외부 시설([키즈체험관 타]·[키즈체험관 파])"부터 추천. 우리 아쿠아리움·어드벤처 언급은 후순위</li>
+              <li>Q7 (점심 식당): 인용 출처가 거의 전부 외부 블로그 (159곳 식당 데이터가 정적 HTML에 없음)</li>
+              <li>FAQ 페이지 자체가 존재하지 않음 — 자주 묻는 질문에 대한 공식 답변 0개</li>
+              <li>문제해결형 매칭률 50% · 정의형 매칭률 33% · 추천형 매칭률 33% — <strong>실용 질문에서 모두 취약</strong></li>
+            </ul>
+          </div>
+          <div class="insight-col tobe">
+            <div class="insight-col-label"><span class="dot dot-green"></span>처방 · TO-BE</div>
+            <ul>
+              <li><strong>FAQ 페이지 신설</strong> + FAQPage 스키마 적용 — 영업시간·주차·교통·키즈 시설·외국인 서비스·예약 등 Q&A 20개 이상</li>
+              <li>"어린이와 함께" 페이지 신설 — 아쿠아리움·어드벤처·키즈존·베이비라운지·유모차 대여 한 페이지에 통합</li>
+              <li>"점심 추천 5선" 같은 큐레이션 콘텐츠 정기 발행 — Q7 같은 추천형 질문에서 자사가 1차 출처 역할 수행</li>
+              <li><strong>예상 효과:</strong> 문제해결형 매칭률 50% → 80%+, 자사 인용률 +10%p</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="code-section">
+          <div class="code-section-label">수정 코드 · llms.txt + HowTo 스키마</div>
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-title">llms.txt (AI 크롤러 전용 사이트맵) + HowTo (가이드 콘텐츠)</span>
+              <span class="code-lang">TXT · JSON-LD</span>
+            </div>
+            <div class="code-tabs">
+              <div class="code-tab active" data-target="i06-llms">llms.txt</div>
+              <div class="code-tab" data-target="i06-howto">HowTo 스키마</div>
+            </div>
+            <div id="i06-llms" class="code-pane active">
+<pre><span class="code-cmt"># /llms.txt — 도메인 루트에 배치 (https://www.ourmall.co.kr/llms.txt)</span>
+<span class="code-cmt"># AI 크롤러(ClaudeBot, GPTBot, Gemini 등)가 우선 참조하는 메타 파일</span>
+
+<span class="code-tag"># Subject Shopping Mall — AI Crawler Reference</span>
+
+<span class="code-tag">## Site Information</span>
+- Name: Subject Shopping Mall (○○○쇼핑몰)
+- URL: https://www.ourmall.co.kr/ko
+- Type: Shopping Center, Entertainment Complex
+- Location: Seoul, Songpa-gu, Korea
+
+<span class="code-tag">## Description</span>
+서울 ○○구 [자사 권역]에 위치한 서울 최대 규모 복합쇼핑몰.
+프리미엄관(명품관) · 쇼핑몰동 · 엔터테인먼트동 구성.
+영업시간: 매일 10:30 ~ 22:00
+
+<span class="code-tag">## Key Information</span>
+- 영업시간: 쇼핑몰 10:30-22:00, 프리미엄관 10:30-20:00
+- 주차: 평일 300원/10분, 주말 500원/10분, 일일 최대 45,000원
+- 대중교통: 지하철 2호선·8호선 ○○역 6번 출구 직결
+- 인천공항 접근: 공항철도 → 서울역 → 2호선 ○○역, 약 80분
+
+<span class="code-tag">## Services for International Visitors</span>
+- Tax-Free Shopping: 즉시 환급 가능
+- Payment: 알리페이, 위챗페이, 유니온페이 결제
+- 다국어 안내: 영어·중국어·일본어
+
+<span class="code-tag">## Main Attractions</span>
+- 수족관 (650종, 55,000마리, 5,200톤)
+- 영화관 (21개관)
+- 콘서트홀 (국내 최초 빈야드 스타일)
+- 전망대 전망대 (118~123층)
+
+<span class="code-tag">## Brand Categories</span>
+- 명품: 에르메스, 샤넬, 루이비통, 디올, 구찌, 프라다 등
+- 주얼리·시계: 까르띠에, 티파니, 불가리, 반클리프 아펠, 롤렉스
+- K-뷰티: 설화수, 헤라, 라네즈, 이니스프리
+- F&B: 159곳 이상 식음료 매장
+
+<span class="code-tag">## Related Pages</span>
+- /ko/shopping/all.do — 전체 입점 브랜드 목록
+- /ko/fnb/restaurant-guide.do — 식당 가이드
+- /ko/about/floor.do — 층별 안내
+- /ko/entertainment/aquarium.do — 아쿠아리움
+- /ko/about/location.do — 위치·교통
+
+<span class="code-tag">## Last Updated</span>
+2026-05-15</pre>
+            </div>
+            <div id="i06-howto" class="code-pane">
+<pre><span class="code-cmt">&lt;!-- /guide/family-visit 어린이 동반 방문 가이드 페이지 --&gt;</span>
+<span class="code-tag">&lt;script</span> <span class="code-attr">type</span>=<span class="code-str">"application/ld+json"</span><span class="code-tag">&gt;</span>
+{
+  <span class="code-prop">"@context"</span>: <span class="code-str">"https://schema.org"</span>,
+  <span class="code-prop">"@type"</span>: <span class="code-str">"HowTo"</span>,
+  <span class="code-prop">"name"</span>: <span class="code-str">"어린이와 함께 ○○○쇼핑몰 즐기는 법"</span>,
+  <span class="code-prop">"description"</span>: <span class="code-str">"아이들이 좋아할 코스, 편의시설 위치, 유모차 대여, 베이비라운지 등 가족 방문에 필요한 모든 정보."</span>,
+  <span class="code-prop">"totalTime"</span>: <span class="code-str">"PT5H"</span>,
+  <span class="code-prop">"estimatedCost"</span>: {
+    <span class="code-prop">"@type"</span>: <span class="code-str">"MonetaryAmount"</span>,
+    <span class="code-prop">"currency"</span>: <span class="code-str">"KRW"</span>,
+    <span class="code-prop">"value"</span>: <span class="code-str">"50000"</span>
+  },
+  <span class="code-prop">"step"</span>: [
+    {
+      <span class="code-prop">"@type"</span>: <span class="code-str">"HowToStep"</span>,
+      <span class="code-prop">"position"</span>: <span class="code-val">1</span>,
+      <span class="code-prop">"name"</span>: <span class="code-str">"오전 — 수족관"</span>,
+      <span class="code-prop">"text"</span>: <span class="code-str">"개장 직후(10:00)가 가장 한산합니다. 650종 55,000마리 해양 생물 관람. 약 2시간 소요."</span>
+    },
+    {
+      <span class="code-prop">"@type"</span>: <span class="code-str">"HowToStep"</span>,
+      <span class="code-prop">"position"</span>: <span class="code-val">2</span>,
+      <span class="code-prop">"name"</span>: <span class="code-str">"점심 — 5층 식당가"</span>,
+      <span class="code-prop">"text"</span>: <span class="code-str">"가족 단위에게 적합한 한식·일식·양식 매장 약 30곳. 키즈 메뉴 제공 매장 다수."</span>
+    },
+    {
+      <span class="code-prop">"@type"</span>: <span class="code-str">"HowToStep"</span>,
+      <span class="code-prop">"position"</span>: <span class="code-val">3</span>,
+      <span class="code-prop">"name"</span>: <span class="code-str">"오후 — [체험아트센터] / 키즈존"</span>,
+      <span class="code-prop">"text"</span>: <span class="code-str">"6층 [체험아트센터]에서 체험형 전시 관람. 1~2시간."</span>
+    }
+  ],
+  <span class="code-prop">"supply"</span>: [
+    { <span class="code-prop">"@type"</span>: <span class="code-str">"HowToSupply"</span>, <span class="code-prop">"name"</span>: <span class="code-str">"유모차 대여 (안내데스크)"</span> },
+    { <span class="code-prop">"@type"</span>: <span class="code-str">"HowToSupply"</span>, <span class="code-prop">"name"</span>: <span class="code-str">"수유실·기저귀 교환대 (전 층)"</span> }
+  ]
+}
+<span class="code-tag">&lt;/script&gt;</span></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- ============ 04 인용 출처 분석 ============ -->
+<section id="citation" class="section">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-num">CHAPTER 04</div>
+      <h2 class="section-title">인용 출처 분석 — AI는 누구의 말을 우리에 대해 듣는가</h2>
+      <p class="section-lead">
+        AI가 우리에 대해 답할 때 참고하는 출처 190건을 자사·권위지·기타로 분류했습니다. 자사 인용률 16.3%는 단일 수치가 아니라, AI 답변의 정확성·톤·신뢰도를 결정하는 가장 본질적인 지표입니다.
+      </p>
+    </div>
+
+    <div class="citation-overview">
+      <div class="citation-donut">
+        <div class="citation-donut-title">전체 인용 출처 분포 · 190건</div>
+        <div class="citation-bars">
+          <div class="citation-bar-row">
+            <div class="citation-bar-label">
+              자사
+              <span class="sub">Own</span>
+            </div>
+            <div class="citation-bar-track">
+              <div class="citation-bar-fill own" style="width:16.3%">16.3%</div>
+            </div>
+            <div class="citation-bar-num">
+              <span class="pct">31</span> / 190
+            </div>
+          </div>
+          <div class="citation-bar-row">
+            <div class="citation-bar-label">
+              경쟁사
+              <span class="sub">Competitor</span>
+            </div>
+            <div class="citation-bar-track">
+              <div class="citation-bar-fill" style="width:0%;background:var(--text-4);"></div>
+            </div>
+            <div class="citation-bar-num">
+              <span class="pct">0</span> / 190
+            </div>
+          </div>
+          <div class="citation-bar-row">
+            <div class="citation-bar-label">
+              권위지
+              <span class="sub">Authority</span>
+            </div>
+            <div class="citation-bar-track">
+              <div class="citation-bar-fill authority" style="width:5.3%">5.3%</div>
+            </div>
+            <div class="citation-bar-num">
+              <span class="pct">10</span> / 190
+            </div>
+          </div>
+          <div class="citation-bar-row">
+            <div class="citation-bar-label">
+              기타
+              <span class="sub">Other</span>
+            </div>
+            <div class="citation-bar-track">
+              <div class="citation-bar-fill other" style="width:78.4%">78.4%</div>
+            </div>
+            <div class="citation-bar-num">
+              <span class="pct">149</span> / 190
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="citation-side">
+        <div class="citation-side-label">한 줄 요약</div>
+        <h3 class="citation-side-headline">
+          AI는 우리 사이트를 <em>10번 중 1.6번</em>만 본다.
+        </h3>
+        <p class="citation-side-body">
+          나머지 8.4번은 외부 블로그·위키·여행 정보에서 우리 정보를 가져옵니다. 정보의 정확성과 톤을 우리가 통제할 수 없는 구조이며, "공식 채널이 곧 1차 출처" 라는 신뢰의 출발점이 깨진 상태입니다.
+        </p>
+      </div>
+    </div>
+
+    <div class="subsection-title">자사 도메인 인용 분포 (31건 · 8개 도메인)</div>
+    <table class="domain-table">
+      <thead>
+        <tr>
+          <th>도메인</th>
+          <th>도메인 유형</th>
+          <th class="num">인용 빈도</th>
+          <th class="num">비중</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="mono">ourmall.co.kr</td><td><span class="own-tag own">공식 메인</span></td><td class="num">13</td><td class="num">41.9%</td></tr>
+        <tr><td class="mono">affiliate-a.co.kr</td><td><span class="own-tag own">계열사</span></td><td class="num">6</td><td class="num">19.4%</td></tr>
+        <tr><td class="mono">parentco.co.kr</td><td><span class="own-tag own">계열사</span></td><td class="num">4</td><td class="num">12.9%</td></tr>
+        <tr><td class="mono">aquarium.affiliates.co.kr</td><td><span class="own-tag own">계열사</span></td><td class="num">2</td><td class="num">6.5%</td></tr>
+        <tr><td class="mono">adventure.affiliates.co.kr</td><td><span class="own-tag own">계열사</span></td><td class="num">2</td><td class="num">6.5%</td></tr>
+        <tr><td class="mono">blog.lotte.co.kr</td><td><span class="own-tag own">공식 블로그</span></td><td class="num">2</td><td class="num">6.5%</td></tr>
+        <tr><td class="mono">facebook.com (공식)</td><td><span class="own-tag own">공식 SNS</span></td><td class="num">1</td><td class="num">3.2%</td></tr>
+        <tr><td class="mono">instagram.com (공식)</td><td><span class="own-tag own">공식 SNS</span></td><td class="num">1</td><td class="num">3.2%</td></tr>
+      </tbody>
+    </table>
+
+    <div class="notice">
+      <span class="notice-icon">INSIGHT</span>
+      <span>자사 인용 31건 중 메인 도메인(ourmall.co.kr) 비중은 <strong>41.9%(13건)</strong>에 불과합니다. 나머지는 affiliate-a.co.kr·parentco.co.kr 등 계열사 도메인으로 분산되어 있어 메인 도메인 자체의 권위 신호가 약합니다. <strong>메인 도메인으로 콘텐츠 집중 + 계열사 도메인에서 메인으로 sameAs 링크 강화</strong>가 필요합니다.</span>
+    </div>
+
+    <div class="domain-grid">
+      <div>
+        <div class="domain-block-title navy">권위지 (10건 · 5.3%)</div>
+        <table class="domain-table">
+          <thead>
+            <tr>
+              <th>도메인</th>
+              <th>유형</th>
+              <th class="num">인용</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="mono">namu.wiki</td><td>위키 (2차)</td><td class="num">8</td></tr>
+            <tr><td class="mono">visitseoul.net</td><td>정부·관광청</td><td class="num">2</td></tr>
+            <tr><td class="mono">datalab.visitkorea.or.kr</td><td>정부·관광청</td><td class="num">2</td></tr>
+            <tr><td class="mono">visitkorea.or.kr</td><td>정부·관광청</td><td class="num">1</td></tr>
+            <tr><td class="mono">ko.wikipedia.org</td><td>위키 (2차)</td><td class="num">1</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:12px; color:var(--text-3); margin-top:10px; line-height:1.7;">
+          ※ 권위지 10건 중 <strong>나무위키 8건</strong>이 80%를 차지. 사실상 나무위키 단일 페이지가 우리 브랜드의 핵심 정보원 역할을 하고 있는 상태.
+        </p>
+      </div>
+      <div>
+        <div class="domain-block-title">기타 (상위 5개 · 149건 중)</div>
+        <table class="domain-table">
+          <thead>
+            <tr>
+              <th>도메인</th>
+              <th>유형</th>
+              <th class="num">인용</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="mono">tripadvisor.com</td><td>여행 리뷰</td><td class="num">4</td></tr>
+            <tr><td class="mono">trip.com</td><td>여행 정보</td><td class="num">2</td></tr>
+            <tr><td class="mono">brunch.co.kr</td><td>블로그 (퍼블리싱)</td><td class="num">2</td></tr>
+            <tr><td class="mono">hotels.com</td><td>호텔·여행</td><td class="num">1</td></tr>
+            <tr><td class="mono">agoda.com</td><td>여행 가이드</td><td class="num">1</td></tr>
+            <tr><td class="mono">기타 32개 도메인</td><td>혼합 (개인 블로그·뉴스 등)</td><td class="num">139</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:12px; color:var(--text-3); margin-top:10px; line-height:1.7;">
+          ※ 기타 149건은 32개 도메인에 흩어져 있으며, 그 중 상당수가 개인 블로그·여행 후기로 정보의 정확성·최신성을 우리가 통제할 수 없습니다.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ============ 05 AI 엔진별 응답 실측 ============ -->
+<section id="engines" class="section">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-num">CHAPTER 05</div>
+      <h2 class="section-title">AI 엔진별 응답 실측</h2>
+      <p class="section-lead">
+        10개 질문 × 3개 엔진 = 총 30회의 응답을 그대로 수집했습니다. 각 질문에서 우리 브랜드가 노출된 순위, 엔진별 응답 요약, 인용 출처 수까지 모든 측정 결과를 투명하게 공개합니다.
+      </p>
+    </div>
+
+    <div class="notice">
+      <span class="notice-icon">LEGEND</span>
+      <span><strong>노출 순위</strong>는 AI 응답에서 우리 브랜드가 언급된 상대적 위치를 나타냅니다. <span class="check">1위 ✓</span> 응답 첫머리에 자발 언급 / <span class="warn">2~3위 ⚠</span> 본문 중간 언급 / <span class="cross">미언급 ✕</span> 후보에서 누락. 우측의 큰 숫자는 3엔진 통합 평균 순위입니다.</span>
+    </div>
+
+    <!-- Q1 -->
+    <div class="qlog">
+      <div class="qlog-head">
+        <div class="qlog-head-l">
+          <div class="qlog-id">Q01 <span class="qtype">비교형</span></div>
+          <div class="qlog-q">○○○쇼핑몰과 [경쟁몰 가] 중에 가족 단위로 가기 좋은 곳은 어디예요?</div>
+        </div>
+        <div class="qlog-rank">
+          <div class="qlog-rank-label">통합 노출 순위</div>
+          <div class="qlog-rank-val">1위</div>
+        </div>
+      </div>
+      <div class="qlog-body">
+        <div class="qlog-engine">
+          <div class="qlog-engine-name">CLAUDE <span class="engine-pill pill-yes">언급</span></div>
+          <div class="qlog-engine-body">○○○쇼핑몰: 어드벤처·아쿠아리움·[자사 키즈존] 등 가족 친화 강조. [경쟁몰 가]: 실내정원·팝업 스토어. <strong>결론: 영·유아·초등 자녀 가족 → ○○○쇼핑몰 추천.</strong></div>
+          <div class="qlog-engine-meta">
+            <span>언급 <span class="v">4회</span></span>
+            <span>인용 <span class="v">10건</span></span>
+            <span>자사 <span class="v">3건</span></span>
+          </div>
+        </div>
+        <div class="qlog-engine">
+          <div class="qlog-engine-name">GEMINI <span class="engine-pill pill-yes">언급</span></div>
+          <div class="qlog-engine-body">○○○쇼핑몰: 다양한 엔터테인먼트·넓은 공간·편리한 교통. [경쟁몰 가]: 세련된 분위기·휴식 공간. <strong>결론: 가족 구성원 취향에 따라 선택 (중립)</strong>.</div>
+          <div class="qlog-engine-meta">
+            <span>언급 <span class="v">4회</span></span>
+            <span>인용 <span class="v">8건</span></span>
+            <span>자사 <span class="v">2건</span></span>
+          </div>
+        </div>
+        <div class="qlog-engine">
+          <div class="qlog-engine-name">PERPLEXITY <span class="engine-pill pill-yes">언급</span></div>
+          <div class="qlog-engine-body">○○○쇼핑몰: 유아 동반 친화적·편의시설 多. [경쟁몰 가]: 쇼핑·전시·식사 위주. <strong>결론: 어린 자녀 동반 → ○○○쇼핑몰이 더 무난</strong>.</div>
+          <div class="qlog-engine-meta">
+            <span>언급 <span class="v">9회</span></span>
+            <span>인용 <span class="v">8건</span></span>
+            <span>자사 <span class="v">2건</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="qlog">
+      <div class="qlog-head">
+        <div class="qlog-head-l">
+          <div class="qlog-id">Q02 <span class="qtype">추천형</span></div>
+          <div class="qlog-q">외국인 관광객이 가기 좋은 서울 도심 복합쇼핑몰 추천해줘</div>
+        </div>
+        <div class="qlog-rank">
+          <div class="qlog-rank-label">통합 노출 순위</div>
+          <div class="qlog-rank-val bad">3~4위 / 미언급</div>
+        </div>
+      </div>
+      <div class="qlog-body">
+        <div class="qlog-engine">
+          <div class="qlog-engine-name">CLAUDE <span class="engine-pill pill-no">미언급</span></div>
+          <div class="qlog-engine-body">[경쟁몰 가]·[경쟁몰 다]·[경쟁몰 바]·[경쟁몰 사]·[경쟁몰 마] 추천. <strong>○○○쇼핑몰 미언급</strong> (검색 횟수 제한 사유 명시).</div>
+          <div class="qlog-engine-meta">
+            <span>언급 <span class="v">0회</span></span>
+            <span>인용 <span class="v">8건</span></span>
+            <span>자사 <span class="v" style="color:var(--red);">0건</span></span>
+          </div>
+        </div>
+        <div class="qlog-engine">
+          <div class="qlog-engine-name">GEMINI <span class="engine-pill pill-no">미언급</span></div>
+          <div class="qlog-engine-body">[경쟁몰 가] 1위, [경쟁몰 마] 2위, [경쟁몰 나] 3위, <strong>○○○쇼핑몰 4번째</strong>, [경쟁브랜드 차], [경쟁상권 카] 추천.</div>
+          <div class="qlog-engine-meta">
+            <span>언급 <span class="v">0회</span></span>
+            <span>인용 <span class="v">6건</span></span>
+            <span>자사 <span class="v" style="color:var(--red);">0건</span></span>
+          </div>
+        </div>
+        <div class="qlog-engine">
+          <div class="qlog-engine-name">PERPLEXITY <span class="engine-pill pill-no">미언급</span></div>
+          <div class="qlog-engine-body">[경쟁시설 자] 1위, [경쟁몰 다] 2위, <strong>○○○쇼핑몰 3번째</strong>, [경쟁몰 가], [경쟁몰 나] 추천. "공항철도·환승" 기준 분리.</div>
+          <div class="qlog-engine-meta">
+            <span>언급 <span class="v">0회</span></span>
+            <span>인용 <span class="v">7건</span></span>
+            <span>자사 <span class="v" style="color:var(--red);">0건</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="qlog">
+      <div class="qlog-head">
+        <div class="qlog-head-l">
+          <div class="qlog-id">Q03 <span class="qtype">문제해결형</span></div>
+          <div class="qlog-q">[자사 권역] ○○○쇼핑몰에서 어린이랑 함께 시간을 보낼 만한 시설이 있나?</div>
+        </div>
+        <div class="qlog-rank">
+          <div class="qlog-rank-label">통합 노출 순위</div>
+          <div class="qlog-rank-val">1위</div>
+        </div>
+      </div>
+      <div class="qlog-body">
+        <div class="qlog-engine">
+          <div class="qlog-engine-name">CLAUDE <span class="engine-pill pill-yes">언급</span></div>
+          <div class="qlog-engine-body">수족관·테마파크·[체험아트센터]·영화관 체험존 체험 전시 소개. <strong>결론: 어린이 동반 시설 풍부</strong>.</div>
+          <div class="qlog-engine-meta">
+            <span>언급 <span class="v">3회</span></span>
+            <span>인용 <span class="v">6건</span></span>
+            <span>자사 <span class="v">2건</span></span>
+          </div>
+        </div>
+        <div class="qlog-engine">
+          <div class="qlog-engine-name">GEMINI <span class="engine-pill pill-yes">언급</span></div>
+          <div class="qlog-engine-body">[키즈체험관 파]·[키즈시설 하]·수족관·테마복합단지·키즈 라운지 소개. 외부 시설 우선 추천 후 자사 언급.</div>
+          <div class="qlog-engine-meta">
+            <span>언급 <span class="v">0회</span></span>
+            <span>인용 <span class="v">5건</span></span>
+            <span>자사 <span class="v">1건</span></span>
+          </div>
+        </div>
+        <div class="qlog-engine">
+          <div class="qlog-engine-name">PERPLEXITY <span class="engine-pill pill-yes">언급</span></div>
+          <div class="qlog-engine-body">[키즈체험관 파]·테마파크·아쿠아리움·[키즈체험관 타] 소개. <strong>결론: 어린이와 시간 보내기 좋은 시설 많음</strong>.</div>
+          <div class="qlog-engine-meta">
+            <span>언급 <span class="v">3회</span></span>
+            <span>인용 <span class="v">6건</span></span>
+            <span>자사 <span class="v">2건</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="qlog">
+      <div class="qlog-head">
+        <div class="qlog-head-l">
+          <div class="qlog-id">Q04 <span class="qtype">정의형</span></div>
+          <div class="qlog-q">○○○쇼핑몰은 어떤 쇼핑몰이고 어떤 브랜드들이 입점해 있어?</div>
+        </div>
+        <div class="qlog-rank">
+          <div class="qlog-rank-label">통합 노출 순위</div>
+          <div class="qlog-rank-val">1위</div>
+        </div>
+      </div>
+      <div class="qlog-body">
+        <div class="qlog-engine">
+          <div class="qlog-engine-name">CLAUDE <span class="engine-pill pill-yes">언급</span></div>
+          <div class="qlog-engine-body">프리미엄관동(명품관)·쇼핑몰동·엔터테인먼트동 구성. 3대 명품(에르메스·샤넬·루이비통), 4대 주얼리 입점. <strong>규모: 지상 10층·지하 4층</strong>.</div>
+          <div class="qlog-engine-meta">
+            <span>언급 <span class="v">1회</span></span>
+            <span>인용 <span class="v">5건</span></span>
+            <span>자사 <span class="v">2건</span></span>
+          </div>
+        </div>
+        <div class="qlog-engine">
+          <div class="qlog-engine-name">GEMINI <span class="engine-pill pill-yes">언급</span></div>
+          <div class="qlog-engine-body">프리미엄관·면세점·가전마트·대형마트. 영화관·아쿠아리움·콘서트홀. <strong>특징: 명품 + 엔터테인먼트 복합</strong>.</div>
+          <div class="qlog-engine-meta">
+            <span>언급 <span class="v">1회</span></span>
+            <span>인용 <span class="v">4건</span></span>
+            <span>자사 <span class="v">1건</span></span>
+          </div>
+        </div>
+        <div class="qlog-engine">
+          <div class="qlog-engine-name">PERPLEXITY <span class="engine-pill pill-yes">언급</span></div>
+          <div class="qlog-engine-body">프리미엄관동(200개 이상 명품)·쇼핑동·엔터테인먼트동·아쿠아리움. <strong>공식 소개 인용: "서울 최대 복합쇼핑몰"</strong>.</div>
+          <div class="qlog-engine-meta">
+            <span>언급 <span class="v">3회</span></span>
+            <span>인용 <span class="v">5건</span></span>
+            <span>자사 <span class="v">3건</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="qlog">
+      <div class="qlog-head">
+        <div class="qlog-head-l">
+          <div class="qlog-id">Q05 <span class="qtype">정의형</span></div>
+          <div class="qlog-q">○○○쇼핑몰의 영업시간과 주차, 대중교통 접근 방법은?</div>
+        </div>
+        <div class="qlog-rank">
+          <div class="qlog-rank-label">통합 노출 순위</div>
+          <div class="qlog-rank-val">1위</div>
+        </div>
+      </div>
+      <div class="qlog-body">
+        <div class="qlog-engine">
+          <div class="qlog-engine-name">CLAUDE <span class="engine-pill pill-yes">언급</span></div>
+          <div class="qlog-engine-body">쇼핑몰 10:30~22:00·프리미엄관 10:30~20:00·아쿠아리움 10:00~20:00. 주차: 최초 30분 3,000원, 이후 10분당 1,000원. <strong>교통: ○○역 2호선/8호선 직결</strong>.</div>
+          <div class="qlog-engine-meta">
+            <span>언급 <span class="v">1회</span></span>
+            <span>인용 <span class="v">5건</span></span>
+            <span>자사 <span class="v">1건</span></span>
+          </div>
+        </div>
+        <div class="qlog-engine">
+          <div class="qlog-engine-name">GEMINI <span class="engine-pill pill-yes">언급</span></div>
+          <div class="qlog-engine-body">면세점 09:30~20:00·마트 10:00~23:00·아쿠아리움 10:00~20:00·프리미엄관 10:30~20:00·쇼핑몰 10:30~22:00. 주차 평일 300원, 주말 500원.</div>
+          <div class="qlog-engine-meta">
+            <span>언급 <span class="v">3회</span></span>
+            <span>인용 <span class="v">7건</span></span>
+            <span>자사 <span class="v">2건</span></span>
+          </div>
+        </div>
+        <div class="qlog-engine">
+          <div class="qlog-engine-name">PERPLEXITY <span class="engine-pill pill-yes">언급</span></div>
+          <div class="qlog-engine-body">쇼핑몰 10:30~22:00·프리미엄관 10:30~20:00·아쿠아리움 10:00~20:00·전망대 평일 ~22:00 / 금토 ~23:00. <strong>주차 최대 45,000원</strong>.</div>
+          <div class="qlog-engine-meta">
+            <span>언급 <span class="v">3회</span></span>
+            <span>인용 <span class="v">8건</span></span>
+            <span>자사 <span class="v">2건</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+<section class="section" style="border-top:none;padding-top:0;">
+  <div class="section-inner">
+
+    <!-- Q6 -->
+    <div class="qlog">
+      <div class="qlog-head">
+        <div class="qlog-head-l">
+          <div class="qlog-id">Q06 <span class="qtype">추천형</span></div>
+          <div class="qlog-q">○○○쇼핑몰에서 명품 쇼핑하기 좋은 브랜드 추천</div>
+        </div>
+        <div class="qlog-rank">
+          <div class="qlog-rank-label">통합 노출 순위</div>
+          <div class="qlog-rank-val">1위</div>
+        </div>
+      </div>
+      <div class="qlog-body">
+        <div class="qlog-engine">
+          <div class="qlog-engine-name">CLAUDE <span class="engine-pill pill-yes">언급</span></div>
+          <div class="qlog-engine-body">3대 명품(에르메스·샤넬·루이비통)·4대 주얼리(까르띠에·티파니·불가리·반클리프 아펠)·롤렉스. 디올·프라다·생로랑·구찌·보테가베네타 추천.</div>
+          <div class="qlog-engine-meta">
+            <span>언급 <span class="v">2회</span></span>
+            <span>인용 <span class="v">5건</span></span>
+            <span>자사 <span class="v">2건</span></span>
+          </div>
+        </div>
+        <div class="qlog-engine">
+          <div class="qlog-engine-name">GEMINI <span class="engine-pill pill-yes">언급</span></div>
+          <div class="qlog-engine-body">프리미엄관 층별 안내: 1F 에르메스·샤넬, 2F 시계·주얼리, 3F 고급 패션, 4F 남성복, 5F 액세서리. COS·마시모두띠.</div>
+          <div class="qlog-engine-meta">
+            <span>언급 <span class="v">2회</span></span>
+            <span>인용 <span class="v">4건</span></span>
+            <span>자사 <span class="v">1건</span></span>
+          </div>
+        </div>
+        <div class="qlog-engine">
+          <div class="qlog-engine-name">PERPLEXITY <span class="engine-pill pill-yes">언급</span></div>
+          <div class="qlog-engine-body">샤넬·에르메스·루이비통·구찌·디올·보테가베네타·까르띠에·롤렉스·랄프로렌·마시모두띠. <strong>10개 브랜드 상세 설명</strong>.</div>
+          <div class="qlog-engine-meta">
+            <span>언급 <span class="v">3회</span></span>
+            <span>인용 <span class="v">6건</span></span>
+            <span>자사 <span class="v">2건</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="qlog">
+      <div class="qlog-head">
+        <div class="qlog-head-l">
+          <div class="qlog-id">Q07 <span class="qtype">문제해결형</span></div>
+          <div class="qlog-q">○○○쇼핑몰에서 점심 먹을 만한 식당이 많이 있나?</div>
+        </div>
+        <div class="qlog-rank">
+          <div class="qlog-rank-label">통합 노출 순위</div>
+          <div class="qlog-rank-val warn">1~2위</div>
+        </div>
+      </div>
+      <div class="qlog-body">
+        <div class="qlog-engine">
+          <div class="qlog-engine-name">CLAUDE <span class="engine-pill pill-yes">언급</span></div>
+          <div class="qlog-engine-body">159곳 이상 음식점. 이터스 멕시칸·보부선부대보쌈·한국집·오레노라멘·도쿄 마제소바 칸다 등. <strong>결론: 매우 다양·풍부</strong>.</div>
+          <div class="qlog-engine-meta">
+            <span>언급 <span class="v">3회</span></span>
+            <span>인용 <span class="v">6건</span></span>
+            <span>자사 <span class="v">2건</span></span>
+          </div>
+        </div>
+        <div class="qlog-engine">
+          <div class="qlog-engine-name">GEMINI <span class="engine-pill pill-yes">언급</span></div>
+          <div class="qlog-engine-body">한식(하트파트·미포집)·양식(쌤쌤쌤·캐롤스)·일식(진가와·해목)·중식(댄싱홍콩)·멕시칸(온더보더). <strong>결론: 다양한 종류 多</strong>.</div>
+          <div class="qlog-engine-meta">
+            <span>언급 <span class="v">0회</span></span>
+            <span>인용 <span class="v">5건</span></span>
+            <span>자사 <span class="v">0건</span></span>
+          </div>
+        </div>
+        <div class="qlog-engine">
+          <div class="qlog-engine-name">PERPLEXITY <span class="engine-pill pill-yes">언급</span></div>
+          <div class="qlog-engine-body">5층 식당가·지하 푸드코트·백화점 지하 식당가·브런치·카페·디저트 매장. <strong>결론: 식당 수 많음, 점심 선택지 풍부</strong>.</div>
+          <div class="qlog-engine-meta">
+            <span>언급 <span class="v">2회</span></span>
+            <span>인용 <span class="v">5건</span></span>
+            <span>자사 <span class="v">2건</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="qlog">
+      <div class="qlog-head">
+        <div class="qlog-head-l">
+          <div class="qlog-id">Q08 <span class="qtype">비교형</span></div>
+          <div class="qlog-q">서울 도심 쇼핑몰 중 ○○○쇼핑몰·[경쟁몰 가]·[경쟁몰 라] 어디가 명품 쇼핑에 가장 좋아?</div>
+        </div>
+        <div class="qlog-rank">
+          <div class="qlog-rank-label">통합 노출 순위</div>
+          <div class="qlog-rank-val">1위</div>
+        </div>
+      </div>
+      <div class="qlog-body">
+        <div class="qlog-engine">
+          <div class="qlog-engine-name">CLAUDE <span class="engine-pill pill-yes">언급</span></div>
+          <div class="qlog-engine-body"><strong>1위: ○○○쇼핑몰</strong> (3대 명품+4대 주얼리+롤렉스 모두 입점). 2위: [경쟁몰 가] (루이비통만). 3위: [경쟁몰 라] (할인 쇼핑).</div>
+          <div class="qlog-engine-meta">
+            <span>언급 <span class="v">6회</span></span>
+            <span>인용 <span class="v">4건</span></span>
+            <span>자사 <span class="v">1건</span></span>
+          </div>
+        </div>
+        <div class="qlog-engine">
+          <div class="qlog-engine-name">GEMINI <span class="engine-pill pill-yes">언급</span></div>
+          <div class="qlog-engine-body"><strong>1위: ○○○쇼핑몰</strong> (다양한 명품 브랜드). 2위: [경쟁몰 가] (트렌디한 감성). 3위: [경쟁몰 라] (합리적 가격).</div>
+          <div class="qlog-engine-meta">
+            <span>언급 <span class="v">4회</span></span>
+            <span>인용 <span class="v">3건</span></span>
+            <span>자사 <span class="v">1건</span></span>
+          </div>
+        </div>
+        <div class="qlog-engine">
+          <div class="qlog-engine-name">PERPLEXITY <span class="engine-pill pill-yes">언급</span></div>
+          <div class="qlog-engine-body"><strong>1위: ○○○쇼핑몰</strong> (명품 브랜드 다양성). 2위: [경쟁몰 가] (감성+일부 럭셔리). 3위: [경쟁몰 라] (할인 쇼핑).</div>
+          <div class="qlog-engine-meta">
+            <span>언급 <span class="v">7회</span></span>
+            <span>인용 <span class="v">3건</span></span>
+            <span>자사 <span class="v">1건</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="qlog">
+      <div class="qlog-head">
+        <div class="qlog-head-l">
+          <div class="qlog-id">Q09 <span class="qtype">정의형</span></div>
+          <div class="qlog-q">○○○쇼핑몰에 수족관이나 엔터테인먼트 시설이 있나?</div>
+        </div>
+        <div class="qlog-rank">
+          <div class="qlog-rank-label">통합 노출 순위</div>
+          <div class="qlog-rank-val">1위</div>
+        </div>
+      </div>
+      <div class="qlog-body">
+        <div class="qlog-engine">
+          <div class="qlog-engine-name">CLAUDE <span class="engine-pill pill-yes">언급</span></div>
+          <div class="qlog-engine-body">수족관(650종 55,000마리·5,200톤 수조). 영화관관(아시아 최대). 콘서트홀(국내 최초 빈야드 스타일).</div>
+          <div class="qlog-engine-meta">
+            <span>언급 <span class="v">2회</span></span>
+            <span>인용 <span class="v">5건</span></span>
+            <span>자사 <span class="v">3건</span></span>
+          </div>
+        </div>
+        <div class="qlog-engine">
+          <div class="qlog-engine-name">GEMINI <span class="engine-pill pill-yes">언급</span></div>
+          <div class="qlog-engine-body">수족관(650종 55,000마리·13개 테마존). 영화관(5~10F). 콘서트홀(8~10F). <strong>쇼핑+문화+엔터테인먼트 복합</strong>.</div>
+          <div class="qlog-engine-meta">
+            <span>언급 <span class="v">2회</span></span>
+            <span>인용 <span class="v">5건</span></span>
+            <span>자사 <span class="v">2건</span></span>
+          </div>
+        </div>
+        <div class="qlog-engine">
+          <div class="qlog-engine-name">PERPLEXITY <span class="engine-pill pill-yes">언급</span></div>
+          <div class="qlog-engine-body">수족관(5,200톤·650종·55,000마리). 전망대·영화관·콘서트홀·[자사 카페] 카페. <strong>엔터테인먼트 시설 풍부</strong>.</div>
+          <div class="qlog-engine-meta">
+            <span>언급 <span class="v">2회</span></span>
+            <span>인용 <span class="v">6건</span></span>
+            <span>자사 <span class="v">3건</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="qlog">
+      <div class="qlog-head">
+        <div class="qlog-head-l">
+          <div class="qlog-id">Q10 <span class="qtype">추천형</span></div>
+          <div class="qlog-q">중국인 관광객을 위한 ○○○쇼핑몰 쇼핑 가이드 알려줘</div>
+        </div>
+        <div class="qlog-rank">
+          <div class="qlog-rank-label">통합 노출 순위</div>
+          <div class="qlog-rank-val warn">1위 (D등급)</div>
+        </div>
+      </div>
+      <div class="qlog-body">
+        <div class="qlog-engine">
+          <div class="qlog-engine-name">CLAUDE <span class="engine-pill pill-yes">언급</span></div>
+          <div class="qlog-engine-body">K-뷰티(설화수·헤라·라네즈)·홍삼·건강식품·빼빼로·허니버터칩. 택스리펀드 7~10%. 알리페이·위챗페이. <strong>중국어 서비스 직원 배치</strong>.</div>
+          <div class="qlog-engine-meta">
+            <span>언급 <span class="v">4회</span></span>
+            <span>인용 <span class="v">6건</span></span>
+            <span>자사 <span class="v">2건</span></span>
+          </div>
+        </div>
+        <div class="qlog-engine">
+          <div class="qlog-engine-name">GEMINI <span class="engine-pill pill-yes">언급</span></div>
+          <div class="qlog-engine-body">K-뷰티(올리브영·면세점)·패션·건강식품(홍삼)·식품·간식. 면세점 중심. <strong>결론: 중국인 관광객 인기 높음</strong>.</div>
+          <div class="qlog-engine-meta">
+            <span>언급 <span class="v">2회</span></span>
+            <span>인용 <span class="v">5건</span></span>
+            <span>자사 <span class="v">1건</span></span>
+          </div>
+        </div>
+        <div class="qlog-engine">
+          <div class="qlog-engine-name">PERPLEXITY <span class="engine-pill pill-yes">언급</span></div>
+          <div class="qlog-engine-body">프리미엄관동(200개 이상 명품)·면세점(아시아 최대 규모). 외국인 전용 멤버십 카드(최대 30% 할인). <strong>중국인 관광객 맞춤 시설</strong>.</div>
+          <div class="qlog-engine-meta">
+            <span>언급 <span class="v">0회</span></span>
+            <span>인용 <span class="v">5건</span></span>
+            <span>자사 <span class="v">1건</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- ============ 06 개선 우선순위 (STANDARD에서는 마지막 챕터) ============ -->
+<section id="priority" class="section">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-num">CHAPTER 06</div>
+      <h2 class="section-title">개선 우선순위 — 무엇부터, 언제, 얼마나</h2>
+      <p class="section-lead">
+        이번 진단에서 도출된 6가지 처방을 적용 난이도와 기대 효과 기준으로 6단계로 정렬했습니다. <strong>1순위 두 가지(Schema.org + 정적 콘텐츠)만 적용해도 GEO 점수 43 → 65, 자사 인용률 16.3% → 40%+의 회복</strong>이 가능합니다. 각 처방의 즉시 적용 가능한 수정 코드는 본 보고서 03장에 모두 포함되어 있습니다.
+      </p>
+    </div>
+
+    <div class="priority-list">
+      <div class="priority-item r1">
+        <div class="priority-rank">01</div>
+        <div class="priority-content">
+          <div class="priority-title">Schema.org JSON-LD 적용 (Organization · ShoppingCenter · FAQPage)</div>
+          <div class="priority-desc">
+            메인 페이지에 Organization + ShoppingCenter + AggregateRating + FAQPage 스키마를 즉시 적용합니다. INSIGHT 01·03의 핵심 처방이며, 코드는 본 보고서 03장에 그대로 복사 가능한 형태로 제공되어 있습니다. 개발자 1명 기준 반나절 작업.
+          </div>
+        </div>
+        <div class="priority-impact">
+          <div class="priority-impact-label">예상 효과</div>
+          <div class="priority-impact-val">GEO <em>+15점</em><br>자사 인용률 <em>+18%p</em></div>
+          <div class="priority-impact-meta">
+            <span class="meta-tag tag-urgent">즉시</span>
+            <span class="meta-tag tag-dev">개발 0.5MD</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="priority-item r1">
+        <div class="priority-rank">02</div>
+        <div class="priority-content">
+          <div class="priority-title">정적 HTML 콘텐츠 블록 인라인 삽입 (H1 + 본문 텍스트)</div>
+          <div class="priority-desc">
+            SPA 앱 마운트 div 이전에 <code>&lt;main aria-hidden="true"&gt;</code> 블록으로 페이지별 H1 + 핵심 텍스트 300자 이상을 삽입합니다. 화면에 영향 없이 AI 크롤러만 읽는 구조이며, INSIGHT 02의 처방입니다. 페이지당 작업이지만 메인·쇼핑·F&B 3개 주요 페이지 우선.
+          </div>
+        </div>
+        <div class="priority-impact">
+          <div class="priority-impact-label">예상 효과</div>
+          <div class="priority-impact-val">GEO <em>+8점</em><br>크롤러 인식률 <em>0 → 100%</em></div>
+          <div class="priority-impact-meta">
+            <span class="meta-tag tag-urgent">즉시</span>
+            <span class="meta-tag tag-dev">개발 1MD</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="priority-item r2">
+        <div class="priority-rank">03</div>
+        <div class="priority-content">
+          <div class="priority-title">다국어 hreflang + 다국어 OG 태그 확장</div>
+          <div class="priority-desc">
+            모든 언어 페이지 &lt;head&gt;에 hreflang 4종(ko · en · zh-CN · ja) + x-default 추가, 그리고 /en · /cn · /jp 페이지에 언어별 OG 태그를 작성합니다. INSIGHT 04의 처방으로, Q2 외국인 추천 카테고리의 다국어 가시성 회복의 핵심입니다.
+          </div>
+        </div>
+        <div class="priority-impact">
+          <div class="priority-impact-label">예상 효과</div>
+          <div class="priority-impact-val">Q2 외국인 가시성 <em>회복</em><br>다국어 인식률 향상</div>
+          <div class="priority-impact-meta">
+            <span class="meta-tag tag-week">1주</span>
+            <span class="meta-tag tag-dev">개발 0.5MD</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="priority-item r2">
+        <div class="priority-rank">04</div>
+        <div class="priority-content">
+          <div class="priority-title">FAQ 페이지 신설 + FAQPage 스키마</div>
+          <div class="priority-desc">
+            영업시간 · 주차 · 교통 · 키즈 시설 · 외국인 서비스 · 예약 등 자주 묻는 질문 20개 이상을 단일 페이지에 정리하고 FAQPage 스키마를 적용합니다. INSIGHT 06의 처방으로, 문제해결형 질문 매칭률을 50% → 80%로 끌어올립니다.
+          </div>
+        </div>
+        <div class="priority-impact">
+          <div class="priority-impact-label">예상 효과</div>
+          <div class="priority-impact-val">문제해결형 매칭 <em>+30%p</em><br>자사 인용률 <em>+10%p</em></div>
+          <div class="priority-impact-meta">
+            <span class="meta-tag tag-month">1개월</span>
+            <span class="meta-tag tag-dev">기획·콘텐츠 2MD</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="priority-item r3">
+        <div class="priority-rank">05</div>
+        <div class="priority-content">
+          <div class="priority-title">외국인 맞춤 콘텐츠 + 교통 접근성 가이드 신설</div>
+          <div class="priority-desc">
+            "인천공항 → [자사 권역] 교통 안내", "알리페이·위챗페이 사용법", "택스리펀 절차", "중국인 선호 K-뷰티 가이드" 등 외국인 페르소나별 정적 콘텐츠를 신설합니다. INSIGHT 04 보완 처방이며, Q10 중국인 가이드 등급 D → B 회복이 목표입니다.
+          </div>
+        </div>
+        <div class="priority-impact">
+          <div class="priority-impact-label">예상 효과</div>
+          <div class="priority-impact-val">Q2·Q10 <em>등급 ↑↑</em><br>외국인 가시성 회복</div>
+          <div class="priority-impact-meta">
+            <span class="meta-tag tag-month">1개월</span>
+            <span class="meta-tag tag-dev">기획·번역 3MD</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="priority-item r3">
+        <div class="priority-rank">06</div>
+        <div class="priority-content">
+          <div class="priority-title">공식 비교 콘텐츠 + 브랜드 팩트시트 발행</div>
+          <div class="priority-desc">
+            "프리미엄관 명품 쇼핑 가이드", "층별 입점 브랜드 팩트시트" 등 자사 1차 정보 콘텐츠를 발행하고 Article · Dataset 스키마를 적용합니다. INSIGHT 05의 처방으로, 비교형 질문에서 자사 도메인 인용률 30% → 50%+ 회복이 목표입니다.
+          </div>
+        </div>
+        <div class="priority-impact">
+          <div class="priority-impact-label">예상 효과</div>
+          <div class="priority-impact-val">비교형 인용 <em>30 → 50%</em><br>외부 의존도 ↓</div>
+          <div class="priority-impact-meta">
+            <span class="meta-tag tag-month">1~2개월</span>
+            <span class="meta-tag tag-dev">기획·콘텐츠 5MD</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ ETRIBE-STYLED FOOTER — Upsell only ============ -->
+<footer class="etx-footer">
+  <div class="etx-footer-hero">
+    <div class="etx-upsell etx-upsell--solo">
+      <div class="etx-container">
+        <div>
+          <div class="etx-upsell-label">COMPETITIVE INTELLIGENCE · UPGRADE</div>
+          <h3 class="etx-upsell-title">
+            <em>경쟁사 대비 우리는 어디쯤 서 있을까?</em><br>
+            PREMIUM에서 답을 드립니다.
+          </h3>
+          <p class="etx-upsell-body">
+            본 STANDARD 진단은 "우리 사이트가 AI에서 얼마나 보이는가"까지를 측정했습니다. PREMIUM은 한 단계 더 들어가서 <strong>경쟁사 3사를 동일한 측정 프레임으로 진단</strong>하고, AI 검색 점유율(SOV) 비교, 카테고리별 1위 분포, 그리고 GEO 컨설턴트의 직접 작성한 인사이트와 함께 <strong>30일 · 90일 · 180일 단계별 로드맵</strong>을 제공해드립니다. 단순 진단이 아닌 시장 내 포지션과 다음 행보까지 보여주는 보고서입니다.
+          </p>
+        </div>
+        <aside class="etx-upsell-aside">
+          <a href="#" class="etx-upsell-cta">PREMIUM <span class="price">99만원</span></a>
+          <div class="etx-tier-line">
+            <span class="tier">LITE</span>
+            <span class="sep">/</span>
+            <span class="tier active">STANDARD</span>
+            <span class="sep">/</span>
+            <span class="tier">PREMIUM</span>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ JS: 코드 탭 전환 ============ -->
+<script>
+  document.addEventListener('click', function(e) {
+    const tab = e.target.closest('.code-tab');
+    if (!tab) return;
+    const target = tab.getAttribute('data-target');
+    if (!target) return;
+    const block = tab.closest('.code-block');
+    if (!block) return;
+    block.querySelectorAll('.code-tab').forEach(t => t.classList.remove('active'));
+    block.querySelectorAll('.code-pane').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    const pane = document.getElementById(target);
+    if (pane) pane.classList.add('active');
+  });
+</script>
+
+</body>
+</html>
