@@ -11,10 +11,16 @@
   <!-- ───── Canonical · Locale · Robots ───── -->
   <link rel="canonical" href="https://www.etribe.co.kr/geo/" />
   <meta name="author" content="이트라이브 (ETRIBE)" />
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
   <meta name="keywords"
     content="GEO, Generative Engine Optimization, AI 검색 최적화, AEO, 답변 엔진 최적화, ChatGPT, Gemini, Perplexity, Claude, 생성형 AI 마케팅, 이트라이브, ETRIBE, AI 가시성, 스키마 마크업, Schema.org, JSON-LD, llms.txt, MARS" />
   <meta name="theme-color" content="#DDF300" />
+  <meta name="language" content="Korean" />
+  <meta http-equiv="content-language" content="ko-KR" />
+  <meta name="geo.placename" content="Seoul, South Korea" />
+  <meta name="geo.region" content="KR-11" />
 
   <!-- ───── Open Graph (Facebook · KakaoTalk · 메신저 일반) ───── -->
   <meta property="og:type" content="website" />
@@ -31,13 +37,15 @@
 
   <!-- ───── Twitter Card ───── -->
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://www.etribe.co.kr/geo/" />
   <meta name="twitter:title" content="ETRIBE GEO — 답이 되다 · Be the Answer" />
   <meta name="twitter:description" content="생성형 AI 답변에 인용되는 브랜드를 만드는 GEO 솔루션, ETRIBE GEO." />
   <meta name="twitter:image" content="https://www.etribe.co.kr/geo/og-image.png" />
+  <meta name="twitter:image:alt" content="ETRIBE GEO — Be the Answer" />
 
   <!-- ───── AI / LLM crawler hints ───── -->
   <meta name="ai-content-declaration" content="human-curated" />
-  <link rel="alternate" type="text/plain" title="llms.txt" href="/llms.txt" />
+  <link rel="alternate" type="text/plain" title="llms.txt" href="/geo/llms.txt" />
 
   <!-- JS 활성화 표식 — 히어로 타이핑 효과의 FOUC 방지용 -->
   <script>document.documentElement.classList.add('has-js');</script>
@@ -7968,6 +7976,68 @@
   "itemListElement": [
     { "@type": "ListItem", "position": 1, "name": "이트라이브",  "item": "https://www.etribe.co.kr" },
     { "@type": "ListItem", "position": 2, "name": "ETRIBE GEO", "item": "https://www.etribe.co.kr/geo/" }
+  ]
+}
+</script>
+
+  <!-- FAQPage — 메인 페이지 노출되는 대표 6문항 (visible content mirror) -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": "https://www.etribe.co.kr/geo/#faq",
+  "inLanguage": "ko-KR",
+  "isPartOf": { "@id": "https://www.etribe.co.kr/geo/#website" },
+  "publisher": { "@id": "https://www.etribe.co.kr/#organization" },
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "GEO와 SEO는 어떻게 다른가요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "SEO는 검색결과 페이지(SERP) 상위 노출이 목표이고, GEO는 생성형 AI의 답변 텍스트 안에 우리 브랜드가 인용되는 것이 목표입니다. SEO가 '클릭을 받는 게임'이라면 GEO는 'AI가 우리를 답으로 선택하는 게임'입니다. 두 작업은 스키마·E-E-A-T 같은 신호에서 일부 겹치지만, GEO는 4개 AI 엔진에서의 답변 점유율(SOV)을 핵심 지표로 삼는다는 점이 다릅니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "ETRIBE GEO는 어떤 서비스를 제공하나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ETRIBE GEO는 AI 검색 가시성을 진단·구축·운영하는 3트랙 솔루션입니다. 진단(무료~99만원)은 현재 상태를 측정하고, 구축(299만원~)은 사이트와 콘텐츠 구조를 AI 인용 가능 상태로 정비하며, 운영(49만원/월~)은 인텐트 변화에 따라 콘텐츠·스키마·FAQ를 지속 업데이트합니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "10분 무료 진단으로 무엇을 알 수 있나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "10분 무료 진단(진단 LITE)은 robots.txt·GPTBot·llms.txt·sitemap·Schema.org 적용 현황 등 테크니컬 GEO 항목을 점검한 보고서를 이메일로 발송해 드립니다. AI 가시성 측정과 경쟁사 비교는 포함되지 않으며, 오픈 기념 이벤트 기간에는 AI 가시성을 다루는 STANDARD까지 무료로 제공합니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "구축 LITE 299만원은 어떤 사이트에 적합한가요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "구축 LITE(299만원)는 싱글페이지 구조이거나 메인 1페이지만 GEO 관점에서 정비하면 충분한 사이트에 적합합니다. 분석·수정 약 3일이 소요되며 디자인 변경은 포함되지 않습니다. 멀티페이지 사이트의 핵심 페이지군을 다뤄야 한다면 STANDARD(599만원) 이상을 권장합니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "왜 인블로그 콘텐츠가 GEO에 가장 직접적인가요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "스키마와 테크니컬 신호는 기반이지만 변경 빈도가 낮은 반면, 인블로그 콘텐츠는 새로운 인텐트가 등장할 때마다 AI에게 인용 거리(quotable text)를 제공할 수 있기 때문입니다. ETRIBE GEO는 민트 유닛 자동화 레시피를 통해 월 1편의 콘텐츠를 인블로그·스키마·FAQ에 동시 반영합니다."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "MARS는 어떤 도구이고 무엇을 자동화하나요?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "MARS는 ETRIBE가 자체 개발한 17개 에이전트 기반 GEO 진단·실행 플랫폼입니다. 사이트 크롤링, 스키마 점검, 4개 AI 엔진 실측, 경쟁사 비교, 보고서 작성을 자동화하며, 진단 STANDARD 이상 서비스에 적용됩니다. PREMIUM은 자사 1회 + 경쟁사 3회 = 총 4회 실행을 통합해 인텔리전스 보고서를 산출합니다."
+      }
+    }
   ]
 }
 </script>
