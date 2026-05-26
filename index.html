@@ -1735,7 +1735,7 @@
         min-height: 0;
         height: auto;
         max-height: calc(100vh - var(--gnb-h) - var(--s-80));
-        padding: var(--s-28) var(--s-22);
+        padding: 28px 22px;
         overflow-y: auto;
         align-self: center;
       }
@@ -2358,32 +2358,44 @@
 
       .agents {
         grid-template-columns: repeat(2, 1fr);
-        padding: var(--s-16);
+        /* grid-auto-rows: 1fr 제거 — 숨겨진 셀의 빈 행 방지 */
+        padding: var(--s-12);
         gap: var(--s-12);
       }
 
-      /* —— 에이전트 카드 패딩 정리 (dot 위치도 padding 안쪽으로) —— */
+      /* —— 에이전트 카드 — 넉넉한 사방 패딩 + 자연 흐름
+         ⚠️ 변수는 4·8·12·16·20·24·32 만 사용. --s-14, --s-18 등은 미정의. */
       .agent {
-        padding: var(--s-16) var(--s-14);
-        min-height: 96px;
-        gap: var(--s-4);
+        padding: 20px 18px;       /* 위·아래 20 / 좌·우 18 — 리터럴로 명시 */
+        min-height: 0;
+        gap: var(--s-8);
+        justify-content: flex-start;
       }
+      /* 점 인디케이터 — 7px, 우상단 안쪽 */
       .agent::before {
-        top: var(--s-14);
-        right: var(--s-14);
+        top: 18px;
+        right: 18px;
+        width: 7px;
+        height: 7px;
       }
       .agent .ix {
-        font-size: 10px;
-        letter-spacing: 0.14em;
+        font-size: 10.5px;
+        letter-spacing: 0.16em;
+        line-height: 1;
+        padding-right: var(--s-32);
       }
       .agent .nm {
-        font-size: 14.5px;
-        line-height: 1.25;
-        padding-right: var(--s-16); /* 우측 dot 와 텍스트가 닿지 않도록 */
+        font-size: 15px;
+        font-weight: 700;
+        line-height: 1.3;
+        letter-spacing: -0.005em;
       }
       .agent .nm-en {
-        font-size: 10px;
+        margin-top: var(--s-4);
+        font-size: 10.5px;
+        font-weight: 500;
         letter-spacing: 0.06em;
+        line-height: 1;
       }
 
       /* —— 스포트라이트 카드 컴팩트 —— */
@@ -2438,8 +2450,8 @@
       }
       .agents.is-expanded > :nth-child(n+8) {
         max-height: 200px;
-        padding: var(--s-16) var(--s-14);
-        min-height: 96px;
+        padding: 20px 18px;        /* 카드와 동일 — 변수 미정의 회피 */
+        min-height: 0;
         border-width: 1px;
         opacity: 1;
         transform: none;
@@ -2451,15 +2463,17 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        gap: var(--s-10);
-        margin: var(--s-16) var(--s-16) 0;
-        width: calc(100% - var(--s-32));
+        gap: var(--s-12); /* 라벨 묶음 ↔ 아이콘 간격 */
+        /* 카드 그리드와 시각적으로 한 덩어리로 묶이도록 위 margin 축소 */
+        margin: var(--s-8) var(--s-12) var(--s-12);
+        width: calc(100% - var(--s-24));
         height: 52px;
+        padding: 0 var(--s-20);
         background: var(--ink);
         color: var(--canvas);
         border: 0;
         font-family: var(--font-en);
-        font-size: 12px;
+        font-size: 12.5px;
         font-weight: 700;
         letter-spacing: 0.14em;
         text-transform: uppercase;
@@ -2468,18 +2482,28 @@
       }
       .agents-toggle:hover { background: #1a1a1a; }
       .agents-toggle:active { transform: scale(0.99); }
+
+      /* "에이전트 더보기" 텍스트 + +11 배지 한 덩어리 */
+      .agents-toggle .lab-collapsed,
+      .agents-toggle .lab-expanded {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px; /* 텍스트 ↔ +11 배지 간격 — 리터럴 (변수 미정의 회피) */
+      }
+
       .agents-toggle .num {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        min-width: 22px;
-        height: 22px;
-        padding: 0 6px;
+        min-width: 28px;
+        height: 20px;
+        padding: 0 8px;
         background: var(--primary);
         color: var(--ink);
-        border-radius: 11px;
+        border-radius: 10px;
         font-size: 11px;
-        font-weight: 700;
+        font-weight: 800;
+        letter-spacing: 0.04em;
       }
       .agents-toggle .ico {
         width: 8px; height: 8px;
@@ -2487,17 +2511,19 @@
         border-bottom: 2px solid currentColor;
         transform: rotate(45deg);
         transition: transform .3s ease;
-        margin-left: 2px;
+        flex-shrink: 0;
       }
       .agents-toggle.is-open .ico { transform: rotate(-135deg); }
-      .agents-toggle .lab-collapsed { display: inline; }
       .agents-toggle .lab-expanded { display: none; }
       .agents-toggle.is-open .lab-collapsed { display: none; }
-      .agents-toggle.is-open .lab-expanded { display: inline; }
+      .agents-toggle.is-open .lab-expanded { display: inline-flex; }
     }
 
-    /* 데스크탑·태블릿에선 토글 자체를 숨김 (전체 노출이 기본) */
-    .agents-toggle { display: none; }
+    /* 데스크탑·태블릿(>720px)에선 토글 자체를 숨김. ≤720px 모바일에서는 위 media query의 inline-flex 적용.
+       ⚠️ 소스 순서상 뒤에 오는 전역 규칙이 모바일 규칙을 덮어쓰지 않도록 min-width로 명시. */
+    @media (min-width: 721px) {
+      .agents-toggle { display: none; }
+    }
 
     /* ═══════════════════════════════════════════════════════════════
    POSITIONING (#positioning) — process + manifesto + plans
@@ -3953,7 +3979,7 @@
       }
       .report-card {
         min-height: 0;
-        padding: var(--s-28);
+        padding: 28px;
       }
       .report-card.tier-standard { transform: none; }
       .report-card.tier-standard:hover { transform: translateY(-4px); }
@@ -3964,59 +3990,176 @@
       .report-card-name br { display: none; }
     }
 
-    /* —— Phone (≤700px): compact spacing & smaller hard shadow —— */
+    /* —— Phone (≤700px): list-style 리스트형 — 세로 스택, 콤팩트, 좌측 컬러 바, 우상단 번호 —— */
     @media (max-width: 700px) {
-      .report-grid { gap: var(--s-16); }
-      .report-card { padding: var(--s-24); }
-      .report-card::before { height: 6px; }
-      .report-card-num { font-size: 44px; margin-bottom: 4px; }
+      .report-grid {
+        gap: var(--s-12);
+        grid-template-columns: 1fr;
+      }
+      .report-card {
+        position: relative;
+        padding: var(--s-20) var(--s-20) var(--s-20) var(--s-24);
+        min-height: 0;
+        /* 카드 그림자/리프트 효과는 리스트 스타일에서 노이즈 → 제거 */
+        box-shadow: none !important;
+        transform: none !important;
+      }
+      /* Top stripe → Left stripe (리스트 항목의 컬러 인디케이터 느낌) */
+      .report-card::before {
+        top: 0; left: 0;
+        width: 4px;
+        height: 100%;
+      }
+      .report-card:hover,
+      .report-card.tier-standard:hover,
+      .report-card.tier-premium:hover {
+        box-shadow: none !important;
+        transform: none !important;
+      }
+
+      /* 큰 번호 → 우상단 작은 마커로 이동 (이름이 좌측 가득 차지) */
+      .report-card-num {
+        position: absolute;
+        top: var(--s-20);
+        right: var(--s-20);
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--text-muted);
+        margin-bottom: 0;
+        line-height: 1;
+        letter-spacing: 0.05em;
+      }
+      .report-card.tier-premium .report-card-num { color: var(--primary); }
+
+      /* Tier 라벨 — 한 줄로 콤팩트 */
       .report-card-tier {
-        font-size: 10px;
-        letter-spacing: 0.2em;
-        margin-bottom: var(--s-16);
+        font-size: 10.5px;
+        letter-spacing: 0.18em;
+        margin-bottom: var(--s-8);
         gap: var(--s-8);
       }
-      .report-card-tier::before { width: 20px; }
+      .report-card-tier::before { width: 14px; }
+
+      /* 이름 — 한 줄로, br 무시 */
       .report-card-name {
-        font-size: 22px;
-        line-height: 1.25;
-        margin-bottom: var(--s-12);
+        font-size: 19px;
+        line-height: 1.3;
+        margin-bottom: var(--s-8);
+        padding-right: var(--s-40); /* 우상단 num과 겹치지 않게 */
       }
+      .report-card-name br { display: none; }
+
+      /* 설명 */
       .report-card-desc {
         font-size: 13.5px;
-        line-height: 1.6;
-        margin-bottom: var(--s-20);
+        line-height: 1.55;
+        margin-bottom: 14px;
       }
+
+      /* 기능 목록 — 상단 구분선 제거, 콤팩트 */
       .report-card-feats {
-        padding-top: var(--s-16);
-        margin-bottom: var(--s-24);
-        gap: var(--s-10);
+        padding-top: var(--s-12);
+        margin-top: var(--s-4);
+        margin-bottom: var(--s-16);
+        gap: 6px;
       }
-      .report-card-feats li { font-size: 12.5px; line-height: 1.5; }
+      .report-card-feats li {
+        font-size: 12.5px;
+        line-height: 1.5;
+      }
+
+      /* CTA — 풀폭 solid 버튼, 모바일에서 식별 잘 되도록 크게·중앙 정렬 */
       .report-card-cta {
-        padding: 14px var(--s-16);
-        font-size: 12px;
+        width: 100%;
+        margin-top: var(--s-8);
+        min-height: 56px;
+        padding: var(--s-20) var(--s-32);
+        font-size: 14px;
+        font-weight: 800;
         letter-spacing: 0.14em;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center; /* 텍스트·화살표 묶음을 중앙에 */
+        gap: var(--s-12);
+        /* 기본(LITE·STANDARD): 검정 배경 + 라임 텍스트 (강한 콘트라스트) */
+        background: var(--ink);
+        color: var(--primary);
+        border: 0;
       }
-      .report-card-cta::after { font-size: 16px; }
+      .report-card-cta::after {
+        font-size: 20px;
+        font-weight: 800;
+        line-height: 1;
+      }
+
+      /* Premium tier CTA — 검정 카드 위 라임 솔리드 버튼 (가장 강한 식별성) */
+      .report-card.tier-premium .report-card-cta {
+        background: var(--primary);
+        color: var(--ink);
+        border: 0;
+      }
+      .report-card.tier-premium .report-card-cta:hover,
+      .report-card.tier-premium .report-card-cta:active {
+        background: var(--primary-active);
+        color: var(--ink);
+      }
+
+      /* Ribbon — 작고 단정하게 */
       .report-card-ribbon {
-        font-size: 9.5px;
-        padding: 4px 10px;
+        font-size: 9px;
+        padding: 3px 8px;
         top: var(--s-12);
+        right: var(--s-12);
         letter-spacing: 0.16em;
       }
-      .report-card:hover { box-shadow: 6px 6px 0 0 var(--ink); transform: translateY(-2px); }
-      .report-card.tier-standard:hover { transform: translateY(-2px); }
-      .report-card.tier-premium:hover { box-shadow: 6px 6px 0 0 var(--primary); }
+      /* Standard tier에서 ribbon이 num과 겹치지 않게 num 위치 조정 */
+      .report-card.tier-standard .report-card-num {
+        top: calc(var(--s-12) + 28px);
+      }
     }
 
-    /* —— Small phone (≤480px) —— */
+    /* —— Small phone (≤480px) — 더 콤팩트하게 —— */
     @media (max-width: 480px) {
-      .report-card { padding: var(--s-20); }
-      .report-card-num { font-size: 40px; }
-      .report-card-name { font-size: 20px; }
-      .report-card-desc { font-size: 13px; }
-      .report-card-cta { font-size: 11.5px; padding: 13px var(--s-14); }
+      .report-card {
+        padding: var(--s-16) var(--s-16) var(--s-16) var(--s-20);
+      }
+      .report-card-num {
+        font-size: 12px;
+        top: var(--s-16);
+        right: var(--s-16);
+      }
+      .report-card-tier { font-size: 10px; margin-bottom: 6px; }
+      .report-card-name {
+        font-size: 17px;
+        margin-bottom: 6px;
+        padding-right: var(--s-32);
+      }
+      .report-card-desc {
+        font-size: 13px;
+        line-height: 1.5;
+        margin-bottom: var(--s-12);
+      }
+      .report-card-feats {
+        padding-top: 10px;
+        margin-bottom: 14px;
+        gap: 6px;
+      }
+      .report-card-feats li { font-size: 12px; }
+      .report-card-cta {
+        min-height: 52px;
+        font-size: 13.5px;
+        padding: 18px var(--s-24);
+        letter-spacing: 0.12em;
+        gap: 10px;
+      }
+      .report-card-cta::after { font-size: 19px; }
+      .report-card-ribbon {
+        font-size: 8.5px;
+        padding: 2px 6px;
+      }
+      .report-card.tier-standard .report-card-num {
+        top: calc(10px + 22px);
+      }
     }
 
     /* —— Report preview MODAL (full-screen iframe popup) —— */
@@ -4118,7 +4261,8 @@
       .report-modal-action { padding: 7px 10px; font-size: 10px; }
     }
 
-    @media (max-width: 1100px) {
+    /* 태블릿 범위(701~1100px)에서만 2컬럼. 700px 이하에서는 위쪽 ≤700px 리스트형 규칙이 1컬럼으로 처리. */
+    @media (min-width: 701px) and (max-width: 1100px) {
       .report-grid {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -4782,14 +4926,15 @@
 
     /* —— [CASCADE START] —— */
     /*
-   사이클 = 3s
-   각 에이전트의 펄스 구간 = 0% ~ 14% (0~420ms)
-     0% → 2%   : 페이드 인
-     2% → 8%   : 피크 hold (180ms)
-     8% → 14%  : 페이드 아웃
-     14% → 100%: idle (2.58s)
-   에이전트 간 stagger = 50ms → 전체 sweep = 16 × 50ms = 0.8s
-   마지막 에이전트 펄스 종료 ≈ 1.22s, 이후 rest 1.78s, 반복.
+   사이클 = 6s
+   각 에이전트의 펄스 구간 = 0% ~ 6% (0~360ms)
+     0% → 1%   : 페이드 인 (60ms)
+     1% → 5%   : 피크 hold — 라임 솔리드 (240ms)
+     5% → 6%   : 페이드 아웃 (60ms)
+     6% → 100%: idle (5.64s)
+   에이전트 간 stagger = 0.28s → 전체 sweep = 16 × 0.28s = 4.48s
+   마지막 에이전트 펄스 종료 ≈ 4.84s, 이후 rest 1.16s, 반복.
+   → 1번부터 17번까지 한 번에 하나씩 또렷이 라임으로 켜지는 marching-light 효과.
 */
 
     @keyframes mars-cascade-cell {
@@ -4797,30 +4942,35 @@
         background: var(--canvas);
         border-color: var(--line-soft);
         transform: translateY(0);
+        box-shadow: 0 0 0 rgba(221,243,0,0);
       }
 
       2% {
         background: var(--primary-soft);
         border-color: var(--primary);
-        transform: translateY(-3px);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px -6px rgba(221,243,0,0.35);
+      }
+
+      5% {
+        background: var(--primary-soft);
+        border-color: var(--primary);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px -6px rgba(221,243,0,0.35);
       }
 
       8% {
-        background: var(--primary-soft);
-        border-color: var(--primary);
-        transform: translateY(-3px);
-      }
-
-      14% {
         background: var(--canvas);
         border-color: var(--line-soft);
         transform: translateY(0);
+        box-shadow: 0 0 0 rgba(221,243,0,0);
       }
 
       100% {
         background: var(--canvas);
         border-color: var(--line-soft);
         transform: translateY(0);
+        box-shadow: 0 0 0 rgba(221,243,0,0);
       }
     }
 
@@ -4829,131 +4979,139 @@
       0%,
       100% {
         background: var(--text-muted);
+        transform: scale(1);
       }
 
       2%,
-      8% {
+      5% {
         background: var(--primary);
+        transform: scale(1.3);
       }
 
-      14% {
+      8% {
         background: var(--text-muted);
+        transform: scale(1);
       }
     }
 
     /* 캐스케이드는 .mars-board.is-playing 클래스가 붙은 동안만 동작.
        클래스는 IntersectionObserver가 섹션 노출 시 자동으로 부착·해제. */
     .mars-board.is-playing .agent:not(.agent-spotlight) {
-      animation: mars-cascade-cell 3s ease-in-out infinite;
+      animation: mars-cascade-cell 7s ease infinite;
     }
 
     .mars-board.is-playing .agent:not(.agent-spotlight)::before {
-      animation: mars-cascade-dot 3s ease-in-out infinite;
+      animation: mars-cascade-dot 7s ease infinite;
     }
 
-    /* Stagger by position — 50ms per slot (spotlight = :nth-child(1), agents 01~17 = :nth-child(2)~18) */
-    .agent:nth-child(2),
-    .agent:nth-child(2)::before {
+    /* Stagger by position — 280ms per slot (spotlight = :nth-child(1), agents 01~17 = :nth-child(2)~18)
+       1번부터 17번까지 한 번에 하나씩 라임으로 또렷이 켜지는 marching-light.
+       ⚠️ specificity 0,0,4,0 — shorthand의 0s 기본값을 덮어쓰기 위해 .mars-board.is-playing 스코프 필수. */
+    .mars-board.is-playing .agent:nth-child(2),
+    .mars-board.is-playing .agent:nth-child(2)::before {
       animation-delay: 0.00s;
     }
 
-    .agent:nth-child(3),
-    .agent:nth-child(3)::before {
-      animation-delay: 0.05s;
+    .mars-board.is-playing .agent:nth-child(3),
+    .mars-board.is-playing .agent:nth-child(3)::before {
+      animation-delay: 0.28s;
     }
 
-    .agent:nth-child(4),
-    .agent:nth-child(4)::before {
-      animation-delay: 0.10s;
+    .mars-board.is-playing .agent:nth-child(4),
+    .mars-board.is-playing .agent:nth-child(4)::before {
+      animation-delay: 0.56s;
     }
 
-    .agent:nth-child(5),
-    .agent:nth-child(5)::before {
-      animation-delay: 0.15s;
+    .mars-board.is-playing .agent:nth-child(5),
+    .mars-board.is-playing .agent:nth-child(5)::before {
+      animation-delay: 0.84s;
     }
 
-    .agent:nth-child(6),
-    .agent:nth-child(6)::before {
-      animation-delay: 0.20s;
+    .mars-board.is-playing .agent:nth-child(6),
+    .mars-board.is-playing .agent:nth-child(6)::before {
+      animation-delay: 1.12s;
     }
 
-    .agent:nth-child(7),
-    .agent:nth-child(7)::before {
-      animation-delay: 0.25s;
+    .mars-board.is-playing .agent:nth-child(7),
+    .mars-board.is-playing .agent:nth-child(7)::before {
+      animation-delay: 1.40s;
     }
 
-    .agent:nth-child(8),
-    .agent:nth-child(8)::before {
-      animation-delay: 0.30s;
+    .mars-board.is-playing .agent:nth-child(8),
+    .mars-board.is-playing .agent:nth-child(8)::before {
+      animation-delay: 1.68s;
     }
 
-    .agent:nth-child(9),
-    .agent:nth-child(9)::before {
-      animation-delay: 0.35s;
+    .mars-board.is-playing .agent:nth-child(9),
+    .mars-board.is-playing .agent:nth-child(9)::before {
+      animation-delay: 1.96s;
     }
 
-    .agent:nth-child(10),
-    .agent:nth-child(10)::before {
-      animation-delay: 0.40s;
+    .mars-board.is-playing .agent:nth-child(10),
+    .mars-board.is-playing .agent:nth-child(10)::before {
+      animation-delay: 2.24s;
     }
 
-    .agent:nth-child(11),
-    .agent:nth-child(11)::before {
-      animation-delay: 0.45s;
+    .mars-board.is-playing .agent:nth-child(11),
+    .mars-board.is-playing .agent:nth-child(11)::before {
+      animation-delay: 2.52s;
     }
 
-    .agent:nth-child(12),
-    .agent:nth-child(12)::before {
-      animation-delay: 0.50s;
+    .mars-board.is-playing .agent:nth-child(12),
+    .mars-board.is-playing .agent:nth-child(12)::before {
+      animation-delay: 2.80s;
     }
 
-    .agent:nth-child(13),
-    .agent:nth-child(13)::before {
-      animation-delay: 0.55s;
+    .mars-board.is-playing .agent:nth-child(13),
+    .mars-board.is-playing .agent:nth-child(13)::before {
+      animation-delay: 3.08s;
     }
 
-    .agent:nth-child(14),
-    .agent:nth-child(14)::before {
-      animation-delay: 0.60s;
+    .mars-board.is-playing .agent:nth-child(14),
+    .mars-board.is-playing .agent:nth-child(14)::before {
+      animation-delay: 3.36s;
     }
 
-    .agent:nth-child(15),
-    .agent:nth-child(15)::before {
-      animation-delay: 0.65s;
+    .mars-board.is-playing .agent:nth-child(15),
+    .mars-board.is-playing .agent:nth-child(15)::before {
+      animation-delay: 3.64s;
     }
 
-    .agent:nth-child(16),
-    .agent:nth-child(16)::before {
-      animation-delay: 0.70s;
+    .mars-board.is-playing .agent:nth-child(16),
+    .mars-board.is-playing .agent:nth-child(16)::before {
+      animation-delay: 3.92s;
     }
 
-    .agent:nth-child(17),
-    .agent:nth-child(17)::before {
-      animation-delay: 0.75s;
+    .mars-board.is-playing .agent:nth-child(17),
+    .mars-board.is-playing .agent:nth-child(17)::before {
+      animation-delay: 4.20s;
     }
 
-    .agent:nth-child(18),
-    .agent:nth-child(18)::before {
-      animation-delay: 0.80s;
+    .mars-board.is-playing .agent:nth-child(18),
+    .mars-board.is-playing .agent:nth-child(18)::before {
+      animation-delay: 4.48s;
     }
 
-    /* Header meter pulses lime during each sweep — synced to 3s cycle */
+    /* Header meter pulses lime across the full sweep — synced to 6s cycle (sweep = 0~80%) */
     @keyframes mars-cascade-meter {
 
       0%,
-      50%,
       100% {
         color: rgba(255, 255, 255, 0.7);
       }
 
-      10%,
-      30% {
+      5%,
+      78% {
         color: var(--primary);
+      }
+
+      85% {
+        color: rgba(255, 255, 255, 0.7);
       }
     }
 
     .mars-board.is-playing .mars-board-head .meter {
-      animation: mars-cascade-meter 3s ease-in-out infinite;
+      animation: mars-cascade-meter 7s ease infinite;
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -5065,11 +5223,9 @@
       .mars-board-head { padding: var(--s-16) var(--s-16); }
       .mars-board-head .label { font-size: 10px; letter-spacing: 0.14em; }
       .mars-board-head .meter { font-size: 11px; }
-      .agents { padding: var(--s-12); gap: var(--s-8); }
-      .agent { padding: var(--s-14) var(--s-12); min-height: 92px; gap: var(--s-4); }
-      .agent .ix { font-size: 10px; }
-      .agent .nm { font-size: 14px; line-height: 1.2; }
-      .agent .nm-en { font-size: 10px; }
+      /* .agents / .agent / .ix / .nm / .nm-en — 중복 규칙 제거.
+         ≤720px 블록(line 2359~)에서 더 정밀하게 정의되며,
+         이전 규칙들은 invalid var(--s-14) 포함 + 소스 순서상 뒤에 와서 ≤720px 규칙을 덮어쓰는 문제 있었음. */
       .agent-spotlight { padding: var(--s-20); }
       .agent-spotlight .nm { font-size: 22px; }
       .agent-spotlight .meta { gap: var(--s-20); }
@@ -5415,7 +5571,7 @@
         font-size: 13.5px;
       }
       .td-grid .td-hr {
-        padding: var(--s-12) var(--s-10);
+        padding: var(--s-12) 10px;
       }
 
       /* data-mobile-tier에 따라 비선택 컬럼/헤더 숨김 */
@@ -5702,21 +5858,21 @@
   <section class="section data" id="data">
     <div class="container">
 
-      <div class="section-label kr reveal">GEO 기술력</div>
-
-      <h2 class="data-h reveal">
-        <span class="muted">분석만 하는 GEO는</span><br />
-        이미 많습니다.<br />
-        ETRIBE는 <span class="lime-fill">다릅니다.</span>
-      </h2>
-
-      <p class="data-lead reveal">
-        <strong>분석부터 실행까지</strong> — ETRIBE GEO는 분석·모니터링에 그치지 않고, 진단부터 콘텐츠 제작·운영까지 풀스택으로 끝까지 책임집니다.
-      </p>
-
-      <!-- ETRIBE GEO 차별화 카드 — 모바일은 scroll-jacking 캐러셀 -->
+      <!-- ETRIBE GEO 차별화 카드 — 모바일은 scroll-jacking 캐러셀
+           섹션 헤더·스크롤 힌트를 stage 안에 배치하여 pinning 중에도 콘텐츠가 함께 보이게 함 -->
       <div class="carousel-pin tech-pin" data-carousel="tech" style="--card-count: 3;">
         <div class="carousel-stage">
+          <div class="carousel-header">
+            <div class="section-label kr reveal">GEO 기술력</div>
+            <h2 class="data-h reveal">
+              <span class="muted">분석만 하는 GEO는</span><br />
+              이미 많습니다.<br />
+              ETRIBE는 <span class="lime-fill">다릅니다.</span>
+            </h2>
+            <p class="data-lead reveal">
+              <strong>분석부터 실행까지</strong> — ETRIBE GEO는 분석·모니터링에 그치지 않고, 진단부터 콘텐츠 제작·운영까지 풀스택으로 끝까지 책임집니다.
+            </p>
+          </div>
       <div class="tech-cards reveal-stagger">
 
         <article class="tech-card tech-card-featured">
@@ -5769,12 +5925,264 @@
         </article>
 
       </div>
+          <!-- 모바일 캐러셀 스와이프 힌트 — stage 안에 배치 (pinning 중 함께 보임) -->
+          <div class="tech-scroll-hint" aria-hidden="true">
+            <span>SCROLL</span><span class="arrow"></span>
+          </div>
         </div>
       </div><!-- /.carousel-pin tech-pin -->
 
-      <!-- 모바일 캐러셀 스와이프 힌트 -->
-      <div class="tech-scroll-hint" aria-hidden="true">
-        <span>SCROLL</span><span class="arrow"></span>
+      <!-- ─────────────────────────────────────────────────────────
+         CREDIBILITY — 인터뷰 기반 전문성 어필 (ditoday 단독 인터뷰)
+         ───────────────────────────────────────────────────────── -->
+      <style>
+        .data .cred-block {
+          margin-top: var(--s-120);
+          padding-top: var(--s-64);
+          border-top: 1px solid var(--line-hard);
+        }
+        .data .cred-eyebrow {
+          display: inline-flex; align-items: center; gap: var(--s-8);
+          font-family: var(--font-en);
+          font-size: 12px; font-weight: 700;
+          letter-spacing: 0.18em; text-transform: uppercase;
+          color: var(--ink);
+          padding: 6px 12px;
+          border: 1px solid var(--line-hard);
+          background: var(--canvas);
+        }
+        .data .cred-eyebrow::before {
+          content: ""; width: 6px; height: 6px;
+          background: var(--primary); border-radius: 50%;
+        }
+        .data .cred-title {
+          margin-top: var(--s-24);
+          font-weight: 700;
+          font-size: clamp(28px, 3vw, 44px);
+          line-height: 1.18;
+          letter-spacing: -0.025em;
+          color: var(--ink);
+          max-width: 1000px;
+        }
+        .data .cred-title .lime-fill {
+          background: var(--primary);
+          padding: 0 0.08em 0.04em;
+          display: inline-block;
+        }
+        .data .cred-lead {
+          margin-top: var(--s-20);
+          font-size: 17px;
+          line-height: 1.65;
+          color: var(--text-body);
+          max-width: 820px;
+        }
+        .data .cred-lead strong { color: var(--ink); font-weight: 700; }
+
+        .data .cred-media {
+          margin-top: var(--s-56);
+          display: grid;
+          grid-template-columns: 1.15fr 1fr;
+          gap: var(--s-24);
+          align-items: stretch;
+        }
+        .data .cred-photo {
+          position: relative;
+          margin: 0;
+          background: var(--ink);
+          border: 1px solid var(--line-hard);
+          overflow: hidden;
+          aspect-ratio: 3 / 2;   /* 원본 사진 비율(약 1638×1092) 그대로 유지 */
+          width: 100%;
+        }
+        .data .cred-slides {
+          position: absolute; inset: 0;
+        }
+        .data .cred-slide {
+          position: absolute; inset: 0;
+          width: 100%; height: 100%;
+          object-fit: cover;
+          display: block;
+          opacity: 0;
+          transition: opacity .9s ease;
+          will-change: opacity;
+        }
+        .data .cred-slide.is-active { opacity: 1; }
+        .data .cred-photo::after {
+          content: "";
+          position: absolute;
+          left: 0; right: 0; bottom: 0;
+          height: 80px;
+          background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 100%);
+          pointer-events: none;
+        }
+        .data .cred-photo figcaption {
+          position: absolute;
+          left: var(--s-20); bottom: var(--s-16);
+          right: var(--s-20);
+          font-family: var(--font-en);
+          font-size: 11px; font-weight: 600;
+          letter-spacing: 0.16em; text-transform: uppercase;
+          color: var(--text-on-ink);
+          z-index: 2;
+          pointer-events: none;
+        }
+        .data .cred-dots {
+          position: absolute;
+          right: var(--s-20); bottom: var(--s-16);
+          display: flex; gap: 6px;
+          z-index: 3;
+        }
+        .data .cred-dots .dot {
+          width: 6px; height: 6px;
+          border-radius: 50%;
+          background: rgba(255,255,255,0.4);
+          transition: background .3s ease, width .3s ease;
+        }
+        .data .cred-dots .dot.is-active {
+          background: var(--primary);
+          width: 18px;
+          border-radius: 3px;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .data .cred-slide { transition: none; }
+        }
+        .data .cred-q {
+          background: var(--canvas);
+          border: 1px solid var(--line-hard);
+          padding: var(--s-40);
+          display: flex; flex-direction: column;
+          position: relative;
+        }
+        .data .cred-q::before {
+          content: "“";
+          position: absolute;
+          top: var(--s-16); right: var(--s-24);
+          font-family: var(--font-en);
+          font-size: 96px; font-weight: 700;
+          line-height: 0.7;
+          color: var(--primary);
+        }
+        .data .cred-q-text {
+          font-size: 20px; line-height: 1.55;
+          font-weight: 500; letter-spacing: -0.015em;
+          color: var(--ink);
+          padding-right: var(--s-40);
+          flex: 1 1 auto;
+        }
+        .data .cred-q-by {
+          margin-top: var(--s-24);
+          padding-top: var(--s-16);
+          border-top: 1px solid var(--line-soft);
+          font-family: var(--font-en);
+          font-size: 12px; font-weight: 600;
+          letter-spacing: 0.14em; text-transform: uppercase;
+          color: var(--text-muted);
+        }
+        .data .cred-q-by b {
+          color: var(--ink); font-weight: 700;
+        }
+
+        .data .cred-q-cta {
+          display: flex; align-items: center;
+          justify-content: space-between;
+          gap: var(--s-16);
+          width: 100%;
+          margin-top: var(--s-32);
+          padding: var(--s-20) var(--s-24);
+          background: var(--ink);
+          color: var(--text-on-ink);
+          font-family: var(--font-en);
+          font-size: 14px; font-weight: 700;
+          letter-spacing: 0.08em; text-transform: uppercase;
+          line-height: 1.2;
+          border: 1px solid var(--ink);
+          transition: background .15s ease, color .15s ease, transform .15s ease, border-color .15s ease;
+        }
+        .data .cred-q-cta:hover {
+          background: var(--primary);
+          color: var(--ink);
+          border-color: var(--primary);
+          transform: translateY(-2px);
+        }
+        .data .cred-q-cta .ext {
+          display: inline-flex; align-items: center; justify-content: center;
+          width: 28px; height: 28px;
+          border: 1px solid currentColor;
+          border-radius: 50%;
+          font-size: 14px;
+          flex: 0 0 auto;
+        }
+
+        .data .cred-source {
+          margin-top: var(--s-32);
+          padding-top: var(--s-20);
+          border-top: 1px solid var(--line-soft);
+          font-family: var(--font-en);
+          font-size: 11px; font-weight: 500;
+          letter-spacing: 0.14em; text-transform: uppercase;
+          color: var(--text-muted);
+        }
+        .data .cred-source b { color: var(--ink); font-weight: 700; }
+
+        @media (max-width: 900px) {
+          .data .cred-block { margin-top: var(--s-80); padding-top: var(--s-48); }
+          .data .cred-media { grid-template-columns: 1fr; }
+          .data .cred-photo { min-height: 260px; }
+          .data .cred-foot { flex-direction: column; align-items: flex-start; }
+        }
+      </style>
+      <div class="cred-block reveal">
+        <span class="cred-eyebrow">EXPERTISE · 인터뷰로 검증된 전문성</span>
+        <h3 class="cred-title">
+          20년의 디지털 에이전시 노하우가 <span class="lime-fill">GEO 플랫폼</span>으로.
+        </h3>
+        <p class="cred-lead">
+          이트라이브는 <strong>2006년부터 170명의 전문가</strong>가 거의 모든 산업의 IT 과제를 풀어 온 디지털 에이전시입니다.
+          그 누적된 운영 경험 위에서, AI가 답을 내리는 <strong>Zero-Click 시대</strong>의 GEO를 컨설팅이 아닌 <strong>고객이 직접 돌리는 플랫폼</strong>으로 설계했습니다.
+          — 디지털인사이트(ditoday) 단독 인터뷰에서 발췌.
+        </p>
+
+        <div class="cred-media reveal-stagger">
+          <figure class="cred-photo" id="cred-photo"
+                  aria-label="이트라이브 GEO 팀의 디지털인사이트(ditoday) 단독 인터뷰 현장 사진 4장">
+            <div class="cred-slides" data-cred-slides>
+              <img class="cred-slide is-active" data-cred-slide
+                   src="assets/interview-ditoday-01.jpg.webp"
+                   alt="ditoday 단독 인터뷰 — ETRIBE GEO 팀 현장 1" loading="lazy" decoding="async" />
+              <img class="cred-slide" data-cred-slide
+                   src="assets/interview-ditoday-02.jpg.webp"
+                   alt="ditoday 단독 인터뷰 — ETRIBE GEO 팀 현장 2" loading="lazy" decoding="async" />
+              <img class="cred-slide" data-cred-slide
+                   src="assets/interview-ditoday-03.jpg.webp"
+                   alt="ditoday 단독 인터뷰 — ETRIBE GEO 팀 현장 3" loading="lazy" decoding="async" />
+              <img class="cred-slide" data-cred-slide
+                   src="assets/interview-ditoday-04.jpg.webp"
+                   alt="ditoday 단독 인터뷰 — ETRIBE GEO 팀 현장 4" loading="lazy" decoding="async" />
+            </div>
+            <div class="cred-dots" data-cred-dots aria-hidden="true">
+              <span class="dot is-active"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+            <figcaption>ETRIBE GEO 팀 · ditoday Interview</figcaption>
+          </figure>
+
+          <article class="cred-q">
+            <p class="cred-q-text">
+              GEO는 단발성 캠페인이 아니라 운영 차원에서 접근해야 합니다.
+              AI의 엔티티(Entity) 학습은 축적되기 때문에, 지금 선점한 브랜드가 다음 분기에도 답이 됩니다.
+            </p>
+            <a class="cred-q-cta" target="_blank" rel="noopener"
+               href="https://ditoday.com/20%eb%85%84-%ec%b0%a8-%eb%94%94%ec%a7%80%ed%84%b8-%ec%97%90%ec%9d%b4%ec%a0%84%ec%8b%9c%ec%9d%98-geo-%ed%94%8c%eb%9e%ab%ed%8f%bc%ec%9d%80-%eb%ac%b4%ec%97%87%ec%9d%b4-%eb%8b%a4%eb%a5%bc%ea%b9%8c/">
+              <span>ditoday 원문 인터뷰 전문 보기</span>
+              <span class="ext" aria-hidden="true">↗</span>
+            </a>
+            <div class="cred-source">
+              Source · <b>Digital Insight (ditoday)</b> · 2026 단독 인터뷰
+            </div>
+          </article>
+        </div>
       </div>
 
     </div>
@@ -5786,22 +6194,22 @@
   <section class="section tools" id="tools">
     <div class="container">
 
-      <div class="section-label kr reveal">ETRIBE GEO</div>
-
-      <h2 class="tools-h reveal">
-        AI가 답할 때,<br />
-        <span class="lime-fill">우리 브랜드가 들어가게 하는</span><br />
-        4가지 도구.
-      </h2>
-
-      <p class="tools-lead reveal">
-        사람이 읽기 좋은 콘텐츠와 AI가 답변에 인용하는 콘텐츠는 <strong>구조가 다릅니다</strong>.
-        ETRIBE GEO는 다음 네 단계로 접근합니다.
-      </p>
-
-      <!-- TOOLS 카드 — 모바일은 scroll-jacking 캐러셀 -->
+      <!-- TOOLS 카드 — 모바일은 scroll-jacking 캐러셀
+           섹션 헤더·스크롤 힌트를 stage 안에 배치하여 pinning 중에도 콘텐츠가 함께 보이게 함 -->
       <div class="carousel-pin tools-pin" data-carousel="tools" style="--card-count: 4;">
         <div class="carousel-stage">
+          <div class="carousel-header">
+            <div class="section-label kr reveal">ETRIBE GEO</div>
+            <h2 class="tools-h reveal">
+              AI가 답할 때,<br />
+              <span class="lime-fill">우리 브랜드가 들어가게 하는</span><br />
+              4가지 도구.
+            </h2>
+            <p class="tools-lead reveal">
+              사람이 읽기 좋은 콘텐츠와 AI가 답변에 인용하는 콘텐츠는 <strong>구조가 다릅니다</strong>.
+              ETRIBE GEO는 다음 네 단계로 접근합니다.
+            </p>
+          </div>
       <div class="tools-grid reveal-stagger">
 
         <div class="tool-card">
@@ -5895,13 +6303,12 @@
         </div>
 
       </div>
+          <!-- 모바일 캐러셀 스와이프 힌트 — stage 안에 배치 (pinning 중 함께 보임) -->
+          <div class="tools-scroll-hint" aria-hidden="true">
+            <span>SCROLL</span><span class="arrow"></span>
+          </div>
         </div>
       </div><!-- /.carousel-pin tools-pin -->
-
-      <!-- 모바일 캐러셀 스와이프 힌트 -->
-      <div class="tools-scroll-hint" aria-hidden="true">
-        <span>SCROLL</span><span class="arrow"></span>
-      </div>
 
       <!-- MARS — 17 agent platform -->
       <div class="mars">
@@ -7218,7 +7625,7 @@
       const io = new IntersectionObserver((entries) => {
         for (const entry of entries) {
           if (entry.isIntersecting) {
-            // 강제 reflow 후 클래스 재부착 → 항상 0%부터 시작
+            // 강제 reflow 후 클래스 재부착 → 항상 1번부터 새로 시작
             board.classList.remove('is-playing');
             void board.offsetWidth;
             board.classList.add('is-playing');
@@ -7852,6 +8259,56 @@
           const top = target.getBoundingClientRect().top + window.scrollY - gnbH + 1;
           window.scrollTo({ top, behavior: 'smooth' });
         });
+      });
+    })();
+  </script>
+
+  <!-- ───── Interview photo slideshow (ditoday) ───── -->
+  <script>
+    (function () {
+      const root = document.getElementById('cred-photo');
+      if (!root) return;
+      const slides = root.querySelectorAll('[data-cred-slide]');
+      const dots = root.querySelectorAll('[data-cred-dots] .dot');
+      if (slides.length < 2) return;
+
+      const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let i = 0;
+      let timer = null;
+      const INTERVAL = 4500;
+
+      function go(next) {
+        slides[i].classList.remove('is-active');
+        if (dots[i]) dots[i].classList.remove('is-active');
+        i = (next + slides.length) % slides.length;
+        slides[i].classList.add('is-active');
+        if (dots[i]) dots[i].classList.add('is-active');
+      }
+      function start() {
+        if (reduceMotion || timer) return;
+        timer = setInterval(() => go(i + 1), INTERVAL);
+      }
+      function stop() {
+        if (!timer) return;
+        clearInterval(timer); timer = null;
+      }
+
+      // 뷰포트에 보일 때만 회전 — 비가시 시 CPU 절약
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((e) => e.isIntersecting ? start() : stop());
+        }, { threshold: 0.2 });
+        io.observe(root);
+      } else {
+        start();
+      }
+
+      // 호버 시 일시정지 (데스크탑 UX)
+      root.addEventListener('mouseenter', stop);
+      root.addEventListener('mouseleave', start);
+      // 탭 비활성 시 정지
+      document.addEventListener('visibilitychange', () => {
+        document.hidden ? stop() : start();
       });
     })();
   </script>
