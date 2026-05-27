@@ -678,6 +678,9 @@
       transition: transform .35s cubic-bezier(.6, .05, .1, .95);
       display: flex;
       flex-direction: column;
+      /* 짧은 화면에서 메뉴 콘텐츠가 넘칠 때 스크롤. 동시에 닫힘(translateY -100%) 상태에서
+         하단 CTA가 박스 밖으로 흘러넘쳐 GNB 위에 겹쳐 보이던 문제를 클리핑으로 차단 */
+      overflow-y: auto;
     }
 
     .mobile-menu.open {
