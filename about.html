@@ -164,13 +164,14 @@ body.overlay-open .gnb { visibility: hidden; pointer-events: none; }
   width: 100%; padding: 0 var(--page-pad);
   display: flex; align-items: center; justify-content: space-between; gap: var(--s-24);
 }
-.gnb-logo { display: inline-flex; align-items: stretch; height: 32px; color: var(--ink); }
+.gnb-logo { display: inline-flex; align-items: stretch; height: 32px; gap: 0; background: transparent; color: var(--ink); }
 .gnb-logo .wordmark-box {
-  background: var(--surface-ink); display: inline-flex; align-items: center;
+  /* 흰 박스 + 검정 ETRIBE 로고 — 어두운 히어로 위에서도 흰 칩이 또렷이 보임 */
+  background: var(--canvas); display: inline-flex; align-items: center;
   justify-content: center; padding: 0 var(--s-16);
 }
 .gnb-logo .wordmark-box img,
-.gnb-logo .wordmark-box .etribe-wordmark { height: 16px; width: auto; display: block; color: #ffffff; }
+.gnb-logo .wordmark-box .etribe-wordmark { height: 16px; width: auto; display: block; color: var(--ink); }
 .gnb-logo .service-name {
   display: inline-flex; align-items: center; padding: 0 var(--s-16);
   font-family: var(--font-en); font-weight: 700; font-size: 15px;
@@ -205,6 +206,28 @@ body.overlay-open .gnb { visibility: hidden; pointer-events: none; }
   .gnb-toggle { display: inline-flex; }
 }
 
+/* GNB 로고 — index.html과 동일한 모바일 축소 규칙 (크기 통일) */
+@media (max-width: 1024px) {
+  .gnb-logo { height: 30px; }
+  .gnb-logo .wordmark-box img,
+  .gnb-logo .wordmark-box .etribe-wordmark { height: 15px; }
+}
+@media (max-width: 768px) {
+  .gnb-logo { height: 28px; }
+  .gnb-logo .wordmark-box img,
+  .gnb-logo .wordmark-box .etribe-wordmark { height: 14px; }
+  .gnb-logo .wordmark-box,
+  .gnb-logo .service-name { padding: 0 var(--s-12); }
+  .gnb-logo .service-name { font-size: 13px; }
+}
+@media (max-width: 480px) {
+  .gnb-logo { height: 26px; }
+  .gnb-logo .wordmark-box img,
+  .gnb-logo .wordmark-box .etribe-wordmark { height: 13px; }
+  .gnb-logo .wordmark-box,
+  .gnb-logo .service-name { padding: 0 10px; }
+}
+
 .mobile-menu {
   position: fixed; inset: 0; z-index: 999; background: var(--canvas);
   padding: var(--gnb-h) var(--s-24) var(--s-40);
@@ -235,6 +258,8 @@ body.overlay-open .gnb { visibility: hidden; pointer-events: none; }
   border-bottom-color: rgba(255,255,255,0.08);
 }
 .gnb.over-dark .gnb-logo { color: var(--text-on-ink); }
+/* ETRIBE 워드마크는 흰 박스 위에 있으므로 다크 히어로 위에서도 검정 유지 */
+.gnb.over-dark .gnb-logo .wordmark-box .etribe-wordmark { color: var(--ink); }
 .gnb.over-dark .gnb-logo .service-name {
   color: var(--text-on-ink);
   border-color: var(--text-on-ink);
@@ -1110,7 +1135,7 @@ body.overlay-open .gnb { visibility: hidden; pointer-events: none; }
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   FOOTER (faq.html / index.html과 공통)
+   FOOTER — faq.html과 동일한 compact 구성. 색상은 --primary(레드).
    ═══════════════════════════════════════════════════════════════ */
 .footer-mini {
   background: var(--primary);
@@ -1152,8 +1177,11 @@ body.overlay-open .gnb { visibility: hidden; pointer-events: none; }
 .footer-bottom-bar a:hover { opacity: 0.65; }
 @media (max-width: 768px) {
   .footer-mini .container { grid-template-columns: 1fr; gap: var(--s-32); }
+  .footer-mini { padding: var(--s-40) 0 var(--s-24); }
+  .footer-mini .brand { font-size: clamp(36px, 12vw, 64px); }
+  .footer-mini .nav-list { font-size: 15px; gap: var(--s-8); }
+  .footer-bottom-bar .container { font-size: 10px; }
 }
-
 /* ─────────────── Footer reveal — Alph.kr-style (index.html과 동일) ───────────────
    .page-shell이 솔리드 배경 + z-index:2로 위 레이어를 형성하고,
    .footer-wrap은 뷰포트 하단에 fixed로 항상 대기.
@@ -1829,7 +1857,7 @@ body { position: relative; background: var(--canvas); }
 
 </div><!-- /.page-shell — 콘텐츠 레이어 종료, 아래 푸터가 뒤쪽에서 드러남 -->
 
-<!-- ─────────── Footer (공통) — Alph.kr-style reveal ─────────── -->
+<!-- ─────────── Footer — faq.html과 동일한 compact 구성 (레드 컬러) ─────────── -->
 <div class="footer-wrap">
 <footer class="footer-mini">
   <div class="container">
