@@ -27,7 +27,7 @@
   <meta property="og:site_name" content="ETRIBE GEO" />
   <meta property="og:title" content="ETRIBE GEO — 답이 되다 · Be the Answer" />
   <meta property="og:description"
-    content="ChatGPT·Gemini·Perplexity·Claude의 답변에 우리 브랜드가 인용되도록. 생성형 AI 검색 시대를 위한 이트라이브의 GEO 진단·구축·운영 솔루션." />
+    content="ChatGPT · Gemini · Perplexity · Claude의 답변에 우리 브랜드가 인용되도록. 생성형 AI 검색 시대를 위한 이트라이브의 GEO 진단 · 구축 · 운영 솔루션." />
   <meta property="og:url" content="https://www.etribe.co.kr/geo/" />
   <meta property="og:image" content="https://www.etribe.co.kr/geo/og-image.png" />
   <meta property="og:image:width" content="1200" />
@@ -1978,8 +1978,9 @@
     }
 
     .tool-card p {
-      font-size: 18px;
-      line-height: 1.7;
+      margin-top: var(--s-16);
+      font-size: 15px;
+      line-height: 1.65;
       color: var(--text-body);
     }
 
@@ -2125,7 +2126,8 @@
       }
 
       .tools-pin .tool-card p {
-        font-size: 15.5px;
+        margin-top: var(--s-12);
+        font-size: 13.5px;
         line-height: 1.6;
       }
 
@@ -3047,6 +3049,88 @@
       border-radius: var(--r-pill);
     }
 
+    /* ── EVENT: 선착순 99 업체 STANDARD 무료 ── */
+    .tier-event {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      align-self: flex-start;
+      margin-top: var(--s-12);
+      padding: 6px 12px;
+      background: var(--ink);
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: -0.005em;
+      border-radius: var(--r-pill);
+      white-space: nowrap;
+    }
+
+    .tier-event .dot {
+      width: 6px;
+      height: 6px;
+      background: var(--primary);
+      border-radius: 50%;
+      box-shadow: 0 0 0 2px rgba(221, 243, 0, 0.25);
+      animation: tier-event-pulse 1.6s ease-in-out infinite;
+    }
+
+    @keyframes tier-event-pulse {
+      0%, 100% { box-shadow: 0 0 0 2px rgba(221, 243, 0, 0.25); }
+      50%      { box-shadow: 0 0 0 5px rgba(221, 243, 0, 0.12); }
+    }
+
+    /* ── HERO CTA 말풍선 ── */
+    .cta-bubble {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      align-self: flex-start;
+      padding: 8px 14px;
+      background: var(--canvas);
+      color: var(--ink);
+      border: 1.5px solid var(--ink);
+      border-radius: var(--r-pill);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: -0.005em;
+      white-space: nowrap;
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+
+    .cta-bubble .dot {
+      width: 6px;
+      height: 6px;
+      background: var(--ink);
+      border-radius: 50%;
+      animation: cta-bubble-pulse 1.4s ease-in-out infinite;
+    }
+
+    @keyframes cta-bubble-pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%      { opacity: 0.55; transform: scale(0.85); }
+    }
+
+    .cta-bubble::after {
+      content: "";
+      position: absolute;
+      left: 22px;
+      bottom: -7px;
+      width: 12px;
+      height: 12px;
+      background: var(--canvas);
+      border-right: 1.5px solid var(--ink);
+      border-bottom: 1.5px solid var(--ink);
+      transform: rotate(45deg);
+    }
+
+    /* hero-meta는 row 기본 flex; 말풍선을 버튼 위에 두기 위해 column으로 전환 */
+    .hero-meta {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
     .tier .tier-label {
       font-family: var(--font-en);
       font-size: 11px;
@@ -3657,6 +3741,108 @@
 
     .im-field input.invalid+.im-err {
       display: block;
+    }
+
+    /* —— 개인정보 수집·이용 동의 (체크박스 + 아코디언) —— */
+    .im-consent {
+      margin-top: var(--s-12);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .im-consent-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      cursor: pointer;
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--ink);
+      user-select: none;
+    }
+
+    .im-consent-label input[type="checkbox"] {
+      flex: 0 0 auto;
+      width: 18px;
+      height: 18px;
+      margin-top: 1px;
+      accent-color: var(--ink);
+      cursor: pointer;
+    }
+
+    .im-consent-label b {
+      color: #D8232A;
+      font-weight: 700;
+      margin-right: 2px;
+    }
+
+    .im-consent .im-err {
+      display: none;
+      font-size: 12px;
+      color: #D8232A;
+      margin-left: 28px;
+    }
+
+    .im-consent.invalid .im-err {
+      display: block;
+    }
+
+    .im-consent-details {
+      margin-top: 4px;
+      border: 1px solid var(--line-soft);
+      background: rgba(0, 0, 0, 0.02);
+    }
+
+    .im-consent-details > summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 10px 14px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .im-consent-details > summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .im-consent-details > summary::after {
+      content: "+";
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .im-consent-details[open] > summary::after {
+      content: "−";
+    }
+
+    .im-consent-details .im-consent-body {
+      padding: 12px 14px 14px;
+      border-top: 1px solid var(--line-soft);
+      font-size: 12px;
+      line-height: 1.65;
+      color: var(--text-body);
+    }
+
+    .im-consent-details .im-consent-body h5 {
+      font-size: 12.5px;
+      font-weight: 700;
+      margin-top: 10px;
+      color: var(--ink);
+    }
+
+    .im-consent-details .im-consent-body h5:first-child {
+      margin-top: 0;
+    }
+
+    .im-consent-details .im-consent-body p {
+      margin-top: 4px;
     }
 
     /* Email-delivery notice */
@@ -5675,7 +5861,8 @@
       }
 
       .tool-card p {
-        font-size: 16px;
+        margin-top: var(--s-12);
+        font-size: 14px;
         line-height: 1.6;
       }
 
@@ -6529,7 +6716,7 @@
     <div class="mobile-menu-foot">
       <div class="contact-row">
         CONTACT
-        <span class="email">hello@etribe.co.kr</span>
+        <span class="email">geo@etribe.co.kr</span>
       </div>
       <a href="#" class="btn-cta" data-open-inquiry>
         10분 무료 진단 신청
@@ -6568,6 +6755,7 @@
           </span>
 
           <div class="hero-meta">
+            <div class="cta-bubble"><span class="dot" aria-hidden="true"></span>선착순 99 업체 STANDARD 무료</div>
             <a href="#" class="btn btn-primary" data-open-inquiry>
               지금 무료진단 신청 <span class="arrow"></span>
             </a>
@@ -6684,7 +6872,7 @@
             <span class="step-num">STEP C</span>
             <h3>노출되게</h3>
             <div class="step-en">Be Exposed</div>
-            <p>ChatGPT · Gemini · Perplexity 등 주요 엔진에서<br />실제 노출 빈도와 인용 맥락을 추적·개선합니다.</p>
+            <p>ChatGPT · Gemini · Perplexity 등 주요 엔진에서<br />실제 노출 빈도와 인용 맥락을 추적 · 개선합니다.</p>
           </div>
         </div>
 
@@ -6710,7 +6898,7 @@
                 ETRIBE는 <span class="lime-fill">다릅니다.</span>
               </h2>
               <p class="data-lead reveal">
-                <strong>분석부터 실행까지</strong> — ETRIBE GEO는 분석·모니터링에 그치지 않고, 진단부터 콘텐츠 제작·운영까지 풀스택으로 끝까지 책임집니다.
+                <strong>분석부터 실행까지</strong> — ETRIBE GEO는 분석 · 모니터링에 그치지 않고, 진단부터 콘텐츠 제작 · 운영까지 풀스택으로 끝까지 책임집니다.
               </p>
             </div>
             <div class="tech-cards reveal-stagger">
@@ -7189,12 +7377,13 @@
               <div class="section-label kr reveal">ETRIBE GEO</div>
               <h2 class="tools-h reveal">
                 AI가 답할 때,<br />
-                <span class="lime-fill">우리 브랜드가 들어가게 하는</span><br />
-                4가지 도구.
+                <span class="lime-fill">우리 브랜드의 인용 확률을 높이는</span><br />
+                4가지 솔루션
               </h2>
               <p class="tools-lead reveal">
                 사람이 읽기 좋은 콘텐츠와 AI가 답변에 인용하는 콘텐츠는 <strong>구조가 다릅니다</strong>.
-                ETRIBE GEO는 다음 네 단계로 접근합니다.
+                이트라이브 GEO 솔루션은 정밀 진단부터 상시 모니터링까지,
+                AI 가시성을 극대화하는 최적의 프로세스를 제공합니다.
               </p>
             </div>
             <div class="tools-grid reveal-stagger">
@@ -7210,14 +7399,14 @@
                   </div>
                 </div>
                 <div>
-                  <h3>엔티티 탐침기</h3>
-                  <div class="tool-en">Entity Probe</div>
-                  <div class="quote">AI는 우리 브랜드를 뭐라고 알고 있을까?</div>
-                  <p>AI가 인식하는 브랜드의 속성 · 연관 키워드 · 경쟁 구도를 진단합니다.</p>
+                  <h3>GEO 분석/검증 도구</h3>
+                  <div class="tool-en">GEO Analyzer</div>
+                  <div class="quote">AI는 우리 브랜드를 제대로 알고 있을까?</div>
+                  <p>엔티티 인식, 테크니컬 인프라, AI 실측 응답, SOV · 인용률, 경쟁사 비교까지 — GEO 상태를 한 번에 진단하고 검증합니다.</p>
                 </div>
                 <div class="deliv">
                   <span class="lab">Result</span>
-                  <span class="val">브랜드 엔티티 맵 · 인식 개선 포인트</span>
+                  <span class="val">GEO 종합 진단 보고서 · 개선 포인트</span>
                 </div>
               </div>
 
@@ -7234,14 +7423,14 @@
                   </div>
                 </div>
                 <div>
-                  <h3>인텐트 나침반</h3>
-                  <div class="tool-en">Intent Compass</div>
-                  <div class="quote">우리 고객은 AI에게 어떤 질문을 할까?</div>
-                  <p>타깃 고객이 AI에 던지는 질문 유형과 의도를 분석합니다.</p>
+                  <h3>GEO 모니터링</h3>
+                  <div class="tool-en">GEO Monitor</div>
+                  <div class="quote">지금, AI는 우리 브랜드를 어떻게 말하고 있을까?</div>
+                  <p>AI에서 브랜드 노출 · 인용률 · 경쟁사 점유율 · 감정 변화를 자동 추적하고, 이상 발생 시 실시간 알림을 보냅니다.</p>
                 </div>
                 <div class="deliv">
                   <span class="lab">Result</span>
-                  <span class="val">핵심 질문 · 의도 클러스터 맵</span>
+                  <span class="val">실시간 대시보드 · 이상 알림 · 월간 리포트</span>
                 </div>
               </div>
 
@@ -7257,13 +7446,13 @@
                 </div>
                 <div>
                   <h3>GEO 콘텐츠 생성기</h3>
-                  <div class="tool-en">Content Generator</div>
-                  <div class="quote">AI가 인용하고 싶은 콘텐츠는 따로 있다.</div>
-                  <p>AI가 발췌하기 좋은 구조화된 답변형 콘텐츠를 자동 생성합니다.</p>
+                  <div class="tool-en">GEO Kit</div>
+                  <div class="quote">AI가 인용하는 콘텐츠, 직접 만들어 드립니다.</div>
+                  <p>블로그 콘텐츠부터 FAQ, 테크니컬 인프라까지 — AI가 우리 브랜드를 찾고, 이해하고, 인용하는 데 필요한 모든 산출물을 생성합니다.</p>
                 </div>
                 <div class="deliv">
                   <span class="lab">Result</span>
-                  <span class="val">월별 GEO 콘텐츠 패키지</span>
+                  <span class="val">GEO 콘텐츠 패키지 (스키마 · FAQ · 블로그 · 크롤러 설정 외)</span>
                 </div>
               </div>
 
@@ -7278,14 +7467,14 @@
                   </div>
                 </div>
                 <div>
-                  <h3>GEO 대시보드</h3>
-                  <div class="tool-en">Performance Dashboard</div>
-                  <div class="quote">지금, 어느 AI에 몇 번 나왔을까?</div>
-                  <p>주요 AI 엔진별 노출 · 인용 · 경쟁사 비교를 한 화면에서 확인합니다.</p>
+                  <h3>인텐트 그래프</h3>
+                  <div class="tool-en">Intent Graph</div>
+                  <div class="quote">다음에 집중할 질문은 어디에 있을까?</div>
+                  <p>브랜드 엔티티와 고객 인텐트 간의 연결 관계를 시각화합니다. 질문별 답변에서 브랜드 가시성을 확인해 보다 집중해야 할 인텐트를 찾아냅니다.</p>
                 </div>
                 <div class="deliv">
                   <span class="lab">Result</span>
-                  <span class="val">실시간 모니터링 대시보드 · 월간 리포트</span>
+                  <span class="val">엔티티-인텐트 연결 맵 · 미연결 인텐트 리스트</span>
                 </div>
               </div>
 
@@ -7316,8 +7505,8 @@
             </div>
             <div class="reveal">
               <p class="mars-desc">
-                <strong>ETRIBE GEO</strong>는 멀티 에이전트 플랫폼으로
-                크롤링부터 리라이팅까지 — 고객 상황에 맞게 GEO 대응에 필요한 모든 정보를 한 번에 가져옵니다.
+                <strong>이트라이브의 멀티 에이전트 플랫폼</strong>으로 데이터 크롤링부터 콘텐츠 리라이팅까지,
+                GEO 대응에 필요한 모든 단계를 에이전트들이 유기적으로 협업하여 정밀하게 실행합니다.
               </p>
             </div>
           </div>
@@ -7721,6 +7910,64 @@
         border-left: 2px solid var(--primary);
       }
 
+      /* ── 기능 05 · 인텐트 그래프 (준비중) ── */
+      #monitoring .mon-coming-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: var(--s-20);
+        padding: 6px 12px;
+        background: var(--ink);
+        color: var(--primary);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        border-radius: var(--r-pill);
+      }
+      #monitoring .mon-coming-badge .dot {
+        width: 6px; height: 6px;
+        background: var(--primary);
+        border-radius: 50%;
+        box-shadow: 0 0 0 2px rgba(221, 243, 0, 0.25);
+        animation: mon-coming-pulse 1.6s ease-in-out infinite;
+      }
+      @keyframes mon-coming-pulse {
+        0%, 100% { box-shadow: 0 0 0 2px rgba(221, 243, 0, 0.25); }
+        50%      { box-shadow: 0 0 0 5px rgba(221, 243, 0, 0.12); }
+      }
+
+      #monitoring .mon-coming-placeholder {
+        position: relative;
+        aspect-ratio: 16 / 10;
+        background:
+          repeating-linear-gradient(135deg, #fafafa 0 14px, #f2f2f2 14px 28px);
+        border: 1px solid var(--line-hard);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: var(--s-12);
+        overflow: hidden;
+      }
+      #monitoring .mon-coming-placeholder .stamp {
+        display: inline-block;
+        padding: 9px 26px;
+        border: 1.5px solid #8A8A8A;
+        color: #4A4A4A;
+        background: rgba(255, 255, 255, 0.92);
+        font-family: var(--font-kr);
+        font-size: clamp(26px, 3.2vw, 36px);
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        transform: rotate(-4deg);
+        box-shadow: 1.5px 1.5px 0 rgba(0, 0, 0, 0.06);
+      }
+      #monitoring .mon-coming-placeholder .hint {
+        font-size: 13px;
+        color: var(--text-muted);
+        letter-spacing: 0.04em;
+      }
+
       @media (max-width: 1024px) {
         #monitoring .mon-values { grid-template-columns: repeat(2, 1fr); }
         #monitoring .mon-modules { grid-template-columns: repeat(2, 1fr); }
@@ -7755,8 +8002,8 @@
           </h2>
           <p class="mon-sub">
             ETRIBE GEO 운영 서비스에는 <strong>LLM 브랜드 노출 모니터링 시스템</strong>이 함께합니다.
-            ChatGPT·Gemini·Claude·Perplexity 답변 안에서 우리 브랜드의 <strong>노출·맥락·점유율을 매일 자동 측정</strong>하고,
-            경쟁사 대비 어디에 있는지·언제 흔들리는지를 한 화면에서 추적합니다.
+            주요 LLM 답변 안에서 우리 브랜드의 <strong>노출 · 맥락 · 점유율을 매일 자동 측정</strong>하고,
+            경쟁사 대비 어디에 있는지 · 언제 흔들리는지를 한 화면에서 추적합니다.
             검색 시대의 SEO 순위 추적기를, 답변 시대에 맞게 다시 짠 운영 도구입니다.
           </p>
         </div>
@@ -7770,17 +8017,17 @@
           <article class="mon-value">
             <div class="vi">02</div>
             <h3>답변은 매번 다릅니다</h3>
-            <p>같은 질문도 매번 다른 어조·인용·비교. <strong>반복 샘플링</strong>으로 노이즈를 평균에 지우고 진짜 추세만 남깁니다.</p>
+            <p>같은 질문도 매번 다른 어조 · 인용 · 비교. <strong>반복 샘플링</strong>으로 노이즈를 평균에 지우고 진짜 추세만 남깁니다.</p>
           </article>
           <article class="mon-value">
             <div class="vi">03</div>
             <h3>엔진마다 답이 다릅니다</h3>
-            <p>Perplexity엔 잘 나와도 Gemini엔 안 나올 수 있습니다. <strong>엔진별·쿼리별·카테고리별 분해</strong>가 필수입니다.</p>
+            <p>Perplexity엔 잘 나와도 Gemini엔 안 나올 수 있습니다. <strong>엔진별 · 쿼리별 · 카테고리별 분해</strong>가 필수입니다.</p>
           </article>
           <article class="mon-value">
             <div class="vi">04</div>
             <h3>변화는 빠릅니다</h3>
-            <p>부정 톤 증가·경쟁사 점유율 역전·인용 도메인 이동을 <strong>즉시 감지</strong>해 대응 시점을 놓치지 않습니다.</p>
+            <p>부정 톤의 증가나 경쟁사의 역전은 <strong>소리 없이 일어납니다</strong>. 가파른 알고리즘 변동 속에서 리스크 방어를 위한 <strong>상시 관측</strong>이 필수입니다.</p>
           </article>
         </div>
 
@@ -7791,6 +8038,7 @@
               <button type="button" class="mon-tab" data-mon-tab="1" role="tab" aria-selected="false">기능 02 · 분석</button>
               <button type="button" class="mon-tab" data-mon-tab="2" role="tab" aria-selected="false">기능 03 · 경쟁사</button>
               <button type="button" class="mon-tab" data-mon-tab="3" role="tab" aria-selected="false">기능 04 · 알림</button>
+              <button type="button" class="mon-tab" data-mon-tab="4" role="tab" aria-selected="false">기능 05 · 인텐트 그래프</button>
             </div>
             <div class="mon-arrows">
               <button type="button" class="mon-nav" data-mon-prev aria-label="이전 기능">
@@ -7810,8 +8058,8 @@
                 <span class="mon-shot-si">기능 01 · 측정</span>
                 <h3>4대 답변 엔진을 <span class="lime-fill">한 화면</span>에서</h3>
                 <p>
-                  하나의 쿼리를 ChatGPT·Gemini·Claude·Perplexity에 동시 발사합니다.
-                  <strong>브랜드 언급률·자연 노출력·카테고리별 인용 히트맵</strong>을 엔진별로 나란히 비교해,
+                  하나의 쿼리를 ChatGPT · Gemini · Claude · Perplexity에 동시 발사합니다.
+                  <strong>브랜드 언급률 · 자연 노출력 · 카테고리별 인용 히트맵</strong>을 엔진별로 나란히 비교해,
                   어느 엔진에서 우리가 강하고 약한지 한눈에 파악합니다.
                 </p>
               </div>
@@ -7833,7 +8081,7 @@
               </div>
               <figure class="mon-shot-fig">
                 <img src="images/11-1.png" alt="분석 화면 — 05-03부터 05-10까지 엔진별 인용률 추이 그래프와 브랜드 언급/미언급 지표" loading="lazy" decoding="async" />
-                <figcaption>인용률 추이 그래프 + 브랜드 언급/미언급 엔진별 지표 (주간·월간 전환)</figcaption>
+                <figcaption>인용률 추이 그래프 + 브랜드 언급/미언급 엔진별 지표 (주간 · 월간 전환)</figcaption>
               </figure>
             </div>
 
@@ -7841,9 +8089,9 @@
             <div class="mon-slide" data-mon-slide role="tabpanel">
               <div class="mon-shot-text">
                 <span class="mon-shot-si">기능 03 · 경쟁사</span>
-                <h3>같은 답변 안에서 <span class="lime-fill">점유율·감정</span>까지</h3>
+                <h3>같은 답변 안에서 <span class="lime-fill">점유율 · 감정</span>까지</h3>
                 <p>
-                  같은 쿼리·답변 안에서 경쟁사 점유율을 자동 계산합니다.
+                  같은 쿼리 · 답변 안에서 경쟁사 점유율을 자동 계산합니다.
                   <strong>"내 브랜드 35% · 경쟁사 A 22% · B 15%"</strong>처럼 한 줄로 끊어 보여주고,
                   엔진별 감정 분포와 인용 소스 도메인 순위까지 함께 제공합니다.
                 </p>
@@ -7861,13 +8109,33 @@
                 <h3>변화가 있을 때만 <span class="lime-fill">신호</span>가 옵니다</h3>
                 <p>
                   매일 대시보드를 들여다보지 않아도 됩니다.
-                  <strong>노출 점유율 급락·부정 감정 증가·경쟁사 역전·신규 인용 도메인 부상</strong>을 자동 감지해,
+                  <strong>노출 점유율 급락 · 부정 감정 증가 · 경쟁사 역전 · 신규 인용 도메인 부상</strong>을 자동 감지해,
                   SSE 실시간 푸시로 운영자에게 즉시 통보합니다.
                 </p>
               </div>
               <figure class="mon-shot-fig">
                 <img src="images/13-2.png" alt="알림 팝업 — '인용률이 0%에서 37.50%로 37.50%p 상승했습니다' 경고 알림" loading="lazy" decoding="async" />
-                <figcaption>점유율·감정·도메인 변화 시 실시간 알림 — 읽음 처리 · 임계값 사용자 정의</figcaption>
+                <figcaption>점유율 · 감정 · 도메인 변화 시 실시간 알림 — 읽음 처리 · 임계값 사용자 정의</figcaption>
+              </figure>
+            </div>
+
+            <!-- 5. 인텐트 그래프 (준비중) -->
+            <div class="mon-slide" data-mon-slide role="tabpanel">
+              <div class="mon-shot-text">
+                <span class="mon-shot-si">기능 05 · 인텐트 그래프</span>
+                <h3>다음 집중해야 할 <span class="lime-fill">질문</span>은 어디에?</h3>
+                <p>
+                  브랜드 엔티티와 고객 인텐트의 연결 관계를 시각화합니다.
+                  질문별 답변에서 브랜드 가시성을 확인해, <strong>가장 먼저 잡아야 할 인텐트</strong>를 찾아냅니다.
+                </p>
+                <span class="mon-coming-badge"><span class="dot" aria-hidden="true"></span>준비중 · COMING SOON</span>
+              </div>
+              <figure class="mon-shot-fig">
+                <div class="mon-coming-placeholder" role="img" aria-label="인텐트 그래프 준비중">
+                  <div class="stamp">준비중</div>
+                  <div class="hint">Intent Graph · 곧 만나보실 수 있습니다</div>
+                </div>
+                <figcaption>엔티티-인텐트 연결 맵 · 미연결 인텐트 리스트 — 출시 예정</figcaption>
               </figure>
             </div>
 
@@ -7879,22 +8147,22 @@
           <div class="mon-module">
             <span class="mn">MODULE 01</span>
             <h4>멀티 엔진</h4>
-            <p>4대 답변 엔진에 동시 발사, 응답 본문·인용·언급을 같은 데이터 모델로 저장.</p>
+            <p>4대 답변 엔진에 동시 발사, 응답 본문 · 인용 · 언급을 같은 데이터 모델로 저장.</p>
           </div>
           <div class="mon-module">
             <span class="mn">MODULE 02</span>
             <h4>검색 의도 세분화</h4>
-            <p>인텐트·카테고리·쿼리 3단 위계. Bulk import로 쿼리 일괄 등록.</p>
+            <p>인텐트 · 카테고리 · 쿼리 3단 위계. Bulk import로 쿼리 일괄 등록.</p>
           </div>
           <div class="mon-module">
             <span class="mn">MODULE 03</span>
             <h4>자동 스케줄</h4>
-            <p>매일·주·월·커스텀 cron + 실행마다 N회 반복. 백그라운드 워커가 자동 처리.</p>
+            <p>매일 · 주 · 월 · 커스텀 cron + 실행마다 N회 반복. 백그라운드 워커가 자동 처리.</p>
           </div>
           <div class="mon-module">
             <span class="mn">MODULE 04</span>
-            <h4>배치·런 추적</h4>
-            <p>입력·응답·인용 URL·토큰·비용까지 1건 단위 보존. 일시정지·재개·CSV 내보내기.</p>
+            <h4>배치 · 런 추적</h4>
+            <p>입력 · 응답 · 인용 URL · 토큰 · 비용까지 1건 단위 보존. 일시정지 · 재개 · CSV 내보내기.</p>
           </div>
         </div>
 
@@ -7903,22 +8171,22 @@
           <div class="mon-module">
             <span class="mn">MODULE 05</span>
             <h4>분석 화면</h4>
-            <p>노출 트렌드·엔진별 점유율·평균 인용 URL·감정 분포를 7개 탭 한 화면에.</p>
+            <p>SOV 변동 추이 · 엔진별 점유율 · 평균 인용 URL · 감정 분포를 한 화면에.</p>
           </div>
           <div class="mon-module">
             <span class="mn">MODULE 06</span>
             <h4>경쟁사 추적</h4>
-            <p>같은 답변 안에서 점유율 자동 비교. 분기별 추이·카테고리 강·약점 진단.</p>
+            <p>같은 답변 안에서 점유율 자동 비교. 분기별 추이 · 카테고리 강 · 약점 진단.</p>
           </div>
           <div class="mon-module">
             <span class="mn">MODULE 07</span>
             <h4>알림</h4>
-            <p>변화가 있을 때만 통보. 읽음 처리·SSE 실시간 푸시·임계값 사용자 정의.</p>
+            <p>변화가 있을 때만 통보. 읽음 처리 · SSE 실시간 푸시 · 임계값 사용자 정의.</p>
           </div>
           <div class="mon-module">
             <span class="mn">MODULE 08</span>
             <h4>비용 관리</h4>
-            <p>LiteLLM 기반 토큰·비용 정량 산정. 배치 누적 비용·월별 추세를 한눈에.</p>
+            <p>LiteLLM 기반 토큰 · 비용 정량 산정. 배치 누적 비용 · 월별 추세를 한눈에.</p>
           </div>
         </div>
 
@@ -8069,6 +8337,7 @@
                 <h4 class="tier-name">AI 가시성 진단 보고서</h4>
                 <p class="tier-desc">AI 가시성 측정 + 콘텐츠 의도 갭 분석</p>
                 <div class="tier-price"><b>29</b>만원</div>
+                <div class="tier-event"><span class="dot" aria-hidden="true"></span>선착순 99 업체 STANDARD 무료</div>
                 <button class="tier-more" type="button">자세히 보기 →</button>
               </div>
 
@@ -8256,7 +8525,7 @@
               <div class="report-card-tier">PREMIUM</div>
               <h4 class="report-card-name">경쟁 인텔리전스<br>보고서</h4>
               <p class="report-card-desc">
-                경쟁사 3사 비교 · SOV · 컨설턴트 인사이트 · 30·90·180일 단계별 로드맵.
+                경쟁사 3사 비교 · SOV · 컨설턴트 인사이트 · 30 · 90 · 180일 단계별 로드맵.
               </p>
               <ul class="report-card-feats">
                 <li>경쟁사 3사 동일 프레임 진단</li>
@@ -8467,7 +8736,7 @@
         <div data-detail="ops">
           <div class="td-eyebrow">운영 서비스 · OPERATION (월정액 리테이너)</div>
           <h3 class="td-title">3가지 운영 플랜 비교</h3>
-          <p class="td-purpose">AI 검색의 변화를 지속 추적하고 성과를 유지·확장합니다.</p>
+          <p class="td-purpose">AI 검색의 변화를 지속 추적하고 성과를 유지 · 확장합니다.</p>
 
           <div class="td-grid" data-rows="ops">
             <div class="td-hr td-h-feature">항목</div>
@@ -8486,8 +8755,8 @@
 
             <div class="td-f">목적</div>
             <div data-c="lite">AI 검색에서 우리 브랜드 변화 추적</div>
-            <div data-c="standard">인텐트 변화에 따른 콘텐츠·스키마·FAQ 통합 운영</div>
-            <div data-c="premium">전담 컨설턴트 배정, 분석·수정·콘텐츠·이벤트 전과정 위임</div>
+            <div data-c="standard">인텐트 변화에 따른 콘텐츠 · 스키마 · FAQ 통합 운영</div>
+            <div data-c="premium">전담 컨설턴트 배정, 분석 · 수정 · 콘텐츠 · 이벤트 전과정 위임</div>
 
             <div class="td-f">진단 분석 모델</div>
             <div data-c="lite">PREMIUM 분석 적용</div>
@@ -8599,26 +8868,26 @@
             <summary>GEO와 SEO는 어떻게 다른가요?</summary>
             <div class="faq-a">SEO는 검색결과 페이지(SERP) 상위 노출이 목표이고, GEO는 생성형 AI의 답변 텍스트 안에 우리 브랜드가 인용되는 것이 목표입니다. SEO가 “클릭을
               받는
-              게임”이라면 GEO는 “AI가 우리를 답으로 선택하는 게임”입니다. 두 작업은 스키마·E-E-A-T 같은 신호에서 일부 겹치지만, GEO는 4개 AI 엔진에서의 답변 점유율(SOV)을 핵심
+              게임”이라면 GEO는 “AI가 우리를 답으로 선택하는 게임”입니다. 두 작업은 스키마 · E-E-A-T 같은 신호에서 일부 겹치지만, GEO는 4개 AI 엔진에서의 답변 점유율(SOV)을 핵심
               지표로 삼는다는 점이 다릅니다.</div>
           </details>
 
           <details class="faq-item">
             <summary>ETRIBE GEO는 어떤 서비스를 제공하나요?</summary>
-            <div class="faq-a">ETRIBE GEO는 AI 검색 가시성을 진단·구축·운영하는 3트랙 솔루션입니다. 진단(무료~99만원)은 현재 상태를 측정하고, 구축(299만원~)은 사이트와
-              콘텐츠 구조를 AI 인용 가능 상태로 정비하며, 운영(49만원/월~)은 인텐트 변화에 따라 콘텐츠·스키마·FAQ를 지속 업데이트합니다.</div>
+            <div class="faq-a">ETRIBE GEO는 AI 검색 가시성을 진단 · 구축 · 운영하는 3트랙 솔루션입니다. 진단(무료~99만원)은 현재 상태를 측정하고, 구축(299만원~)은 사이트와
+              콘텐츠 구조를 AI 인용 가능 상태로 정비하며, 운영(49만원/월~)은 인텐트 변화에 따라 콘텐츠 · 스키마 · FAQ를 지속 업데이트합니다.</div>
           </details>
 
           <details class="faq-item">
             <summary>10분 무료 진단으로 무엇을 알 수 있나요?</summary>
-            <div class="faq-a">10분 무료 진단(진단 LITE)은 robots.txt·GPTBot·llms.txt·sitemap·Schema.org 적용 현황 등 테크니컬 GEO 항목을
+            <div class="faq-a">10분 무료 진단(진단 LITE)은 robots.txt · GPTBot · llms.txt · sitemap · Schema.org 적용 현황 등 테크니컬 GEO 항목을
               점검한
               보고서를 이메일로 발송해 드립니다. AI 가시성 측정과 경쟁사 비교는 포함되지 않으며, 오픈 기념 이벤트 기간에는 AI 가시성을 다루는 STANDARD까지 무료로 제공합니다.</div>
           </details>
 
           <details class="faq-item">
             <summary>구축 LITE 299만원은 어떤 사이트에 적합한가요?</summary>
-            <div class="faq-a">구축 LITE(299만원)는 싱글페이지 구조이거나 메인 1페이지만 GEO 관점에서 정비하면 충분한 사이트에 적합합니다. 분석·수정 약 3일이 소요되며 디자인
+            <div class="faq-a">구축 LITE(299만원)는 싱글페이지 구조이거나 메인 1페이지만 GEO 관점에서 정비하면 충분한 사이트에 적합합니다. 분석 · 수정 약 3일이 소요되며 디자인
               변경은
               포함되지 않습니다. 멀티페이지 사이트의 핵심 페이지군을 다뤄야 한다면 STANDARD(599만원) 이상을 권장합니다.</div>
           </details>
@@ -8627,12 +8896,12 @@
             <summary>왜 인블로그 콘텐츠가 GEO에 가장 직접적인가요?</summary>
             <div class="faq-a">스키마와 테크니컬 신호는 기반이지만 변경 빈도가 낮은 반면, 인블로그 콘텐츠는 새로운 인텐트가 등장할 때마다 AI에게 인용 거리(quotable text)를
               제공할
-              수 있기 때문입니다. ETRIBE GEO는 민트 유닛 자동화 레시피를 통해 월 1편의 콘텐츠를 인블로그·스키마·FAQ에 동시 반영합니다.</div>
+              수 있기 때문입니다. ETRIBE GEO는 민트 유닛 자동화 레시피를 통해 월 1편의 콘텐츠를 인블로그 · 스키마 · FAQ에 동시 반영합니다.</div>
           </details>
 
           <details class="faq-item">
             <summary>MARS는 어떤 도구이고 무엇을 자동화하나요?</summary>
-            <div class="faq-a">MARS는 ETRIBE가 자체 개발한 17개 에이전트 기반 GEO 진단·실행 플랫폼입니다. 사이트 크롤링, 스키마 점검, 4개 AI 엔진 실측, 경쟁사 비교,
+            <div class="faq-a">MARS는 ETRIBE가 자체 개발한 17개 에이전트 기반 GEO 진단 · 실행 플랫폼입니다. 사이트 크롤링, 스키마 점검, 4개 AI 엔진 실측, 경쟁사 비교,
               보고서 작성을 자동화하며, 진단 STANDARD 이상 서비스에 적용됩니다. PREMIUM은 자사 1회 + 경쟁사 3회 = 총 4회 실행을 통합해 인텔리전스 보고서를 산출합니다.</div>
           </details>
         </div>
@@ -8670,19 +8939,30 @@
                 <span class="im-err">이름을 입력해 주세요.</span>
               </div>
               <div class="im-field">
-                <label for="im-phone">휴대폰번호 <span class="im-req" aria-hidden="true">*</span></label>
-                <input type="tel" id="im-phone" name="phone" required placeholder="010-0000-0000" autocomplete="tel"
-                  inputmode="tel" />
-                <span class="im-err">유효한 휴대폰번호를 입력해 주세요.</span>
+                <label for="im-position">직위 <span class="im-req" aria-hidden="true">*</span></label>
+                <input type="text" id="im-position" name="position" required placeholder="마케팅 매니저"
+                  autocomplete="organization-title" />
+                <span class="im-err">직위를 입력해 주세요.</span>
               </div>
               <div class="im-field">
-                <label for="im-email">이메일 <span class="im-req" aria-hidden="true">*</span></label>
-                <input type="email" id="im-email" name="email" required placeholder="hello@company.com"
+                <label for="im-email">이메일 주소 <span class="im-req" aria-hidden="true">*</span></label>
+                <input type="email" id="im-email" name="email" required placeholder="name@company.com"
                   autocomplete="email" />
                 <span class="im-err">유효한 이메일을 입력해 주세요.</span>
               </div>
               <div class="im-field">
-                <label for="im-url">진단할 URL <span class="im-req" aria-hidden="true">*</span></label>
+                <label for="im-company">회사명 <span class="im-req" aria-hidden="true">*</span></label>
+                <input type="text" id="im-company" name="company" required placeholder="(주)이트라이브"
+                  autocomplete="organization" />
+                <span class="im-err">회사명을 입력해 주세요.</span>
+              </div>
+              <div class="im-field">
+                <label for="im-target">진단 대상명(브랜드/제품) <span class="im-req" aria-hidden="true">*</span></label>
+                <input type="text" id="im-target" name="target" required placeholder="브랜드 또는 제품명" />
+                <span class="im-err">진단 대상명을 입력해 주세요.</span>
+              </div>
+              <div class="im-field">
+                <label for="im-url">진단 대상 URL <span class="im-req" aria-hidden="true">*</span></label>
                 <input type="url" id="im-url" name="url" required placeholder="https://yourbrand.com" autocomplete="url"
                   inputmode="url" />
                 <span class="im-err">유효한 URL을 입력해 주세요. (예: https://yourbrand.com)</span>
@@ -8695,6 +8975,28 @@
                   <path d="M3 7l9 6 9-6" />
                 </svg>
                 <span>무료 진단 리포트는 <strong>신청 시 등록하신 이메일</strong>로 발송됩니다.</span>
+              </div>
+
+              <div class="im-consent">
+                <label class="im-consent-label" for="im-consent-check">
+                  <input type="checkbox" id="im-consent-check" name="consent" required />
+                  <span><b>(필수)</b> 개인정보 수집 및 이용에 동의합니다.</span>
+                </label>
+                <span class="im-err">개인정보 수집 및 이용에 동의해 주세요.</span>
+                <details class="im-consent-details">
+                  <summary>개인정보 수집 및 이용 동의 내용 보기</summary>
+                  <div class="im-consent-body">
+                    <p>(주)이트라이브는 귀하의 GEO 무료 진단 서비스 신청 및 결과 보고서 발송, 향후 서비스 상담을 위해 아래와 같이 개인정보를 수집 및 이용합니다.</p>
+                    <h5>1. 개인정보의 수집 및 이용 목적</h5>
+                    <p>· GEO 무료 진단 서비스 대상 식별 및 진단 수행<br />· 진단 결과 보고서 발송 및 관련 고객 문의 응대<br />· GEO 서비스 관련 후속 안내 및 비즈니스 상담</p>
+                    <h5>2. 수집하는 개인정보 항목</h5>
+                    <p>이름, 직위, 이메일 주소, 회사명, 진단 대상명(브랜드/제품), 진단 대상 URL</p>
+                    <h5>3. 개인정보의 보유 및 이용 기간</h5>
+                    <p>귀하의 동의일로부터 1년간 보유 및 이용 후 지체 없이 파기합니다. 단, 서비스 이용 과정에서 별도의 유료 서비스 계약 체결, 분쟁 처리 등 법적 관계가 성립하는 경우, '전자상거래 등에서의 소비자보호에 관한 법률' 등 관련 법령의 규정에 따라 해당 법령에서 정한 기간 동안 보관합니다.</p>
+                    <h5>4. 동의 거부의 권리 및 불이익 안내</h5>
+                    <p>귀하는 위와 같은 개인정보의 수집 및 이용에 동의하지 않을 권리가 있습니다. 다만, 본 동의는 서비스 제공을 위한 최소한의 필수 정보에 대한 동의로서, 동의를 거부하실 경우 GEO 무료 진단 서비스 신청 및 결과 보고서 발송이 불가능합니다.</p>
+                  </div>
+                </details>
               </div>
 
               <button type="submit" class="im-submit">
@@ -8746,7 +9048,7 @@
             </span>
           </a>
           <div class="contact-line">
-            <b>hello@etribe.co.kr</b> &nbsp;·&nbsp; www.etribe.co.kr / geo &nbsp;·&nbsp; 서울시 마포구 월드컵북로 4길 81. 3F
+            <b>geo@etribe.co.kr</b> &nbsp; · &nbsp; www.etribe.co.kr / geo &nbsp; · &nbsp; 서울시 마포구 월드컵북로 4길 81. 3F
           </div>
         </div>
 
@@ -8850,7 +9152,7 @@
           BACK TO TOP
           <span aria-hidden="true">↑</span>
         </button>
-        <a href="mailto:hello@etribe.co.kr" class="email">HELLO@ETRIBE.CO.KR</a>
+        <a href="mailto:geo@etribe.co.kr" class="email">HELLO@ETRIBE.CO.KR</a>
       </div>
     </div>
 
@@ -9516,7 +9818,6 @@
       });
 
       // Validation helpers
-      const phoneRe = /^(?:\+?\d{1,3}[-\s]?)?(?:\(?\d{2,4}\)?[-\s]?)?\d{3,4}[-\s]?\d{4}$/;
       const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       const isValidUrl = (v) => {
         try {
@@ -9527,14 +9828,20 @@
 
       const validate = () => {
         const name = form.elements['name'];
-        const phone = form.elements['phone'];
+        const position = form.elements['position'];
         const email = form.elements['email'];
+        const company = form.elements['company'];
+        const target = form.elements['target'];
         const url = form.elements['url'];
+        const consent = form.elements['consent'];
+        const consentWrap = consent.closest('.im-consent');
 
         const checks = [
           [name, name.value.trim().length >= 2],
-          [phone, phoneRe.test(phone.value.trim())],
+          [position, position.value.trim().length >= 1],
           [email, emailRe.test(email.value.trim())],
+          [company, company.value.trim().length >= 1],
+          [target, target.value.trim().length >= 1],
           [url, isValidUrl(url.value.trim())],
         ];
 
@@ -9543,6 +9850,11 @@
           el.classList.toggle('invalid', !ok);
           if (!ok && !firstInvalid) firstInvalid = el;
         });
+
+        // Consent uses its own .invalid class on the wrapper (checkbox can't show .im-err via sibling rule)
+        const consentOk = consent.checked;
+        consentWrap.classList.toggle('invalid', !consentOk);
+        if (!consentOk && !firstInvalid) firstInvalid = consent;
 
         if (firstInvalid) {
           firstInvalid.focus();
@@ -9555,6 +9867,12 @@
       form.querySelectorAll('input').forEach(input => {
         input.addEventListener('input', () => input.classList.remove('invalid'));
       });
+      const consentCheck = form.elements['consent'];
+      if (consentCheck) {
+        consentCheck.addEventListener('change', () => {
+          consentCheck.closest('.im-consent').classList.remove('invalid');
+        });
+      }
 
       // Submit — no backend in this prototype; show success state
       form.addEventListener('submit', (e) => {
@@ -9922,7 +10240,7 @@
   },
   "contactPoint": [{
     "@type": "ContactPoint",
-    "email": "hello@etribe.co.kr",
+    "email": "geo@etribe.co.kr",
     "contactType": "sales",
     "areaServed": "KR",
     "availableLanguage": ["ko", "en"]
